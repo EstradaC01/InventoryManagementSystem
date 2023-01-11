@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,6 +28,9 @@ public class AddItem extends AppCompatActivity {
     private FirebaseFirestore db;
     private EditText productIdEdt, productDescriptionEdt, productUpcEdt, productQtyEdt, productPcsPerBoxEdt;
     private Button addItemBtn;
+
+    // member fields for logged user
+    String mUserid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,14 @@ public class AddItem extends AppCompatActivity {
         // initializng variable firebase
         // firestore and getting its instance
         db = FirebaseFirestore.getInstance();
+
+        // initializing Firebaseuser
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user != null)
+        {
+            mUserid = user.getUid().toString();
+        }
 
         // add on click listener to create item button
         addItemBtn.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +85,7 @@ public class AddItem extends AppCompatActivity {
                     if(mProductQty.isEmpty()) {
                         mProductQty = "0";
                     }
-                    addDataToFireStore(mProductId, mProductDescription, mProductUpc, mProductQty, mProductPcsPerBox);
+                    addDataToFireStore(mProductId, mProductDescription, mProductUpc, mProductQty, mProductPcsPerBox, mUserid);
                 }
 
             }
@@ -80,14 +93,14 @@ public class AddItem extends AppCompatActivity {
 
     }
 
-    private void addDataToFireStore(String _productId, String _productDescription, String _productUpc, String _productQty, String _productPcsPerBox) {
+    private void addDataToFireStore(String _productId, String _productDescription, String _productUpc, String _productQty, String _productPcsPerBox, String _postedBy) {
 
         // creating a collection reference
         // for our Firebase Firestore database
         CollectionReference dbProducts = db.collection("Products");
 
         // adding our data to our courses object class.
-        Products products = new Products(_productId,_productDescription,_productUpc,_productQty,_productPcsPerBox);
+        Products products = new Products(_productId,_productDescription,_productUpc,_productQty,_productPcsPerBox, _postedBy);
 
         // below method is use to add data to Firebase Firestore
         dbProducts.add(products).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
