@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity {
 
     // creating variables for button
-    private Button createProductbtn;
+    private Button createProductbtn, itemList;
 
     // member fields for logged user
     private String mEmail, mUserid;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         // initializing our buttons
         createProductbtn = findViewById(R.id.idBtnItems);
+        itemList = findViewById(R.id.idBtnListItems);
 
         // initializing FirebaseUser
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -55,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // opening a new activity on button click
                 Intent i = new Intent(MainActivity.this, AddItem.class);
+                startActivity(i);
+            }
+        });
+
+        // adding onClick listener to view data in recycler view. view list of items
+        itemList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, ItemList.class);
                 startActivity(i);
             }
         });

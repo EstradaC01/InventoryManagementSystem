@@ -2,6 +2,7 @@
 package com.example.inventorymanagementsystem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -68,7 +71,28 @@ public class ItemList extends AppCompatActivity {
         // now we will be getting the data from the same reference
         CollectionReference itemsRef = db.collection("Products");
 
-//        itemsRef.whereEqualTo("postedBy", mUserId)
+       itemsRef.whereEqualTo("postedBy", mUserId).addSnapshotListener(new EventListener<QuerySnapshot>() {
+           @Override
+           public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                   if(!value.isEmpty())
+                   {
+                       loadingPB.setVisibility(View.GONE);
+                       List<DocumentSnapshot> list = value.getDocuments();
+                       for(DocumentSnapshot d : list) {
+                           Products p = d.toObject(Products.class);
+
+                           mProductsArrayList.add(p);
+                       }
+
+                       mItemRVAdapter.notifyDataSetChanged();
+                   } else {
+                       Toast.makeText(ItemList.this, "No data found in Database", Toast.LENGTH_SHORT).show();
+                   }
+
+
+           }
+       });
 //                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
 //                    @Override
 //                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
