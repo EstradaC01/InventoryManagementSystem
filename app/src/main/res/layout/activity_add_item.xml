@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity_add_item">
+
+<!--    Textview for adding title of screen-->
+
+    <TextView
+        android:id="@+id/idTvCreateItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="Create Item"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+<!--    EditText for getting Proudct ID-->
+    <EditText
+        android:background="@drawable/edit_text_border"
+        android:id="@+id/idEdtProductId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Product Id"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:padding="10dp"/>
+
+<!--    EditText for Product Description-->
+    <EditText
+        android:background="@drawable/edit_text_border"
+        android:id="@+id/idEdtProductDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Product Description"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        android:lines="4"
+        android:gravity="top|start"
+        android:padding="10dp"
+        />
+
+<!--    EditText for Product UPC-->
+    <EditText
+        android:background="@drawable/edit_text_border"
+        android:id="@+id/idEdtProductUpc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="UPC"
+        android:padding="10dp"
+        android:inputType="text"
+        android:importantForAutofill="no"/>
+
+<!--    EditText for pieces per box-->
+    <EditText
+        android:background="@drawable/edit_text_border"
+        android:id="@+id/idEdtPiecesPerBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Pieces per box"
+        android:padding="10dp"
+        android:inputType="number"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:background="@drawable/edit_text_border"
+        android:id="@+id/idEdtQty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Quantity"
+        android:padding="10dp"
+        android:inputType="number"
+        android:importantForAutofill="no" />
+
+<!--    Button for creating the product -->
+    <Button
+        android:id="@+id/idBtnCreateProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Add Item"
+        android:textAllCaps="false" />
+</LinearLayout>
