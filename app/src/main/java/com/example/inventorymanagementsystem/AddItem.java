@@ -17,6 +17,8 @@ import java.time.format.DateTimeFormatter;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +34,9 @@ public class AddItem extends AppCompatActivity {
     private EditText productIdEdt, productDescriptionEdt, productUpcEdt, productQtyEdt, productPcsPerBoxEdt;
     private Button addItemBtn;
     LocalDateTime myDateObj = LocalDateTime.now();
+
+    // member fields for logged user
+    String mUserid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,14 @@ public class AddItem extends AppCompatActivity {
         // initializng variable firebase
         // firestore and getting its instance
         db = FirebaseFirestore.getInstance();
+
+        // initializing Firebaseuser
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user != null)
+        {
+            mUserid = user.getUid().toString();
+        }
 
         // add on click listener to create item button
         addItemBtn.setOnClickListener(new View.OnClickListener() {

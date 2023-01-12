@@ -23,55 +23,59 @@
 
     <EditText
         android:id="@+id/idEdtFirstName"
-        android:background="@drawable/edit_text_border"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="72dp"
         android:layout_marginEnd="20dp"
-        android:padding="10dp"
+        android:background="@drawable/edit_text_border"
         android:hint="Enter First Name"
+        android:importantForAutofill="no"
         android:inputType="text"
-        android:importantForAutofill="no"/>
+        android:minHeight="48dp"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/idEdtLastName"
-        android:background="@drawable/edit_text_border"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:padding="10dp"
+        android:background="@drawable/edit_text_border"
         android:hint="Enter Last Name"
+        android:importantForAutofill="no"
         android:inputType="text"
-        android:importantForAutofill="no" />
+        android:minHeight="48dp"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/idEdtEmail"
-        android:background="@drawable/edit_text_border"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:padding="10dp"
+        android:background="@drawable/edit_text_border"
         android:hint="Enter Email Address"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
-        android:importantForAutofill="no" />
+        android:minHeight="48dp"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/idEdtPassword"
-        android:background="@drawable/edit_text_border"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:padding="10dp"
+        android:background="@drawable/edit_text_border"
         android:hint="Enter Password"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
-        android:importantForAutofill="no" />
+        android:minHeight="48dp"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/idBtnRegister"
