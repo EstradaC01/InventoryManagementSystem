@@ -1,7 +1,9 @@
 package com.example.inventorymanagementsystem;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Products {
 
@@ -48,9 +50,12 @@ public class Products {
         return mProductPcsPerBox;
     }
     public String getProductTimeAdded() {
-        SimpleDateFormat currentTime = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        SimpleDateFormat currentTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        currentTime.setTimeZone(TimeZone.getTimeZone("EST"));
 
-        return currentTime.format(new Date());
+        return currentTime.format(calendar.getTime());
     }
     public String getPostedBy() {
         return mPostedBy;
