@@ -5,14 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,18 +20,17 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class AddItem extends AppCompatActivity {
 
-    // creating strings for storing
-    // our values from editText fields
-    private String mProductId, mProductDescription, mProductUpc, mProductQty, mProductPcsPerBox, mProductTimeAdded;
+
     // creating variables for firebase firestore, editTexts and Button
     private Products mProduct;
     private FirebaseFirestore db;
     private EditText productIdEdt, productDescriptionEdt, productUpcEdt, productQtyEdt, productPcsPerBoxEdt;
     private Button addItemBtn;
-//    LocalDateTime myDateObj = LocalDateTime.now();
-
     // member fields for logged user
     String mUserid;
 
@@ -75,34 +71,37 @@ public class AddItem extends AppCompatActivity {
                 mProduct.setProductUpc(productUpcEdt.getText().toString());
                 mProduct.setProductQty(productQtyEdt.getText().toString());
                 mProduct.setProductPcsPerBox(productPcsPerBoxEdt.getText().toString());
-//                mProduct.setProductTimeAdded(getCurrentTime());
                 mProduct.setPostedBy(mUserid);
+                mProduct.setProductTimeAdded();
                 // validating the text fields if empty or not
-                if(TextUtils.isEmpty(mProductId))
-                {
+                if (TextUtils.isEmpty(mProduct.getProductId())) {
                     productIdEdt.setError("Please enter product id");
-                } else if (TextUtils.isEmpty(mProductDescription))
-                {
-                    productDescriptionEdt.setError("Please enter product description");
-                } else if (TextUtils.isEmpty(mProductUpc)) {
-                    productUpcEdt.setError("Please enter product upc");
-                } else if (TextUtils.isEmpty(mProductPcsPerBox)) {
-                    productPcsPerBoxEdt.setError("Please enter product pieces per box");
-                } else {
-                    // calling method to add data to Firebase Firestore
-                    if(mProductQty.isEmpty()) {
-                        mProductQty = "0";
-                    }
-                    addDataToFireStore(mProduct);
+                    return;
                 }
-
+                if (TextUtils.isEmpty(mProduct.getProductDescription())) {
+                    productDescriptionEdt.setError("Please enter product description");
+                    return;
+                }
+                if (TextUtils.isEmpty(mProduct.getProductUpc())) {
+                    productUpcEdt.setError("Please enter product upc");
+                    return;
+                }
+                if (TextUtils.isEmpty(mProduct.getProductPcsPerBox())) {
+                    productPcsPerBoxEdt.setError("Please enter product pieces per box");
+                    return;
+                }
+                if (mProduct.getProductQty() == null || mProduct.getProductQty().isEmpty()){
+                    productQtyEdt.setError("Please enter product pieces per box");
+                    return;
+                }
+                // calling method to add data to Firebase Firestore
+                addDataToFireStore(mProduct);
             }
         });
-
     }
 
     private void addDataToFireStore(Products products) {
-
+        //Log.d("FIREBASE-ADD", "Inside");
         // creating a collection reference
         // for our Firebase Firestore database
         CollectionReference dbProducts = db.collection("Products");
@@ -125,10 +124,5 @@ public class AddItem extends AppCompatActivity {
             }
         });
     }
-//    private String getCurrentTime() {
-//        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-////        String formattedDate = myDateObj.format(myFormatObj);
-//        return formattedDate;
-//    }
 }
 

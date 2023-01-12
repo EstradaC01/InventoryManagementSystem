@@ -1,5 +1,8 @@
 package com.example.inventorymanagementsystem;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Products {
 
     // variables for storing our data
@@ -45,7 +48,9 @@ public class Products {
         return mProductPcsPerBox;
     }
     public String getProductTimeAdded() {
-        return mProductTimeAdded;
+        SimpleDateFormat currentTime = new SimpleDateFormat("yyyy-MM-dd");
+
+        return currentTime.format(new Date());
     }
     public String getPostedBy() {
         return mPostedBy;
@@ -71,8 +76,8 @@ public class Products {
     public void setProductPcsPerBox(String productPcsPerBox) {
         mProductPcsPerBox = productPcsPerBox;
     }
-    public void setProductTimeAdded(String productTimeAdded) {
-       mProductTimeAdded = productTimeAdded;
+    public void setProductTimeAdded() {
+       mProductTimeAdded = getProductTimeAdded();
     }
     public void setPostedBy(String postedBy) {
         mPostedBy = postedBy;
