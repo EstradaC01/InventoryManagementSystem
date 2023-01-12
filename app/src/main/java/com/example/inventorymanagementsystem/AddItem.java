@@ -33,7 +33,7 @@ public class AddItem extends AppCompatActivity {
     private FirebaseFirestore db;
     private EditText productIdEdt, productDescriptionEdt, productUpcEdt, productQtyEdt, productPcsPerBoxEdt;
     private Button addItemBtn;
-    LocalDateTime myDateObj = LocalDateTime.now();
+//    LocalDateTime myDateObj = LocalDateTime.now();
 
     // member fields for logged user
     String mUserid;
@@ -75,7 +75,8 @@ public class AddItem extends AppCompatActivity {
                 mProduct.setProductUpc(productUpcEdt.getText().toString());
                 mProduct.setProductQty(productQtyEdt.getText().toString());
                 mProduct.setProductPcsPerBox(productPcsPerBoxEdt.getText().toString());
-                mProduct.setProductTimeAdded(getCurrentTime());
+//                mProduct.setProductTimeAdded(getCurrentTime());
+                mProduct.setPostedBy(mUserid);
                 // validating the text fields if empty or not
                 if(TextUtils.isEmpty(mProductId))
                 {
@@ -124,10 +125,10 @@ public class AddItem extends AppCompatActivity {
             }
         });
     }
-    private String getCurrentTime() {
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedDate = myDateObj.format(myFormatObj);
-        return formattedDate;
-    }
+//    private String getCurrentTime() {
+//        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+////        String formattedDate = myDateObj.format(myFormatObj);
+//        return formattedDate;
+//    }
 }
 

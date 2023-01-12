@@ -3,7 +3,7 @@ package com.example.inventorymanagementsystem;
 public class Products {
 
     // variables for storing our data
-    private String mProductId, mProductDescription, mProductUpc, mProductQty, mProductPcsPerBox, mProductTimeAdded;
+    private String mProductId, mProductDescription, mProductUpc, mProductQty, mProductPcsPerBox, mProductTimeAdded, mPostedBy;
 
     public Products()
     {
@@ -12,7 +12,7 @@ public class Products {
     }
 
     // Constructor for all variables
-    public Products(String _productId, String _productDescription, String _productUpc, String _productQty, String _productPcsPerBox, String _productTimeAdded)
+    public Products(String _productId, String _productDescription, String _productUpc, String _productQty, String _productPcsPerBox, String _productTimeAdded, String _postedBy)
     {
         mProductId = _productId;
         mProductDescription = _productDescription;
@@ -20,6 +20,7 @@ public class Products {
         mProductQty = _productQty;
         mProductPcsPerBox = _productPcsPerBox;
         mProductTimeAdded = _productTimeAdded;
+        mPostedBy = _postedBy;
     }
 
     // getter methods for all variables
@@ -46,6 +47,9 @@ public class Products {
     public String getProductTimeAdded() {
         return mProductTimeAdded;
     }
+    public String getPostedBy() {
+        return mPostedBy;
+    }
     // setter method for all variables
 
     public void setProductId(String productId) {
@@ -69,5 +73,8 @@ public class Products {
     }
     public void setProductTimeAdded(String productTimeAdded) {
        mProductTimeAdded = productTimeAdded;
+    }
+    public void setPostedBy(String postedBy) {
+        mPostedBy = postedBy;
     }
 }

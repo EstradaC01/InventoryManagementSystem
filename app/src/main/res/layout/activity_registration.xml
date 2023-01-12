@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/android_background_geometric"
     android:orientation="vertical"
     tools:context=".Registration">
 
@@ -11,25 +12,28 @@
         android:id="@+id/idTvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:text="Create User"
         android:textAlignment="center"
-        android:textSize="26sp"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textSize="26sp"
         android:textStyle="bold" />
 
     <EditText
+
         android:id="@+id/idEdtFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/edit_text_border_2"
         android:hint="Enter First Name"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:importantForAutofill="no"
         android:inputType="text"
         android:minHeight="48dp"
@@ -42,9 +46,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/edit_text_border_2"
         android:hint="Enter Last Name"
         android:importantForAutofill="no"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:inputType="text"
         android:minHeight="48dp"
         android:padding="10dp" />
@@ -56,9 +62,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/edit_text_border_2"
         android:hint="Enter Email Address"
         android:importantForAutofill="no"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="10dp" />
@@ -70,8 +78,10 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/edit_text_border_2"
         android:hint="Enter Password"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:minHeight="48dp"
@@ -79,13 +89,13 @@
 
     <Button
         android:id="@+id/idBtnRegister"
-        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/colorPrimary"
+        android:text="Register" />
 
 
 </LinearLayout>
