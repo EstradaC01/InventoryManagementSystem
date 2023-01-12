@@ -3,6 +3,7 @@ package com.example.inventorymanagementsystem;
 public class Users {
 
     private String mFirstName, mLastName, mUserId, mEmail;
+    private boolean mIsAdmin;
 
     public Users()
     {
@@ -11,11 +12,12 @@ public class Users {
     }
 
     // Constructors for all variables
-    public Users(String _firstName, String _lastName, String _userId, String _email) {
+    public Users(String _firstName, String _lastName, String _userId, String _email, boolean _isAdmin) {
         mFirstName = _firstName;
         mLastName = _lastName;
         mUserId = _userId;
         mEmail = _email;
+        mIsAdmin = _isAdmin;
     }
 
     // getters
@@ -35,6 +37,9 @@ public class Users {
     public String getEmail() {
         return mEmail;
     }
+    public boolean getIsAdmin() {
+        return mIsAdmin;
+    }
 
     // setters
 
@@ -52,5 +57,8 @@ public class Users {
 
     public void setEmail(String email) {
         mEmail = email;
+    }
+    public void setIsAdmin(boolean isAdmin) {
+        mIsAdmin = isAdmin;
     }
 }

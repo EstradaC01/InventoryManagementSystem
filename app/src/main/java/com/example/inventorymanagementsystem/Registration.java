@@ -33,7 +33,7 @@ public class Registration extends AppCompatActivity {
 
     private Button btnRegister;
 
-    private String mFirstName, mLastName, mEmail, mPassword, mUserId;
+    private String mFirstName, mLastName, mEmail, mPassword;
 
     private static final String TAG = "Registration";
 
@@ -92,7 +92,7 @@ public class Registration extends AppCompatActivity {
 
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                            addDataToFireStore(mFirstName,mLastName,user.getUid().toString(),mEmail);
+                            addDataToFireStore(mFirstName,mLastName,user.getUid().toString(),mEmail, false);
 
                             Intent i = new Intent(Registration.this, Login.class);
                             startActivity(i);
@@ -105,14 +105,14 @@ public class Registration extends AppCompatActivity {
                 });
     }
 
-    private void addDataToFireStore(String _firstName, String _lastName, String _userId, String _email) {
+    private void addDataToFireStore(String _firstName, String _lastName, String _userId, String _email,boolean _isAdmin) {
 
         // creating a collection reference
         // for our Firebase Firestore database
         CollectionReference dbProducts = db.collection("Users");
 
         // adding our data to our users object class.
-        Users user = new Users(_firstName,_lastName,_userId,_email);
+        Users user = new Users(_firstName,_lastName,_userId,_email, _isAdmin);
 
         // below method is use to add data to Firebase Firestore
         dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

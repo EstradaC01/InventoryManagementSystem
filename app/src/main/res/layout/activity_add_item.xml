@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddItem">
+    tools:context=".AddItem"
+    android:background="#E1DCCF">
 
 <!--    Textview for adding title of screen-->
 
@@ -23,7 +24,7 @@
 
 <!--    EditText for getting Proudct ID-->
     <EditText
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/edit_text_border_2"
         android:id="@+id/idEdtProductId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +38,7 @@
 
 <!--    EditText for Product Description-->
     <EditText
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/edit_text_border_2"
         android:id="@+id/idEdtProductDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,10 +53,23 @@
         android:gravity="top|start"
         android:padding="10dp"
         />
+<!--    Spinner for dropdown menu-->
+    <Spinner
+        style="@style/spinner_style"
+        android:background="@drawable/edit_text_border_2"
+        android:id="@+id/idCategoriesSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:importantForAutofill="no"
+        android:spinnerMode="dropdown"
+        android:padding="10dp"/>
 
 <!--    EditText for Product UPC-->
     <EditText
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/edit_text_border_2"
         android:id="@+id/idEdtProductUpc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,7 +83,7 @@
 
 <!--    EditText for pieces per box-->
     <EditText
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/edit_text_border_2"
         android:id="@+id/idEdtPiecesPerBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,19 +95,6 @@
         android:inputType="number"
         android:importantForAutofill="no" />
 
-    <EditText
-        android:background="@drawable/edit_text_border"
-        android:id="@+id/idEdtQty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:hint="Quantity"
-        android:padding="10dp"
-        android:inputType="number"
-        android:importantForAutofill="no" />
-
 <!--    Button for creating the product -->
     <Button
         android:id="@+id/idBtnCreateProduct"
@@ -101,5 +102,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="Add Item"
+        android:textColor="@color/white"
         android:textAllCaps="false" />
 </LinearLayout>

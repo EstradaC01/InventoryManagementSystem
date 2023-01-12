@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Inventory Management System</string>
+    <string-array name="product_categories">
+        <item>Electronics</item>
+        <item>Clothing</item>
+        <item>Toys</item>
+        <item>Consumable</item>
+        <item>Medicine</item>
+        <item>Miscellaneous</item>
+    </string-array>
 </resources>

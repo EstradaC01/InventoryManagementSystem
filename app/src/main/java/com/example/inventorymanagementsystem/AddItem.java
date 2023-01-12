@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -20,8 +20,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 public class AddItem extends AppCompatActivity {
 
@@ -29,8 +28,10 @@ public class AddItem extends AppCompatActivity {
     // creating variables for firebase firestore, editTexts and Button
     private Products mProduct;
     private FirebaseFirestore db;
-    private EditText productIdEdt, productDescriptionEdt, productUpcEdt, productQtyEdt, productPcsPerBoxEdt;
+    private EditText productIdEdt, productDescriptionEdt, productUpcEdt, productPcsPerBoxEdt;
     private Button addItemBtn;
+    private Spinner categoriesSpinner;
+
     // member fields for logged user
     String mUserid;
 
@@ -43,9 +44,19 @@ public class AddItem extends AppCompatActivity {
         productIdEdt = findViewById(R.id.idEdtProductId);
         productDescriptionEdt = findViewById(R.id.idEdtProductDescription);
         productUpcEdt = findViewById(R.id.idEdtProductUpc);
-        productQtyEdt = findViewById(R.id.idEdtQty);
         productPcsPerBoxEdt = findViewById(R.id.idEdtPiecesPerBox);
         addItemBtn = findViewById(R.id.idBtnCreateProduct);
+        categoriesSpinner = findViewById(R.id.idCategoriesSpinner);
+
+        // setting default string for spinner
+        String defaultTextForSpinner = "Category";
+        String[] arrayForSpinner = {"Electronic", "Medicine", "Misc", "Other"};
+        // creating ArrayAdapter for dropdown menu
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.product_categories, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//        categoriesSpinner.setAdapter(adapter);
+
+        categoriesSpinner.setAdapter(new CustomSpinnerAdapter(this, R.layout.spinner_row, arrayForSpinner, defaultTextForSpinner));
 
         // initializng variable firebase
         // firestore and getting its instance
@@ -59,6 +70,7 @@ public class AddItem extends AppCompatActivity {
             mUserid = user.getUid().toString();
         }
 
+
         // add on click listener to create item button
         addItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +81,6 @@ public class AddItem extends AppCompatActivity {
                 mProduct.setProductId(productIdEdt.getText().toString());
                 mProduct.setProductDescription(productDescriptionEdt.getText().toString());
                 mProduct.setProductUpc(productUpcEdt.getText().toString());
-                mProduct.setProductQty(productQtyEdt.getText().toString());
                 mProduct.setProductPcsPerBox(productPcsPerBoxEdt.getText().toString());
                 mProduct.setPostedBy(mUserid);
                 mProduct.setProductTimeAdded();
@@ -88,10 +99,6 @@ public class AddItem extends AppCompatActivity {
                 }
                 if (TextUtils.isEmpty(mProduct.getProductPcsPerBox())) {
                     productPcsPerBoxEdt.setError("Please enter product pieces per box");
-                    return;
-                }
-                if (mProduct.getProductQty() == null || mProduct.getProductQty().isEmpty()){
-                    productQtyEdt.setError("Please enter product pieces per box");
                     return;
                 }
                 // calling method to add data to Firebase Firestore

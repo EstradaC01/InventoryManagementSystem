@@ -73,7 +73,6 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
         // setting data to our text views from our modal class
         Products products = mProductsArrayList.get(position);
         holder.productIdTv.setText(products.getProductId());
-        holder.productAvailableUnitsTv.setText(products.getProductQty());
     }
 
     /**

@@ -8,7 +8,7 @@ import java.util.TimeZone;
 public class Products {
 
     // variables for storing our data
-    private String mProductId, mProductDescription, mProductUpc, mProductQty, mProductPcsPerBox, mProductTimeAdded, mPostedBy;
+    private String mProductId, mProductDescription, mProductUpc,mProductPcsPerBox, mProductTimeAdded, mPostedBy;
 
     public Products()
     {
@@ -17,12 +17,11 @@ public class Products {
     }
 
     // Constructor for all variables
-    public Products(String _productId, String _productDescription, String _productUpc, String _productQty, String _productPcsPerBox, String _productTimeAdded, String _postedBy)
+    public Products(String _productId, String _productDescription, String _productUpc, String _productPcsPerBox, String _productTimeAdded, String _postedBy)
     {
         mProductId = _productId;
         mProductDescription = _productDescription;
         mProductUpc = _productUpc;
-        mProductQty = _productQty;
         mProductPcsPerBox = _productPcsPerBox;
         mProductTimeAdded = _productTimeAdded;
         mPostedBy = _postedBy;
@@ -42,9 +41,6 @@ public class Products {
         return mProductUpc;
     }
 
-    public String getProductQty() {
-        return mProductQty;
-    }
 
     public String getProductPcsPerBox() {
         return mProductPcsPerBox;
@@ -72,10 +68,6 @@ public class Products {
 
     public void setProductUpc(String productUpc) {
         mProductUpc = productUpc;
-    }
-
-    public void setProductQty(String productQty) {
-        mProductQty = productQty;
     }
 
     public void setProductPcsPerBox(String productPcsPerBox) {
