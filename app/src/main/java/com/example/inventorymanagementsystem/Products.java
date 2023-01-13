@@ -1,11 +1,12 @@
 package com.example.inventorymanagementsystem;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class Products {
+public class Products implements Serializable {
 
     // variables for storing our data
     private String mProductId, mProductDescription, mProductUpc,mProductPcsPerBox, mProductTimeAdded, mPostedBy;

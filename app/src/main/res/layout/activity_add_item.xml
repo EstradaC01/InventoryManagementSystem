@@ -10,114 +10,103 @@
 
 <!--    Textview for adding title of screen-->
 
-    <ScrollView
+    <TextView
+        android:id="@+id/idTvCreateItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="Create Item"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+<!--    EditText for getting Proudct ID-->
+    <EditText
+        android:id="@+id/idEdtProductId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/edit_text_border_2"
+        android:hint="Product Id"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dp" />
 
-            <TextView
-                android:id="@+id/idTvCreateItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:text="Create Item"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+<!--    EditText for Product Description-->
+    <EditText
+        android:background="@drawable/edit_text_border_2"
+        android:id="@+id/idEdtProductDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Product Description"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        android:lines="4"
+        android:gravity="top|start"
+        android:padding="10dp"
+        />
+<!--    Spinner for dropdown menu-->
+    <Spinner
+        android:id="@+id/idCategoriesSpinner"
+        style="@style/spinner_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/edit_text_border_2"
+        android:importantForAutofill="no"
+        android:minHeight="48dp"
+        android:padding="10dp"
+        android:contentDescription="Category"
+        android:spinnerMode="dropdown" />
 
-            <EditText
-                android:id="@+id/idEdtProductId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/edit_text_border_2"
-                android:hint="Product Id"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:padding="10dp" />
+<!--    EditText for Product UPC-->
+    <EditText
+        android:id="@+id/idEdtProductUpc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/edit_text_border_2"
+        android:hint="UPC"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dp" />
 
-            <EditText
-                android:id="@+id/idEdtProductDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/edit_text_border_2"
-                android:gravity="top|start"
-                android:hint="Product Description"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:lines="4"
-                android:padding="10dp"
-                android:scrollbars="vertical" />
+<!--    EditText for pieces per box-->
+    <EditText
+        android:id="@+id/idEdtPiecesPerBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/edit_text_border_2"
+        android:hint="Pieces per box"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:padding="10dp" />
 
-            <Spinner
-                android:id="@+id/idCategoriesSpinner"
-                style="@style/spinner_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/edit_text_border_2"
-                android:importantForAutofill="no"
-                android:padding="10dp"
-                android:spinnerMode="dropdown" />
-
-            <EditText
-                android:id="@+id/idEdtProductUpc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/edit_text_border_2"
-                android:hint="UPC"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:padding="10dp" />
-
-            <EditText
-                android:id="@+id/idEdtPiecesPerBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/edit_text_border_2"
-                android:hint="Pieces per box"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:padding="10dp" />
-
-            <Button
-                android:id="@+id/idBtnCreateProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Add Item"
-                android:textAllCaps="false"
-                android:textColor="@color/white" />
-        </LinearLayout>
-    </ScrollView>
-
-    <!--    EditText for getting Proudct ID-->
-
-    <!--    EditText for Product Description-->
-    <!--    Spinner for dropdown menu-->
-
-    <!--    EditText for Product UPC-->
-
-    <!--    EditText for pieces per box-->
-
-    <!--    Button for creating the product -->
+<!--    Button for creating the product -->
+    <Button
+        android:id="@+id/idBtnCreateProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Add Item"
+        android:textColor="@color/white"
+        android:textAllCaps="false" />
 </LinearLayout>

@@ -1,13 +1,17 @@
 package com.example.inventorymanagementsystem;
 
+import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -73,6 +77,15 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
         // setting data to our text views from our modal class
         Products products = mProductsArrayList.get(position);
         holder.productIdTv.setText(products.getProductId());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), ProductDetails.class);
+                i.putExtra("Object", products);
+                v.getContext().startActivity(i);
+            }
+        });
     }
 
     /**
