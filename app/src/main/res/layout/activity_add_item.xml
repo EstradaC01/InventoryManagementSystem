@@ -19,6 +19,31 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/idTvCreateItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:text="Create Item"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/idEdtProductId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/edit_text_border_2"
+                android:hint="Product Id"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:padding="10dp" />
+
             <EditText
                 android:id="@+id/idEdtProductDescription"
                 android:layout_width="match_parent"
@@ -35,18 +60,18 @@
                 android:padding="10dp"
                 android:scrollbars="vertical" />
 
-            <EditText
-                android:id="@+id/idEdtProductId"
+            <Spinner
+                android:id="@+id/idCategoriesSpinner"
+                style="@style/spinner_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/edit_text_border_2"
-                android:hint="Product Id"
                 android:importantForAutofill="no"
-                android:inputType="text"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:spinnerMode="dropdown" />
 
             <EditText
                 android:id="@+id/idEdtProductUpc"
@@ -73,31 +98,6 @@
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:padding="10dp" />
-
-            <TextView
-                android:id="@+id/idTvCreateItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:text="Create Item"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/idCategoriesSpinner"
-                style="@style/spinner_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/edit_text_border_2"
-                android:importantForAutofill="no"
-                android:padding="10dp"
-                android:spinnerMode="dropdown" />
 
             <Button
                 android:id="@+id/idBtnCreateProduct"

@@ -8,94 +8,105 @@
     android:orientation="vertical"
     tools:context=".Registration">
 
-    <TextView
-        android:id="@+id/idTvTitle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:text="Create User"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="26sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent">
 
-    <EditText
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-        android:id="@+id/idEdtFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/edit_text_border_2"
-        android:hint="Enter First Name"
-        android:textColorHint="@color/colorPrimary"
-        android:textColor="@color/colorPrimary"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:padding="10dp" />
+            <TextView
+                android:id="@+id/idTvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:text="Create User"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/idEdtLastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/edit_text_border_2"
-        android:hint="Enter Last Name"
-        android:importantForAutofill="no"
-        android:textColorHint="@color/colorPrimary"
-        android:textColor="@color/colorPrimary"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:padding="10dp" />
+            <EditText
 
-    <EditText
-        android:id="@+id/idEdtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/edit_text_border_2"
-        android:hint="Enter Email Address"
-        android:importantForAutofill="no"
-        android:textColorHint="@color/colorPrimary"
-        android:textColor="@color/colorPrimary"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        android:padding="10dp" />
+                android:id="@+id/idEdtFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="72dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edit_text_border_2"
+                android:hint="Enter First Name"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary" />
 
-    <EditText
-        android:id="@+id/idEdtPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/edit_text_border_2"
-        android:hint="Enter Password"
-        android:textColorHint="@color/colorPrimary"
-        android:textColor="@color/colorPrimary"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:padding="10dp" />
+            <EditText
+                android:id="@+id/idEdtLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edit_text_border_2"
+                android:hint="Enter Last Name"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary" />
 
-    <Button
-        android:id="@+id/idBtnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/colorPrimary"
-        android:text="Register" />
+            <EditText
+                android:id="@+id/idEdtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edit_text_border_2"
+                android:hint="Enter Email Address"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary" />
+
+            <EditText
+                android:id="@+id/idEdtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edit_text_border_2"
+                android:hint="Enter Password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/idBtnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/colorPrimary"
+                android:text="Register" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>
