@@ -24,6 +24,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    //comment for test commit
+
     // creating variables for button
     private Button createProductbtn, itemList, userList;
     // member fields for logged user
