@@ -80,26 +80,17 @@ public class Registration extends AppCompatActivity {
         });
     }
 
-    private void CreateUser(String _email, String _password)
-    {
-        mAuth.createUserWithEmailAndPassword(_email, _password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+    private void sendEmailVerification() {
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createuserWithEmail: success");
-
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                            addDataToFireStore(mFirstName,mLastName,user.getUid().toString(),mEmail, false);
-
-                            Intent i = new Intent(Registration.this, Login.class);
-                            startActivity(i);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(Registration.this, "Authentication failed.", Toast.LENGTH_LONG).show();
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Email sent.");
                         }
                     }
                 });
@@ -131,4 +122,32 @@ public class Registration extends AppCompatActivity {
             }
         });
     }
+
+
+
+    private void CreateUser(String _email, String _password)
+    {
+        mAuth.createUserWithEmailAndPassword(_email, _password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createuserWithEmail: success");
+
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                            addDataToFireStore(mFirstName,mLastName,user.getUid().toString(),mEmail, false);
+
+                            Intent i = new Intent(Registration.this, Login.class);
+                            startActivity(i);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(Registration.this, "Authentication failed.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
 }
