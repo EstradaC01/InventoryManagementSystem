@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AddItem"
-    android:background="#E1DCCF">
+    android:background="@drawable/blue_android_background">
 
 <!--    Textview for adding title of screen-->
 
@@ -19,17 +19,18 @@
         android:layout_marginEnd="10dp"
         android:text="Create Item"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
 
 <!--    EditText for getting Proudct ID-->
     <EditText
         android:id="@+id/idEdtProductId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/edit_text_border_2"
         android:hint="Product Id"
         android:importantForAutofill="no"
@@ -43,9 +44,9 @@
         android:id="@+id/idEdtProductDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="30dp"
         android:hint="Product Description"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
@@ -60,9 +61,9 @@
         style="@style/spinner_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/edit_text_border_2"
         android:importantForAutofill="no"
         android:minHeight="48dp"
@@ -75,9 +76,9 @@
         android:id="@+id/idEdtProductUpc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/edit_text_border_2"
         android:hint="UPC"
         android:importantForAutofill="no"
@@ -90,9 +91,9 @@
         android:id="@+id/idEdtPiecesPerBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/edit_text_border_2"
         android:hint="Pieces per box"
         android:importantForAutofill="no"
@@ -105,8 +106,12 @@
         android:id="@+id/idBtnCreateProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:text="Add Item"
-        android:textColor="@color/white"
+        android:padding="15dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="#CFD8DC"
         android:textAllCaps="false" />
 </LinearLayout>

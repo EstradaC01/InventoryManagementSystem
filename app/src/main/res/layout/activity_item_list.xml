@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItemList">
+    tools:context=".ItemList"
+    android:background="@drawable/blue_android_background">
 
 <!--    Recycler view for displaying data from Firebase-->
     <androidx.recyclerview.widget.RecyclerView
