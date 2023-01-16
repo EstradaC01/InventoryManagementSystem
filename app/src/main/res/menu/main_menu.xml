@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/idMenuProducts"
-        android:title="Products" />
-    <item
-        android:id="@+id/idMenuInventory"
-        android:title="Inventory" />
+        android:id="@+id/idMenuHamburguer"
+        android:title=""
+        android:icon="@drawable/ic_baseline_menu_24"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/idMenuCompanyDetails"
+                android:title="Company Details" />
+            <item
+                android:id="@+id/idMenuUsers"
+                android:title="Users" />
+            <item
+                android:id="@+id/idMenuSystems"
+                android:title="Systems" />
+            <item
+                android:id="@+id/idMenuProducts"
+                android:title="Products" />
+            <item
+                android:id="@+id/idMenuOrders"
+                android:title="Orders" />
+            <item
+                android:id="@+id/idMenuInventory"
+                android:title="Inventory" />
+            <item
+                android:id="@+id/idMenuLocations"
+                android:title="Locations" />
+        </menu>
+    </item>
+
+
 </menu>

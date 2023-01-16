@@ -5,8 +5,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,9 +45,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // prevents users from rotating screen
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         // instantiating firebase firestore database object.
         // firebase firestore database object
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         // initializing our buttons
         createProductbtn = findViewById(R.id.idBtnItems);
         itemList = findViewById(R.id.idBtnListItems);
@@ -94,7 +100,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // adding menu to UI
+        // Changing title of the action bar and color
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>WAREHOUSE 1</font>"));
+
+        //
+        getSupportActionBar().setIcon(R.drawable.warehouse_icon_blue);
 
 
         // adding onClick listener to view data in new activity
