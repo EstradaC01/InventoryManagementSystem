@@ -4,20 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItemList">
+    tools:context=".UserList">
 
-<!--    Recycler view for displaying data from Firebase-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/idRVItems"
+        android:id="@+id/idRVUsers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="15dp" />
-
-<!--    Progress bar for showing loading screen-->
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp">
+    </androidx.recyclerview.widget.RecyclerView>
     <ProgressBar
-        android:id="@+id/idItemProgressBar"
+        android:id="@+id/idUserProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
-
 </RelativeLayout>

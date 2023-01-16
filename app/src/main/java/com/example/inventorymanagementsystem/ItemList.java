@@ -25,7 +25,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ItemList extends AppCompatActivity {
@@ -54,7 +53,7 @@ public class ItemList extends AppCompatActivity {
 
         // initializing variables
         itemRV = findViewById(R.id.idRVItems);
-        loadingPB = findViewById(R.id.idProgressBar);
+        loadingPB = findViewById(R.id.idItemProgressBar);
 
         // initializing our variable for firebase
         // firestore and getting its instance

@@ -98,7 +98,7 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
         return mProductsArrayList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         // creating variables for our text views
         private final TextView productIdTv;
         private final TextView productAvailableUnitsTv;
