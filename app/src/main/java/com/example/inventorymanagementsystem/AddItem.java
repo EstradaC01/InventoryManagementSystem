@@ -3,7 +3,9 @@ package com.example.inventorymanagementsystem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +41,12 @@ public class AddItem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+
+        // prevents users from rotating screen
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        // change action support bar title and font color
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Create Product</font>"));
 
         // initializing variables
         productIdEdt = findViewById(R.id.idEdtProductId);

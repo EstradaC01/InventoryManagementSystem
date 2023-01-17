@@ -30,8 +30,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //comment for test commit
-
     // creating variables for button
     private Button createProductbtn, itemList, userList;
     // member fields for logged user
@@ -53,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // initializing our buttons
-        createProductbtn = findViewById(R.id.idBtnItems);
-        itemList = findViewById(R.id.idBtnListItems);
         userList = findViewById(R.id.idBtnListUsers);
 
         // initializing FirebaseUser
@@ -102,32 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Changing title of the action bar and color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>WAREHOUSE 1</font>"));
-
-        //
-        getSupportActionBar().setIcon(R.drawable.warehouse_icon_blue);
-
-
-        // adding onClick listener to view data in new activity
-        createProductbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // opening a new activity on button click
-                Intent i = new Intent(MainActivity.this, AddItem.class);
-                startActivity(i);
-            }
-        }
-
-
-        );
-
-        // adding onClick listener to view data in recycler view. view list of items
-        itemList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, ItemList.class);
-                startActivity(i);
-            }
-        });
     }
 
     /**
@@ -182,6 +152,31 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch(id) {
+            case R.id.idMenuCompanyDetails:
+                break;
+            case R.id.idMenuUsers:
+                break;
+            case R.id.idMenuSystems:
+                break;
+            case R.id.idMenuProducts:
+                Intent i = new Intent(MainActivity.this, ItemsSubMenu.class);
+                startActivity(i);
+                break;
+            case R.id.idMenuOrders:
+                break;
+            case R.id.idMenuReceiving:
+                break;
+            case R.id.idMenuInventory:
+                break;
+            case R.id.idMenuLocations:
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
         return true;
     }

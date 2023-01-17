@@ -9,49 +9,19 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/idBtnItems"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
-        android:text="Items"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#CFD8DC"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/idBtnListItems"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
-        android:text="List Items"
-        android:padding="15dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#CFD8DC"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idBtnItems" />
-
-    <Button
         android:id="@+id/idBtnListUsers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="30dp"
-        android:text="Users"
-        android:padding="15dp"
         android:backgroundTint="@color/colorPrimary"
+        android:padding="15dp"
+        android:text="Users"
         android:textColor="#CFD8DC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idBtnListItems" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/idBtnLocations"
