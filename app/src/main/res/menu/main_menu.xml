@@ -11,25 +11,36 @@
         <menu>
             <item
                 android:id="@+id/idMenuCompanyDetails"
-                android:title="Company Details" />
+                android:title="Company Details"
+                android:icon="@drawable/ic_baseline_warehouse_24"/>
             <item
                 android:id="@+id/idMenuUsers"
-                android:title="Users" />
+                android:title="Users"
+                android:icon="@drawable/ic_baseline_manage_accounts_24"/>
             <item
                 android:id="@+id/idMenuSystems"
-                android:title="Systems" />
+                android:title="Systems"
+                android:icon="@drawable/ic_baseline_person_24"/>
             <item
                 android:id="@+id/idMenuProducts"
-                android:title="Products" />
+                android:title="Products"
+                android:icon="@drawable/_725534_box_icon"/>
             <item
                 android:id="@+id/idMenuOrders"
-                android:title="Orders" />
+                android:title="Orders"
+                android:icon="@drawable/ic_baseline_shopping_cart_24"/>
+            <item
+                android:id="@+id/idMenuReceiving"
+                android:title="Receiving"
+                android:icon="@drawable/_726506_truck_icon"/>
             <item
                 android:id="@+id/idMenuInventory"
-                android:title="Inventory" />
+                android:title="Inventory"
+                android:icon="@drawable/_303114_explore_lense_magnifier_search_searching_icon__1_"/>
             <item
                 android:id="@+id/idMenuLocations"
-                android:title="Locations" />
+                android:title="Locations"
+                android:icon="@drawable/_726131_location_point_icon"/>
         </menu>
     </item>
 
