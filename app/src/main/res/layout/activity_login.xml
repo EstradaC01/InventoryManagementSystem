@@ -17,7 +17,7 @@
             android:layout_width="342dp"
             android:layout_height="110dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/app_name"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,6 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="32dp"
-            android:fontFamily="@font/alata"
             android:text="Hyperion"
             android:textColor="@color/white"
             android:textSize="24sp"
@@ -51,7 +50,6 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="32dp"
-            android:fontFamily="@font/alata"
             android:text="Inventory Management System"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -68,7 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/edit_text_border_2"
             android:ems="10"
@@ -103,6 +101,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idEdtLoginEmail" />
 
+        <EditText
+            android:id="@+id/idEdtLoginScreenCompanyCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/edit_text_border_2"
+            android:ems="10"
+            android:hint="Enter Company Code"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idEdtLoginPassword" />
+
         <Button
             android:id="@+id/idLoginBtn"
             android:layout_width="match_parent"
@@ -116,7 +134,7 @@
             android:textColor="#CFD8DC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idEdtLoginPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/idEdtLoginScreenCompanyCode" />
 
         <Button
             android:id="@+id/idRegisterBtn"

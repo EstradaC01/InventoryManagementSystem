@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -31,13 +32,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     // creating variables for button
-    private Button createProductbtn, itemList, userList;
+    private Button userList;
     // member fields for logged user
-    private String mEmail, mUserid;
-    private boolean isAdmin;
+    private String mEmail, mUserKey;
 
+    private static boolean isAdmin;
 
-
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
             // The user's ID, unique to the Firebase project. Do NOT use this value to
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.
-            mUserid = user.getUid();
+            mUserKey = user.getUid();
         }
         CollectionReference adminRef = db.collection("Users");
 
-        adminRef.whereEqualTo("userId", mUserid).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        adminRef.whereEqualTo("userKey", mUserKey).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (!value.isEmpty()) {
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
+                Log.d(TAG, "onEvent: " + isAdmin);
             }
         });
 

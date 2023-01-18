@@ -41,7 +41,7 @@ public class ItemList extends AppCompatActivity {
 
     ProgressBar loadingPB;
 
-    private String mUserId;
+    private String mUserKey;
     private boolean isAdmin;
 
     private static final Boolean IS_ADMIN = false;
@@ -68,7 +68,7 @@ public class ItemList extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        mUserId = user.getUid().toString();
+        mUserKey = user.getUid().toString();
 
         // creating our new array list
         mProductsArrayList = new ArrayList<>();
@@ -83,13 +83,13 @@ public class ItemList extends AppCompatActivity {
 
         CollectionReference adminRef = db.collection("Users");
 
-        adminRef.whereEqualTo("userId", mUserId).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        adminRef.whereEqualTo("userKey", mUserKey).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                Log.d(TAG, "onEvent: " + mUserId);
+                Log.d(TAG, "onEvent: " + mUserKey);
                 if(!value.isEmpty())
                 {
-                    Log.d(TAG, "userId: " + mUserId);
+                    Log.d(TAG, "userId: " + mUserKey);
                     loadingPB.setVisibility(View.GONE);
                     List<DocumentSnapshot> list = value.getDocuments();
                     for(DocumentSnapshot d : list) {
@@ -133,7 +133,7 @@ public class ItemList extends AppCompatActivity {
                     });
                 } else {
 
-                    itemsRef.whereEqualTo("postedBy", mUserId).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    itemsRef.whereEqualTo("postedBy", mUserKey).addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
@@ -186,13 +186,13 @@ public class ItemList extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        mUserId = savedInstanceState.getString(USER_ID);
+        mUserKey = savedInstanceState.getString(USER_ID);
         isAdmin = savedInstanceState.getBoolean(String.valueOf(IS_ADMIN));
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putString(USER_ID, mUserId);
+        outState.putString(USER_ID, mUserKey);
         outState.putBoolean(String.valueOf(IS_ADMIN), isAdmin);
         super.onSaveInstanceState(outState);
     }
