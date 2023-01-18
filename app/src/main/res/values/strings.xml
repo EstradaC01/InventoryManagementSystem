@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Inventory Management System</string>
+    <string name="create_company">Create Company</string>
+    <string name="join_company">Join Company</string>
     <string-array name="product_categories">
         <item>Electronics</item>
         <item>Clothing</item>
