@@ -121,32 +121,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idEdtLoginPassword" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/idLoginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
-            android:backgroundTint="@color/colorPrimary"
             android:padding="15dp"
             android:text="Login"
             android:textColor="#CFD8DC"
+            android:background="@drawable/button_navyblue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idEdtLoginScreenCompanyCode" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/idRegisterBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="30dp"
-            android:backgroundTint="@color/colorPrimary"
             android:padding="15dp"
             android:text="Register"
             android:textColor="#CFD8DC"
+            android:background="@drawable/button_navyblue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
