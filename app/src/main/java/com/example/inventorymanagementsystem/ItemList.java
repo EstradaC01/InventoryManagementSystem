@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
@@ -41,12 +42,10 @@ public class ItemList extends AppCompatActivity {
 
     ProgressBar loadingPB;
 
-    private String mUserKey;
-    private boolean isAdmin;
-
     private static final Boolean IS_ADMIN = false;
     private static final String USER_ID = "USER";
 
+    private static Users currentUser;
     private static final String TAG = "ItemList";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +66,6 @@ public class ItemList extends AppCompatActivity {
         // firestore and getting its instance
         db = FirebaseFirestore.getInstance();
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        mUserKey = user.getUid().toString();
-
         // creating our new array list
         mProductsArrayList = new ArrayList<>();
         itemRV.setHasFixedSize(true);
@@ -81,35 +77,37 @@ public class ItemList extends AppCompatActivity {
         // setting adapter to our recycler view
         itemRV.setAdapter(mItemRVAdapter);
 
+        //getting intent from ItemsSubMenu class along with User object
+        Intent i = getIntent();
+        currentUser = (Users)i.getSerializableExtra("User");
+
         CollectionReference adminRef = db.collection("Users");
 
-        adminRef.whereEqualTo("userKey", mUserKey).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                Log.d(TAG, "onEvent: " + mUserKey);
-                if(!value.isEmpty())
-                {
-                    Log.d(TAG, "userId: " + mUserKey);
-                    loadingPB.setVisibility(View.GONE);
-                    List<DocumentSnapshot> list = value.getDocuments();
-                    for(DocumentSnapshot d : list) {
-                        Users u = d.toObject(Users.class);
-                        isAdmin = u.getIsAdmin();
-                    }
-
-                } else {
-                    Log.d(TAG, "onEvent value is empty " + value.getDocuments());
-
-                }
-
+//        adminRef.whereEqualTo("userKey", currentUser.getUserKey()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+//
+//                if(!value.isEmpty())
+//                {
+//
+//                    loadingPB.setVisibility(View.GONE);
+//                    List<DocumentSnapshot> list = value.getDocuments();
+//                    for(DocumentSnapshot d : list) {
+//                        currentUser = d.toObject(Users.class);
+//                    }
+//
+//                } else {
+//                    Log.d(TAG, "onEvent value is empty " + value.getDocuments());
+//
+//                }
+//
                 CollectionReference itemsRef = db.collection("Products");
 
-                if(isAdmin)
+                if(currentUser.getIsAdmin())
                 {
                     db.collection("Products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                            Log.d(TAG, "onSuccess: all products");
                             if(!queryDocumentSnapshots.isEmpty())
                             {
                                 loadingPB.setVisibility(View.GONE);
@@ -133,7 +131,7 @@ public class ItemList extends AppCompatActivity {
                     });
                 } else {
 
-                    itemsRef.whereEqualTo("postedBy", mUserKey).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    itemsRef.whereEqualTo("postedBy", currentUser.getUserKey()).addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
@@ -157,9 +155,8 @@ public class ItemList extends AppCompatActivity {
                         }
                     });
                 }
-                Log.d(TAG, "onEvent: admin" + isAdmin);
-            }
-        });
+//            }
+//        });
     }
 
     /**
@@ -186,14 +183,10 @@ public class ItemList extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        mUserKey = savedInstanceState.getString(USER_ID);
-        isAdmin = savedInstanceState.getBoolean(String.valueOf(IS_ADMIN));
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putString(USER_ID, mUserKey);
-        outState.putBoolean(String.valueOf(IS_ADMIN), isAdmin);
         super.onSaveInstanceState(outState);
     }
 }

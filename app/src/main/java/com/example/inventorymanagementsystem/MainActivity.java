@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     // member fields for logged user
     private String mEmail, mUserKey;
 
-    private static boolean isAdmin;
+    private static Users currentUser;
 
     private static final String TAG = "MainActivity";
     @Override
@@ -78,23 +78,21 @@ public class MainActivity extends AppCompatActivity {
                 if (!value.isEmpty()) {
                     List<DocumentSnapshot> list = value.getDocuments();
                     for (DocumentSnapshot d : list) {
-                        Users u = d.toObject(Users.class);
-                        isAdmin = u.getIsAdmin();
+                        currentUser = d.toObject(Users.class);
                     }
                 } else {
                     Log.d("Error ", "Exception: " + error);
                 }
-                if (!isAdmin) {
-                    userList.setVisibility(View.GONE);
-                } else if (isAdmin) {
-                    userList.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //Intent i = new Intent(MainActivity.this, );
-                        }
-                    });
-                }
-                Log.d(TAG, "onEvent: " + isAdmin);
+//                if (!currentUser.getIsAdmin()) {
+//                    userList.setVisibility(View.GONE);
+//                } else if (currentUser.getIsAdmin()) {
+//                    userList.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            //Intent i = new Intent(MainActivity.this, );
+//                        }
+//                    });
+//                }
             }
         });
 
@@ -166,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.idMenuProducts:
                 Intent i = new Intent(MainActivity.this, ItemsSubMenu.class);
+                i.putExtra("User", currentUser);
                 startActivity(i);
                 break;
             case R.id.idMenuOrders:
@@ -179,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
         return true;
     }
 }

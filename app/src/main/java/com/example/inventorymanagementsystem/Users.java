@@ -1,6 +1,8 @@
 package com.example.inventorymanagementsystem;
 
-public class Users {
+import java.io.Serializable;
+
+public class Users implements Serializable {
 
     private String mFirstName, mLastName, mUserKey, mEmail;
     private boolean mIsAdmin;

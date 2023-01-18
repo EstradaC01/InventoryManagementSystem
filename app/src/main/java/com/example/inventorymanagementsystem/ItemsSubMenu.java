@@ -17,6 +17,7 @@ public class ItemsSubMenu extends AppCompatActivity {
     private ImageButton btnCreateProduct;
     private ImageButton btnProductList;
 
+    private static Users currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +33,17 @@ public class ItemsSubMenu extends AppCompatActivity {
         // change action support bar title
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Products</font>"));
 
+        // getting intent from MainActivity with serialize user object
+        Intent i = getIntent();
+        currentUser = (Users)i.getSerializableExtra("User");
+
         // adding on click listener for Create Product button
         btnCreateProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // opening a new activity using an intent
                 Intent i = new Intent(ItemsSubMenu.this, AddItem.class);
+                i.putExtra("User", currentUser);
                 startActivity(i);
             }
         });
@@ -48,6 +54,7 @@ public class ItemsSubMenu extends AppCompatActivity {
             public void onClick(View v) {
                 // opening a new activity using an intent
                 Intent i = new Intent(ItemsSubMenu.this, ItemList.class);
+                i.putExtra("User", currentUser);
                 startActivity(i);
             }
         });
