@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,11 +22,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 public class AddItem extends AppCompatActivity {
-
 
     // creating variables for firebase firestore, editTexts and Button
     private Products mProduct;
@@ -33,6 +34,7 @@ public class AddItem extends AppCompatActivity {
     private EditText productIdEdt, productDescriptionEdt, productUpcEdt, productPcsPerBoxEdt;
     private Button addItemBtn;
     private Spinner categoriesSpinner;
+    private ImageView uploadImage;
 
     // member fields for logged user
     String mUserid;
@@ -55,6 +57,7 @@ public class AddItem extends AppCompatActivity {
         productPcsPerBoxEdt = findViewById(R.id.idEdtPiecesPerBox);
         addItemBtn = findViewById(R.id.idBtnCreateProduct);
         categoriesSpinner = findViewById(R.id.idCategoriesSpinner);
+        uploadImage = findViewById(R.id.idIVUploadPhoto);
 
         // setting default string for spinner
         String defaultTextForSpinner = "Category";
@@ -73,11 +76,22 @@ public class AddItem extends AppCompatActivity {
         // initializing Firebaseuser
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+
         if(user != null)
         {
             mUserid = user.getUid().toString();
         }
 
+        // getting instance for Cloud Storage
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+
+        // add on lick listener to upload image to FirebaseStorage and show in the screen
+        uploadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         // add on click listener to create item button
         addItemBtn.setOnClickListener(new View.OnClickListener() {
