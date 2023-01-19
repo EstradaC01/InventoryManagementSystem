@@ -99,7 +99,7 @@ public class Registration extends AppCompatActivity {
                 });
     }
 
-    private void addDataToFireStore(String _firstName, String _lastName, String _userKey, String _email,boolean _isAdmin) {
+    private void addDataToFireStore(String _firstName, String _lastName, String _userKey, String _email, boolean _isAdmin) {
 
         // creating a collection reference
         // for our Firebase Firestore database

@@ -42,6 +42,8 @@ public class ItemList extends AppCompatActivity {
 
     ProgressBar loadingPB;
 
+    private String mCompanyCode;
+
     private static final Boolean IS_ADMIN = false;
     private static final String USER_ID = "USER";
 
@@ -80,32 +82,13 @@ public class ItemList extends AppCompatActivity {
         //getting intent from ItemsSubMenu class along with User object
         Intent i = getIntent();
         currentUser = (Users)i.getSerializableExtra("User");
+        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
 
-        CollectionReference adminRef = db.collection("Users");
-
-//        adminRef.whereEqualTo("userKey", currentUser.getUserKey()).addSnapshotListener(new EventListener<QuerySnapshot>() {
-//            @Override
-//            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//
-//                if(!value.isEmpty())
-//                {
-//
-//                    loadingPB.setVisibility(View.GONE);
-//                    List<DocumentSnapshot> list = value.getDocuments();
-//                    for(DocumentSnapshot d : list) {
-//                        currentUser = d.toObject(Users.class);
-//                    }
-//
-//                } else {
-//                    Log.d(TAG, "onEvent value is empty " + value.getDocuments());
-//
-//                }
-//
-                CollectionReference itemsRef = db.collection("Products");
+                CollectionReference itemsRef = db.collection(mCompanyCode + "/WarehouseOne/Products");
 
                 if(currentUser.getIsAdmin())
                 {
-                    db.collection("Products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    db.collection(mCompanyCode + "/WarehouseOne/Products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             if(!queryDocumentSnapshots.isEmpty())

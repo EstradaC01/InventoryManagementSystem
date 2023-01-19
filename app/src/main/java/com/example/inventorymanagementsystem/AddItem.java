@@ -3,6 +3,7 @@ package com.example.inventorymanagementsystem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
@@ -37,7 +38,9 @@ public class AddItem extends AppCompatActivity {
     private ImageView uploadImage;
 
     // member fields for logged user
-    String mUserid;
+    private static Users currentUser;
+
+    private String mCompanyCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +76,10 @@ public class AddItem extends AppCompatActivity {
         // firestore and getting its instance
         db = FirebaseFirestore.getInstance();
 
-        // initializing Firebaseuser
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-
-        if(user != null)
-        {
-            mUserid = user.getUid().toString();
-        }
-
+        // getting intent from ItemsSubMenu class along with User object
+        Intent i = getIntent();
+        currentUser = (Users)i.getSerializableExtra("User");
+        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         // getting instance for Cloud Storage
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
@@ -104,7 +102,8 @@ public class AddItem extends AppCompatActivity {
                 mProduct.setProductDescription(productDescriptionEdt.getText().toString());
                 mProduct.setProductUpc(productUpcEdt.getText().toString());
                 mProduct.setProductPcsPerBox(productPcsPerBoxEdt.getText().toString());
-                mProduct.setPostedBy(mUserid);
+                mProduct.setUserKey(currentUser.getUserKey());
+                mProduct.setProductOwner(currentUser.getSystemId());
                 mProduct.setProductTimeAdded();
                 // validating the text fields if empty or not
                 if (TextUtils.isEmpty(mProduct.getProductId())) {
@@ -133,22 +132,15 @@ public class AddItem extends AppCompatActivity {
         //Log.d("FIREBASE-ADD", "Inside");
         // creating a collection reference
         // for our Firebase Firestore database
-        CollectionReference dbProducts = db.collection("Products");
 
-        // adding our data to our courses object class.
-        // below method is use to add data to Firebase Firestore
-        dbProducts.add(products).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection(mCompanyCode + "/WarehouseOne/Products").document(products.getProductId()).set(products).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(DocumentReference documentReference) {
-                // after the data addition is successful
-                // we are displaying a success toast message
-                Toast.makeText(AddItem.this, "Your product has been added to the system.", Toast.LENGTH_LONG).show();
+            public void onSuccess(Void unused) {
+                Toast.makeText(AddItem.this, "Product updated", Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                // this method is called when the data addition process is failed.
-                // displaying a toast mesage when data addition is failed.
                 Toast.makeText(AddItem.this, "Fail to add product \n" + e, Toast.LENGTH_LONG).show();
             }
         });

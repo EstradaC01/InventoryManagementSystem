@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Users implements Serializable {
 
-    private String mFirstName, mLastName, mUserKey, mEmail;
+    private String mFirstName, mLastName, mUserKey, mEmail, mSystemId;
     private boolean mIsAdmin;
 
     public Users()
@@ -39,10 +39,12 @@ public class Users implements Serializable {
     public String getEmail() {
         return mEmail;
     }
+    public String getSystemId() {
+        return mSystemId;
+    }
     public boolean getIsAdmin() {
         return mIsAdmin;
     }
-
     // setters
 
     public void setFirstName(String firstName) {
@@ -62,5 +64,8 @@ public class Users implements Serializable {
     }
     public void setIsAdmin(boolean isAdmin) {
         mIsAdmin = isAdmin;
+    }
+    public void setSystemId(String systemId) {
+        mSystemId = systemId;
     }
 }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     // creating variables for button
     private Button userList;
     // member fields for logged user
-    private String mEmail, mUserKey;
+    private String mEmail, mUserKey, mCompanyCode;
 
     private static Users currentUser;
 
@@ -47,54 +47,11 @@ public class MainActivity extends AppCompatActivity {
         // prevents users from rotating screen
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        // instantiating firebase firestore database object.
-        // firebase firestore database object
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         // initializing our buttons
         userList = findViewById(R.id.idBtnListUsers);
-
-        // initializing FirebaseUser
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null) {
-            // Name, email address, and profile photo Url
-            // String name = user.getDisplayName();
-            mEmail = user.getEmail();
-            // Uri photoUrl = user.getPhotoUrl();
-
-            // Check if user's email is verified
-            // boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            mUserKey = user.getUid();
-        }
-        CollectionReference adminRef = db.collection("Users");
-
-        adminRef.whereEqualTo("userKey", mUserKey).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (!value.isEmpty()) {
-                    List<DocumentSnapshot> list = value.getDocuments();
-                    for (DocumentSnapshot d : list) {
-                        currentUser = d.toObject(Users.class);
-                    }
-                } else {
-                    Log.d("Error ", "Exception: " + error);
-                }
-//                if (!currentUser.getIsAdmin()) {
-//                    userList.setVisibility(View.GONE);
-//                } else if (currentUser.getIsAdmin()) {
-//                    userList.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            //Intent i = new Intent(MainActivity.this, );
-//                        }
-//                    });
-//                }
-            }
-        });
+        Intent i = getIntent();
+        currentUser = (Users) i.getSerializableExtra("User");
+        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
 
         // Changing title of the action bar and color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>WAREHOUSE 1</font>"));
@@ -165,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.idMenuProducts:
                 Intent i = new Intent(MainActivity.this, ItemsSubMenu.class);
                 i.putExtra("User", currentUser);
+                i.putExtra("CompanyCode", mCompanyCode);
                 startActivity(i);
                 break;
             case R.id.idMenuOrders:
