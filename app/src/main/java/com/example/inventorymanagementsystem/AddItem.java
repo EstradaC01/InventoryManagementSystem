@@ -1,13 +1,23 @@
 package com.example.inventorymanagementsystem;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -25,6 +36,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 public class AddItem extends AppCompatActivity {
@@ -40,8 +52,15 @@ public class AddItem extends AppCompatActivity {
     // member fields for logged user
     private static Users currentUser;
 
+    private String imageURL;
+    private Uri uri;
+
     private String mCompanyCode;
 
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
+
+    private static final String TAG = "AddItem";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,52 +99,75 @@ public class AddItem extends AppCompatActivity {
         Intent i = getIntent();
         currentUser = (Users)i.getSerializableExtra("User");
         mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
-        // getting instance for Cloud Storage
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+
 
         // add on lick listener to upload image to FirebaseStorage and show in the screen
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        Log.d(TAG, "onActivityResult: " + result.getResultCode());
+                        if(result.getResultCode() == Activity.RESULT_OK) {
+                            Intent i = result.getData();
+                            uri = i.getData();
+                            imageURL = uri.toString();
+                            uploadImage.setImageURI(uri);
+                        } else {
+                            Toast.makeText(AddItem.this, "No Image Selected", Toast.LENGTH_LONG).show();
+                        }
+                        Log.d(TAG, "onActivityResult: " + uri);
+                    }
+                });
+
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                i.setType("image/*");
+                activityResultLauncher.launch(i);
             }
         });
 
-        // add on click listener to create item button
-        addItemBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create product
-                mProduct = new Products();
-                // getting data from editText fields.
-                mProduct.setProductId(productIdEdt.getText().toString());
-                mProduct.setProductDescription(productDescriptionEdt.getText().toString());
-                mProduct.setProductUpc(productUpcEdt.getText().toString());
-                mProduct.setProductPcsPerBox(productPcsPerBoxEdt.getText().toString());
-                mProduct.setUserKey(currentUser.getUserKey());
-                mProduct.setProductOwner(currentUser.getSystemId());
-                mProduct.setProductTimeAdded();
-                // validating the text fields if empty or not
-                if (TextUtils.isEmpty(mProduct.getProductId())) {
-                    productIdEdt.setError("Please enter product id");
-                    return;
-                }
-                if (TextUtils.isEmpty(mProduct.getProductDescription())) {
-                    productDescriptionEdt.setError("Please enter product description");
-                    return;
-                }
-                if (TextUtils.isEmpty(mProduct.getProductUpc())) {
-                    productUpcEdt.setError("Please enter product upc");
-                    return;
-                }
-                if (TextUtils.isEmpty(mProduct.getProductPcsPerBox())) {
-                    productPcsPerBoxEdt.setError("Please enter product pieces per box");
-                    return;
-                }
-                // calling method to add data to Firebase Firestore
-                addDataToFireStore(mProduct);
-            }
-        });
+                // add on click listener to create item button
+                addItemBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        // Create product
+                        mProduct = new Products();
+
+
+                        // getting data from editText fields.
+                        mProduct.setProductId(productIdEdt.getText().toString());
+                        mProduct.setProductDescription(productDescriptionEdt.getText().toString());
+                        mProduct.setProductUpc(productUpcEdt.getText().toString());
+                        mProduct.setProductPcsPerBox(productPcsPerBoxEdt.getText().toString());
+                        mProduct.setUserKey(currentUser.getUserKey());
+                        mProduct.setProductOwner(currentUser.getSystemId());
+                        mProduct.setProductTimeAdded();
+
+                        // validating the text fields if empty or not
+                        if (TextUtils.isEmpty(mProduct.getProductId())) {
+                            productIdEdt.setError("Please enter product id");
+                            return;
+                        }
+                        if (TextUtils.isEmpty(mProduct.getProductDescription())) {
+                            productDescriptionEdt.setError("Please enter product description");
+                            return;
+                        }
+                        if (TextUtils.isEmpty(mProduct.getProductUpc())) {
+                            productUpcEdt.setError("Please enter product upc");
+                            return;
+                        }
+                        if (TextUtils.isEmpty(mProduct.getProductPcsPerBox())) {
+                            productPcsPerBoxEdt.setError("Please enter product pieces per box");
+                            return;
+                        }
+                        // calling method to add data to Firebase Firestore
+                        saveProduct(mProduct);
+                    }
+                });
     }
 
     private void addDataToFireStore(Products products) {
@@ -137,6 +179,8 @@ public class AddItem extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(AddItem.this, "Product updated", Toast.LENGTH_LONG).show();
+                finish();
+                Log.d(TAG, "onSuccess: imageURL " + imageURL);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -145,5 +189,26 @@ public class AddItem extends AppCompatActivity {
             }
         });
     }
+
+    private void saveProduct(Products _product){
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("productImages")
+                .child(uri.getLastPathSegment());
+        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                while(!uriTask.isComplete());
+                Uri urlImage = uriTask.getResult();
+                _product.setImageUri(urlImage.toString());
+                addDataToFireStore(_product);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                addDataToFireStore(_product);
+            }
+        });
+    }
+
 }
 

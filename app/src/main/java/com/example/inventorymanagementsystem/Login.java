@@ -93,7 +93,6 @@ public class Login extends AppCompatActivity {
                     db.collection(mCompanyCode).addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                            Log.d(TAG, "onEvent: value " + value.size());
                             if(value.isEmpty()) {
                                 isCompanyCodeValid = false;
                                 Toast.makeText(Login.this, "Company Code Invalid", Toast.LENGTH_LONG).show();
@@ -151,18 +150,8 @@ public class Login extends AppCompatActivity {
                                         i.putExtra("CompanyCode", _companyCode);
                                         startActivity(i);
                                     } else {
-                                        Log.d("Error ", "Exception: " + error);
+                                        Toast.makeText(Login.this, "No user found with email and password provided.", Toast.LENGTH_SHORT).show();
                                     }
-//                if (!currentUser.getIsAdmin()) {
-//                    userList.setVisibility(View.GONE);
-//                } else if (currentUser.getIsAdmin()) {
-//                    userList.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            //Intent i = new Intent(MainActivity.this, );
-//                        }
-//                    });
-//                }
                                 }
                             });
                         } else {

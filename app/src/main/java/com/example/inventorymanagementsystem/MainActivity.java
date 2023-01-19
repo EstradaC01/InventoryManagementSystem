@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     // creating variables for button
     private Button userList, getCompanyDetails;
     // member fields for logged user
-    private String mEmail, mUserKey, mCompanyCode;
+    private String mCompanyCode;
 
     private static Users currentUser;
 

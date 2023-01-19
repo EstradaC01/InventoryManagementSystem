@@ -156,19 +156,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idLoginBtn" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/idforgotpasswordbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:padding="25dp"
             android:background="#00FFFFFF"
             android:text="Forgot Password"
             android:textColor="#16215E"
-            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@+id/idRegisterBtn"
             app:layout_constraintStart_toStartOf="@+id/idRegisterBtn"
-            app:layout_constraintTop_toBottomOf="@+id/idRegisterBtn"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toBottomOf="@+id/idRegisterBtn" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
