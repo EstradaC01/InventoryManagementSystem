@@ -55,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Changing title of the action bar and color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>WAREHOUSE 1</font>"));
+        userList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     /**

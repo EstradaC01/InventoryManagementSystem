@@ -63,11 +63,10 @@ public class Login extends AppCompatActivity {
         edtLoginPassword = findViewById(R.id.idEdtLoginPassword);
         btnLogin = findViewById(R.id.idLoginBtn);
         btnRegistration = findViewById(R.id.idRegisterBtn);
-<<<<<<< HEAD
+
         btnForgotPassword = findViewById(R.id.idforgotpasswordbtn);
-=======
+
         edtCompanyCode = findViewById(R.id.idEdtLoginScreenCompanyCode);
->>>>>>> 691edc74ea663c59e228ae4c0e9306074dcc50ea
 
         // creating on click listener to login user
         btnLogin.setOnClickListener(new View.OnClickListener() {
