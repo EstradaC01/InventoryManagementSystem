@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,8 +23,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
-    // creating variables for button
-    private Button userList, getCompanyDetails;
     // member fields for logged user
     private static String mCompanyCode;
 
@@ -42,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // initializing our buttons
-        userList = findViewById(R.id.idBtnListUsers);
-        getCompanyDetails = findViewById(R.id.idBtnCompanyDetails);
 
         // getting intent from Login screen with Users object and companyCode string
         Intent i = getIntent();
@@ -54,39 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Changing title of the action bar and color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>WAREHOUSE 1</font>"));
-        userList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-        getCompanyDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CollectionReference details = db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails");
-                details.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot document = task.getResult();
-                            if (!document.isEmpty()) {
-                                Intent newIntent = new Intent(MainActivity.this, ViewCompanyDetails.class);
-                                newIntent.putExtra("CompanyCode", mCompanyCode);
-                                newIntent.putExtra("User", currentUser);
-                                startActivity(newIntent);
-                            } else {
-                                Intent newIntent = new Intent(MainActivity.this, CompanySetup.class);
-                                newIntent.putExtra("CompanyCode", mCompanyCode);
-                                newIntent.putExtra("User", currentUser);
-                                startActivity(newIntent);
-                            }
-                        } else {
-                            Log.d(TAG, "Failed with: ", task.getException());
-                        }
-                    }
-                });
-            }
-        });
     }
 
     /**
@@ -146,6 +111,23 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.idMenuCompanyDetails:
+                CollectionReference details = db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails");
+                details.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot document = task.getResult();
+                            if (!document.isEmpty()) {
+                                Intent newIntent = new Intent(MainActivity.this, ViewCompanyDetails.class);
+                                newIntent.putExtra("CompanyCode", mCompanyCode);
+                                newIntent.putExtra("User", currentUser);
+                                startActivity(newIntent);
+                            }
+                        } else {
+                            Toast.makeText(MainActivity.this, "Failed to read database", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
                 break;
             case R.id.idMenuUsers:
                 break;

@@ -59,11 +59,13 @@ public class Registration extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 mFirstName = edtFirstname.getText().toString();
                 mLastName = edtLastName.getText().toString();
                 mEmail = edtEmail.getText().toString();
                 mPassword = edtPassword.getText().toString();
                 mCompanyCode = edtCompanyCode.getText().toString();
+
                 if(TextUtils.isEmpty(mEmail))
                 {
                     edtEmail.setError("Please enter a valid email address");
@@ -76,20 +78,23 @@ public class Registration extends AppCompatActivity {
                 {
                     edtPassword.setError("Please enter a password");
                 }
-                if(!mEmail.isEmpty() && !mPassword.isEmpty())
+                if(!mCompanyCode.isEmpty())
                 {
-                    CreateUser(mEmail, mPassword);
+                    if(!mEmail.isEmpty() && !mPassword.isEmpty())
+                    {
+                        CreateUser(mEmail, mPassword);
+                    }
                 }
             }
         });
     }
 
 
-    private void addDataToFireStore(String _firstName, String _lastName, String _userKey, String _email, boolean _isAdmin) {
+    private void addDataToFireStore(String _firstName, String _lastName, String _userKey, String _email, String _companyCode, boolean _isAdmin) {
 
         // creating a collection reference
         // for our Firebase Firestore database
-        CollectionReference dbProducts = db.collection("Users");
+        CollectionReference dbProducts = db.collection(_companyCode + "/CompanyUsers/Users");
 
         // adding our data to our users object class.
         Users user = new Users(_firstName,_lastName,_userKey,_email, _isAdmin);
@@ -125,10 +130,11 @@ public class Registration extends AppCompatActivity {
 
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                            addDataToFireStore(mFirstName,mLastName,user.getUid().toString(),mEmail, false);
+                            addDataToFireStore(mFirstName,mLastName,user.getUid().toString(),mEmail, mCompanyCode, false);
 
                             Intent i = new Intent(Registration.this, Login.class);
                             startActivity(i);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());

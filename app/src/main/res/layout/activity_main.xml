@@ -9,38 +9,22 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/idBtnListUsers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="30dp"
-        android:padding="15dp"
-        android:text="Users"
-        android:textColor="#ffffff"
-        android:textAllCaps="true"
-        android:textSize="15sp"
-        android:background="@drawable/button_navyblue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/idBtnLocations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
-        android:text="Locations"
-        android:padding="15dp"
-        android:textColor="#ffffff"
-        android:textAllCaps="true"
-        android:textSize="15sp"
         android:background="@drawable/button_navyblue"
+        android:padding="15dp"
+        android:layout_marginTop="20dp"
+        android:text="Locations"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idBtnListUsers" />
+        tools:layout_editor_absoluteY="106dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/idBtnOrders"
@@ -75,22 +59,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idBtnOrders" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/idBtnCompanyDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
-        android:text="Company Details"
-        android:padding="15dp"
-        android:textColor="#ffffff"
-        android:textAllCaps="true"
-        android:textSize="15sp"
-        android:background="@drawable/button_navyblue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idBtnInventory" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

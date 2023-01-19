@@ -23,15 +23,16 @@ public class ForgotPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_forgot_password);
         viewInitializations();
     }
 
     void viewInitializations() {
-        edtEmail = findViewById(R.id.FPEmail);
-mEmail = edtEmail.getText().toString();
+
         // To show back button in actionbar
+        edtEmail = findViewById(R.id.idEdtForgotPasswordUI);
+        mEmail = edtEmail.getText().toString();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -42,14 +43,11 @@ mEmail = edtEmail.getText().toString();
             edtEmail.setError("Please Enter Email");
             return false;
         }
-
         // checking the proper email format
         if (!isEmailValid(mEmail)) {
             edtEmail.setError("Please Enter Valid Email");
             return false;
         }
-
-
         return true;
     }
 
