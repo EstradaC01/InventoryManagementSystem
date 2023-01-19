@@ -15,9 +15,10 @@ import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,14 +60,18 @@ public class MainActivity extends AppCompatActivity {
         getCompanyDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DocumentReference details = db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails").document();
-                details.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                CollectionReference details = db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails");
+                details.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
+                            QuerySnapshot document = task.getResult();
+                            if (!document.isEmpty()) {
                                 Log.d(TAG, "Document exists.");
+                                Intent newIntent = new Intent(MainActivity.this, ViewCompanyDetails.class);
+                                newIntent.putExtra("CompanyCode", mCompanyCode);
+                                newIntent.putExtra("User", currentUser);
+                                startActivity(newIntent);
                             } else {
                                 Log.d(TAG, "Document does not exist.");
                                 Intent newIntent = new Intent(MainActivity.this, CompanySetup.class);
@@ -78,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, "Failed with: ", task.getException());
                         }
                     }
-
                 });
             }
         });

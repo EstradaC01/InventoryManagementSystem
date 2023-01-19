@@ -67,7 +67,7 @@ public class CompanySetup extends AppCompatActivity {
     private void addCompany(Company company) {
 
         db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails")
-                .document(newCompany.getCompanyName()).set(company)
+                .document().set(company)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

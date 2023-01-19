@@ -1,10 +1,11 @@
 package com.example.inventorymanagementsystem;
 
-public class Company {
+import java.io.Serializable;
+
+public class Company implements Serializable {
+
     private String mCompanyName, mCompanyCode, mCompanyOwner,
             mCompanyAddress, mCompanyCountry, mCompanyState, mCompanyZipcode;
-
-
 
     public Company() {
 
