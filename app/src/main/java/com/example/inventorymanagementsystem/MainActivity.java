@@ -1,44 +1,37 @@
 package com.example.inventorymanagementsystem;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     // creating variables for button
-    private Button userList;
+    private Button userList, getCompanyDetails;
     // member fields for logged user
     private String mEmail, mUserKey, mCompanyCode;
 
     private static Users currentUser;
 
+    private FirebaseFirestore db;
+
     private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         // initializing our buttons
         userList = findViewById(R.id.idBtnListUsers);
+        getCompanyDetails = findViewById(R.id.idBtnCompanyDetails);
         Intent i = getIntent();
         currentUser = (Users) i.getSerializableExtra("User");
         mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
+        db = FirebaseFirestore.getInstance();
 
         // Changing title of the action bar and color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>WAREHOUSE 1</font>"));
@@ -59,6 +54,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+        getCompanyDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DocumentReference details = db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails").document();
+                details.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d(TAG, "Document exists.");
+                            } else {
+                                Log.d(TAG, "Document does not exist.");
+                                Intent newIntent = new Intent(MainActivity.this, CompanySetup.class);
+                                newIntent.putExtra("CompanyCode", mCompanyCode);
+                                newIntent.putExtra("User", currentUser);
+                                startActivity(newIntent);
+                            }
+                        } else {
+                            Log.d(TAG, "Failed with: ", task.getException());
+                        }
+                    }
+
+                });
             }
         });
     }
@@ -118,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
             case R.id.idMenuCompanyDetails:
                 break;
             case R.id.idMenuUsers:
