@@ -63,9 +63,7 @@ public class Login extends AppCompatActivity {
         edtLoginPassword = findViewById(R.id.idEdtLoginPassword);
         btnLogin = findViewById(R.id.idLoginBtn);
         btnRegistration = findViewById(R.id.idRegisterBtn);
-
         btnForgotPassword = findViewById(R.id.idforgotpasswordbtn);
-
         edtCompanyCode = findViewById(R.id.idEdtLoginScreenCompanyCode);
 
         // creating on click listener to login user
