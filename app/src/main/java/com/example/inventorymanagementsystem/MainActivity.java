@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -30,16 +31,14 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //comment for test commit
-
     // creating variables for button
-    private Button createProductbtn, itemList, userList;
+    private Button userList;
     // member fields for logged user
-    private String mEmail, mUserid;
-    private boolean isAdmin;
+    private String mEmail, mUserKey, mCompanyCode;
 
+    private static Users currentUser;
 
-
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,86 +47,14 @@ public class MainActivity extends AppCompatActivity {
         // prevents users from rotating screen
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        // instantiating firebase firestore database object.
-        // firebase firestore database object
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         // initializing our buttons
-        createProductbtn = findViewById(R.id.idBtnItems);
-        itemList = findViewById(R.id.idBtnListItems);
         userList = findViewById(R.id.idBtnListUsers);
-
-        // initializing FirebaseUser
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null) {
-            // Name, email address, and profile photo Url
-            // String name = user.getDisplayName();
-            mEmail = user.getEmail();
-            // Uri photoUrl = user.getPhotoUrl();
-
-            // Check if user's email is verified
-            // boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            mUserid = user.getUid();
-        }
-        CollectionReference adminRef = db.collection("Users");
-
-        adminRef.whereEqualTo("userId", mUserid).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (!value.isEmpty()) {
-                    List<DocumentSnapshot> list = value.getDocuments();
-                    for (DocumentSnapshot d : list) {
-                        Users u = d.toObject(Users.class);
-                        isAdmin = u.getIsAdmin();
-                    }
-                } else {
-                    Log.d("Error ", "Exception: " + error);
-                }
-                if (!isAdmin) {
-                    userList.setVisibility(View.GONE);
-                } else if (isAdmin) {
-                    userList.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //Intent i = new Intent(MainActivity.this, );
-                        }
-                    });
-                }
-            }
-        });
+        Intent i = getIntent();
+        currentUser = (Users) i.getSerializableExtra("User");
+        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
 
         // Changing title of the action bar and color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>WAREHOUSE 1</font>"));
-
-        //
-        getSupportActionBar().setIcon(R.drawable.warehouse_icon_blue);
-
-
-        // adding onClick listener to view data in new activity
-        createProductbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // opening a new activity on button click
-                Intent i = new Intent(MainActivity.this, AddItem.class);
-                startActivity(i);
-            }
-        }
-
-
-        );
-
-        // adding onClick listener to view data in recycler view. view list of items
-        itemList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, ItemList.class);
-                startActivity(i);
-            }
-        });
     }
 
     /**
@@ -183,6 +110,32 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+        int id = item.getItemId();
+
+        switch(id) {
+            case R.id.idMenuCompanyDetails:
+                break;
+            case R.id.idMenuUsers:
+                break;
+            case R.id.idMenuSystems:
+                break;
+            case R.id.idMenuProducts:
+                Intent i = new Intent(MainActivity.this, ItemsSubMenu.class);
+                i.putExtra("User", currentUser);
+                i.putExtra("CompanyCode", mCompanyCode);
+                startActivity(i);
+                break;
+            case R.id.idMenuOrders:
+                break;
+            case R.id.idMenuReceiving:
+                break;
+            case R.id.idMenuInventory:
+                break;
+            case R.id.idMenuLocations:
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
         return true;
     }
 }

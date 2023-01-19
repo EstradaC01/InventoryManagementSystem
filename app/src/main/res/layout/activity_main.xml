@@ -8,52 +8,24 @@
     android:padding="8dp"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/idBtnItems"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
-        android:text="Items"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#CFD8DC"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/idBtnListItems"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
-        android:text="List Items"
-        android:padding="15dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#CFD8DC"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idBtnItems" />
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/idBtnListUsers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="30dp"
-        android:text="Users"
         android:padding="15dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#CFD8DC"
+        android:text="Users"
+        android:textColor="#ffffff"
+        android:textAllCaps="true"
+        android:textSize="15sp"
+        android:background="@drawable/button_navyblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idBtnListItems" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/idBtnLocations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,13 +34,15 @@
         android:layout_marginEnd="30dp"
         android:text="Locations"
         android:padding="15dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#CFD8DC"
+        android:textColor="#ffffff"
+        android:textAllCaps="true"
+        android:textSize="15sp"
+        android:background="@drawable/button_navyblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idBtnListUsers" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/idBtnOrders"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,13 +51,15 @@
         android:layout_marginEnd="30dp"
         android:text="Orders"
         android:padding="15dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#CFD8DC"
+        android:textColor="#ffffff"
+        android:textAllCaps="true"
+        android:textSize="15sp"
+        android:background="@drawable/button_navyblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idBtnLocations" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/idBtnInventory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -92,13 +68,15 @@
         android:layout_marginEnd="30dp"
         android:text="Inventory"
         android:padding="15dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#CFD8DC"
+        android:textColor="#ffffff"
+        android:textAllCaps="true"
+        android:textSize="15sp"
+        android:background="@drawable/button_navyblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idBtnOrders" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/idBtnCompanyDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -107,8 +85,10 @@
         android:layout_marginEnd="30dp"
         android:text="Company Details"
         android:padding="15dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#CFD8DC"
+        android:textColor="#ffffff"
+        android:textAllCaps="true"
+        android:textSize="15sp"
+        android:background="@drawable/button_navyblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idBtnInventory" />

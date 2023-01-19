@@ -84,14 +84,14 @@ public class Registration extends AppCompatActivity {
     }
 
 
-    private void addDataToFireStore(String _firstName, String _lastName, String _userId, String _email,boolean _isAdmin) {
+    private void addDataToFireStore(String _firstName, String _lastName, String _userKey, String _email, boolean _isAdmin) {
 
         // creating a collection reference
         // for our Firebase Firestore database
         CollectionReference dbProducts = db.collection("Users");
 
         // adding our data to our users object class.
-        Users user = new Users(_firstName,_lastName,_userId,_email, _isAdmin);
+        Users user = new Users(_firstName,_lastName,_userKey,_email, _isAdmin);
 
         // below method is use to add data to Firebase Firestore
         dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
