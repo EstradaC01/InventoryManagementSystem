@@ -29,11 +29,11 @@ public class Registration extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private EditText edtFirstname, edtLastName, edtEmail, edtPassword;
+    private EditText edtFirstname, edtLastName, edtEmail, edtPassword, edtCompanyCode;
 
     private Button btnRegister;
 
-    private String mFirstName, mLastName, mEmail, mPassword;
+    private String mFirstName, mLastName, mEmail, mPassword, mCompanyCode;
 
     private static final String TAG = "Registration";
 
@@ -53,6 +53,7 @@ public class Registration extends AppCompatActivity {
         edtLastName = findViewById(R.id.idEdtLastName);
         edtEmail = findViewById(R.id.idEdtEmail);
         edtPassword = findViewById(R.id.idEdtPassword);
+        edtCompanyCode = findViewById(R.id.idEdtCompanyGroup);
         btnRegister = findViewById(R.id.idBtnRegister);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +63,7 @@ public class Registration extends AppCompatActivity {
                 mLastName = edtLastName.getText().toString();
                 mEmail = edtEmail.getText().toString();
                 mPassword = edtPassword.getText().toString();
-
+                mCompanyCode = edtCompanyCode.getText().toString();
                 if(TextUtils.isEmpty(mEmail))
                 {
                     edtEmail.setError("Please enter a valid email address");
