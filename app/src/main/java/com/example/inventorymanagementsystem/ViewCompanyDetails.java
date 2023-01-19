@@ -86,8 +86,8 @@ public class ViewCompanyDetails extends AppCompatActivity {
                         ar.add(entry.toString());
                     }
 
-                    edtCompanyAddress.setText(ar.get(1) + " " + ar.get(3) + " " + ar.get(4));
-                    edtCompanyName.setText(ar.get(2));
+                    edtCompanyAddress.setText(ar.get(2) + " " + ar.get(1) + " " + ar.get(4));
+                    edtCompanyName.setText(ar.get(3));
                     edtCompanyCountry.setText(ar.get(5));
                 }
             }
