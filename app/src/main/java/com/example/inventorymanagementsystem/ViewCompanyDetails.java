@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,10 +28,16 @@ public class ViewCompanyDetails extends AppCompatActivity {
     private TextView edtCompanyName, edtCompanyAddress, edtCompanyCountry, edtCompanyState,
             edtCompanyZipcode;
 
+    private Button btnEditCompanyDetails;
+
     private FirebaseFirestore db;
     private static Users currentUser;
     private String mCompanyCode;
     private Company ourCompany;
+
+    private static final String COMPANY_CODE = "NULL";
+
+    private static final String TAG = "ViewCompanyDetails";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Success ", "Inside the layout");
@@ -42,14 +50,30 @@ public class ViewCompanyDetails extends AppCompatActivity {
 
         currentUser = (Users) i.getSerializableExtra("User");
         mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
+
+        Log.d(TAG, "onCreate: companyCode " + mCompanyCode);
         db = FirebaseFirestore.getInstance();
+
         CollectionReference details = db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails");
+
         Log.d("Success ", "collection " + details);
         ArrayList<String> ar = new ArrayList<String>();
 
         edtCompanyName = findViewById(R.id.idTvCompanyName);
         edtCompanyAddress = findViewById(R.id.idTvCompanyAddress);
         edtCompanyCountry = findViewById(R.id.idTvCompanyCountry);
+        btnEditCompanyDetails = findViewById(R.id.idBtnCompanyDetailsEditCompanyDetails);
+
+        btnEditCompanyDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ViewCompanyDetails.this, CompanySetup.class);
+                i.putExtra("CompanyCode", mCompanyCode);
+                i.putExtra("User", currentUser);
+                startActivity(i);
+            }
+        });
+
         details.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -70,5 +94,23 @@ public class ViewCompanyDetails extends AppCompatActivity {
         });
 
     }
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mCompanyCode = savedInstanceState.getString(COMPANY_CODE);
+    }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putString(COMPANY_CODE, mCompanyCode);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
 }

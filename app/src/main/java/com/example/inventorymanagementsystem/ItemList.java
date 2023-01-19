@@ -97,7 +97,6 @@ public class ItemList extends AppCompatActivity {
                                 List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                                 for(DocumentSnapshot d : list) {
                                     Products p = d.toObject(Products.class);
-
                                     mProductsArrayList.add(p);
                                 }
 
@@ -170,6 +169,7 @@ public class ItemList extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
+
         super.onSaveInstanceState(outState);
     }
 }

@@ -37,16 +37,20 @@ public class CompanySetup extends AppCompatActivity {
         setContentView(R.layout.activity_company_setup);
 
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Setup Company details</font>"));
+
         Intent i = getIntent();
         currentUser = (Users) i.getSerializableExtra("User");
         mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
+
         db = FirebaseFirestore.getInstance();
+
         setupCompanyBtn = findViewById(R.id.idBtnSetCompanyDetails);
         edtCompanyName = findViewById(R.id.idEdtCompanyName);
         edtCompanyAddress = findViewById(R.id.idEdtCompanyAddress);
         edtCompanyCountry = findViewById(R.id.idEdtCompanyCountry);
         edtCompanyState = findViewById(R.id.idEdtCompanyState);
         edtCompanyZipcode = findViewById(R.id.idEdtCompanyZipcode);
+
         setupCompanyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,18 +71,18 @@ public class CompanySetup extends AppCompatActivity {
     private void addCompany(Company company) {
 
         db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails")
-                .document().set(company)
+                .document("CompanyDetails").set(company)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(CompanySetup.this, "Details updated", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(CompanySetup.this, ViewCompanyDetails.class);
                 finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(CompanySetup.this, "Details failed to update", Toast.LENGTH_LONG).show();
-
                     }
                 });
     }

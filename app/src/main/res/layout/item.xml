@@ -17,7 +17,7 @@
 
 <!--        Textview for displaying item name-->
         <TextView
-            android:id="@+id/idTVProductId"
+            android:id="@+id/idTVItemCardProductId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
@@ -27,11 +27,11 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/idTVAvailableUnits"
+            android:id="@+id/idTVItemCardProductDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:text="Available Units"
+            android:text="Product Description"
             android:textColor="@color/black" />
     </LinearLayout>
 

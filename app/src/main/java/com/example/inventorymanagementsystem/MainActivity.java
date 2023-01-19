@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     // creating variables for button
     private Button userList, getCompanyDetails;
     // member fields for logged user
-    private String mCompanyCode;
+    private static String mCompanyCode;
 
     private static Users currentUser;
 
@@ -44,9 +44,12 @@ public class MainActivity extends AppCompatActivity {
         // initializing our buttons
         userList = findViewById(R.id.idBtnListUsers);
         getCompanyDetails = findViewById(R.id.idBtnCompanyDetails);
+
+        // getting intent from Login screen with Users object and companyCode string
         Intent i = getIntent();
         currentUser = (Users) i.getSerializableExtra("User");
         mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
+
         db = FirebaseFirestore.getInstance();
 
         // Changing title of the action bar and color
@@ -67,13 +70,11 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             QuerySnapshot document = task.getResult();
                             if (!document.isEmpty()) {
-                                Log.d(TAG, "Document exists.");
                                 Intent newIntent = new Intent(MainActivity.this, ViewCompanyDetails.class);
                                 newIntent.putExtra("CompanyCode", mCompanyCode);
                                 newIntent.putExtra("User", currentUser);
                                 startActivity(newIntent);
                             } else {
-                                Log.d(TAG, "Document does not exist.");
                                 Intent newIntent = new Intent(MainActivity.this, CompanySetup.class);
                                 newIntent.putExtra("CompanyCode", mCompanyCode);
                                 newIntent.putExtra("User", currentUser);

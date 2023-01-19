@@ -77,6 +77,7 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
         // setting data to our text views from our modal class
         Products products = mProductsArrayList.get(position);
         holder.productIdTv.setText(products.getProductId());
+        holder.productDescriptionTv.setText(products.getProductId());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,14 +102,14 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder {
         // creating variables for our text views
         private final TextView productIdTv;
-        private final TextView productAvailableUnitsTv;
+        private final TextView productDescriptionTv;
 
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
             // initializing our text views
-            productIdTv = itemView.findViewById(R.id.idTVProductId);
-            productAvailableUnitsTv = itemView.findViewById(R.id.idTVAvailableUnits);
+            productIdTv = itemView.findViewById(R.id.idTVItemCardProductId);
+            productDescriptionTv = itemView.findViewById(R.id.idTVItemCardProductDescription);
         }
     }
 }
