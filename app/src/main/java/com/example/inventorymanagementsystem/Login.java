@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
     private String mEmail, mPassword;
 
     // creating variables for the buttons
-    private Button btnLogin, btnRegistration;
+    private Button btnLogin, btnRegistration, btnForgotPassword;
 
     private FirebaseAuth mAuth;
 
@@ -48,6 +48,7 @@ public class Login extends AppCompatActivity {
         edtLoginPassword = findViewById(R.id.idEdtLoginPassword);
         btnLogin = findViewById(R.id.idLoginBtn);
         btnRegistration = findViewById(R.id.idRegisterBtn);
+        btnForgotPassword = findViewById(R.id.idforgotpasswordbtn);
 
         // creating on click listener to login user
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +77,15 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Login.this, Registration.class);
+                startActivity(i);
+            }
+        });
+
+        //creating on click listener to forgot password
+        btnForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login.this, ForgotPassword.class);
                 startActivity(i);
             }
         });

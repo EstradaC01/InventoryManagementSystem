@@ -83,21 +83,6 @@ public class Registration extends AppCompatActivity {
         });
     }
 
-    private void sendEmailVerification() {
-
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-
-        user.sendEmailVerification()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "Email sent.");
-                        }
-                    }
-                });
-    }
 
     private void addDataToFireStore(String _firstName, String _lastName, String _userId, String _email,boolean _isAdmin) {
 
@@ -148,6 +133,22 @@ public class Registration extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(Registration.this, "Authentication failed.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
+    private void sendEmailVerification() {
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Email sent.");
                         }
                     }
                 });

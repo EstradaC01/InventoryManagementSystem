@@ -35,10 +35,10 @@
             android:layout_marginEnd="32dp"
             android:fontFamily="@font/alata"
             android:text="Hyperion"
+            android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textAllCaps="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,10 +53,10 @@
             android:layout_marginEnd="32dp"
             android:fontFamily="@font/alata"
             android:text="Inventory Management System"
+            android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:textAllCaps="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,12 +73,12 @@
             android:background="@drawable/edit_text_border_2"
             android:ems="10"
             android:hint="Enter Email-Address"
-            android:textColorHint="@color/colorPrimary"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
             android:padding="10dp"
             android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idTvSubtitle" />
@@ -93,12 +93,12 @@
             android:background="@drawable/edit_text_border_2"
             android:ems="10"
             android:hint="Enter Password"
-            android:textColorHint="@color/colorPrimary"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:padding="10dp"
             android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idEdtLoginEmail" />
@@ -133,6 +133,20 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idLoginBtn" />
+
+        <Button
+            android:id="@+id/idforgotpasswordbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="#00FFFFFF"
+            android:text="Forgot Password"
+            android:textColor="#16215E"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/idRegisterBtn"
+            app:layout_constraintStart_toStartOf="@+id/idRegisterBtn"
+            app:layout_constraintTop_toBottomOf="@+id/idRegisterBtn"
+            tools:visibility="visible" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
