@@ -110,7 +110,7 @@
                 android:elevation="15dp"
                 android:hint="UPC"
                 android:importantForAutofill="no"
-                android:inputType="text"
+                android:inputType="number"
                 android:minHeight="48dp"
                 android:padding="10dp" />
 

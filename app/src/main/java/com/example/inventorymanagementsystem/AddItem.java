@@ -156,7 +156,7 @@ public class AddItem extends AppCompatActivity {
                             productDescriptionEdt.setError("Please enter product description");
                             return;
                         }
-                        if (TextUtils.isEmpty(mProduct.getProductUpc())) {
+                        if (TextUtils.isEmpty(mProduct.getProductUpc()) || mProduct.getProductUpc().length() != 12) {
                             productUpcEdt.setError("Please enter product upc");
                             return;
                         }
