@@ -9,54 +9,45 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         tools:context=".Login">
 
         <ImageView
             android:id="@+id/idImageLogo"
-            android:layout_width="342dp"
-            android:layout_height="110dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:contentDescription="@string/app_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.567"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/logoGuidelineEnd"
+            app:layout_constraintStart_toStartOf="@+id/logoGuidelineStart"
+            app:layout_constraintTop_toTopOf="@id/logoGuidelineTopVertical"
             app:srcCompat="@drawable/titan_logo_2" />
 
         <TextView
             android:id="@+id/idTvTitle"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="32dp"
             android:text="Hyperion"
+            android:layout_marginTop="20dp"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/logoGuidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/logoGuidelineStart"
             app:layout_constraintTop_toBottomOf="@+id/idImageLogo" />
 
         <TextView
             android:id="@+id/idTvSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="32dp"
             android:text="Inventory Management System"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idTvTitle" />
 
@@ -65,9 +56,6 @@
             android:id="@+id/idEdtLoginEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="30dp"
             android:background="@drawable/edit_text_border_2"
             android:ems="10"
             android:hint="Enter Email-Address"
@@ -75,19 +63,17 @@
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
             android:padding="10dp"
+            android:layout_marginTop="15dp"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/textViewButtonsGuidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/textViewButtonsGuidelineStart"
             app:layout_constraintTop_toBottomOf="@+id/idTvSubtitle" />
 
         <EditText
             android:id="@+id/idEdtLoginPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
             android:background="@drawable/edit_text_border_2"
             android:ems="10"
             android:hint="Enter Password"
@@ -95,19 +81,17 @@
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:padding="10dp"
+            android:layout_marginTop="5dp"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/textViewButtonsGuidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/textViewButtonsGuidelineStart"
             app:layout_constraintTop_toBottomOf="@+id/idEdtLoginEmail" />
 
         <EditText
             android:id="@+id/idEdtLoginScreenCompanyCode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
             android:background="@drawable/edit_text_border_2"
             android:ems="10"
             android:hint="Enter Company Code"
@@ -115,58 +99,97 @@
             android:inputType="text"
             android:minHeight="48dp"
             android:padding="10dp"
+            android:layout_marginTop="5dp"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/textViewButtonsGuidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/textViewButtonsGuidelineStart"
             app:layout_constraintTop_toBottomOf="@+id/idEdtLoginPassword" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/idLoginBtn"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
+            android:background="@drawable/button_navyblue"
             android:padding="15dp"
             android:text="Login"
-            android:textColor="#ffffff"
             android:textAllCaps="true"
+            android:textColor="#ffffff"
             android:textSize="15sp"
-            android:background="@drawable/button_navyblue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@id/textViewButtonsGuidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/textViewButtonsGuidelineStart"
             app:layout_constraintTop_toBottomOf="@+id/idEdtLoginScreenCompanyCode" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/idRegisterBtn"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="30dp"
+            android:background="@drawable/button_navyblue"
             android:padding="15dp"
             android:text="Register"
-            android:textColor="#ffffff"
             android:textAllCaps="true"
+            android:textColor="#ffffff"
             android:textSize="15sp"
-            android:background="@drawable/button_navyblue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="@id/textViewButtonsGuidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/textViewButtonsGuidelineStart"
             app:layout_constraintTop_toBottomOf="@+id/idLoginBtn" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/idforgotpasswordbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="25dp"
             android:background="#00FFFFFF"
             android:text="Forgot Password"
             android:textColor="#16215E"
+            android:layout_marginTop="15dp"
+            app:layout_constraintBottom_toTopOf="@id/parentGuidelinebottom"
             app:layout_constraintEnd_toEndOf="@+id/idRegisterBtn"
             app:layout_constraintStart_toStartOf="@+id/idRegisterBtn"
             app:layout_constraintTop_toBottomOf="@+id/idRegisterBtn" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/logoGuidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.35" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/logoGuidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.65" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/logoGuidelineTopVertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/parentGuidelinebottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.97" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/textViewButtonsGuidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".10" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/textViewButtonsGuidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".90" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

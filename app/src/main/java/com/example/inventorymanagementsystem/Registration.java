@@ -130,7 +130,7 @@ public class Registration extends AppCompatActivity {
 
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                            addDataToFireStore(mFirstName,mLastName,user.getUid().toString(),mEmail, mCompanyCode, false);
+                            addDataToFireStore(mFirstName,mLastName,user.getUid().toString(),mEmail, mCompanyCode, true);
 
                             Intent i = new Intent(Registration.this, Login.class);
                             startActivity(i);

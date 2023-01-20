@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity {
                 }
                 if(TextUtils.isEmpty(mCompanyCode))
                 {
-                    edtCompanyCode.setError("Enter valid password");
+                    edtCompanyCode.setError("Enter valid company code");
                 }
                 if(!mEmail.isEmpty() && !mPassword.isEmpty() && !mCompanyCode.isEmpty())
                 {
