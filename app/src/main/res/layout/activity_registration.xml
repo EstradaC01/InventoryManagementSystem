@@ -110,7 +110,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_navyblue"
-        android:padding="15dp"
+        android:padding="10dp"
         android:text="Register"
         android:textAllCaps="true"
         android:textColor="#ffffff"
