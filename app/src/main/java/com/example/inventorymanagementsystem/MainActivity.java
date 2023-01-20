@@ -130,6 +130,10 @@ public class MainActivity extends AppCompatActivity {
                 });
                 break;
             case R.id.idMenuUsers:
+                Intent u = new Intent(MainActivity.this, UserList.class);
+                u.putExtra("User", currentUser);
+                u.putExtra("CompanyCode", mCompanyCode);
+                startActivity(u);
                 break;
             case R.id.idMenuSystems:
                 break;
