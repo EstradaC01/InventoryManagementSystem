@@ -89,18 +89,12 @@ public class Login extends AppCompatActivity {
                 if(!mEmail.isEmpty() && !mPassword.isEmpty() && !mCompanyCode.isEmpty())
                 {
                     CollectionReference companyCodeRef = db.collection(mCompanyCode);
-
-                    db.collection(mCompanyCode).addSnapshotListener(new EventListener<QuerySnapshot>() {
-                        @Override
-                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                            if(value.isEmpty()) {
-                                isCompanyCodeValid = false;
-                                Toast.makeText(Login.this, "Company Code Invalid", Toast.LENGTH_LONG).show();
-                            } else {
-                                signInUser(mEmail, mPassword, mCompanyCode);
-                            }
-                        }
-                    });
+                    if (companyCodeRef.getId().isEmpty()) {
+                        isCompanyCodeValid = false;
+                        Toast.makeText(Login.this, "Company Code Invalid", Toast.LENGTH_LONG).show();
+                    } else {
+                        signInUser(mEmail, mPassword, mCompanyCode);
+                    }
                 }
             }
         });
