@@ -143,7 +143,7 @@ public class Login extends AppCompatActivity {
                                         i.putExtra("CompanyCode", _companyCode);
                                         startActivity(i);
                                     } else {
-                                        Toast.makeText(Login.this, "Company code invalid.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, "Company code invalid", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
