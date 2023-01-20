@@ -34,7 +34,6 @@ public class Login extends AppCompatActivity {
 
     private String mEmail, mPassword, mCompanyCode, mUserKey;
 
-    private boolean isCompanyCodeValid;
     // creating variables for the buttons
     private Button btnLogin, btnRegistration, btnForgotPassword;
 
@@ -90,17 +89,11 @@ public class Login extends AppCompatActivity {
                 {
                     CollectionReference companyCodeRef = db.collection(mCompanyCode);
 
-                    db.collection(mCompanyCode).addSnapshotListener(new EventListener<QuerySnapshot>() {
-                        @Override
-                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                            if(value.isEmpty()) {
-                                isCompanyCodeValid = false;
-                                Toast.makeText(Login.this, "Company Code Invalid", Toast.LENGTH_LONG).show();
-                            } else {
-                                signInUser(mEmail, mPassword, mCompanyCode);
-                            }
-                        }
-                    });
+                    if (companyCodeRef.getId().isEmpty()) {
+                        Toast.makeText(Login.this, "Company Code Invalid", Toast.LENGTH_LONG).show();
+                    } else {
+                        signInUser(mEmail, mPassword, mCompanyCode);
+                    }
                 }
             }
         });
@@ -150,7 +143,7 @@ public class Login extends AppCompatActivity {
                                         i.putExtra("CompanyCode", _companyCode);
                                         startActivity(i);
                                     } else {
-                                        Toast.makeText(Login.this, "No user found with email and password provided.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, "Company code invalid.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
