@@ -2,11 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/blue_android_background"
-    tools:context=".ItemsSubMenu">
+    tools:context=".LocationsSubMenu">
 
     <ImageButton
         android:id="@+id/idImageButtonItemMenuProductReports"
@@ -16,7 +15,6 @@
         android:background="@drawable/statelistdrawable_white"
         android:elevation="10dp"
         android:padding="30dp"
-        android:contentDescription="reportsImage"
         android:src="@drawable/ic_product_reports_mainblue_64px"
         app:layout_constraintEnd_toEndOf="@+id/idImageButtonItemMenuCreateProduct"
         app:layout_constraintStart_toStartOf="@+id/idImageButtonItemMenuCreateProduct"
@@ -28,50 +26,48 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Reports"
+        android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/idImageButtonItemMenuProductReports"
         app:layout_constraintStart_toStartOf="@+id/idImageButtonItemMenuProductReports"
         app:layout_constraintTop_toBottomOf="@+id/idImageButtonItemMenuProductReports" />
 
     <ImageButton
-        android:background="@drawable/statelistdrawable_white"
         android:id="@+id/idImageButtonItemMenuCreateProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_pricetag_mainblue_64px"
-        android:padding="30dp"
+        android:background="@drawable/statelistdrawable_white"
         android:elevation="10dp"
-        android:contentDescription="productImage"
+        android:padding="30dp"
+        android:src="@drawable/ic_pricetag_mainblue_64px"
         app:layout_constraintStart_toEndOf="@id/guidelineStart"
         app:layout_constraintTop_toTopOf="@id/guidelineTop"
         app:layout_constraintEnd_toStartOf="@id/guidelineMiddle"/>
 
     <ImageButton
-        android:background="@drawable/statelistdrawable_white"
         android:id="@+id/idImageButtonItemMenuProductList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/statelistdrawable_white"
         android:elevation="10dp"
         android:padding="30dp"
-        android:contentDescription="inquiryImage"
         android:src="@drawable/ic_product_inquiry_mainblue_64px"
         app:layout_constraintTop_toBottomOf="@id/guidelineTop"
         app:layout_constraintStart_toEndOf="@id/guidelineMiddle"
-        app:layout_constraintEnd_toStartOf="@id/guidelineEnd" />
+        app:layout_constraintEnd_toStartOf="@id/guidelineEnd"/>
 
     <TextView
         android:id="@+id/idTextViewItemSubmenuCreateProductTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Create/Edit"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
+        android:text="Locations"
         android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/idImageButtonItemMenuCreateProduct"
         app:layout_constraintStart_toStartOf="@+id/idImageButtonItemMenuCreateProduct"
         app:layout_constraintTop_toBottomOf="@+id/idImageButtonItemMenuCreateProduct" />
@@ -81,28 +77,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Inquiry"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
+        android:text="Zones"
         android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/idImageButtonItemMenuProductList"
         app:layout_constraintStart_toStartOf="@+id/idImageButtonItemMenuProductList"
         app:layout_constraintTop_toBottomOf="@+id/idImageButtonItemMenuProductList" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineMiddle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".5" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".9" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"
@@ -116,6 +98,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="41dp" />
+        app:layout_constraintGuide_percent=".1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
