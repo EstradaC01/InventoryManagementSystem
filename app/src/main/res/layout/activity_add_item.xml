@@ -1,167 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/blue_android_background"
     android:orientation="vertical"
     tools:context=".AddItem">
 
     <!--    EditText for getting Proudct ID-->
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="end">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
+            android:id="@+id/addItemEditButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:background="@drawable/statelistdrawable_yellow"
             android:clickable="true"
             android:elevation="10dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_edit_white_24px" />
+            android:padding="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_edit_white_24px"
+            android:contentDescription="editbutton"
+            app:layout_constraintEnd_toStartOf="@id/addItemDeleteButton"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewEditButton"
+            app:layout_constraintTop_toBottomOf="@id/addItemScrollableViewTop" />
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="30dp"
+            android:id="@+id/addItemDeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:background="@drawable/statelistdrawable_red"
             android:clickable="true"
             android:elevation="10dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_delete_white_24px" />
-    </LinearLayout>
+            android:padding="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_delete_white_24px"
+            android:contentDescription="deletebutton"
+            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"
+            app:layout_constraintStart_toEndOf="@id/addItemEditButton"
+            app:layout_constraintTop_toBottomOf="@id/addItemScrollableViewTop" />
 
-    <ScrollView
-        android:id="@+id/idScrollViewCreateProductScreen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/idEdtProductId"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Product Id"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/addItemGuidelineTopMid"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"
+            />
+
+        <!--    EditText for Product Description-->
+
+        <EditText
+            android:id="@+id/idEdtProductDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:gravity="top|start"
+            android:hint="Product Description"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/idEdtProductId"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd" />
+        <!--    EditText for Product UPC-->
+
+        <EditText
+            android:id="@+id/idEdtProductUpc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="UPC"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/idEdtProductDescription"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"/>
+
+        <!--    EditText for pieces per box-->
+        <EditText
+            android:id="@+id/idEdtPiecesPerBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Pieces per box"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/idEdtProductUpc"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"/>
+
+        <!--    Spinner for dropdown menu-->
+        <Spinner
+            android:id="@+id/idCategoriesSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:contentDescription="Category"
+            android:elevation="15dp"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/idEdtPiecesPerBox"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"/>
+
+        <!--    ImageView to show uploaded image-->
+        <ImageView
+            android:id="@+id/idIVUploadPhoto"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="1:1"
+            android:src="@drawable/ic_photo_mainblue_64px"
+            app:layout_constraintTop_toBottomOf="@id/idCategoriesSpinner"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"/>
+
+        <!--    Button for creating the product -->
 
 
-            <EditText
-                android:id="@+id/idEdtProductId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/edit_text_border_2"
-                android:elevation="15dp"
-                android:hint="Product Id"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:minHeight="48dp"
-                android:padding="10dp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/idBtnCreateProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_navyblue"
+            android:elevation="15dp"
+            android:padding="12dp"
+            android:text="Add Item"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/idIVUploadPhoto"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"/>
 
-            <!--    EditText for Product Description-->
-            <EditText
-                android:id="@+id/idEdtProductDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/edit_text_border_2"
-                android:elevation="15dp"
-                android:gravity="top|start"
-                android:hint="Product Description"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:lines="4"
-                android:padding="10dp"
-                android:scrollbars="vertical" />
-            <!--    Spinner for dropdown menu-->
-            <Spinner
-                android:id="@+id/idCategoriesSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/edit_text_border_2"
-                android:contentDescription="Category"
-                android:elevation="15dp"
-                android:importantForAutofill="no"
-                android:minHeight="48dp"
-                android:padding="10dp"
-                android:spinnerMode="dropdown" />
-
-            <!--    EditText for Product UPC-->
-            <EditText
-                android:id="@+id/idEdtProductUpc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/edit_text_border_2"
-                android:elevation="15dp"
-                android:hint="UPC"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:minHeight="48dp"
-                android:padding="10dp" />
-
-            <!--    EditText for pieces per box-->
-            <EditText
-                android:id="@+id/idEdtPiecesPerBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/edit_text_border_2"
-                android:elevation="15dp"
-                android:hint="Pieces per box"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:minHeight="48dp"
-                android:padding="10dp" />
-
-            <!--    ImageView to show uploaded image-->
-            <ImageView
-                android:id="@+id/idIVUploadPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/rounded_corners_white"
-                android:padding="60dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_photo_mainblue_64px" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="     "
+            app:layout_constraintTop_toBottomOf="@id/idBtnCreateProduct"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"/>
 
 
-            <!--    Button for creating the product -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/idBtnCreateProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/button_navyblue"
-                android:elevation="15dp"
-                android:padding="12dp"
-                android:text="Add Item"
-                android:textAllCaps="true"
-                android:textColor="#ffffff"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/addItemScrollableViewTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".02" />
 
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/addItemScrollableViewStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/addItemScrollableViewEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".92" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/addItemScrollableViewEditButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".6" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/addItemGuidelineTopMid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".10" />
+
+        <ProgressBar
+            android:id="@+id/addItemLayoutPB"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/addItemScrollableViewEnd"
+            app:layout_constraintStart_toStartOf="@+id/addItemScrollableViewStart"
+            app:layout_constraintTop_toTopOf="@+id/addItemScrollableViewTop" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

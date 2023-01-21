@@ -150,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.idMenuInventory:
                 break;
             case R.id.idMenuLocations:
+                Intent locationsIntent = new Intent(MainActivity.this, LocationsSubMenu.class);
+                locationsIntent.putExtra("User", currentUser);
+                locationsIntent.putExtra("CompanyCode", mCompanyCode);
+                startActivity(locationsIntent);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

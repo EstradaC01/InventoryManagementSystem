@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class AddItem extends AppCompatActivity {
     private Button addItemBtn;
     private Spinner categoriesSpinner;
     private ImageView uploadImage;
+    private ProgressBar pbLoad;
 
     // member fields for logged user
     private static Users currentUser;
@@ -80,6 +82,7 @@ public class AddItem extends AppCompatActivity {
         addItemBtn = findViewById(R.id.idBtnCreateProduct);
         categoriesSpinner = findViewById(R.id.idCategoriesSpinner);
         uploadImage = findViewById(R.id.idIVUploadPhoto);
+        pbLoad = findViewById(R.id.addItemLayoutPB);
 
         // setting default string for spinner
         String defaultTextForSpinner = "Category";
@@ -178,6 +181,7 @@ public class AddItem extends AppCompatActivity {
         db.collection(mCompanyCode + "/WarehouseOne/Products").document(products.getProductId()).set(products).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+
                 Toast.makeText(AddItem.this, "Product updated", Toast.LENGTH_LONG).show();
                 finish();
                 Log.d(TAG, "onSuccess: imageURL " + imageURL);
@@ -197,7 +201,8 @@ public class AddItem extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while(!uriTask.isComplete());
+
+                while(!uriTask.isComplete())pbLoad.setVisibility(View.VISIBLE);
                 Uri urlImage = uriTask.getResult();
                 _product.setImageUri(urlImage.toString());
                 addDataToFireStore(_product);
