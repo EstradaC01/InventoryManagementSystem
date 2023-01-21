@@ -28,7 +28,7 @@ public class ForgotPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
         viewInitializations();
 
-        //Submit Button
+        //Submit Button test comment
         btnSubmit = findViewById(R.id.idSubmitbtn);
         btnSubmit.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -60,11 +60,11 @@ public class ForgotPassword extends AppCompatActivity {
             return false;
         }
         return true;
-    };
+    }
 
     boolean isEmailValid(String email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    };
+    }
 
 
 }
