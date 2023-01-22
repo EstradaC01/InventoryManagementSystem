@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class ItemList extends AppCompatActivity {
     private ArrayList<Products> mProductsArrayList;
     private ItemRVAdapter mItemRVAdapter;
     private FirebaseFirestore db;
+    private Button btnAddItem;
 
     ProgressBar loadingPB;
 
@@ -63,6 +65,7 @@ public class ItemList extends AppCompatActivity {
         // initializing variables
         itemRV = findViewById(R.id.idRVItems);
         loadingPB = findViewById(R.id.idItemProgressBar);
+        btnAddItem = findViewById(R.id.btnItemListActivityAddProduct);
 
         // initializing our variable for firebase
         // firestore and getting its instance
@@ -137,8 +140,19 @@ public class ItemList extends AppCompatActivity {
                         }
                     });
                 }
-//            }
-//        });
+
+                // adding on click listener for when the Add Item button is clicked
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Creating intent to open add product activity
+                Intent i = new Intent(ItemList.this, AddItem.class);
+                i.putExtra("User", currentUser);
+                i.putExtra("CompanyCode", mCompanyCode);
+                startActivity(i);
+            }
+        });
+
     }
 
     /**
@@ -171,5 +185,13 @@ public class ItemList extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
 
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
     }
 }

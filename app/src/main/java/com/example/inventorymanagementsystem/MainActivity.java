@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.idMenuSystems:
                 break;
             case R.id.idMenuProducts:
-                Intent i = new Intent(MainActivity.this, ItemsSubMenu.class);
+                Intent i = new Intent(MainActivity.this, ItemList.class);
                 i.putExtra("User", currentUser);
                 i.putExtra("CompanyCode", mCompanyCode);
                 startActivity(i);
