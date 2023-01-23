@@ -234,7 +234,10 @@ public class MainActivity extends AppCompatActivity {
                     if (spinner.getSelectedItem() == warehouses.get(i)) {
                         dialog.dismiss();
                         break;
-                    }                }
+                    }
+                }
+                getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>"+mWarehouse+"</font>"));
+
             }
         });
     }
