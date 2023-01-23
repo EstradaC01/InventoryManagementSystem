@@ -45,6 +45,7 @@ public class ItemList extends AppCompatActivity {
     ProgressBar loadingPB;
 
     private String mCompanyCode;
+    private String mWarehouse;
 
     private static final Boolean IS_ADMIN = false;
     private static final String USER_ID = "USER";
@@ -86,12 +87,13 @@ public class ItemList extends AppCompatActivity {
         Intent i = getIntent();
         currentUser = (Users)i.getSerializableExtra("User");
         mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
+        mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
-                CollectionReference itemsRef = db.collection(mCompanyCode + "/WarehouseOne/Products");
+                CollectionReference itemsRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Products");
 
                 if(currentUser.getIsAdmin())
                 {
-                    db.collection(mCompanyCode + "/WarehouseOne/Products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    itemsRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             if(!queryDocumentSnapshots.isEmpty())
@@ -149,6 +151,7 @@ public class ItemList extends AppCompatActivity {
                 Intent i = new Intent(ItemList.this, AddItem.class);
                 i.putExtra("User", currentUser);
                 i.putExtra("CompanyCode", mCompanyCode);
+                i.putExtra("Warehouse", mWarehouse);
                 startActivity(i);
             }
         });
