@@ -118,4 +118,9 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
             productDescriptionTv = itemView.findViewById(R.id.idTVItemCardProductDescription);
         }
     }
+
+    public void setFilteredList(ArrayList<Products> filteredList) {
+        mProductsArrayList = filteredList;
+        notifyDataSetChanged();
+    }
 }

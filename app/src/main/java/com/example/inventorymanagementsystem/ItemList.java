@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,7 +43,7 @@ public class ItemList extends AppCompatActivity {
     private ItemRVAdapter mItemRVAdapter;
     private FirebaseFirestore db;
     private Button btnAddItem;
-
+    private SearchView edtSearchItems;
     ProgressBar loadingPB;
 
     private String mCompanyCode;
@@ -67,6 +69,7 @@ public class ItemList extends AppCompatActivity {
         itemRV = findViewById(R.id.idRVItems);
         loadingPB = findViewById(R.id.idItemProgressBar);
         btnAddItem = findViewById(R.id.btnItemListActivityAddProduct);
+        edtSearchItems = findViewById(R.id.idSVSearchItems);
 
         // initializing our variable for firebase
         // firestore and getting its instance
@@ -155,7 +158,33 @@ public class ItemList extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        edtSearchItems.clearFocus();
+        edtSearchItems.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
+    }
+
+    private void filterList(String text) {
+        ArrayList<Products> filteredList = new ArrayList<>();
+        for (Products product : mProductsArrayList) {
+            if (product.getProductId().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(product);
+            }
+        }
+        if (filteredList.isEmpty()) {
+            Toast.makeText(this, "No items found", Toast.LENGTH_SHORT);
+        } else {
+            mItemRVAdapter.setFilteredList(filteredList);
+        }
     }
 
     /**

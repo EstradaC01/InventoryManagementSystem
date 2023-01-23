@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Users implements Serializable {
 
     private String firstName, lastName, userKey, email, systemId;
-    private boolean mIsAdmin;
+    private boolean isAdmin;
 
     public Users()
     {
@@ -19,7 +19,7 @@ public class Users implements Serializable {
         lastName = _lastName;
         userKey = _userKey;
         email = _email;
-        mIsAdmin = _isAdmin;
+        isAdmin = _isAdmin;
     }
 
     // getters
@@ -43,7 +43,7 @@ public class Users implements Serializable {
         return systemId;
     }
     public boolean getIsAdmin() {
-        return mIsAdmin;
+        return isAdmin;
     }
     // setters
 
@@ -63,7 +63,7 @@ public class Users implements Serializable {
         this.email = email;
     }
     public void setIsAdmin(boolean isAdmin) {
-        mIsAdmin = isAdmin;
+        this.isAdmin = isAdmin;
     }
     public void setSystemId(String systemId) {
         this.systemId = systemId;

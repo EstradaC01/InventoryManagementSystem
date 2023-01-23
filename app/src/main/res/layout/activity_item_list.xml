@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/blue_android_background"
+    android:foregroundTint="@color/black"
     tools:context=".ItemList">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,16 +17,16 @@
         app:layout_constraintStart_toEndOf="@id/itemListGuidelineStart"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <SearchView
+            android:id="@+id/idSVSearchItems"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corners_white"
+            android:layout_height="0dp"
+            android:background="@color/white"
             android:gravity="left|center"
-            android:hint="Search"
-            android:inputType="text"
-            android:minHeight="48dp"
             android:paddingLeft="10dp"
-            android:textSize="18sp"
+            android:paddingTop="10dp"
+            android:queryHint="Search..."
+            android:scaleY="0.8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/itemListGuidelineMiddleLeft"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +42,8 @@
             android:textColor="#ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemListGuidelineMiddleRight"/>
+            app:layout_constraintStart_toEndOf="@id/itemListGuidelineMiddleRight"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/itemListGuidelineMiddleLeft"
