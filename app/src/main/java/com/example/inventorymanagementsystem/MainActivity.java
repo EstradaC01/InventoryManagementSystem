@@ -234,8 +234,7 @@ public class MainActivity extends AppCompatActivity {
                     if (spinner.getSelectedItem() == warehouses.get(i)) {
                         dialog.dismiss();
                         break;
-                    }
-                }
+                    }                }
             }
         });
     }
