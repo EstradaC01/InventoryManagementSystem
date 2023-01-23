@@ -58,6 +58,7 @@ public class AddItem extends AppCompatActivity {
     private Uri uri;
 
     private String mCompanyCode;
+    private String mWarehouse;
 
     private FirebaseStorage storage;
     private StorageReference storageRef;
@@ -102,6 +103,7 @@ public class AddItem extends AppCompatActivity {
         Intent i = getIntent();
         currentUser = (Users)i.getSerializableExtra("User");
         mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
+        mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
 
         // add on lick listener to upload image to FirebaseStorage and show in the screen
@@ -110,7 +112,6 @@ public class AddItem extends AppCompatActivity {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        Log.d(TAG, "onActivityResult: " + result.getResultCode());
                         if(result.getResultCode() == Activity.RESULT_OK) {
                             Intent i = result.getData();
                             uri = i.getData();
@@ -119,7 +120,6 @@ public class AddItem extends AppCompatActivity {
                         } else {
                             Toast.makeText(AddItem.this, "No Image Selected", Toast.LENGTH_LONG).show();
                         }
-                        Log.d(TAG, "onActivityResult: " + uri);
                     }
                 });
 
@@ -178,13 +178,12 @@ public class AddItem extends AppCompatActivity {
         // creating a collection reference
         // for our Firebase Firestore database
 
-        db.collection(mCompanyCode + "/WarehouseOne/Products").document(products.getProductId()).set(products).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection(mCompanyCode + "/"+mWarehouse+"/Products").document(products.getProductId()).set(products).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
 
                 Toast.makeText(AddItem.this, "Product updated", Toast.LENGTH_LONG).show();
                 finish();
-                Log.d(TAG, "onSuccess: imageURL " + imageURL);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

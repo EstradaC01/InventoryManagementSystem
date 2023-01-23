@@ -3,6 +3,7 @@ package com.example.inventorymanagementsystem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -11,15 +12,23 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private static String mCompanyCode;
 
     private static Users currentUser;
+
+    private static String mWarehouse = "";
 
     private FirebaseFirestore db;
 
@@ -40,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // prevents users from rotating screen
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        // initializing our buttons
+
 
         // getting intent from Login screen with Users object and companyCode string
         Intent i = getIntent();
@@ -50,8 +61,12 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         // Changing title of the action bar and color
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>WAREHOUSE 1</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>"+mWarehouse+"</font>"));
 
+        // Shows dialog box if warehouse is not selected or null
+        if (mWarehouse.isEmpty()) {
+            showCustomDialog();
+        }
     }
 
     /**
@@ -111,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.idMenuCompanyDetails:
-                CollectionReference details = db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails");
+                CollectionReference details = db.collection(mCompanyCode + "/"+mWarehouse+"/CompanyDetails");
                 details.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -138,9 +153,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.idMenuSystems:
                 break;
             case R.id.idMenuProducts:
-                Intent i = new Intent(MainActivity.this, ItemsSubMenu.class);
+                Intent i = new Intent(MainActivity.this, ItemList.class);
                 i.putExtra("User", currentUser);
                 i.putExtra("CompanyCode", mCompanyCode);
+                i.putExtra("Warehouse", mWarehouse);
                 startActivity(i);
                 break;
             case R.id.idMenuOrders:
@@ -159,5 +175,70 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    void showCustomDialog() {
+        final Dialog dialog = new Dialog(MainActivity.this);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        dialog.setCancelable(false);
+
+        dialog.setContentView(R.layout.dialog_choose_warehouse);
+
+        final TextView title = dialog.findViewById(R.id.dialogChooseWarehouseTitle);
+        final Spinner spinner = dialog.findViewById(R.id.dialogChooseWarehouseSpinner);
+        Button submitButton = dialog.findViewById(R.id.dialogChooseWarehouseSubmitButton);
+
+
+        // setting default string for spinner
+        String defaultTextForSpinner = "Warehouse";
+
+        List<String> warehouses = new ArrayList<>();
+
+        db.collection(mCompanyCode).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(!queryDocumentSnapshots.isEmpty())
+                {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for(DocumentSnapshot d : list) {
+                        if(d.getId().contains("Warehouse")){
+                            String warehouse = d.getId();
+                            warehouses.add(warehouse);
+                        }
+                    }
+                    String[] arrayForSpinner = new String[warehouses.size()];
+                    for(int i = 0; i < warehouses.size(); i++) {
+                        arrayForSpinner[i] = warehouses.get(i);
+                    }
+
+                    spinner.setAdapter(new CustomSpinnerAdapter(MainActivity.this, R.layout.spinner_row, arrayForSpinner, defaultTextForSpinner));
+                    dialog.show();
+                } else {
+                    Toast.makeText(MainActivity.this, "No data found in Database", Toast.LENGTH_LONG).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity.this, "Failed to get data", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mWarehouse = spinner.getSelectedItem().toString();
+                for(int i = 0; i < warehouses.size(); i++) {
+                    if (spinner.getSelectedItem() == warehouses.get(i)) {
+                        dialog.dismiss();
+                        break;
+                    }
+                }
+                getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>"+mWarehouse+"</font>"));
+
+            }
+        });
     }
 }

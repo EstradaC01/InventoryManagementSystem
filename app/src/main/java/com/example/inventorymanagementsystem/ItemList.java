@@ -13,7 +13,10 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,10 +42,12 @@ public class ItemList extends AppCompatActivity {
     private ArrayList<Products> mProductsArrayList;
     private ItemRVAdapter mItemRVAdapter;
     private FirebaseFirestore db;
-
+    private Button btnAddItem;
+    private SearchView edtSearchItems;
     ProgressBar loadingPB;
 
     private String mCompanyCode;
+    private String mWarehouse;
 
     private static final Boolean IS_ADMIN = false;
     private static final String USER_ID = "USER";
@@ -63,6 +68,8 @@ public class ItemList extends AppCompatActivity {
         // initializing variables
         itemRV = findViewById(R.id.idRVItems);
         loadingPB = findViewById(R.id.idItemProgressBar);
+        btnAddItem = findViewById(R.id.btnItemListActivityAddProduct);
+        edtSearchItems = findViewById(R.id.idSVSearchItems);
 
         // initializing our variable for firebase
         // firestore and getting its instance
@@ -83,12 +90,13 @@ public class ItemList extends AppCompatActivity {
         Intent i = getIntent();
         currentUser = (Users)i.getSerializableExtra("User");
         mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
+        mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
-                CollectionReference itemsRef = db.collection(mCompanyCode + "/WarehouseOne/Products");
+                CollectionReference itemsRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Products");
 
                 if(currentUser.getIsAdmin())
                 {
-                    db.collection(mCompanyCode + "/WarehouseOne/Products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    itemsRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             if(!queryDocumentSnapshots.isEmpty())
@@ -137,8 +145,46 @@ public class ItemList extends AppCompatActivity {
                         }
                     });
                 }
-//            }
-//        });
+
+                // adding on click listener for when the Add Item button is clicked
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Creating intent to open add product activity
+                Intent i = new Intent(ItemList.this, AddItem.class);
+                i.putExtra("User", currentUser);
+                i.putExtra("CompanyCode", mCompanyCode);
+                i.putExtra("Warehouse", mWarehouse);
+                startActivity(i);
+            }
+        });
+        edtSearchItems.clearFocus();
+        edtSearchItems.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
+    }
+
+    private void filterList(String text) {
+        ArrayList<Products> filteredList = new ArrayList<>();
+        for (Products product : mProductsArrayList) {
+            if (product.getProductId().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(product);
+            }
+        }
+        if (filteredList.isEmpty()) {
+            Toast.makeText(this, "No items found", Toast.LENGTH_SHORT);
+        } else {
+            mItemRVAdapter.setFilteredList(filteredList);
+        }
     }
 
     /**
@@ -171,5 +217,13 @@ public class ItemList extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
 
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
     }
 }

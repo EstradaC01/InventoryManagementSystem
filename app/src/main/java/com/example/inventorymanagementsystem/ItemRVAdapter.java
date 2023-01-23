@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -74,10 +76,12 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
      */
     @Override
     public void onBindViewHolder(@NonNull ItemRVAdapter.ViewHolder holder, int position) {
-        // setting data to our text views from our modal class
+        // setting data to our text views from our model class
         Products products = mProductsArrayList.get(position);
         holder.productIdTv.setText(products.getProductId());
         holder.productDescriptionTv.setText(products.getProductId());
+
+        holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +91,8 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
                 v.getContext().startActivity(i);
             }
         });
+
+
     }
 
     /**
@@ -111,5 +117,10 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
             productIdTv = itemView.findViewById(R.id.idTVItemCardProductId);
             productDescriptionTv = itemView.findViewById(R.id.idTVItemCardProductDescription);
         }
+    }
+
+    public void setFilteredList(ArrayList<Products> filteredList) {
+        mProductsArrayList = filteredList;
+        notifyDataSetChanged();
     }
 }

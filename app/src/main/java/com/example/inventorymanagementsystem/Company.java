@@ -4,76 +4,85 @@ import java.io.Serializable;
 
 public class Company implements Serializable {
 
-    private String mCompanyName, mCompanyCode, mCompanyOwner,
-            mCompanyAddress, mCompanyCountry, mCompanyState, mCompanyZipcode;
+    private String companyName, companyCode, companyOwner,
+            companyAddress, companyCountry, companyState, companyZipcode, companyCity;
 
     public Company() {
 
     }
 
     public Company(String companyName, String companyCode, String companyOwner, String companyAddress,
-                   String companyCountry, String companyState, String companyZipcode) {
-        mCompanyName = companyName;
-        mCompanyCode = companyCode;
-        mCompanyOwner = companyOwner;
-        mCompanyCountry = companyCountry;
-        mCompanyAddress = companyAddress;
-        mCompanyState = companyState;
-        mCompanyZipcode = companyZipcode;
+                   String companyCountry, String companyState, String companyZipcode, String companyCity) {
+        this.companyName = companyName;
+        this.companyCode = companyCode;
+        this.companyOwner = companyOwner;
+        this.companyCountry = companyCountry;
+        this.companyAddress = companyAddress;
+        this.companyState = companyState;
+        this.companyZipcode = companyZipcode;
+        this.companyCity = companyCity;
     }
     public String getCompanyAddress() {
-        return mCompanyAddress;
+        return companyAddress;
     }
 
     public void setCompanyAddress(String companyAddress) {
-        mCompanyAddress = companyAddress;
+        this.companyAddress = companyAddress;
     }
 
     public String getCompanyCountry() {
-        return mCompanyCountry;
+        return companyCountry;
     }
 
     public void setCompanyCountry(String mCompanyCountry) {
-        this.mCompanyCountry = mCompanyCountry;
+        this.companyCountry = mCompanyCountry;
     }
 
     public String getCompanyState() {
-        return mCompanyState;
+        return companyState;
     }
 
     public void setCompanyState(String mCompanyState) {
-        this.mCompanyState = mCompanyState;
+        this.companyState = mCompanyState;
     }
 
     public String getCompanyZipcode() {
-        return mCompanyZipcode;
+        return companyZipcode;
     }
 
     public void setCompanyZipcode(String mCompanyZipcode) {
-        this.mCompanyZipcode = mCompanyZipcode;
+        this.companyZipcode = mCompanyZipcode;
     }
 
     public String getCompanyName() {
-        return mCompanyName;
+        return companyName;
     }
 
     public void setCompanyName(String mCompanyName) {
-        this.mCompanyName = mCompanyName;
+        this.companyName = mCompanyName;
     }
 
     public String getCompanyCode() {
-        return mCompanyCode;
+        return companyCode;
     }
 
     public void setCompanyCode(String mCompanyCode) {
-        this.mCompanyCode = mCompanyCode;
+        this.companyCode = mCompanyCode;
     }
 
     public String getCompanyOwner() {
-        return mCompanyOwner;
+        return companyOwner;
     }
 
     public void setCompanyOwner(String mCompanyOwner) {
-        this.mCompanyOwner = mCompanyOwner;
+        this.companyOwner = mCompanyOwner;
+    }
+
+    public String getCompanyCity() {
+        return companyCity;
+    }
+
+    public void setCompanyCity(String companyCity) {
+        this.companyCity = companyCity;
     }
 }

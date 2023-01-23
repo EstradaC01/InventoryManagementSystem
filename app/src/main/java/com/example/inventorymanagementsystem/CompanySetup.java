@@ -17,12 +17,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CompanySetup extends AppCompatActivity {
-    private String mCompanyName, mCompanyCode, mCompanyOwner,
-            mCompanyAddress, mCompanyCountry, mCompanyState, mCompanyZipcode;
+    private String mCompanyCode;
 
 
     private TextView edtCompanyName, edtCompanyAddress, edtCompanyCountry, edtCompanyState,
-            edtCompanyZipcode;
+            edtCompanyZipcode, edtCompanyCity;
 
 
     private static Users currentUser;
@@ -50,7 +49,7 @@ public class CompanySetup extends AppCompatActivity {
         edtCompanyCountry = findViewById(R.id.idEdtCompanyCountry);
         edtCompanyState = findViewById(R.id.idEdtCompanyState);
         edtCompanyZipcode = findViewById(R.id.idEdtCompanyZipcode);
-
+        edtCompanyCity = findViewById(R.id.idEdtCompanyCity);
         setupCompanyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +61,7 @@ public class CompanySetup extends AppCompatActivity {
                 newCompany.setCompanyZipcode(edtCompanyZipcode.getText().toString());
                 newCompany.setCompanyOwner(currentUser.getUserKey());
                 newCompany.setCompanyCode(mCompanyCode);
+                newCompany.setCompanyCity((edtCompanyCity.getText().toString()));
 
                 addCompany(newCompany);
 

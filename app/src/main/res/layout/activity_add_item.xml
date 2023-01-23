@@ -132,21 +132,23 @@
             app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"/>
 
         <!--    ImageView to show uploaded image-->
+
+        <!--    Button for creating the product -->
+
+
         <ImageView
             android:id="@+id/idIVUploadPhoto"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/rounded_corners_white"
             android:scaleType="fitXY"
+            android:src="@drawable/ic_photo_mainblue_128px"
             app:layout_constraintDimensionRatio="1:1"
-            android:src="@drawable/ic_photo_mainblue_64px"
-            app:layout_constraintTop_toBottomOf="@id/idCategoriesSpinner"
+            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
-            app:layout_constraintEnd_toStartOf="@id/addItemScrollableViewEnd"/>
-
-        <!--    Button for creating the product -->
-
+            app:layout_constraintTop_toBottomOf="@id/idCategoriesSpinner" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/idBtnCreateProduct"

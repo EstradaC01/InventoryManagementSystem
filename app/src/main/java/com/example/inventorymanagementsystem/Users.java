@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Users implements Serializable {
 
-    private String mFirstName, mLastName, mUserKey, mEmail, mSystemId;
-    private boolean mIsAdmin;
+    private String firstName, lastName, userKey, email, systemId;
+    private boolean isAdmin;
 
     public Users()
     {
@@ -15,57 +15,57 @@ public class Users implements Serializable {
 
     // Constructors for all variables
     public Users(String _firstName, String _lastName, String _userKey, String _email, boolean _isAdmin) {
-        mFirstName = _firstName;
-        mLastName = _lastName;
-        mUserKey = _userKey;
-        mEmail = _email;
-        mIsAdmin = _isAdmin;
+        firstName = _firstName;
+        lastName = _lastName;
+        userKey = _userKey;
+        email = _email;
+        isAdmin = _isAdmin;
     }
 
     // getters
 
     public String getFirstName() {
-        return mFirstName;
+        return firstName;
     }
 
     public String getLastName() {
-        return mLastName;
+        return lastName;
     }
 
     public String getUserKey() {
-        return mUserKey;
+        return userKey;
     }
 
     public String getEmail() {
-        return mEmail;
+        return email;
     }
     public String getSystemId() {
-        return mSystemId;
+        return systemId;
     }
     public boolean getIsAdmin() {
-        return mIsAdmin;
+        return isAdmin;
     }
     // setters
 
     public void setFirstName(String firstName) {
-        mFirstName = firstName;
+        this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
-        mLastName = lastName;
+        this.lastName = lastName;
     }
 
     public void setUserKey(String userKey) {
-        mUserKey = userKey;
+        this.userKey = userKey;
     }
 
     public void setEmail(String email) {
-        mEmail = email;
+        this.email = email;
     }
     public void setIsAdmin(boolean isAdmin) {
-        mIsAdmin = isAdmin;
+        this.isAdmin = isAdmin;
     }
     public void setSystemId(String systemId) {
-        mSystemId = systemId;
+        this.systemId = systemId;
     }
 }

@@ -57,7 +57,6 @@ public class ViewCompanyDetails extends AppCompatActivity {
         CollectionReference details = db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails");
 
         Log.d("Success ", "collection " + details);
-        ArrayList<String> ar = new ArrayList<String>();
 
         edtCompanyName = findViewById(R.id.idTvCompanyName);
         edtCompanyAddress = findViewById(R.id.idTvCompanyAddress);
@@ -79,16 +78,13 @@ public class ViewCompanyDetails extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     List<DocumentSnapshot> myDocs = task.getResult().getDocuments();
+                    ourCompany = myDocs.get(0).toObject(Company.class);
 
-                    Map<String, Object> d = myDocs.get(0).getData();
-                    for (Object entry : d.values()) {
-                        Log.d("Success ", "data " + entry.toString());
-                        ar.add(entry.toString());
-                    }
-
-                    edtCompanyAddress.setText(ar.get(2) + " " + ar.get(1) + " " + ar.get(4));
-                    edtCompanyName.setText(ar.get(3));
-                    edtCompanyCountry.setText(ar.get(5));
+                    edtCompanyAddress.setText(ourCompany.getCompanyAddress() + " "
+                            + ourCompany.getCompanyCity() + " " +ourCompany.getCompanyState()
+                            + " " + ourCompany.getCompanyZipcode());
+                    edtCompanyName.setText(ourCompany.getCompanyName());
+                    edtCompanyCountry.setText(ourCompany.getCompanyCountry());
                 }
             }
         });
