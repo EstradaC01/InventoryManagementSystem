@@ -28,7 +28,7 @@ public class ForgotPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
         viewInitializations();
 
-        //Submit Button test comment
+        //Submit Button
         btnSubmit = findViewById(R.id.idSubmitbtn);
         btnSubmit.setOnClickListener(new View.OnClickListener(){
             @Override
