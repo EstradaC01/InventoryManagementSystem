@@ -141,13 +141,45 @@ public class Registration extends AppCompatActivity {
 
                 if (!codeExists) {
                     Log.d("Code", ": Is empty");
-                    user.setUserRank("Owner");
+                    user.setRank("Owner");
+                    // below method is use to add data to Firebase Firestore
+                    dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            // after the data addition is successful
+                            // we are displaying a success toast message
+                            Toast.makeText(Registration.this, "User was registered successfully.", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // this method is called when the data addition process is failed.
+                            // displaying a toast message when data addition is failed.
+                            Toast.makeText(Registration.this, "Fail to add user \n" + e, Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
                 else {
-                    user.setUserRank("Employee");
+                    user.setRank("Employee");
                     user.setIsAdmin(false);
+                    // below method is use to add data to Firebase Firestore
+                    dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            // after the data addition is successful
+                            // we are displaying a success toast message
+                            Toast.makeText(Registration.this, "User was registered successfully.", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // this method is called when the data addition process is failed.
+                            // displaying a toast message when data addition is failed.
+                            Toast.makeText(Registration.this, "Fail to add user \n" + e, Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
-                Log.d("User role", ": " + user.getUserRank());
+                Log.d("User role", ": " + user.getRank());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -156,22 +188,7 @@ public class Registration extends AppCompatActivity {
 
             }
         });
-        // below method is use to add data to Firebase Firestore
-        dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                // after the data addition is successful
-                // we are displaying a success toast message
-                Toast.makeText(Registration.this, "User was registered successfully.", Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                // this method is called when the data addition process is failed.
-                // displaying a toast message when data addition is failed.
-                Toast.makeText(Registration.this, "Fail to add user \n" + e, Toast.LENGTH_LONG).show();
-            }
-        });
+
     }
 
 

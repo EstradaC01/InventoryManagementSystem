@@ -9,7 +9,7 @@ public class Users implements Serializable {
     private String userKey;
     private String email;
     private String systemId;
-    private String userRank;
+    private String rank;
     private boolean isAdmin;
 
     public Users()
@@ -19,12 +19,13 @@ public class Users implements Serializable {
     }
 
     // Constructors for all variables
-    public Users(String _firstName, String _lastName, String _userKey, String _email, boolean _isAdmin) {
+    public Users(String _firstName, String _lastName, String _userKey, String _email, boolean _isAdmin, String _rank) {
         firstName = _firstName;
         lastName = _lastName;
         userKey = _userKey;
         email = _email;
         isAdmin = _isAdmin;
+        rank = _rank;
     }
 
     // getters
@@ -73,11 +74,11 @@ public class Users implements Serializable {
     public void setSystemId(String systemId) {
         this.systemId = systemId;
     }
-    public String getUserRank() {
-        return userRank;
+    public String getRank() {
+        return rank;
     }
 
-    public void setUserRank(String userRank) {
-        this.userRank = userRank;
+    public void setRank(String rank) {
+        this.rank = rank;
     }
 }

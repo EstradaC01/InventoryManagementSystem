@@ -37,7 +37,7 @@ public class UnitsOfMeasure extends AppCompatActivity {
     private FirebaseFirestore db;
     private ImageButton addButton;
     private Button deleteButton;
-    private EditText edUnitofMeasure;
+    private EditText edtUnitofMeasure;
 
     private String mCompanyCode;
     private String mWarehouse;
@@ -57,7 +57,7 @@ public class UnitsOfMeasure extends AppCompatActivity {
 
         // initializing widgets
         mRecyclerView = findViewById(R.id.unitsOfMeasureRecyclerView);
-        edUnitofMeasure = findViewById(R.id.edUnitOfMeasureDescription);
+        edtUnitofMeasure = findViewById(R.id.edUnitOfMeasureDescription);
         addButton = findViewById(R.id.unitsOfMeasureAddButton);
 
         // creating our new array list
@@ -108,6 +108,39 @@ public class UnitsOfMeasure extends AppCompatActivity {
             Toast.makeText(UnitsOfMeasure.this, "Access Denied", Toast.LENGTH_LONG).show();
             finish();
         }
+
+            addButton.setOnClickListener(v -> {
+                // Adding unit of measure to firebase
+                UnitType unitType = new UnitType();
+                unitType.setUnitType(edtUnitofMeasure.getText().toString());
+                unitType.setActive(true);
+                unitType.setCanBeDeleted(true);
+
+                if(!unitType.getUnitType().isEmpty()) {
+                    addDataToFireStore(unitType);
+                }
+            });
+
+    }
+
+    private void addDataToFireStore(UnitType _unitType) {
+        //Log.d("FIREBASE-ADD", "Inside");
+        // creating a collection reference
+        // for our Firebase Firestore database
+
+        db.collection(mCompanyCode + "/"+mWarehouse+"/Units of Measure").document(_unitType.getUnitType()).set(_unitType).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+                Toast.makeText(UnitsOfMeasure.this, "Unit Type Added", Toast.LENGTH_LONG).show();
+                onRestart();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(UnitsOfMeasure.this, "Fail to add product \n" + e, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void onRestart()
