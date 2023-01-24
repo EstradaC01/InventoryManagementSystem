@@ -55,6 +55,20 @@
                 app:layout_constraintStart_toEndOf="@id/productDetailsEditButton"
                 app:layout_constraintTop_toBottomOf="@id/changeItemScrollableViewTop" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/productDetailsSaveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/button_orange"
+                android:text="save"
+                android:textColor="#ffffff"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/idTvProductId"
+                app:layout_constraintEnd_toStartOf="@+id/addItemScrollableViewEditButton"
+                app:layout_constraintTop_toTopOf="@+id/changeItemScrollableViewTop" />
+
             <TextView
                 android:id="@+id/idTvProductIdTitle"
                 android:layout_width="0dp"
@@ -68,7 +82,7 @@
                 app:layout_constraintStart_toStartOf="@id/productDetailsGuidelineStart2"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <EditText
                 android:id="@+id/idTvProductId"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -76,6 +90,9 @@
                 android:padding="10dp"
                 android:textColor="#423E3E"
                 android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
                 app:layout_constraintEnd_toEndOf="@id/productDetailsGuidelineEnd2"
                 app:layout_constraintStart_toStartOf="@id/idTvProductIdTitle"
                 app:layout_constraintTop_toBottomOf="@id/idTvProductIdTitle" />
@@ -92,7 +109,7 @@
                 app:layout_constraintStart_toStartOf="@id/idTvProductId"
                 app:layout_constraintTop_toBottomOf="@id/idTvProductId" />
 
-            <TextView
+            <EditText
                 android:id="@+id/idTvProductDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -102,6 +119,9 @@
                 android:scrollbars="vertical"
                 android:textColor="#423E3E"
                 android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
                 app:layout_constraintEnd_toEndOf="@id/idTvProductId"
                 app:layout_constraintStart_toStartOf="@id/idTvproductDescriptionTitle"
                 app:layout_constraintTop_toBottomOf="@id/idTvproductDescriptionTitle" />
