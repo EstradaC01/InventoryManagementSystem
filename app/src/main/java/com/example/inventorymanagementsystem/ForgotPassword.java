@@ -1,7 +1,5 @@
 package com.example.inventorymanagementsystem;
 
-
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,8 +24,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.chromium.base.Callback;
-
-import javax.security.auth.callback.Callback;
 
 
 public class ForgotPassword extends AppCompatActivity {
@@ -69,27 +65,27 @@ public class ForgotPassword extends AppCompatActivity {
 
     protected final void resetPassword(String emailId,final Callback callback){
 
-        AUTH.sendPasswordResetEmail(emailId)
-
-                .addOnCompleteListener(new OnCompleteListener() {
-
-                    @Override
-
-                    public void onComplete(@NonNull Task task) {
-
-                        if (task.isSuccessful()) {
-
-                            Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
-
-                        } else {
-
-                            Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_LONG).show();
-
-                        }
-
-                    }
-
-                });
+//        AUTH.sendPasswordResetEmail(emailId)
+//
+//                .addOnCompleteListener(new OnCompleteListener() {
+//
+//                    @Override
+//
+//                    public void onComplete(@NonNull Task task) {
+//
+//                        if (task.isSuccessful()) {
+//
+//                            Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
+//
+//                        } else {
+//
+//                            Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_LONG).show();
+//
+//                        }
+//
+//                    }
+//
+//                });
 
     }
 
