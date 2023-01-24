@@ -169,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent locationsIntent = new Intent(MainActivity.this, LocationsSubMenu.class);
                 locationsIntent.putExtra("User", currentUser);
                 locationsIntent.putExtra("CompanyCode", mCompanyCode);
+                locationsIntent.putExtra("Warehouse", mWarehouse);
                 startActivity(locationsIntent);
                 break;
             default:

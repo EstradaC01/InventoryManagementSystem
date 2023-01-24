@@ -20,17 +20,65 @@
             android:layout_height="wrap_content"
             android:padding="2dp"
             android:text="Description"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/unitType"
+            android:id="@+id/tvUnitTypeDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
             android:text="Unit Type"
-            android:textColor="@color/black" />
+            android:textSize="16sp"
+            android:textColor="@color/purple_500" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Active?"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvUnitTypeActive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="false"
+            android:textSize="16sp"
+            android:textColor="@color/purple_500" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnUnitTypeDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_gravity="end"
+                android:text="Delete"
+                android:textColor="#ffffff"
+                android:background="@drawable/statelistdrawable_red" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  " />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnUnitTypeEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/statelistdrawable_yellow"
+                android:padding="2dp"
+                android:text="Edit"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +18,16 @@ public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRe
 
     private ArrayList<UnitType> mUnitTypeArrayList;
     private Context mContext;
+    private OnItemClickListener listener;
+
+    // we need interface for this
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+    // now we need a method
+    public void setOnItemClickListener(OnItemClickListener clickListener) {
+        listener = clickListener;
+    }
 
     public UnitTypeRecyclerViewAdapter(ArrayList<UnitType> _unitTypeArrayList, Context _context) {
         mUnitTypeArrayList = _unitTypeArrayList;
@@ -45,7 +56,13 @@ public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRe
     @NonNull
     @Override
     public UnitTypeRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.unit_type, parent, false));
+
+        Context context = parent.getContext();
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+
+        View v = layoutInflater.inflate(R.layout.unit_type, parent, false);
+        // we need to pass the listener
+        return new ViewHolder(v, listener);
     }
 
 
@@ -73,7 +90,8 @@ public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRe
     public void onBindViewHolder(@NonNull UnitTypeRecyclerViewAdapter.ViewHolder holder, int position) {
         // setting data to our text views from our model class
         UnitType unitType = mUnitTypeArrayList.get(position);
-        holder.unitTypeTv.setText(unitType.getUnitType());
+        holder.tvUnitTypeDescription.setText(unitType.getUnitType());
+        holder.tvUnitTypeActive.setText(unitType.getEnabled().toString());
 
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
     }
@@ -90,13 +108,23 @@ public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRe
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         // creating variables for our text views
-        private final TextView unitTypeTv;
+        private final TextView tvUnitTypeDescription;
+        private final TextView tvUnitTypeActive;
+        private final Button btnUnitTypeDelete;
+        private final Button btnUnitTypeEdit;
 
-        public ViewHolder(@NonNull View itemView)
+        public ViewHolder(@NonNull View itemView, OnItemClickListener listener)
         {
             super(itemView);
             // initializing our text views
-            unitTypeTv = itemView.findViewById(R.id.unitType);
+            tvUnitTypeDescription = itemView.findViewById(R.id.tvUnitTypeDescription);
+            tvUnitTypeActive = itemView.findViewById(R.id.tvUnitTypeActive);
+            btnUnitTypeDelete = itemView.findViewById(R.id.btnUnitTypeDelete);
+            btnUnitTypeEdit = itemView.findViewById(R.id.btnUnitTypeEdit);
+
+            btnUnitTypeDelete.setOnClickListener(v -> {
+                listener.onItemClick(getAbsoluteAdapterPosition());
+            });
         }
     }
 }

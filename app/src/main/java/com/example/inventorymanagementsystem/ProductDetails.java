@@ -104,6 +104,10 @@ public class ProductDetails extends AppCompatActivity {
     void showCustomDialog() {
         final Dialog dialog = new Dialog(ProductDetails.this);
 
+        saveButton.setVisibility(View.GONE);
+        tvProductId.setEnabled(false);
+        tvProductDescription.setEnabled(false);
+
         dialog.setCancelable(false);
 
         dialog.setContentView(R.layout.dialog_confirmation);
