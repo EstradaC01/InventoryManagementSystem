@@ -89,6 +89,36 @@ public class Registration extends AppCompatActivity {
         });
     }
 
+    private void sendVerificationEmail()
+    {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // email sent
+                            Toast.makeText(Registration.this,"Email was sent.", Toast.LENGTH_LONG).show();
+
+                            // after email is sent just logout the user and finish this activity
+                            FirebaseAuth.getInstance().signOut();
+                            startActivity(new Intent(Registration.this, Login.class));
+                            finish();
+                        }
+                        else
+                        {
+                            Toast.makeText(Registration.this,"Email was not sent.", Toast.LENGTH_LONG).show();
+                            //restart this activity
+                            overridePendingTransition(0, 0);
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(getIntent());
+
+                        }
+                    }
+                });
+    }
 
     private void addDataToFireStore(String _firstName, String _lastName, String _userKey, String _email, String _companyCode, boolean _isAdmin) {
 
@@ -139,22 +169,6 @@ public class Registration extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(Registration.this, "Authentication failed.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-    }
-
-    private void sendEmailVerification() {
-
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-
-        user.sendEmailVerification()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "Email sent.");
                         }
                     }
                 });
