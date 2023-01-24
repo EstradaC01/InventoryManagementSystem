@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserDetails"
+    android:background="@drawable/blue_android_background">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/userDetailsGuidelineBottom"
+        app:layout_constraintEnd_toStartOf="@+id/userDetailsGuidelineEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/userDetailsGuidelineStart"
+        app:layout_constraintTop_toTopOf="@+id/userDetailsGuidelineTop"
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@drawable/rounded_white_background"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="8dp">
+
+
+            <ImageButton
+                android:id="@+id/userDetailsEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@drawable/statelistdrawable_yellow"
+                android:clickable="true"
+                android:contentDescription="editbutton"
+                android:elevation="10dp"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_edit_white_24px"
+                app:layout_constraintEnd_toStartOf="@id/userDetailsDeleteButton"
+                app:layout_constraintStart_toEndOf="@id/addUserScrollableViewEditButton"
+                app:layout_constraintTop_toBottomOf="@id/changeUserScrollableViewTop" />
+
+            <ImageButton
+                android:id="@+id/userDetailsDeleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@drawable/statelistdrawable_red"
+                android:clickable="true"
+                android:contentDescription="deletebutton"
+                android:elevation="10dp"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_delete_white_24px"
+                app:layout_constraintEnd_toStartOf="@id/changeUserScrollableViewEnd"
+                app:layout_constraintStart_toEndOf="@id/userDetailsEditButton"
+                app:layout_constraintTop_toBottomOf="@id/changeUserScrollableViewTop" />
+
+            <TextView
+                android:id="@+id/idTvUsernameTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Username"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/userDetailsGuidelineStart2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/idTVUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_white"
+                android:padding="10dp"
+                android:textColor="#423E3E"
+                android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
+                app:layout_constraintEnd_toEndOf="@id/userDetailsGuidelineEnd2"
+                app:layout_constraintStart_toStartOf="@id/idTvUsernameTitle"
+                app:layout_constraintTop_toBottomOf="@id/idTvUsernameTitle" />
+
+            <TextView
+                android:id="@+id/idTvUserEmailTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="User Email"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/idTVUsername"
+                app:layout_constraintTop_toBottomOf="@id/idTVUsername" />
+
+            <EditText
+                android:id="@+id/idTvUserEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_white"
+                android:lines="2"
+                android:padding="10dp"
+                android:scrollbars="vertical"
+                android:textColor="#423E3E"
+                android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
+                app:layout_constraintEnd_toEndOf="@id/idTVUsername"
+                app:layout_constraintStart_toStartOf="@id/idTvUserEmailTitle"
+                app:layout_constraintTop_toBottomOf="@id/idTvUserEmailTitle" />
+
+            <TextView
+                android:id="@+id/idTVUserRoleTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="User Role"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/idTvUserEmail"
+                app:layout_constraintTop_toBottomOf="@id/idTvUserEmail" />
+
+            <TextView
+                android:id="@+id/idTVUserRole"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_white"
+                android:padding="10dp"
+                android:textColor="#423E3E"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/idTvUserEmail"
+                app:layout_constraintStart_toStartOf="@id/idTVUserRoleTitle"
+                app:layout_constraintTop_toBottomOf="@id/idTVUserRoleTitle" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/changeUserScrollableViewTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".006" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/changeUserScrollableViewEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".98" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/addUserScrollableViewEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".68" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/userDetailsGuidelineStart2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/userDetailsGuidelineEnd2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".95" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/userDetailsGuidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/userDetailsGuidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/userDetailsGuidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/userDetailsGuidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".03" />
+</androidx.constraintlayout.widget.ConstraintLayout>
