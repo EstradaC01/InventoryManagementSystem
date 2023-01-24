@@ -4,6 +4,7 @@ package com.example.inventorymanagementsystem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +16,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +43,7 @@ public class ItemList extends AppCompatActivity {
     private ItemRVAdapter mItemRVAdapter;
     private FirebaseFirestore db;
     private Button btnAddItem;
-    private SearchView edtSearchItems;
+    private androidx.appcompat.widget.SearchView edtSearchItems;
     ProgressBar loadingPB;
 
     private String mCompanyCode;
@@ -168,7 +168,7 @@ public class ItemList extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 filterList(newText);
-                return true;
+                return false;
             }
         });
     }
