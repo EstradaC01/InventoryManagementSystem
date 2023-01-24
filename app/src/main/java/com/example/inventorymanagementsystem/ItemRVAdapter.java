@@ -22,10 +22,11 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
     // creating variables for our ArrayList and context
     private ArrayList<Products> mProductsArrayList;
     private Context context;
-
-    public ItemRVAdapter(ArrayList<Products> productsArrayList, Context context) {
+    private Intent theIntent;
+    public ItemRVAdapter(ArrayList<Products> productsArrayList, Context context, Intent in) {
         this.mProductsArrayList = productsArrayList;
         this.context = context;
+        this.theIntent = in;
     }
     /**
      * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
@@ -77,7 +78,11 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ItemRVAdapter.ViewHolder holder, int position) {
         // setting data to our text views from our model class
+
+        String mCompanyCode = (String) theIntent.getSerializableExtra("CompanyCode");
+        String mWarehouse = (String) theIntent.getSerializableExtra("Warehouse");
         Products products = mProductsArrayList.get(position);
+
         holder.productIdTv.setText(products.getProductId());
         holder.productDescriptionTv.setText(products.getProductId());
 
@@ -86,8 +91,11 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Intent i = new Intent(v.getContext(), ProductDetails.class);
                 Intent i = new Intent(v.getContext(), ProductDetails.class);
                 i.putExtra("Object", products);
+                i.putExtra("CompanyCode", mCompanyCode);
+                i.putExtra("Warehouse", mWarehouse);
                 v.getContext().startActivity(i);
             }
         });

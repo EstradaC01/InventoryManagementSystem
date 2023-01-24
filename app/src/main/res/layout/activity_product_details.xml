@@ -25,6 +25,36 @@
             android:elevation="8dp">
             <!--    TextView to show Product ID-->
 
+            <ImageButton
+                android:id="@+id/productDetailsEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@drawable/statelistdrawable_yellow"
+                android:clickable="true"
+                android:contentDescription="editbutton"
+                android:elevation="10dp"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_edit_white_24px"
+                app:layout_constraintEnd_toStartOf="@id/productDetailsDeleteButton"
+                app:layout_constraintStart_toEndOf="@id/addItemScrollableViewEditButton"
+                app:layout_constraintTop_toBottomOf="@id/changeItemScrollableViewTop" />
+
+            <ImageButton
+                android:id="@+id/productDetailsDeleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@drawable/statelistdrawable_red"
+                android:clickable="true"
+                android:contentDescription="deletebutton"
+                android:elevation="10dp"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_delete_white_24px"
+                app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"
+                app:layout_constraintStart_toEndOf="@id/productDetailsEditButton"
+                app:layout_constraintTop_toBottomOf="@id/changeItemScrollableViewTop" />
+
             <TextView
                 android:id="@+id/idTvProductIdTitle"
                 android:layout_width="0dp"
@@ -121,6 +151,27 @@
                 app:layout_constraintTop_toBottomOf="@id/productDetailsImageViewProductImage"
                 app:layout_constraintStart_toStartOf="@id/productDetailsImageViewProductImage"
                 app:layout_constraintEnd_toEndOf="@id/productDetailsImageViewProductImage" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/changeItemScrollableViewTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".006" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/changeItemScrollableViewEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".98" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/addItemScrollableViewEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".68" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/productDetailsGuidelineStart2"
