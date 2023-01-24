@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Registration extends AppCompatActivity {
@@ -125,10 +126,36 @@ public class Registration extends AppCompatActivity {
         // creating a collection reference
         // for our Firebase Firestore database
         CollectionReference dbProducts = db.collection(_companyCode + "/CompanyUsers/Users");
-
         // adding our data to our users object class.
-        Users user = new Users(_firstName,_lastName,_userKey,_email, _isAdmin);
+        Users user = new Users();
+        user.setFirstName(_firstName);
+        user.setLastName(_lastName);
+        user.setUserKey(_userKey);
+        user.setEmail(_email);
+        user.setIsAdmin(_isAdmin);
+        dbProducts.document().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                boolean codeExists = documentSnapshot.exists();
+                Log.d("Success", ": task");
 
+                if (!codeExists) {
+                    Log.d("Code", ": Is empty");
+                    user.setUserRank("Owner");
+                }
+                else {
+                    user.setUserRank("Employee");
+                    user.setIsAdmin(false);
+                }
+                Log.d("User role", ": " + user.getUserRank());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("Failed", ": task");
+
+            }
+        });
         // below method is use to add data to Firebase Firestore
         dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override

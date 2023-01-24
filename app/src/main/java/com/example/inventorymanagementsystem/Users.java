@@ -9,7 +9,7 @@ public class Users implements Serializable {
     private String userKey;
     private String email;
     private String systemId;
-    private String role;
+    private String userRank;
     private boolean isAdmin;
 
     public Users()
@@ -73,11 +73,11 @@ public class Users implements Serializable {
     public void setSystemId(String systemId) {
         this.systemId = systemId;
     }
-    public String getRole() {
-        return role;
+    public String getUserRank() {
+        return userRank;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserRank(String userRank) {
+        this.userRank = userRank;
     }
 }
