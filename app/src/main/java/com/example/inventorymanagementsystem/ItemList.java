@@ -80,17 +80,18 @@ public class ItemList extends AppCompatActivity {
         itemRV.setHasFixedSize(true);
         itemRV.setLayoutManager(new LinearLayoutManager(this));
 
-        // adding our array list to our recycler view adapter class
-        mItemRVAdapter = new ItemRVAdapter(mProductsArrayList, this);
-
-        // setting adapter to our recycler view
-        itemRV.setAdapter(mItemRVAdapter);
 
         //getting intent from ItemsSubMenu class along with User object
         Intent i = getIntent();
         currentUser = (Users)i.getSerializableExtra("User");
         mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
+
+        // adding our array list to our recycler view adapter class
+        mItemRVAdapter = new ItemRVAdapter(mProductsArrayList, this, i);
+
+        // setting adapter to our recycler view
+        itemRV.setAdapter(mItemRVAdapter);
 
                 CollectionReference itemsRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Products");
 

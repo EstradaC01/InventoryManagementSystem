@@ -4,7 +4,12 @@ import java.io.Serializable;
 
 public class Users implements Serializable {
 
-    private String firstName, lastName, userKey, email, systemId;
+    private String firstName;
+    private String lastName;
+    private String userKey;
+    private String email;
+    private String systemId;
+
     private boolean isAdmin;
 
     public Users()
