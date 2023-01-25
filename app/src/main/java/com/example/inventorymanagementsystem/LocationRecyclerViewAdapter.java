@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,26 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRecyclerViewAdapter.ViewHolder> {
 
-public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRecyclerViewAdapter.ViewHolder> {
-
-    private ArrayList<UnitType> mUnitTypeArrayList;
+    private ArrayList<Location> mLocationArrayList;
     private Context mContext;
-    private OnItemClickListener listener;
 
-    // we need interface for this
-    public interface OnItemClickListener{
-        void onItemClick(int position);
-    }
-    // now we need a method
-    public void setOnItemClickListener(OnItemClickListener clickListener) {
-        listener = clickListener;
+    public LocationRecyclerViewAdapter(ArrayList<Location> locationArrayList, Context context) {
+        mLocationArrayList = locationArrayList;
+        mContext = context;
     }
 
-    public UnitTypeRecyclerViewAdapter(ArrayList<UnitType> _unitTypeArrayList, Context _context) {
-        mUnitTypeArrayList = _unitTypeArrayList;
-        mContext = _context;
-    }
     /**
      * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
      * an item.
@@ -43,7 +32,7 @@ public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRe
      * layout file.
      * <p>
      * The new ViewHolder will be used to display items of the adapter using
-     * { #onBindViewHolder(ViewHolder, int, List)}. Since it will be re-used to display
+     * {@link #onBindViewHolder(ViewHolder, int, List)}. Since it will be re-used to display
      * different items in the data set, it is a good idea to cache references to sub views of
      * the View to avoid unnecessary {@link View#findViewById(int)} calls.
      *
@@ -52,20 +41,19 @@ public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRe
      * @param viewType The view type of the new View.
      * @return A new ViewHolder that holds a View of the given view type.
      * @see #getItemViewType(int)
-     *  #onBindViewHolder(ViewHolder, int)
+     * @see #onBindViewHolder(ViewHolder, int)
      */
     @NonNull
     @Override
-    public UnitTypeRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LocationRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        Context context = parent.getContext();
+        Context  context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        View v = layoutInflater.inflate(R.layout.unit_type, parent, false);
-        // we need to pass the listener
-        return new ViewHolder(v, listener);
-    }
+        View v = layoutInflater.inflate(R.layout.location, parent, false);
 
+        return new ViewHolder(v);
+    }
 
     /**
      * Called by RecyclerView to display the data at the specified position. This method should
@@ -80,7 +68,7 @@ public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRe
      * on (e.g. in a click listener), use {@link ViewHolder#getBindingAdapterPosition()} which
      * will have the updated adapter position.
      * <p>
-     * Override { #onBindViewHolder(ViewHolder, int, List)} instead if Adapter can
+     * Override {@link #onBindViewHolder(ViewHolder, int, List)} instead if Adapter can
      * handle efficient partial bind.
      *
      * @param holder   The ViewHolder which should be updated to represent the contents of the
@@ -88,11 +76,11 @@ public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRe
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(@NonNull UnitTypeRecyclerViewAdapter.ViewHolder holder, int position) {
-        // setting data to our text views from our model class
-        UnitType unitType = mUnitTypeArrayList.get(position);
-        holder.tvUnitTypeDescription.setText(unitType.getUnitType());
-        holder.tvUnitTypeActive.setText(unitType.getEnabled().toString());
+    public void onBindViewHolder(@NonNull LocationRecyclerViewAdapter.ViewHolder holder, int position) {
+        Location location = mLocationArrayList.get(position);
+        holder.tvLocationName.setText(location.getName());
+        holder.tvZone.setText(location.getZone());
+        holder.tvStatus.setText(location.getStatus());
 
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
     }
@@ -104,26 +92,20 @@ public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRe
      */
     @Override
     public int getItemCount() {
-        return mUnitTypeArrayList.size();
+        return mLocationArrayList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        // creating variables for our text views
-        private final TextView tvUnitTypeDescription;
-        private final TextView tvUnitTypeActive;
-        private final Button btnUnitTypeDelete;
+        private final TextView tvLocationName;
+        private final TextView tvZone;
+        private final TextView tvStatus;
 
-        public ViewHolder(@NonNull View itemView, OnItemClickListener listener)
-        {
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            // initializing our text views
-            tvUnitTypeDescription = itemView.findViewById(R.id.tvUnitTypeDescription);
-            tvUnitTypeActive = itemView.findViewById(R.id.tvUnitTypeActive);
-            btnUnitTypeDelete = itemView.findViewById(R.id.btnUnitTypeDelete);
-
-            btnUnitTypeDelete.setOnClickListener(v -> {
-                listener.onItemClick(getAbsoluteAdapterPosition());
-            });
+            tvLocationName = itemView.findViewById(R.id.tvLocationName);
+            tvZone = itemView.findViewById(R.id.tvLocationZone);
+            tvStatus = itemView.findViewById(R.id.tvLocationStatus);
         }
     }
 }

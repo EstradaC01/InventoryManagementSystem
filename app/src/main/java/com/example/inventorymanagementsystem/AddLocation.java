@@ -38,7 +38,7 @@ public class AddLocation extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // change action support bar title and font color
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Zones</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Locations</font>"));
 
         //Initializing firebase
         db = FirebaseFirestore.getInstance();
@@ -104,7 +104,7 @@ public class AddLocation extends AppCompatActivity {
 
                 if (!location.getAisle().isEmpty()) {
 
-                    CollectionReference collectionReference = db.collection(mCompanyCode + "/" + mWarehouse + "/Zones/" + location.getZone() +"/Locations");
+                    CollectionReference collectionReference = db.collection(mCompanyCode + "/" + mWarehouse + "/Locations");
 
                     collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -167,7 +167,7 @@ public class AddLocation extends AppCompatActivity {
         // creating a collection reference
         // for our Firebase Firestore database
 
-        db.collection(mCompanyCode + "/"+mWarehouse+"/Zones/"+_location.getZone()+"/Locations").document(_location.getName()).set(_location).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection(mCompanyCode + "/"+mWarehouse+"/Locations").document(_location.getName()).set(_location).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(AddLocation.this, "Location Added", Toast.LENGTH_LONG).show();
