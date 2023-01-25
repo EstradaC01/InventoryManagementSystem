@@ -21,7 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Registration extends AppCompatActivity {
 
@@ -125,24 +127,66 @@ public class Registration extends AppCompatActivity {
         // creating a collection reference
         // for our Firebase Firestore database
         CollectionReference dbProducts = db.collection(_companyCode + "/CompanyUsers/Users");
-
         // adding our data to our users object class.
-        Users user = new Users(_firstName,_lastName,_userKey,_email, _isAdmin);
-
-        // below method is use to add data to Firebase Firestore
-        dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        Users user = new Users();
+        user.setFirstName(_firstName);
+        user.setLastName(_lastName);
+        user.setUserKey(_userKey);
+        user.setEmail(_email);
+        user.setIsAdmin(_isAdmin);
+        dbProducts.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(DocumentReference documentReference) {
-                // after the data addition is successful
-                // we are displaying a success toast message
-                Toast.makeText(Registration.this, "User was registered successfully.", Toast.LENGTH_LONG).show();
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                boolean codeExists = queryDocumentSnapshots.isEmpty();
+                Log.d("Success", ": task");
+
+                if (codeExists) {
+                    Log.d("Code", ": Is empty");
+                    user.setRank("Owner");
+                    // below method is use to add data to Firebase Firestore
+                    dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            // after the data addition is successful
+                            // we are displaying a success toast message
+                            Toast.makeText(Registration.this, "User was registered successfully.", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // this method is called when the data addition process is failed.
+                            // displaying a toast message when data addition is failed.
+                            Toast.makeText(Registration.this, "Fail to add user \n" + e, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                else {
+                    user.setRank("Employee");
+                    user.setIsAdmin(false);
+                    // below method is use to add data to Firebase Firestore
+                    dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            // after the data addition is successful
+                            // we are displaying a success toast message
+                            Toast.makeText(Registration.this, "User was registered successfully.", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // this method is called when the data addition process is failed.
+                            // displaying a toast message when data addition is failed.
+                            Toast.makeText(Registration.this, "Fail to add user \n" + e, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                Log.d("User role", ": " + user.getRank());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                // this method is called when the data addition process is failed.
-                // displaying a toast message when data addition is failed.
-                Toast.makeText(Registration.this, "Fail to add user \n" + e, Toast.LENGTH_LONG).show();
+                Log.d("Failed", ": task");
+
             }
         });
     }

@@ -78,7 +78,7 @@ public class Products implements Serializable {
         this.productPcsPerBox = productPcsPerBox;
     }
     public void setProductTimeAdded() {
-       productTimeAdded = getProductTimeAdded();
+       this.productTimeAdded = getProductTimeAdded();
     }
     public void setUserKey(String userKey) {
         this.userKey = userKey;

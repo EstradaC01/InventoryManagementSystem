@@ -45,17 +45,17 @@ public class UserList extends AppCompatActivity {
         loadingUsersPB = findViewById(R.id.idUserProgressBar);
 
         db = FirebaseFirestore.getInstance();
+        Intent i = getIntent();
 
         mUsersArrayList = new ArrayList<>();
         userRV.setHasFixedSize(true);
         userRV.setLayoutManager(new LinearLayoutManager(this));
 
-        mUserRVAdapter = new UserRVAdapter(mUsersArrayList, this);
+        mUserRVAdapter = new UserRVAdapter(mUsersArrayList, this, i);
 
         userRV.setAdapter(mUserRVAdapter);
 
 
-        Intent i = getIntent();
         currentUser = (Users)i.getSerializableExtra("User");
         mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
 

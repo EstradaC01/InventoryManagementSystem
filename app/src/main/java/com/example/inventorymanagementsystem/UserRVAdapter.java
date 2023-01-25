@@ -18,10 +18,11 @@ public class UserRVAdapter extends RecyclerView.Adapter<UserRVAdapter.ViewHolder
 
     private ArrayList<Users> mUsersArrayList;
     private Context context;
-
-    public UserRVAdapter(ArrayList<Users> usersArrayList, Context context) {
+    private Intent theIntent;
+    public UserRVAdapter(ArrayList<Users> usersArrayList, Context context, Intent in) {
         this.mUsersArrayList = usersArrayList;
         this.context = context;
+        this.theIntent = in;
     }
     @NonNull
     @Override
@@ -31,6 +32,8 @@ public class UserRVAdapter extends RecyclerView.Adapter<UserRVAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull UserRVAdapter.ViewHolder holder, int position) {
+        String mCompanyCode = (String) theIntent.getSerializableExtra("CompanyCode");
+        String mWarehouse = (String) theIntent.getSerializableExtra("Warehouse");
         Users users = mUsersArrayList.get(position);
         holder.usernameIdTv.setText(users.getFirstName() + " " + users.getLastName());
         holder.emailIdTv.setText(users.getEmail());
@@ -38,6 +41,11 @@ public class UserRVAdapter extends RecyclerView.Adapter<UserRVAdapter.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), UserDetails.class);
+                i.putExtra("UserObject", users);
+                i.putExtra("CompanyCode", mCompanyCode);
+                i.putExtra("Warehouse", mWarehouse);
+                v.getContext().startActivity(i);
             }
         });
     }

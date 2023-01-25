@@ -4,7 +4,12 @@ import java.io.Serializable;
 
 public class Users implements Serializable {
 
-    private String firstName, lastName, userKey, email, systemId;
+    private String firstName;
+    private String lastName;
+    private String userKey;
+    private String email;
+    private String systemId;
+    private String rank;
     private boolean isAdmin;
 
     public Users()
@@ -14,12 +19,13 @@ public class Users implements Serializable {
     }
 
     // Constructors for all variables
-    public Users(String _firstName, String _lastName, String _userKey, String _email, boolean _isAdmin) {
+    public Users(String _firstName, String _lastName, String _userKey, String _email, boolean _isAdmin, String _rank) {
         firstName = _firstName;
         lastName = _lastName;
         userKey = _userKey;
         email = _email;
         isAdmin = _isAdmin;
+        rank = _rank;
     }
 
     // getters
@@ -67,5 +73,12 @@ public class Users implements Serializable {
     }
     public void setSystemId(String systemId) {
         this.systemId = systemId;
+    }
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
     }
 }

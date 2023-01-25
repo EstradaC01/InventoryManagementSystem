@@ -9,6 +9,20 @@
     tools:context=".ItemsSubMenu">
 
     <ImageButton
+        android:id="@+id/idImageButtonItemMenuUnitsOfMeasure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/statelistdrawable_white"
+        android:contentDescription="reportsImage"
+        android:elevation="10dp"
+        android:padding="30dp"
+        android:src="@drawable/ic_product_reports_mainblue_64px"
+        app:layout_constraintEnd_toEndOf="@+id/idImageButtonItemMenuProductList"
+        app:layout_constraintStart_toStartOf="@+id/idImageButtonItemMenuProductList"
+        app:layout_constraintTop_toBottomOf="@+id/idTextViewItemSubmenuProductListTitle" />
+
+    <ImageButton
         android:id="@+id/idImageButtonItemMenuProductReports"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -27,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Reports"
+        android:text="Exception Codes"
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
@@ -35,6 +49,20 @@
         app:layout_constraintEnd_toEndOf="@+id/idImageButtonItemMenuProductReports"
         app:layout_constraintStart_toStartOf="@+id/idImageButtonItemMenuProductReports"
         app:layout_constraintTop_toBottomOf="@+id/idImageButtonItemMenuProductReports" />
+
+    <TextView
+        android:id="@+id/idTextViewItemSubmenuProductReportsTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Units of Measure"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/idImageButtonItemMenuUnitsOfMeasure"
+        app:layout_constraintStart_toStartOf="@+id/idImageButtonItemMenuUnitsOfMeasure"
+        app:layout_constraintTop_toBottomOf="@+id/idImageButtonItemMenuUnitsOfMeasure" />
 
     <ImageButton
         android:background="@drawable/statelistdrawable_white"
@@ -67,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Create/Edit"
+        android:text="Locations"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:textColor="#ffffff"
@@ -81,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Inquiry"
+        android:text="Zones"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:textColor="#ffffff"

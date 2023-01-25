@@ -1,32 +1,37 @@
 package com.example.inventorymanagementsystem;
 
-import android.content.ClipData;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder> {
-    // creating variables for our ArrayList and context
-    private ArrayList<Products> mProductsArrayList;
-    private Context context;
-    private Intent theIntent;
-    public ItemRVAdapter(ArrayList<Products> productsArrayList, Context context, Intent in) {
-        this.mProductsArrayList = productsArrayList;
-        this.context = context;
-        this.theIntent = in;
+public class UnitTypeRecyclerViewAdapter extends RecyclerView.Adapter<UnitTypeRecyclerViewAdapter.ViewHolder> {
+
+    private ArrayList<UnitType> mUnitTypeArrayList;
+    private Context mContext;
+    private OnItemClickListener listener;
+
+    // we need interface for this
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+    // now we need a method
+    public void setOnItemClickListener(OnItemClickListener clickListener) {
+        listener = clickListener;
+    }
+
+    public UnitTypeRecyclerViewAdapter(ArrayList<UnitType> _unitTypeArrayList, Context _context) {
+        mUnitTypeArrayList = _unitTypeArrayList;
+        mContext = _context;
     }
     /**
      * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
@@ -37,7 +42,7 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
      * layout file.
      * <p>
      * The new ViewHolder will be used to display items of the adapter using
-     * { onBindViewHolder(ViewHolder, int, List)}. Since it will be re-used to display
+     * { #onBindViewHolder(ViewHolder, int, List)}. Since it will be re-used to display
      * different items in the data set, it is a good idea to cache references to sub views of
      * the View to avoid unnecessary {@link View#findViewById(int)} calls.
      *
@@ -46,14 +51,20 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
      * @param viewType The view type of the new View.
      * @return A new ViewHolder that holds a View of the given view type.
      * @see #getItemViewType(int)
-     * @see #onBindViewHolder(ViewHolder, int)
+     *  #onBindViewHolder(ViewHolder, int)
      */
     @NonNull
     @Override
-    public ItemRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // passing our layout file for displaying our card item
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item,parent,false));
+    public UnitTypeRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        Context context = parent.getContext();
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+
+        View v = layoutInflater.inflate(R.layout.unit_type, parent, false);
+        // we need to pass the listener
+        return new ViewHolder(v, listener);
     }
+
 
     /**
      * Called by RecyclerView to display the data at the specified position. This method should
@@ -65,8 +76,8 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
      * invalidated or the new position cannot be determined. For this reason, you should only
      * use the <code>position</code> parameter while acquiring the related data item inside
      * this method and should not keep a copy of it. If you need the position of an item later
-     * on (e.g. in a click listener), use {@link ViewHolder#getAdapterPosition()} which will
-     * have the updated adapter position.
+     * on (e.g. in a click listener), use {@link ViewHolder#getBindingAdapterPosition()} which
+     * will have the updated adapter position.
      * <p>
      * Override { #onBindViewHolder(ViewHolder, int, List)} instead if Adapter can
      * handle efficient partial bind.
@@ -76,31 +87,13 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(@NonNull ItemRVAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UnitTypeRecyclerViewAdapter.ViewHolder holder, int position) {
         // setting data to our text views from our model class
-
-        String mCompanyCode = (String) theIntent.getSerializableExtra("CompanyCode");
-        String mWarehouse = (String) theIntent.getSerializableExtra("Warehouse");
-        Products products = mProductsArrayList.get(position);
-
-        holder.productIdTv.setText(products.getProductId());
-        holder.productDescriptionTv.setText(products.getProductId());
+        UnitType unitType = mUnitTypeArrayList.get(position);
+        holder.tvUnitTypeDescription.setText(unitType.getUnitType());
+        holder.tvUnitTypeActive.setText(unitType.getEnabled().toString());
 
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent i = new Intent(v.getContext(), ProductDetails.class);
-                Intent i = new Intent(v.getContext(), ProductDetails.class);
-                i.putExtra("Object", products);
-                i.putExtra("CompanyCode", mCompanyCode);
-                i.putExtra("Warehouse", mWarehouse);
-                v.getContext().startActivity(i);
-            }
-        });
-
-
     }
 
     /**
@@ -110,25 +103,28 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
      */
     @Override
     public int getItemCount() {
-        return mProductsArrayList.size();
+        return mUnitTypeArrayList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         // creating variables for our text views
-        private final TextView productIdTv;
-        private final TextView productDescriptionTv;
+        private final TextView tvUnitTypeDescription;
+        private final TextView tvUnitTypeActive;
+        private final Button btnUnitTypeDelete;
+        private final Button btnUnitTypeEdit;
 
-        public ViewHolder(@NonNull View itemView)
+        public ViewHolder(@NonNull View itemView, OnItemClickListener listener)
         {
             super(itemView);
             // initializing our text views
-            productIdTv = itemView.findViewById(R.id.idTVItemCardProductId);
-            productDescriptionTv = itemView.findViewById(R.id.idTVItemCardProductDescription);
-        }
-    }
+            tvUnitTypeDescription = itemView.findViewById(R.id.tvUnitTypeDescription);
+            tvUnitTypeActive = itemView.findViewById(R.id.tvUnitTypeActive);
+            btnUnitTypeDelete = itemView.findViewById(R.id.btnUnitTypeDelete);
+            btnUnitTypeEdit = itemView.findViewById(R.id.btnUnitTypeEdit);
 
-    public void setFilteredList(ArrayList<Products> filteredList) {
-        mProductsArrayList = filteredList;
-        notifyDataSetChanged();
+            btnUnitTypeDelete.setOnClickListener(v -> {
+                listener.onItemClick(getAbsoluteAdapterPosition());
+            });
+        }
     }
 }
