@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_android_background"
+    android:orientation="vertical"
+    tools:context=".AddItem">
+
+    <!--    EditText for getting Proudct ID-->
+
+
+
+        <EditText
+            android:id="@+id/edtAddZoneZoneID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Zone ID"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toTopOf="@+id/changeItemScrollableViewTop" />
+
+        <!--    EditText for Product Description-->
+
+        <EditText
+            android:id="@+id/edtAddZoneDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:gravity="top|start"
+            android:hint="Zone Description"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:layout_marginTop="8dp"
+            android:minHeight="48dp"
+            app:layout_constraintTop_toBottomOf="@id/edtAddZoneZoneID"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd" />
+        <!--    EditText for Product UPC-->
+
+        <!--    Spinner for dropdown menu-->
+        <Spinner
+            android:id="@+id/spinnerAddZones"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:contentDescription="Category"
+            android:elevation="15dp"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/edtAddZoneDescription"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+
+        <!--    Button for creating the product -->
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAddZonesCreateZone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_navyblue"
+            android:elevation="15dp"
+            android:padding="12dp"
+            android:text="Create Zone"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/spinnerAddZones"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="     "
+            app:layout_constraintTop_toBottomOf="@id/btnAddZonesCreateZone"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/changeItemScrollableViewTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/addItemScrollableViewStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/changeItemScrollableViewEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".92" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

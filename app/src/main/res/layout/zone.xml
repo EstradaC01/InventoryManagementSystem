@@ -15,48 +15,65 @@
 
         <!--        Textview for displaying item name-->
         <TextView
-            android:id="@+id/unitTypeDescriptionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:text="Description"
+            android:text="Zone ID"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvUnitTypeDescription"
+            android:id="@+id/tvZoneZoneId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:text="Unit Type"
+            android:text="BINS"
             android:textSize="16sp"
             android:textColor="@color/purple_500" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:text="Active?"
+            android:text="Name"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/tvUnitTypeActive"
+            android:id="@+id/tvZoneName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:text="false"
+            android:text="Bin Area"
             android:textSize="16sp"
             android:textColor="@color/purple_500" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Type of Unit"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvZoneTypeOfUnit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Pallet"
+            android:textSize="16sp"
+            android:textColor="@color/purple_500" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="end">
+            android:gravity="end"
+            android:layout_marginTop="10dp">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnUnitTypeDelete"
+                android:id="@+id/btnZoneDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
