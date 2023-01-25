@@ -79,6 +79,23 @@ public class UnitsOfMeasure extends AppCompatActivity {
         // setting adapter to our recycler view
         mRecyclerView.setAdapter(mUnitTypeRecyclerViewAdapter);
 
+        mUnitTypeRecyclerViewAdapter.setOnItemClickListener(new UnitTypeRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // now delete...
+                if(mUnitTypeArrayList.get(position).getCanBeDeleted() == true)
+                {
+                    CollectionReference d = db.collection(mCompanyCode + "/" + mWarehouse + "/Units of Measure");
+                    d.document(mUnitTypeArrayList.get(position).getUnitType()).delete();
+                    mUnitTypeArrayList.remove(position);
+                    //then notify...
+                    mUnitTypeRecyclerViewAdapter.notifyItemRemoved(position);
+                } else {
+                    Toast.makeText(UnitsOfMeasure.this, "Data cannot be deleted.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         CollectionReference itemsRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Units of Measure");
 
         if(mCurrentUser.getIsAdmin())
@@ -131,9 +148,9 @@ public class UnitsOfMeasure extends AppCompatActivity {
         db.collection(mCompanyCode + "/"+mWarehouse+"/Units of Measure").document(_unitType.getUnitType()).set(_unitType).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-
+                mUnitTypeArrayList.add(_unitType);
+                mUnitTypeRecyclerViewAdapter.notifyDataSetChanged();
                 Toast.makeText(UnitsOfMeasure.this, "Unit Type Added", Toast.LENGTH_LONG).show();
-                onRestart();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
