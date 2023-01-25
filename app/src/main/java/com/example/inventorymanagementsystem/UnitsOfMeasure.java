@@ -17,8 +17,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -42,7 +44,11 @@ public class UnitsOfMeasure extends AppCompatActivity {
     private String mCompanyCode;
     private String mWarehouse;
 
+
+
     private static Users mCurrentUser;
+
+    private static final String TAG = "UnitsOfMeasure";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,13 +134,37 @@ public class UnitsOfMeasure extends AppCompatActivity {
 
             addButton.setOnClickListener(v -> {
                 // Adding unit of measure to firebase
+
                 UnitType unitType = new UnitType();
                 unitType.setUnitType(edtUnitofMeasure.getText().toString());
                 unitType.setActive(true);
                 unitType.setCanBeDeleted(true);
 
                 if(!unitType.getUnitType().isEmpty()) {
-                    addDataToFireStore(unitType);
+
+                    CollectionReference collectionReference = db.collection(mCompanyCode + "/" + mWarehouse + "/Units of Measure");
+
+                    collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            Boolean unitTypeExists = false;
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for(DocumentSnapshot d: list) {
+                                if(d.getId().equals(unitType.getUnitType())) {
+                                    unitTypeExists = true;
+                                    Toast.makeText(UnitsOfMeasure.this, "Unit type already exists", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            if(!unitTypeExists) {
+                                addDataToFireStore(unitType);
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(UnitsOfMeasure.this, "Unable to read data", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             });
 
