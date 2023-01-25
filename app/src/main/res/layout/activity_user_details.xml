@@ -55,6 +55,20 @@
                 app:layout_constraintStart_toEndOf="@id/userDetailsEditButton"
                 app:layout_constraintTop_toBottomOf="@id/changeUserScrollableViewTop" />
 
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/userDetailsSaveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/button_orange"
+                android:text="save"
+                android:textColor="#ffffff"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/idTVUsername"
+                app:layout_constraintEnd_toStartOf="@+id/addUserScrollableViewEditButton"
+                app:layout_constraintTop_toTopOf="@+id/changeUserScrollableViewTop" />
             <TextView
                 android:id="@+id/idTvUsernameTitle"
                 android:layout_width="0dp"
@@ -113,19 +127,19 @@
                 app:layout_constraintTop_toBottomOf="@id/idTvUserEmailTitle" />
 
             <TextView
-                android:id="@+id/idTVUserRoleTitle"
+                android:id="@+id/idTVUserRankTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="User Role"
+                android:text="User Rank"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/idTvUserEmail"
                 app:layout_constraintTop_toBottomOf="@id/idTvUserEmail" />
 
-            <TextView
-                android:id="@+id/idTVUserRole"
+            <EditText
+                android:id="@+id/idTVUserRank"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_corners_white"
@@ -133,8 +147,8 @@
                 android:textColor="#423E3E"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@id/idTvUserEmail"
-                app:layout_constraintStart_toStartOf="@id/idTVUserRoleTitle"
-                app:layout_constraintTop_toBottomOf="@id/idTVUserRoleTitle" />
+                app:layout_constraintStart_toStartOf="@id/idTVUserRankTitle"
+                app:layout_constraintTop_toBottomOf="@id/idTVUserRankTitle" />
 
 
             <androidx.constraintlayout.widget.Guideline

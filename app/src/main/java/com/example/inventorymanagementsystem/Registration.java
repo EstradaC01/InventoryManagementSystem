@@ -23,6 +23,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Registration extends AppCompatActivity {
 
@@ -133,13 +134,13 @@ public class Registration extends AppCompatActivity {
         user.setUserKey(_userKey);
         user.setEmail(_email);
         user.setIsAdmin(_isAdmin);
-        dbProducts.document().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        dbProducts.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                boolean codeExists = documentSnapshot.exists();
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                boolean codeExists = queryDocumentSnapshots.isEmpty();
                 Log.d("Success", ": task");
 
-                if (!codeExists) {
+                if (codeExists) {
                     Log.d("Code", ": Is empty");
                     user.setRank("Owner");
                     // below method is use to add data to Firebase Firestore
@@ -188,7 +189,6 @@ public class Registration extends AppCompatActivity {
 
             }
         });
-
     }
 
 
