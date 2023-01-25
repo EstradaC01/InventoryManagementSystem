@@ -53,5 +53,13 @@ public class LocationsSubMenu extends AppCompatActivity {
 
         });
 
+        locationsButton.setOnClickListener(v -> {
+            Intent locationsIntent = new Intent (LocationsSubMenu.this, AddLocation.class);
+            locationsIntent.putExtra("User", mCurrentUser);
+            locationsIntent.putExtra("CompanyCode", mCompanyCode);
+            locationsIntent.putExtra("Warehouse", mWarehouse);
+            startActivity(locationsIntent);
+        });
+
     }
 }
