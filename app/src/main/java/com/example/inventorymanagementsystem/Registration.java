@@ -92,25 +92,6 @@ public class Registration extends AppCompatActivity {
         });
     }
 
-    private void sendVerificationEmail()//updated
-    {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        user.sendEmailVerification()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            // email sent
-                            Toast.makeText(Registration.this,"Email was sent.", Toast.LENGTH_LONG).show();
-
-                            // after email is sent just logout the user and finish this activity
-                            FirebaseAuth.getInstance().signOut();
-                        }
-                    }
-                });
-    }
-
     private void addDataToFireStore(String _firstName, String _lastName, String _userKey, String _email, String _companyCode, boolean _isAdmin) {
 
         // creating a collection reference
@@ -184,7 +165,6 @@ public class Registration extends AppCompatActivity {
 
     private void CreateUser(String _email, String _password)
     {
-        sendVerificationEmail();
         mAuth.createUserWithEmailAndPassword(_email, _password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -193,7 +173,7 @@ public class Registration extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
 
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+                            user.sendEmailVerification();
                             addDataToFireStore(mFirstName,mLastName,user.getUid().toString(),mEmail, mCompanyCode, true);
 
                             Intent i = new Intent(Registration.this, Login.class);
