@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,8 @@ public class UserRVAdapter extends RecyclerView.Adapter<UserRVAdapter.ViewHolder
         Users users = mUsersArrayList.get(position);
         holder.usernameIdTv.setText(users.getFirstName() + " " + users.getLastName());
         holder.emailIdTv.setText(users.getEmail());
+
+        holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
