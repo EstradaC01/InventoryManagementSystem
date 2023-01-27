@@ -10,8 +10,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,24 +22,21 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Zones extends AppCompatActivity {
+public class LocationList extends AppCompatActivity {
+
+    private Users mCurrentUser;
+    private String mWarehouse;
+    private String mCompanyCode;
 
     private RecyclerView mRecyclerView;
-    private ArrayList<Zone> mZoneArrayList;
-    private ZoneRecyclerViewAdapter mZoneRecyclerViewAdapter;
+    private ArrayList<Location> mLocationArrayList;
+    private LocationRecyclerViewAdapter mLocationRecyclerViewAdapter;
     private FirebaseFirestore db;
-
-    private Button addButton;
-
-    private String mCompanyCode;
-    private String mWarehouse;
-
-    private static Users mCurrentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_zones);
+        setContentView(R.layout.activity_location_list);
 
         // prevents users from rotating screen
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -49,16 +44,16 @@ public class Zones extends AppCompatActivity {
         // change action support bar title and font color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Zones</font>"));
 
-        // initializing widgets
-        mRecyclerView = findViewById(R.id.recyclerViewZonesListOfZones);
-        addButton = findViewById(R.id.btnZonesAddZone);
+        //initializing widgets
+        Button btnAddLocation = findViewById(R.id.btnLocationListAddLocation);
+        mRecyclerView = findViewById(R.id.recyclerViewLocationList);
 
         // creating our new array list
-        mZoneArrayList = new ArrayList<>();
+        mLocationArrayList = new ArrayList<>();
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //Initializing firebase
+        // initialize firebase
         db = FirebaseFirestore.getInstance();
 
         Intent i = getIntent();
@@ -67,28 +62,12 @@ public class Zones extends AppCompatActivity {
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         // adding our array list to our recycler view adapter class
-        mZoneRecyclerViewAdapter = new ZoneRecyclerViewAdapter(mZoneArrayList, this);
+        mLocationRecyclerViewAdapter = new LocationRecyclerViewAdapter(mLocationArrayList, this);
 
         // setting adapter to our recycler view
-        mRecyclerView.setAdapter(mZoneRecyclerViewAdapter);
+        mRecyclerView.setAdapter(mLocationRecyclerViewAdapter);
 
-        mZoneRecyclerViewAdapter.setOnItemClickListener(new ZoneRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(mZoneArrayList.get(position).getCanBeDeleted() == true)
-                {
-                    CollectionReference d = db.collection(mCompanyCode + "/" + mWarehouse + "/Zones");
-                    d.document(mZoneArrayList.get(position).getZoneId()).delete();
-                    mZoneArrayList.remove(position);
-                    //then notify...
-                    mZoneRecyclerViewAdapter.notifyItemRemoved(position);
-                } else {
-                    Toast.makeText(Zones.this, "Data cannot be deleted.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        CollectionReference itemsRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Zones");
+        CollectionReference itemsRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Locations");
 
         if(mCurrentUser.getIsAdmin())
         {
@@ -99,36 +78,34 @@ public class Zones extends AppCompatActivity {
                     {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                         for(DocumentSnapshot d : list) {
-                            Zone z = d.toObject(Zone.class);
-                            mZoneArrayList.add(z);
+                            Location l = d.toObject(Location.class);
+                            mLocationArrayList.add(l);
                         }
-                        mZoneRecyclerViewAdapter.notifyDataSetChanged();
+                        mLocationRecyclerViewAdapter.notifyDataSetChanged();
                     } else {
-                        Toast.makeText(Zones.this, "No data found in Database", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LocationList.this, "No data found in Database", Toast.LENGTH_LONG).show();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Zones.this, "Failed to get data", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LocationList.this, "Failed to get data", Toast.LENGTH_LONG).show();
                 }
             });
         } else {
-            Toast.makeText(Zones.this, "Access Denied", Toast.LENGTH_LONG).show();
+            Toast.makeText(LocationList.this, "Access Denied", Toast.LENGTH_LONG).show();
             finish();
         }
 
-        addButton.setOnClickListener(v -> {
+        btnAddLocation.setOnClickListener(v -> {
             // Intent
-            Intent addZoneIntent = new Intent(Zones.this, AddZone.class);
+            Intent addZoneIntent = new Intent(LocationList.this, AddLocation.class);
             addZoneIntent.putExtra("User", mCurrentUser);
             addZoneIntent.putExtra("CompanyCode", mCompanyCode);
             addZoneIntent.putExtra("Warehouse", mWarehouse);
             startActivity(addZoneIntent);
         });
-
     }
-
 
     public void onRestart()
     {
@@ -136,5 +113,4 @@ public class Zones extends AppCompatActivity {
         finish();
         startActivity(getIntent());
     }
-
 }

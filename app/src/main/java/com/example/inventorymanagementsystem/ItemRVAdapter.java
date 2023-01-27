@@ -23,6 +23,7 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
     private ArrayList<Products> mProductsArrayList;
     private Context context;
     private Intent theIntent;
+
     public ItemRVAdapter(ArrayList<Products> productsArrayList, Context context, Intent in) {
         this.mProductsArrayList = productsArrayList;
         this.context = context;

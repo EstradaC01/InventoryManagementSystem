@@ -85,7 +85,7 @@ public class UserDetails extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CollectionReference d = db.collection(mCompanyCode + "/CompanyUsers/" + "/Users");
+                CollectionReference d = db.collection(mCompanyCode + "/CompanyUsers/" + "Users");
 
                 d.document(mUser.getUserKey()).delete();
                 String[] split = tvUserName.getText().toString().split("\\s+");
@@ -117,7 +117,7 @@ public class UserDetails extends AppCompatActivity {
 
         dialog.show();
         yesButton.setOnClickListener(v -> {
-            CollectionReference d = db.collection(mCompanyCode + "/CompanyUsers"+"/Users");
+            CollectionReference d = db.collection(mCompanyCode + "/CompanyUsers/"+"Users");
             d.document(mUser.getUserKey()).delete();
             d.whereEqualTo("userKey", mUser.getUserKey()).addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
@@ -140,17 +140,20 @@ public class UserDetails extends AppCompatActivity {
     private void addDataToFireStore(Users _user) {
         // creating a collection reference
         // for our Firebase Firestore database
+        CollectionReference d = db.collection(mCompanyCode + "/CompanyUsers/"+"Users");
+        d.whereEqualTo("userKey", mUser.getUserKey()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (!value.isEmpty()) {
 
-        db.collection(mCompanyCode + "/CompanyUsers"+"/Users").document(_user.getUserKey()).set(_user).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(UserDetails.this, "Product updated", Toast.LENGTH_LONG).show();
-                finish();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UserDetails.this, "Fail to add product \n" + e, Toast.LENGTH_LONG).show();
+                    List<DocumentSnapshot> list = value.getDocuments();
+                    for (DocumentSnapshot d : list) {
+                        d.getReference().set(_user);
+                    }
+                    Toast.makeText(UserDetails.this, "User updated", Toast.LENGTH_LONG).show();
+
+                    finish();
+                }
             }
         });
     }

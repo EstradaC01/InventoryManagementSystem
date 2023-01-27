@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_android_background"
+    android:orientation="vertical"
+    tools:context=".AddItem">
+
+    <!--    EditText for getting Proudct ID-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/edtAddLocationAisle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Aisle"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toTopOf="@+id/changeItemScrollableViewTop" />
+
+        <!--    EditText for Product Description-->
+
+        <EditText
+            android:id="@+id/edtAddLocationRack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:gravity="top|start"
+            android:hint="Rack"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="10dp"
+            android:minHeight="48dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/edtAddLocationAisle"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd" />
+        <!--    EditText for Product UPC-->
+
+        <EditText
+            android:id="@+id/edtAddLocationLevel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Level"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/edtAddLocationRack"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+
+
+        <!--    Spinner for dropdown menu-->
+        <Spinner
+            android:id="@+id/spinnerAddLocationZone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:contentDescription="Category"
+            android:elevation="15dp"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/edtAddLocationLevel"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+
+        <EditText
+            android:id="@+id/edtAddLocationLPLimit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="License Plate Limit"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/spinnerAddLocationZone"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+        <EditText
+            android:id="@+id/edtAddLocationWeight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Weight"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/edtAddLocationLPLimit"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+        <EditText
+            android:id="@+id/edtAddLocationHeight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Height"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/edtAddLocationWeight"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+        <EditText
+            android:id="@+id/edtAddLocationWidth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Width"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/edtAddLocationHeight"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+        <EditText
+            android:id="@+id/edtAddLocationLength"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Length"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/edtAddLocationWidth"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAddLocationAddLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_navyblue"
+            android:elevation="15dp"
+            android:padding="12dp"
+            android:text="Add Location"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/edtAddLocationLength"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="     "
+            app:layout_constraintTop_toBottomOf="@id/btnAddLocationAddLocation"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/changeItemScrollableViewTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/addItemScrollableViewStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/changeItemScrollableViewEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".92" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>

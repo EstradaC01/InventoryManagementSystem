@@ -43,5 +43,23 @@ public class LocationsSubMenu extends AppCompatActivity {
             unitsOfMeasureIntent.putExtra("Warehouse", mWarehouse);
             startActivity(unitsOfMeasureIntent);
         });
+
+        zonesButton.setOnClickListener(v -> {
+            Intent zonesIntent = new Intent (LocationsSubMenu.this, Zones.class);
+            zonesIntent.putExtra("User", mCurrentUser);
+            zonesIntent.putExtra("CompanyCode", mCompanyCode);
+            zonesIntent.putExtra("Warehouse", mWarehouse);
+            startActivity(zonesIntent);
+
+        });
+
+        locationsButton.setOnClickListener(v -> {
+            Intent locationsIntent = new Intent (LocationsSubMenu.this, LocationList.class);
+            locationsIntent.putExtra("User", mCurrentUser);
+            locationsIntent.putExtra("CompanyCode", mCompanyCode);
+            locationsIntent.putExtra("Warehouse", mWarehouse);
+            startActivity(locationsIntent);
+        });
+
     }
 }
