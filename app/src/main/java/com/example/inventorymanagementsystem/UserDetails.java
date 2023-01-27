@@ -118,7 +118,6 @@ public class UserDetails extends AppCompatActivity {
         dialog.show();
         yesButton.setOnClickListener(v -> {
             CollectionReference d = db.collection(mCompanyCode + "/CompanyUsers/"+"Users");
-            d.document(mUser.getUserKey()).delete();
             d.whereEqualTo("userKey", mUser.getUserKey()).addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

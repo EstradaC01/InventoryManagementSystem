@@ -94,4 +94,12 @@ public class UserList extends AppCompatActivity {
 
         super.onSaveInstanceState(outState);
     }
+
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
 }
