@@ -87,7 +87,7 @@ public class Registration extends AppCompatActivity {
                         CreateUser(mEmail, mPassword);
                     }
                 }
-                sendVerificationEmail();
+
             }
         });
     }
@@ -196,6 +196,7 @@ public class Registration extends AppCompatActivity {
 
     private void CreateUser(String _email, String _password)
     {
+        sendVerificationEmail();
         mAuth.createUserWithEmailAndPassword(_email, _password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
