@@ -92,7 +92,7 @@ public class Registration extends AppCompatActivity {
         });
     }
 
-    private void sendVerificationEmail()
+    private void sendVerificationEmail()//updated
     {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
