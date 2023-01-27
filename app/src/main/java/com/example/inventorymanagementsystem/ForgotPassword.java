@@ -53,6 +53,8 @@ public class ForgotPassword extends AppCompatActivity {
                 {
                     edtEmail.setError("Enter valid email address");
                 }
+                validateInput();
+                resetPassword(mEmail);
             }
 
         });
@@ -78,7 +80,7 @@ public class ForgotPassword extends AppCompatActivity {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    protected final void resetPassword(String emailId,final Callback callback){
+    protected final void resetPassword(String emailId){
 
         FirebaseAuth.getInstance().sendPasswordResetEmail(emailId)
 

@@ -87,6 +87,7 @@ public class Registration extends AppCompatActivity {
                         CreateUser(mEmail, mPassword);
                     }
                 }
+                sendVerificationEmail();
             }
         });
     }
