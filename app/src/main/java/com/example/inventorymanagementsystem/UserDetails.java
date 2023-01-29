@@ -87,7 +87,6 @@ public class UserDetails extends AppCompatActivity {
             public void onClick(View v) {
                 CollectionReference d = db.collection(mCompanyCode + "/CompanyUsers/" + "Users");
 
-                d.document(mUser.getUserKey()).delete();
                 String[] split = tvUserName.getText().toString().split("\\s+");
 
                 // getting data from editText fields.
@@ -149,7 +148,7 @@ public class UserDetails extends AppCompatActivity {
                     for (DocumentSnapshot d : list) {
                         d.getReference().set(_user);
                     }
-                    Toast.makeText(UserDetails.this, "User updated", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserDetails.this, "User updated", Toast.LENGTH_SHORT).show();
 
                     finish();
                 }
