@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_android_background"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".BarcodeScanner">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/idBtnScanCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_navyblue"
+        android:padding="10dp"
+        android:text="Scan"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toStartOf="@id/scanGuidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/scanGuidelineStart"
+        app:layout_constraintTop_toTopOf="@id/scanGuidelineTop" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/scanGuidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".10"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/scanGuidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".90"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/scanGuidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".45"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/scanGuidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".519" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
