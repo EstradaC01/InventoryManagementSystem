@@ -26,7 +26,6 @@ public class AddLocation extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private static Users mCurrentUser;
-    private String mCompanyCode;
     private String mWarehouse;
 
     @Override
@@ -65,7 +64,6 @@ public class AddLocation extends AppCompatActivity {
         // getting intent from previous activities
         Intent i = getIntent();
         mCurrentUser = (Users)i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         btnAddLocation.setOnClickListener(v -> {
@@ -104,7 +102,7 @@ public class AddLocation extends AppCompatActivity {
 
                 if (!location.getAisle().isEmpty()) {
 
-                    CollectionReference collectionReference = db.collection(mCompanyCode + "/" + mWarehouse + "/Locations");
+                    CollectionReference collectionReference = db.collection("Warehouses/" + mWarehouse + "/Locations");
 
                     collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -131,7 +129,7 @@ public class AddLocation extends AppCompatActivity {
             }
         });
 
-        CollectionReference unitTypeRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Zones");
+        CollectionReference unitTypeRef = db.collection("Warehouses/"+mWarehouse+"/Zones");
 
         unitTypeRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -167,7 +165,7 @@ public class AddLocation extends AppCompatActivity {
         // creating a collection reference
         // for our Firebase Firestore database
 
-        db.collection(mCompanyCode + "/"+mWarehouse+"/Locations").document(_location.getName()).set(_location).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Warehouses/"+mWarehouse+"/Locations").document(_location.getName()).set(_location).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(AddLocation.this, "Location Added", Toast.LENGTH_LONG).show();

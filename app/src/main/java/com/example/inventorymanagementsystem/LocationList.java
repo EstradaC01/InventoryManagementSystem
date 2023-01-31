@@ -26,8 +26,6 @@ public class LocationList extends AppCompatActivity {
 
     private Users mCurrentUser;
     private String mWarehouse;
-    private String mCompanyCode;
-
     private RecyclerView mRecyclerView;
     private ArrayList<Location> mLocationArrayList;
     private LocationRecyclerViewAdapter mLocationRecyclerViewAdapter;
@@ -58,7 +56,6 @@ public class LocationList extends AppCompatActivity {
 
         Intent i = getIntent();
         mCurrentUser = (Users)i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         // adding our array list to our recycler view adapter class
@@ -67,7 +64,7 @@ public class LocationList extends AppCompatActivity {
         // setting adapter to our recycler view
         mRecyclerView.setAdapter(mLocationRecyclerViewAdapter);
 
-        CollectionReference itemsRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Locations");
+        CollectionReference itemsRef = db.collection("Warehouses/"+mWarehouse+"/Locations");
 
         if(mCurrentUser.getIsAdmin())
         {
@@ -101,7 +98,6 @@ public class LocationList extends AppCompatActivity {
             // Intent
             Intent addZoneIntent = new Intent(LocationList.this, AddLocation.class);
             addZoneIntent.putExtra("User", mCurrentUser);
-            addZoneIntent.putExtra("CompanyCode", mCompanyCode);
             addZoneIntent.putExtra("Warehouse", mWarehouse);
             startActivity(addZoneIntent);
         });

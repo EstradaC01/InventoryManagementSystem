@@ -21,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -31,11 +30,11 @@ public class Registration extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private EditText edtFirstname, edtLastName, edtEmail, edtPassword, edtCompanyCode;
+    private EditText edtFirstname, edtLastName, edtEmail, edtPassword;
 
     private Button btnRegister;
 
-    private String mFirstName, mLastName, mEmail, mPassword, mCompanyCode;
+    private String mFirstName, mLastName, mEmail, mPassword;
 
     private static final String TAG = "Registration";
 
@@ -55,7 +54,6 @@ public class Registration extends AppCompatActivity {
         edtLastName = findViewById(R.id.idEdtLastName);
         edtEmail = findViewById(R.id.idEdtEmail);
         edtPassword = findViewById(R.id.idEdtPassword);
-        edtCompanyCode = findViewById(R.id.idEdtCompanyGroup);
         btnRegister = findViewById(R.id.idBtnRegister);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +64,6 @@ public class Registration extends AppCompatActivity {
                 mLastName = edtLastName.getText().toString();
                 mEmail = edtEmail.getText().toString();
                 mPassword = edtPassword.getText().toString();
-                mCompanyCode = edtCompanyCode.getText().toString();
 
                 if(TextUtils.isEmpty(mEmail))
                 {
@@ -80,23 +77,20 @@ public class Registration extends AppCompatActivity {
                 {
                     edtPassword.setError("Please enter a password");
                 }
-                if(!mCompanyCode.isEmpty())
+                if(!mEmail.isEmpty() && !mPassword.isEmpty())
                 {
-                    if(!mEmail.isEmpty() && !mPassword.isEmpty())
-                    {
-                        CreateUser(mEmail, mPassword);
-                    }
+                    CreateUser(mEmail, mPassword);
                 }
 
             }
         });
     }
 
-    private void addDataToFireStore(String _firstName, String _lastName, String _userKey, String _email, String _companyCode, boolean _isAdmin) {
+    private void addDataToFireStore(String _firstName, String _lastName, String _userKey, String _email, boolean _isAdmin) {
 
         // creating a collection reference
         // for our Firebase Firestore database
-        CollectionReference dbProducts = db.collection(_companyCode + "/CompanyUsers/Users");
+        CollectionReference dbProducts = db.collection("Users");
         // adding our data to our users object class.
         Users user = new Users();
         user.setFirstName(_firstName);
@@ -174,7 +168,7 @@ public class Registration extends AppCompatActivity {
 
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             user.sendEmailVerification();
-                            addDataToFireStore(mFirstName,mLastName,user.getUid().toString(),mEmail, mCompanyCode, true);
+                            addDataToFireStore(mFirstName,mLastName,user.getUid(),mEmail, true);
 
                             Intent i = new Intent(Registration.this, Login.class);
                             startActivity(i);

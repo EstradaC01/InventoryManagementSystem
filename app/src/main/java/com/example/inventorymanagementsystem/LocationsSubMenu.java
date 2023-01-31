@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 public class LocationsSubMenu extends AppCompatActivity {
 
     private static Users mCurrentUser;
-    private static String mCompanyCode;
     private static String mWarehouse;
 
     @Override
@@ -28,7 +27,6 @@ public class LocationsSubMenu extends AppCompatActivity {
         //getting intent from ItemsSubMenu class along with User object
         Intent i = getIntent();
         mCurrentUser = (Users)i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         // initializing image buttons from item sub menu layout
@@ -39,7 +37,6 @@ public class LocationsSubMenu extends AppCompatActivity {
         unitsOfMeasureButton.setOnClickListener(v -> {
             Intent unitsOfMeasureIntent = new Intent (LocationsSubMenu.this, UnitsOfMeasure.class);
             unitsOfMeasureIntent.putExtra("User", mCurrentUser);
-            unitsOfMeasureIntent.putExtra("CompanyCode", mCompanyCode);
             unitsOfMeasureIntent.putExtra("Warehouse", mWarehouse);
             startActivity(unitsOfMeasureIntent);
         });
@@ -47,7 +44,6 @@ public class LocationsSubMenu extends AppCompatActivity {
         zonesButton.setOnClickListener(v -> {
             Intent zonesIntent = new Intent (LocationsSubMenu.this, Zones.class);
             zonesIntent.putExtra("User", mCurrentUser);
-            zonesIntent.putExtra("CompanyCode", mCompanyCode);
             zonesIntent.putExtra("Warehouse", mWarehouse);
             startActivity(zonesIntent);
 
@@ -56,7 +52,6 @@ public class LocationsSubMenu extends AppCompatActivity {
         locationsButton.setOnClickListener(v -> {
             Intent locationsIntent = new Intent (LocationsSubMenu.this, LocationList.class);
             locationsIntent.putExtra("User", mCurrentUser);
-            locationsIntent.putExtra("CompanyCode", mCompanyCode);
             locationsIntent.putExtra("Warehouse", mWarehouse);
             startActivity(locationsIntent);
         });

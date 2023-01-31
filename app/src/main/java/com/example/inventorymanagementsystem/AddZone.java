@@ -28,7 +28,6 @@ public class AddZone extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private static Users mCurrentUser;
-    private String mCompanyCode;
     private String mWarehouse;
 
     @Override
@@ -60,7 +59,6 @@ public class AddZone extends AppCompatActivity {
         // getting intent from previous activities
         Intent i = getIntent();
         mCurrentUser = (Users)i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         addButton.setOnClickListener(v -> {
@@ -76,7 +74,7 @@ public class AddZone extends AppCompatActivity {
 
                 if (!zone.getZoneId().isEmpty()) {
 
-                    CollectionReference collectionReference = db.collection(mCompanyCode + "/" + mWarehouse + "/Zones");
+                    CollectionReference collectionReference = db.collection("Warehouses/" + mWarehouse + "/Zones");
 
                     collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -103,7 +101,7 @@ public class AddZone extends AppCompatActivity {
             }
         });
 
-        CollectionReference unitTypeRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Units of Measure");
+        CollectionReference unitTypeRef = db.collection("Warehouses/"+mWarehouse+"/Units of Measure");
 
         unitTypeRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -139,7 +137,7 @@ public class AddZone extends AppCompatActivity {
         // creating a collection reference
         // for our Firebase Firestore database
 
-        db.collection(mCompanyCode + "/"+mWarehouse+"/Zones").document(_zone.getZoneId()).set(_zone).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Warehouses/"+mWarehouse+"/Zones").document(_zone.getZoneId()).set(_zone).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(AddZone.this, "Zone Added", Toast.LENGTH_LONG).show();

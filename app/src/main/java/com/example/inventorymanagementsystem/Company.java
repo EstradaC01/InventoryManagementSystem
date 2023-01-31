@@ -4,17 +4,16 @@ import java.io.Serializable;
 
 public class Company implements Serializable {
 
-    private String companyName, companyCode, companyOwner,
+    private String companyName, companyOwner,
             companyAddress, companyCountry, companyState, companyZipcode, companyCity;
 
     public Company() {
 
     }
 
-    public Company(String companyName, String companyCode, String companyOwner, String companyAddress,
+    public Company(String companyName, String companyOwner, String companyAddress,
                    String companyCountry, String companyState, String companyZipcode, String companyCity) {
         this.companyName = companyName;
-        this.companyCode = companyCode;
         this.companyOwner = companyOwner;
         this.companyCountry = companyCountry;
         this.companyAddress = companyAddress;
@@ -62,13 +61,6 @@ public class Company implements Serializable {
         this.companyName = mCompanyName;
     }
 
-    public String getCompanyCode() {
-        return companyCode;
-    }
-
-    public void setCompanyCode(String mCompanyCode) {
-        this.companyCode = mCompanyCode;
-    }
 
     public String getCompanyOwner() {
         return companyOwner;

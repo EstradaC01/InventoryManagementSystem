@@ -57,7 +57,6 @@ public class AddItem extends AppCompatActivity {
     private String imageURL;
     private Uri uri;
 
-    private String mCompanyCode;
     private String mWarehouse;
 
     private FirebaseStorage storage;
@@ -102,7 +101,6 @@ public class AddItem extends AppCompatActivity {
         // getting intent from ItemsSubMenu class along with User object
         Intent i = getIntent();
         currentUser = (Users)i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
 
@@ -178,7 +176,7 @@ public class AddItem extends AppCompatActivity {
         // creating a collection reference
         // for our Firebase Firestore database
 
-        db.collection(mCompanyCode + "/"+mWarehouse+"/Products").document(products.getProductId()).set(products).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Warehouses/"+mWarehouse+"/Products").document(products.getProductId()).set(products).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
 

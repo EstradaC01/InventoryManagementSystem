@@ -34,7 +34,6 @@ public class UserDetails extends AppCompatActivity {
     private static Button saveButton;
     private FirebaseFirestore db;
     private static Users mUser;
-    private static String mCompanyCode;
     private static String mWarehouse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class UserDetails extends AppCompatActivity {
 
         Intent i = getIntent();
         mUser = (Users)i.getSerializableExtra("UserObject");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         tvUserName = findViewById(R.id.idTVUsername);
@@ -85,7 +83,7 @@ public class UserDetails extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CollectionReference d = db.collection(mCompanyCode + "/CompanyUsers/" + "Users");
+                CollectionReference d = db.collection("Users");
 
                 String[] split = tvUserName.getText().toString().split("\\s+");
 
@@ -116,7 +114,7 @@ public class UserDetails extends AppCompatActivity {
 
         dialog.show();
         yesButton.setOnClickListener(v -> {
-            CollectionReference d = db.collection(mCompanyCode + "/CompanyUsers/"+"Users");
+            CollectionReference d = db.collection("Users");
             d.whereEqualTo("userKey", mUser.getUserKey()).addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -138,7 +136,7 @@ public class UserDetails extends AppCompatActivity {
     private void addDataToFireStore(Users _user) {
         // creating a collection reference
         // for our Firebase Firestore database
-        CollectionReference d = db.collection(mCompanyCode + "/CompanyUsers/"+"Users");
+        CollectionReference d = db.collection("Users");
         d.whereEqualTo("userKey", mUser.getUserKey()).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

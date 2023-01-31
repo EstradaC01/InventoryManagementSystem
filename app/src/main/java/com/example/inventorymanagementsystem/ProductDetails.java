@@ -32,7 +32,6 @@ public class ProductDetails extends AppCompatActivity {
     private static ImageView ivProductImage;
     private FirebaseFirestore db;
     private static Products mProduct;
-    private static String mCompanyCode;
     private static String mWarehouse;
 
     private static final String TAG = "ProductDetails";
@@ -53,7 +52,6 @@ public class ProductDetails extends AppCompatActivity {
 
         Intent i = getIntent();
         mProduct = (Products)i.getSerializableExtra("Object");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         tvProductId = findViewById(R.id.idTvProductId);
@@ -90,7 +88,7 @@ public class ProductDetails extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CollectionReference d = db.collection(mCompanyCode + "/" + mWarehouse + "/Products");
+                CollectionReference d = db.collection("Warehouses/" + mWarehouse + "/Products");
 
                 d.document(mProduct.getProductId()).delete();
                 // getting data from editText fields.
@@ -117,7 +115,7 @@ public class ProductDetails extends AppCompatActivity {
 
         dialog.show();
         yesButton.setOnClickListener(v -> {
-            CollectionReference d = db.collection(mCompanyCode + "/" + mWarehouse + "/Products");
+            CollectionReference d = db.collection("Warehouses/" + mWarehouse + "/Products");
             d.document(mProduct.getProductId()).delete();
             dialog.dismiss();
             finish();
@@ -130,7 +128,7 @@ public class ProductDetails extends AppCompatActivity {
         // creating a collection reference
         // for our Firebase Firestore database
 
-        db.collection(mCompanyCode + "/"+mWarehouse+"/Products").document(_product.getProductId()).set(_product).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Warehouses/"+mWarehouse+"/Products").document(_product.getProductId()).set(_product).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(ProductDetails.this, "Product updated", Toast.LENGTH_LONG).show();

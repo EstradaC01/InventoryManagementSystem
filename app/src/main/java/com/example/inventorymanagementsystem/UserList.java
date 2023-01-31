@@ -28,10 +28,7 @@ public class UserList extends AppCompatActivity {
     private ArrayList<Users> mUsersArrayList;
     private UserRVAdapter mUserRVAdapter;
     private FirebaseFirestore db;
-
     private ProgressBar loadingUsersPB;
-
-    private String mCompanyCode;
     private static Users currentUser;
 
     @Override
@@ -57,9 +54,8 @@ public class UserList extends AppCompatActivity {
 
 
         currentUser = (Users)i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
 
-        CollectionReference usersRef = db.collection(mCompanyCode + "/CompanyUsers/Users");
+        CollectionReference usersRef = db.collection("Users");
 
         usersRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override

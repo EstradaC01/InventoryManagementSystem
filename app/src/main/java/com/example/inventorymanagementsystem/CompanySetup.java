@@ -17,8 +17,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CompanySetup extends AppCompatActivity {
-    private String mCompanyCode;
-
 
     private TextView edtCompanyName, edtCompanyAddress, edtCompanyCountry, edtCompanyState,
             edtCompanyZipcode, edtCompanyCity;
@@ -39,7 +37,6 @@ public class CompanySetup extends AppCompatActivity {
 
         Intent i = getIntent();
         currentUser = (Users) i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
 
         db = FirebaseFirestore.getInstance();
 
@@ -60,7 +57,6 @@ public class CompanySetup extends AppCompatActivity {
                 newCompany.setCompanyState(edtCompanyState.getText().toString());
                 newCompany.setCompanyZipcode(edtCompanyZipcode.getText().toString());
                 newCompany.setCompanyOwner(currentUser.getUserKey());
-                newCompany.setCompanyCode(mCompanyCode);
                 newCompany.setCompanyCity((edtCompanyCity.getText().toString()));
 
                 addCompany(newCompany);
@@ -70,7 +66,7 @@ public class CompanySetup extends AppCompatActivity {
     }
     private void addCompany(Company company) {
 
-        db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails")
+        db.collection( "CompanyDetails")
                 .document("CompanyDetails").set(company)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

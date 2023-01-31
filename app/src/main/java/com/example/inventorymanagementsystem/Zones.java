@@ -10,8 +10,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,10 +28,8 @@ public class Zones extends AppCompatActivity {
     private ArrayList<Zone> mZoneArrayList;
     private ZoneRecyclerViewAdapter mZoneRecyclerViewAdapter;
     private FirebaseFirestore db;
-
     private Button addButton;
 
-    private String mCompanyCode;
     private String mWarehouse;
 
     private static Users mCurrentUser;
@@ -63,7 +59,6 @@ public class Zones extends AppCompatActivity {
 
         Intent i = getIntent();
         mCurrentUser = (Users)i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         // adding our array list to our recycler view adapter class
@@ -77,7 +72,7 @@ public class Zones extends AppCompatActivity {
             public void onItemClick(int position) {
                 if(mZoneArrayList.get(position).getCanBeDeleted() == true)
                 {
-                    CollectionReference d = db.collection(mCompanyCode + "/" + mWarehouse + "/Zones");
+                    CollectionReference d = db.collection("Warehouses/" + mWarehouse + "/Zones");
                     d.document(mZoneArrayList.get(position).getZoneId()).delete();
                     mZoneArrayList.remove(position);
                     //then notify...
@@ -88,7 +83,7 @@ public class Zones extends AppCompatActivity {
             }
         });
 
-        CollectionReference itemsRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Zones");
+        CollectionReference itemsRef = db.collection("Warehouses/" + mWarehouse + "/Zones");
 
         if(mCurrentUser.getIsAdmin())
         {
@@ -122,7 +117,6 @@ public class Zones extends AppCompatActivity {
             // Intent
             Intent addZoneIntent = new Intent(Zones.this, AddZone.class);
             addZoneIntent.putExtra("User", mCurrentUser);
-            addZoneIntent.putExtra("CompanyCode", mCompanyCode);
             addZoneIntent.putExtra("Warehouse", mWarehouse);
             startActivity(addZoneIntent);
         });

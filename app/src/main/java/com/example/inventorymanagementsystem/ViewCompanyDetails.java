@@ -32,7 +32,6 @@ public class ViewCompanyDetails extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private static Users currentUser;
-    private String mCompanyCode;
     private Company ourCompany;
 
     private static final String COMPANY_CODE = "NULL";
@@ -49,12 +48,10 @@ public class ViewCompanyDetails extends AppCompatActivity {
         Intent i = getIntent();
 
         currentUser = (Users) i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
 
-        Log.d(TAG, "onCreate: companyCode " + mCompanyCode);
         db = FirebaseFirestore.getInstance();
 
-        CollectionReference details = db.collection(mCompanyCode + "/WarehouseOne/CompanyDetails");
+        CollectionReference details = db.collection("CompanyDetails");
 
         Log.d("Success ", "collection " + details);
 
@@ -67,7 +64,6 @@ public class ViewCompanyDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ViewCompanyDetails.this, CompanySetup.class);
-                i.putExtra("CompanyCode", mCompanyCode);
                 i.putExtra("User", currentUser);
                 startActivity(i);
             }
@@ -93,12 +89,10 @@ public class ViewCompanyDetails extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        mCompanyCode = savedInstanceState.getString(COMPANY_CODE);
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putString(COMPANY_CODE, mCompanyCode);
         super.onSaveInstanceState(outState);
     }
 

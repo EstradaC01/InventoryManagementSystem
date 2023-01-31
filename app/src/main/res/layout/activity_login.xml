@@ -72,20 +72,6 @@
         app:layout_constraintStart_toStartOf="@id/textViewButtonsGuidelineStart"
         app:layout_constraintTop_toBottomOf="@+id/idEdtLoginEmail" />
 
-    <EditText
-        android:id="@+id/idEdtLoginScreenCompanyCode"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_corners_white"
-        android:hint="Enter Company Code"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="@id/textViewButtonsGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/textViewButtonsGuidelineStart"
-        app:layout_constraintTop_toBottomOf="@+id/idEdtLoginPassword" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/idLoginBtn"
         android:layout_width="0dp"
@@ -98,7 +84,7 @@
         android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="@id/textViewButtonsGuidelineEnd"
         app:layout_constraintStart_toStartOf="@id/textViewButtonsGuidelineStart"
-        app:layout_constraintTop_toBottomOf="@+id/idEdtLoginScreenCompanyCode" />
+        app:layout_constraintTop_toBottomOf="@+id/idEdtLoginPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/idRegisterBtn"

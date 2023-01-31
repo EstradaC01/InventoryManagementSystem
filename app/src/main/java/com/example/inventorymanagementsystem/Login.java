@@ -30,9 +30,9 @@ import java.util.List;
 public class Login extends AppCompatActivity {
 
     // creating variables for the EditText
-    private EditText edtLoginEmail, edtLoginPassword, edtCompanyCode;
+    private EditText edtLoginEmail, edtLoginPassword;
 
-    private String mEmail, mPassword, mCompanyCode, mUserKey;
+    private String mEmail, mPassword, mUserKey;
 
     // creating variables for the buttons
     private Button btnLogin, btnRegistration, btnForgotPassword;
@@ -63,7 +63,6 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.idLoginBtn);
         btnRegistration = findViewById(R.id.idRegisterBtn);
         btnForgotPassword = findViewById(R.id.idforgotpasswordbtn);
-        edtCompanyCode = findViewById(R.id.idEdtLoginScreenCompanyCode);
 
         // creating on click listener to login user
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +70,6 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 mEmail = edtLoginEmail.getText().toString();
                 mPassword = edtLoginPassword.getText().toString();
-                mCompanyCode = edtCompanyCode.getText().toString();
 
                 if(TextUtils.isEmpty(mEmail))
                 {
@@ -81,19 +79,9 @@ public class Login extends AppCompatActivity {
                 {
                     edtLoginPassword.setError("Enter valid password");
                 }
-                if(TextUtils.isEmpty(mCompanyCode))
+                if(!mEmail.isEmpty() && !mPassword.isEmpty())
                 {
-                    edtCompanyCode.setError("Enter valid company code");
-                }
-                if(!mEmail.isEmpty() && !mPassword.isEmpty() && !mCompanyCode.isEmpty())
-                {
-                    CollectionReference companyCodeRef = db.collection(mCompanyCode);
-
-                    if (companyCodeRef.getId().isEmpty()) {
-                        Toast.makeText(Login.this, "Company Code Invalid", Toast.LENGTH_LONG).show();
-                    } else {
-                        signInUser(mEmail, mPassword, mCompanyCode);
-                    }
+                    signInUser(mEmail, mPassword);
                 }
             }
         });
@@ -117,7 +105,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void signInUser(String _email, String _password, String _companyCode) {
+    private void signInUser(String _email, String _password) {
 
         mAuth.signInWithEmailAndPassword(_email, _password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -128,7 +116,7 @@ public class Login extends AppCompatActivity {
 
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             mUserKey = user.getUid();
-                            CollectionReference adminRef = db.collection(_companyCode + "/CompanyUsers/Users");
+                            CollectionReference adminRef = db.collection("Users");
 
                             adminRef.whereEqualTo("userKey", mUserKey).addSnapshotListener(new EventListener<QuerySnapshot>() {
                                 @Override
@@ -140,7 +128,6 @@ public class Login extends AppCompatActivity {
                                         }
                                         Intent i = new Intent (Login.this, MainActivity.class);
                                         i.putExtra("User", currentUser);
-                                        i.putExtra("CompanyCode", _companyCode);
                                         startActivity(i);
                                     } else {
                                         Toast.makeText(Login.this, "Company code invalid.", Toast.LENGTH_SHORT).show();

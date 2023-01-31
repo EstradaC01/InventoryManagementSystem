@@ -40,12 +40,7 @@ public class UnitsOfMeasure extends AppCompatActivity {
     private ImageButton addButton;
     private Button deleteButton;
     private EditText edtUnitofMeasure;
-
-    private String mCompanyCode;
     private String mWarehouse;
-
-
-
     private static Users mCurrentUser;
 
     private static final String TAG = "UnitsOfMeasure";
@@ -76,7 +71,6 @@ public class UnitsOfMeasure extends AppCompatActivity {
 
         Intent i = getIntent();
         mCurrentUser = (Users)i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         // adding our array list to our recycler view adapter class
@@ -91,7 +85,7 @@ public class UnitsOfMeasure extends AppCompatActivity {
                 // now delete...
                 if(mUnitTypeArrayList.get(position).getCanBeDeleted() == true)
                 {
-                    CollectionReference d = db.collection(mCompanyCode + "/" + mWarehouse + "/Units of Measure");
+                    CollectionReference d = db.collection("Warehouses/" + mWarehouse + "/Units of Measure");
                     d.document(mUnitTypeArrayList.get(position).getUnitType()).delete();
                     mUnitTypeArrayList.remove(position);
                     //then notify...
@@ -102,7 +96,7 @@ public class UnitsOfMeasure extends AppCompatActivity {
             }
         });
 
-        CollectionReference itemsRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Units of Measure");
+        CollectionReference itemsRef = db.collection("Warehouses/"+mWarehouse+"/Units of Measure");
 
         if(mCurrentUser.getIsAdmin())
         {
@@ -142,7 +136,7 @@ public class UnitsOfMeasure extends AppCompatActivity {
 
                 if(!unitType.getUnitType().isEmpty()) {
 
-                    CollectionReference collectionReference = db.collection(mCompanyCode + "/" + mWarehouse + "/Units of Measure");
+                    CollectionReference collectionReference = db.collection("Warehouses/" + mWarehouse + "/Units of Measure");
 
                     collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -175,7 +169,7 @@ public class UnitsOfMeasure extends AppCompatActivity {
         // creating a collection reference
         // for our Firebase Firestore database
 
-        db.collection(mCompanyCode + "/"+mWarehouse+"/Units of Measure").document(_unitType.getUnitType()).set(_unitType).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Warehouses/"+mWarehouse+"/Units of Measure").document(_unitType.getUnitType()).set(_unitType).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 mUnitTypeArrayList.add(_unitType);

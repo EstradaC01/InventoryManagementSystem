@@ -45,8 +45,6 @@ public class ItemList extends AppCompatActivity {
     private Button btnAddItem;
     private androidx.appcompat.widget.SearchView edtSearchItems;
     ProgressBar loadingPB;
-
-    private String mCompanyCode;
     private String mWarehouse;
 
     private static final Boolean IS_ADMIN = false;
@@ -84,7 +82,6 @@ public class ItemList extends AppCompatActivity {
         //getting intent from ItemsSubMenu class along with User object
         Intent i = getIntent();
         currentUser = (Users)i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         // adding our array list to our recycler view adapter class
@@ -93,7 +90,7 @@ public class ItemList extends AppCompatActivity {
         // setting adapter to our recycler view
         itemRV.setAdapter(mItemRVAdapter);
 
-                CollectionReference itemsRef = db.collection(mCompanyCode + "/"+mWarehouse+"/Products");
+                CollectionReference itemsRef = db.collection("Warehouses/"+mWarehouse+"/Products");
 
                 if(currentUser.getIsAdmin())
                 {
@@ -154,7 +151,6 @@ public class ItemList extends AppCompatActivity {
                 // Creating intent to open add product activity
                 Intent i = new Intent(ItemList.this, AddItem.class);
                 i.putExtra("User", currentUser);
-                i.putExtra("CompanyCode", mCompanyCode);
                 i.putExtra("Warehouse", mWarehouse);
                 startActivity(i);
             }

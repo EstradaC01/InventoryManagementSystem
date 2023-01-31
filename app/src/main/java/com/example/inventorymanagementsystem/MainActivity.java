@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +32,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     // member fields for logged user
-    private static String mCompanyCode;
 
     private static Users currentUser;
 
@@ -56,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         // getting intent from Login screen with Users object and companyCode string
         Intent i = getIntent();
         currentUser = (Users) i.getSerializableExtra("User");
-        mCompanyCode = (String) i.getSerializableExtra("CompanyCode");
 
         db = FirebaseFirestore.getInstance();
 
@@ -126,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.idMenuCompanyDetails:
-                CollectionReference details = db.collection(mCompanyCode + "/"+mWarehouse+"/CompanyDetails");
+                CollectionReference details = db.collection("CompanyDetails");
                 details.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -134,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                             QuerySnapshot document = task.getResult();
                             if (!document.isEmpty()) {
                                 Intent newIntent = new Intent(MainActivity.this, ViewCompanyDetails.class);
-                                newIntent.putExtra("CompanyCode", mCompanyCode);
                                 newIntent.putExtra("User", currentUser);
                                 startActivity(newIntent);
                             }
@@ -147,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.idMenuUsers:
                 Intent u = new Intent(MainActivity.this, UserList.class);
                 u.putExtra("User", currentUser);
-                u.putExtra("CompanyCode", mCompanyCode);
                 startActivity(u);
                 break;
             case R.id.idMenuSystems:
@@ -155,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.idMenuProducts:
                 Intent i = new Intent(MainActivity.this, ItemList.class);
                 i.putExtra("User", currentUser);
-                i.putExtra("CompanyCode", mCompanyCode);
                 i.putExtra("Warehouse", mWarehouse);
                 startActivity(i);
                 break;
@@ -168,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.idMenuLocations:
                 Intent locationsIntent = new Intent(MainActivity.this, LocationsSubMenu.class);
                 locationsIntent.putExtra("User", currentUser);
-                locationsIntent.putExtra("CompanyCode", mCompanyCode);
                 locationsIntent.putExtra("Warehouse", mWarehouse);
                 startActivity(locationsIntent);
                 break;
@@ -197,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<String> warehouses = new ArrayList<>();
 
-        db.collection(mCompanyCode).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("Warehouses").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if(!queryDocumentSnapshots.isEmpty())
