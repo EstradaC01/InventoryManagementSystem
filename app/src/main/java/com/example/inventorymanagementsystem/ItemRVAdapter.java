@@ -79,9 +79,8 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ItemRVAdapter.ViewHolder holder, int position) {
         // setting data to our text views from our model class
-
-        String mCompanyCode = (String) theIntent.getSerializableExtra("CompanyCode");
         String mWarehouse = (String) theIntent.getSerializableExtra("Warehouse");
+
         Products products = mProductsArrayList.get(position);
 
         holder.productIdTv.setText(products.getProductId());
@@ -95,13 +94,10 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
                 //Intent i = new Intent(v.getContext(), ProductDetails.class);
                 Intent i = new Intent(v.getContext(), ProductDetails.class);
                 i.putExtra("Object", products);
-                i.putExtra("CompanyCode", mCompanyCode);
                 i.putExtra("Warehouse", mWarehouse);
                 v.getContext().startActivity(i);
             }
         });
-
-
     }
 
     /**

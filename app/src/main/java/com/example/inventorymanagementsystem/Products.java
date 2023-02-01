@@ -9,7 +9,9 @@ import java.util.TimeZone;
 public class Products implements Serializable {
 
     // variables for storing our data
-    private String productId, productDescription, productUpc, productPcsPerBox, productTimeAdded, userKey, uniqueIdentifier, imageUri, productOwner;
+    private String productId, productDescription,
+            productUpc, productPcsPerBox, productTimeAdded,
+            userKey,  uniqueIdentifier, imageUri, productOwner;
 
     public Products()
     {
@@ -18,7 +20,10 @@ public class Products implements Serializable {
     }
 
     // Constructor for all variables
-    public Products(String _productId, String _productDescription, String _productUpc, String _productPcsPerBox, String _productTimeAdded, String _userKey, String _productOwner, String _imageUri)
+    public Products(String _productId, String _productDescription,
+                    String _productUpc, String _productPcsPerBox,
+                    String _productTimeAdded, String _userKey, String _productOwner,
+                    String _imageUri)
     {
         productId = _productId;
         productDescription = _productDescription;
@@ -88,5 +93,9 @@ public class Products implements Serializable {
     }
     public void setImageUri(String imageUri) {
         this.imageUri = imageUri;
+    }
+
+    public void setUniqueIdentifier(String uniqueIdentifier) {
+        this.uniqueIdentifier = uniqueIdentifier;
     }
 }

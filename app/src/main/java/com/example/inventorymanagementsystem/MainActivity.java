@@ -32,7 +32,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     // member fields for logged user
-
     private static Users currentUser;
 
     private static String mWarehouse = "";
@@ -48,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         // prevents users from rotating screen
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-
 
         // getting intent from Login screen with Users object and companyCode string
         Intent i = getIntent();
@@ -183,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
         final TextView title = dialog.findViewById(R.id.dialogChooseWarehouseTitle);
         final Spinner spinner = dialog.findViewById(R.id.dialogChooseWarehouseSpinner);
         Button submitButton = dialog.findViewById(R.id.dialogChooseWarehouseSubmitButton);
-
 
         // setting default string for spinner
         String defaultTextForSpinner = "Warehouse";

@@ -39,7 +39,6 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-
     private static Users currentUser;
 
     private static final String TAG = "Login";

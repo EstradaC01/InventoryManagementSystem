@@ -90,7 +90,7 @@ public class Registration extends AppCompatActivity {
 
         // creating a collection reference
         // for our Firebase Firestore database
-        CollectionReference dbProducts = db.collection("Users");
+        CollectionReference dbUsers = db.collection("Users");
         // adding our data to our users object class.
         Users user = new Users();
         user.setFirstName(_firstName);
@@ -98,59 +98,32 @@ public class Registration extends AppCompatActivity {
         user.setUserKey(_userKey);
         user.setEmail(_email);
         user.setIsAdmin(_isAdmin);
-        dbProducts.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        dbUsers.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                boolean codeExists = queryDocumentSnapshots.isEmpty();
-                Log.d("Success", ": task");
-
-                if (codeExists) {
-                    Log.d("Code", ": Is empty");
-                    user.setRank("Owner");
-                    // below method is use to add data to Firebase Firestore
-                    dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            // after the data addition is successful
-                            // we are displaying a success toast message
-                            Toast.makeText(Registration.this, "User was registered successfully.", Toast.LENGTH_LONG).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // this method is called when the data addition process is failed.
-                            // displaying a toast message when data addition is failed.
-                            Toast.makeText(Registration.this, "Fail to add user \n" + e, Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-                else {
-                    user.setRank("Employee");
-                    user.setIsAdmin(false);
-                    // below method is use to add data to Firebase Firestore
-                    dbProducts.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            // after the data addition is successful
-                            // we are displaying a success toast message
-                            Toast.makeText(Registration.this, "User was registered successfully.", Toast.LENGTH_LONG).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // this method is called when the data addition process is failed.
-                            // displaying a toast message when data addition is failed.
-                            Toast.makeText(Registration.this, "Fail to add user \n" + e, Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-                Log.d("User role", ": " + user.getRank());
+                user.setRank("Employee");
+                user.setIsAdmin(false);
+                // below method is use to add data to Firebase Firestore
+                dbUsers.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        // after the data addition is successful
+                        // we are displaying a success toast message
+                        Toast.makeText(Registration.this, "User was registered successfully.", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // this method is called when the data addition process is failed.
+                        // displaying a toast message when data addition is failed.
+                        Toast.makeText(Registration.this, "Fail to add user \n" + e, Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d("Failed", ": task");
-
             }
         });
     }
@@ -160,22 +133,17 @@ public class Registration extends AppCompatActivity {
     private void CreateUser(String _email, String _password)
     {
         mAuth.createUserWithEmailAndPassword(_email, _password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(Registration.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            user.sendEmailVerification();
+//                            user.sendEmailVerification();
                             addDataToFireStore(mFirstName,mLastName,user.getUid(),mEmail, true);
-
-                            Intent i = new Intent(Registration.this, Login.class);
-                            startActivity(i);
-
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(Registration.this, "Authentication failed.", Toast.LENGTH_LONG).show();
                         }
                     }

@@ -59,8 +59,6 @@ public class AddItem extends AppCompatActivity {
 
     private String mWarehouse;
 
-    private FirebaseStorage storage;
-    private StorageReference storageRef;
 
     private static final String TAG = "AddItem";
     @Override

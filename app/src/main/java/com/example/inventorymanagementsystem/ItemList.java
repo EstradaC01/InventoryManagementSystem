@@ -119,7 +119,7 @@ public class ItemList extends AppCompatActivity {
                     });
                 } else {
 
-                    itemsRef.whereEqualTo("postedBy", currentUser.getUserKey()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    itemsRef.whereEqualTo("userKey", currentUser.getUserKey()).addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
