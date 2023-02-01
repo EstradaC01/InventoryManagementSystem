@@ -153,6 +153,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.idMenuOrders:
                 break;
             case R.id.idMenuReceiving:
+                Intent receivingIntent = new Intent(MainActivity.this, ReceivingScreen.class);
+                receivingIntent.putExtra("User", currentUser);
+                receivingIntent.putExtra("Warehouse", mWarehouse);
+                startActivity(receivingIntent);
                 break;
             case R.id.idMenuInventory:
                 break;
