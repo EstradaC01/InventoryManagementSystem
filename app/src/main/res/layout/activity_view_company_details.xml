@@ -8,7 +8,7 @@
     android:layout_margin="20dp"
     app:cardCornerRadius="6dp"
     app:cardElevation="4dp"
-    tools:context=".ViewCompanyDetails">
+    tools:context=".views.ViewCompanyDetails">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/blue_android_background"
     android:foregroundTint="@color/black"
-    tools:context=".ItemList">
+    tools:context=".views.ItemList">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"

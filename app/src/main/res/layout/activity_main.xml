@@ -6,4 +6,4 @@
     android:layout_height="match_parent"
     android:background="@drawable/blue_android_background"
     android:padding="8dp"
-    tools:context=".MainActivity"/>
+    tools:context=".views.MainActivity"/>

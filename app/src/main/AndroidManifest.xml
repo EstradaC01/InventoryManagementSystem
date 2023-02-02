@@ -13,13 +13,13 @@
         android:theme="@style/Theme.InventoryManagementSystem"
         tools:targetApi="31">
         <activity
-            android:name=".FindLocationScreen"
+            android:name=".views.FindLocationScreen"
             android:exported="false" />
         <activity
-            android:name=".ReceivingScreen"
+            android:name=".views.ReceivingScreen"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".views.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,119 +28,119 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LocationList"
+            android:name=".views.LocationList"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddLocation"
+            android:name=".views.AddLocation"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddZone"
+            android:name=".views.AddZone"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserDetails"
+            android:name=".views.UserDetails"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ExceptionCodes"
+            android:name=".deprecated.ExceptionCodes"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UnitsOfMeasure"
+            android:name=".views.UnitsOfMeasure"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Zones"
+            android:name=".views.Zones"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Locations"
+            android:name=".deprecated.Locations"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LocationsSubMenu"
+            android:name=".views.LocationsSubMenu"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ViewCompanyDetails"
+            android:name=".views.ViewCompanyDetails"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ItemsSubMenu"
+            android:name=".deprecated.ItemsSubMenu"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserList"
+            android:name=".views.UserList"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ProductDetails"
+            android:name=".views.ProductDetails"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Registration"
+            android:name=".views.Registration"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".views.Login"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ItemList"
+            android:name=".views.ItemList"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddItem"
+            android:name=".views.AddItem"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -148,7 +148,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".CompanySetup"
+            android:name=".views.CompanySetup"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -156,14 +156,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".views.MainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ForgotPassword"
+            android:name=".views.ForgotPassword"
             android:exported="true" />
 
         <meta-data
