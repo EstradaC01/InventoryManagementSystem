@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class ProductDetails extends AppCompatActivity {
 
     private static EditText tvProductId, tvProductDescription;
+    private static TextView tvAvailableUnits;
     private static ImageButton edtChangeProductDetails, edtDeleteProductDetails;
     private static Button saveButton;
     private static ImageView ivProductImage;
@@ -55,6 +57,8 @@ public class ProductDetails extends AppCompatActivity {
 
         tvProductId = findViewById(R.id.idTvProductId);
         tvProductDescription = findViewById(R.id.idTvProductDescription);
+        tvAvailableUnits = findViewById(R.id.idTVCardItemAvailableUnits);
+
         ivProductImage = findViewById(R.id.productDetailsImageViewProductImage);
         edtChangeProductDetails = findViewById(R.id.productDetailsEditButton);
         edtDeleteProductDetails = findViewById(R.id.productDetailsDeleteButton);
@@ -64,6 +68,7 @@ public class ProductDetails extends AppCompatActivity {
 
         tvProductId.setText(mProduct.getProductId());
         tvProductDescription.setText(mProduct.getProductDescription());
+        tvAvailableUnits.setText(mProduct.getAvailableUnits());
 
         tvProductId.setEnabled(false);
         tvProductDescription.setEnabled(false);

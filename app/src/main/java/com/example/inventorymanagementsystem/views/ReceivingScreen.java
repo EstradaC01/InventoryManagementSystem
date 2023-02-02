@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.CustomSpinnerAdapter;
 import com.example.inventorymanagementsystem.models.Location;
+import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Receiving;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -116,7 +117,7 @@ public class ReceivingScreen extends AppCompatActivity {
             receiving.setShipFrom(edtShipFrom.getText().toString());
             receiving.setReceiptId(String.valueOf(mReceiptId));
 
-            addDataToFireStore(receiving);
+            updateProductAvailableUnits(receiving.getProductId(), receiving.getNumberOfUnits(), receiving);
 
         });
 
@@ -171,18 +172,56 @@ public class ReceivingScreen extends AppCompatActivity {
                 }
             });
 
-    private void addDataToFireStore(Receiving _receiving) {
-        db.collection("Warehouses/"+mWarehouse+"/Receiving").document(_receiving.getReceiptId()).set(_receiving).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+    private void addDataToFireStore(Products _product, Receiving _receiving) {
+        db.collection("Warehouses/"+mWarehouse+"/Products").document(_product.getProductId()).set(_product).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(ReceivingScreen.this, "Receiving confirmed", Toast.LENGTH_LONG).show();
-                finish();
+                db.collection("Warehouses/"+mWarehouse+"/Receiving").document(_receiving.getReceiptId()).set(_receiving).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(ReceivingScreen.this, "Receiving confirmed", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ReceivingScreen.this, "Fail to confirm receiving \n" + e, Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ReceivingScreen.this, "Fail to confirm receiving \n" + e, Toast.LENGTH_LONG).show();
+                Toast.makeText(ReceivingScreen.this, "Failed to update product", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void updateProductAvailableUnits(String _productId, String _numberOfUnits, Receiving _receiving) {
+        CollectionReference productDocument = db.collection("Warehouses/"+mWarehouse+"/Products");
+
+        productDocument.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(!queryDocumentSnapshots.isEmpty()) {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for(DocumentSnapshot d : list) {
+                        if(d.getId().equals(_productId)) {
+                            Products p = d.toObject(Products.class);
+                            productDocument.document(d.getId()).delete();
+                            p.setAvailableUnits(_numberOfUnits);
+                            addDataToFireStore(p, _receiving);
+                        }
+                    }
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ReceivingScreen.this, "Failed to get data", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 }
