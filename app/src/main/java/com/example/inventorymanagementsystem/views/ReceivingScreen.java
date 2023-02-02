@@ -166,7 +166,7 @@ public class ReceivingScreen extends AppCompatActivity {
                         mProduct = data.getStringExtra("Product");
                         edtProductId.setText(mProduct);
                     } else {
-                        Toast.makeText(ReceivingScreen.this, "Cancelled...", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ReceivingScreen.this, "Cancelled", Toast.LENGTH_LONG).show();
                     }
                 }
             });
