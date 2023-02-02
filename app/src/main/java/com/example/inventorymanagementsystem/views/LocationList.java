@@ -44,7 +44,7 @@ public class LocationList extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // change action support bar title and font color
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Zones</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Locations</font>"));
 
         //initializing widgets
         Button btnAddLocation = findViewById(R.id.btnLocationListAddLocation);

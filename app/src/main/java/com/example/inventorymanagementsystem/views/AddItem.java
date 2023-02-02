@@ -98,7 +98,7 @@ public class AddItem extends AppCompatActivity {
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
 
-        // add on lick listener to upload image to FirebaseStorage and show in the screen
+        // add on click listener to upload image to FirebaseStorage and show in the screen
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
