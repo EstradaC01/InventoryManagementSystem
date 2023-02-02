@@ -28,8 +28,9 @@ public class ReceivingScreen extends AppCompatActivity {
     Users mCurrentUser;
     String mWarehouse;
 
-    private EditText edtLocation;
+    private EditText edtLocation, edtProductId;
     private String mLocation;
+    private String mProduct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class ReceivingScreen extends AppCompatActivity {
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Receiving</font>"));
 
         // Initialize widgets
-        EditText edtProductId = findViewById(R.id.edtReceivingScreenProductId);
+        edtProductId = findViewById(R.id.edtReceivingScreenProductId);
         EditText edtNumberOfUnits = findViewById(R.id.edtReceivingScreenNumberOfUnits);
         EditText edtPiecesPerBox = findViewById(R.id.edtReceivingScreenPiecesPerBox);
         EditText edtNumberOfBoxes = findViewById(R.id.edtReceivingScreenTotalBoxes);
@@ -78,11 +79,19 @@ public class ReceivingScreen extends AppCompatActivity {
             Intent findLocationIntent = new Intent(ReceivingScreen.this, FindLocationScreen.class);
             findLocationIntent.putExtra("User", mCurrentUser);
             findLocationIntent.putExtra("Warehouse", mWarehouse);
-            launchSecondActivity.launch(findLocationIntent);
+            launchFindLocationActivity.launch(findLocationIntent);
+        });
+
+        // add on click listener to open Find Product
+        btnAddProduct.setOnClickListener(v -> {
+            Intent findProductIntent = new Intent(ReceivingScreen.this, FindProductScreen.class);
+            findProductIntent.putExtra("User", mCurrentUser);
+            findProductIntent.putExtra("Warehouse", mWarehouse);
+            launchFindProductActivity.launch(findProductIntent);
         });
     }
 
-    private ActivityResultLauncher<Intent> launchSecondActivity = registerForActivityResult(
+    private ActivityResultLauncher<Intent> launchFindLocationActivity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -91,6 +100,21 @@ public class ReceivingScreen extends AppCompatActivity {
                         Intent data = result.getData();
                         mLocation = data.getStringExtra("Location");
                         edtLocation.setText(mLocation);
+                    } else {
+                        Toast.makeText(ReceivingScreen.this, "Cancelled...", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
+    private ActivityResultLauncher<Intent> launchFindProductActivity = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        mProduct = data.getStringExtra("Product");
+                        edtProductId.setText(mProduct);
                     } else {
                         Toast.makeText(ReceivingScreen.this, "Cancelled...", Toast.LENGTH_LONG).show();
                     }
