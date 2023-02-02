@@ -11,7 +11,9 @@ public class Products implements Serializable {
     // variables for storing our data
     private String productId, productDescription,
             productUpc, productPcsPerBox, productTimeAdded,
-            userKey,  uniqueIdentifier, imageUri, productOwner;
+            userKey,  uniqueIdentifier,
+            imageUri, productOwner,
+            availableUnits;
 
     public Products()
     {
@@ -23,7 +25,7 @@ public class Products implements Serializable {
     public Products(String _productId, String _productDescription,
                     String _productUpc, String _productPcsPerBox,
                     String _productTimeAdded, String _userKey, String _productOwner,
-                    String _imageUri)
+                    String _imageUri, String _availableUnits)
     {
         productId = _productId;
         productDescription = _productDescription;
@@ -33,6 +35,7 @@ public class Products implements Serializable {
         userKey = _userKey;
         productOwner = _productOwner;
         imageUri = _imageUri;
+        availableUnits = _availableUnits;
     }
 
     // getter methods for all variables
@@ -97,5 +100,17 @@ public class Products implements Serializable {
 
     public void setUniqueIdentifier(String uniqueIdentifier) {
         this.uniqueIdentifier = uniqueIdentifier;
+    }
+
+    public void setProductTimeAdded(String productTimeAdded) {
+        this.productTimeAdded = productTimeAdded;
+    }
+
+    public String getAvailableUnits() {
+        return availableUnits;
+    }
+
+    public void setAvailableUnits(String availableUnits) {
+        this.availableUnits = availableUnits;
     }
 }
