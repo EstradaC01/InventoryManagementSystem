@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.models.Orders;
+import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Users;
 
 import java.util.ArrayList;
@@ -66,5 +67,9 @@ public class OrderRVAdapter extends RecyclerView.Adapter<OrderRVAdapter.ViewHold
             customerNameTV = itemView.findViewById(R.id.idTVCustomerName);
             statusTV = itemView.findViewById(R.id.idTVOrderStatus);
         }
+    }
+    public void setFilteredList(ArrayList<Orders> filteredList) {
+        mOrdersArrayList = filteredList;
+        notifyDataSetChanged();
     }
 }
