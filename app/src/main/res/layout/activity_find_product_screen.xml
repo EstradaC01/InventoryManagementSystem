@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_android_background"
+    android:foregroundTint="@color/black"
+    tools:context=".views.ItemList">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/itemListGuidelineTop"
+        app:layout_constraintEnd_toEndOf="@id/itemListGuidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/itemListGuidelineStart"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/svFindProductScreen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_white_background"
+            android:gravity="left|center"
+            android:queryHint="Search..."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/itemListGuidelineMiddleRight"/>
+
+        <ImageButton
+            android:id="@+id/ibFindProductScreen"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="true"
+            android:contentDescription="filter"
+            android:elevation="10dp"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_filter_64px"
+            android:background="#0582FC"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/itemListGuidelineMiddleRight"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/itemListGuidelineMiddleRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".85" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    Recycler view for displaying data from Firebase-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFindProductScreen"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/itemListGuidelineBottom"
+        app:layout_constraintEnd_toStartOf="@id/itemListGuidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/itemListGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/itemListGuidelineTop" />
+
+    <!--    Progress bar for showing loading screen-->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/itemListGuidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/itemListGuidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/itemListGuidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/itemListGuidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".98" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

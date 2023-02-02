@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.inventorymanagementsystem.views.ProductDetails;
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.models.Products;
@@ -84,7 +86,9 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
         Products products = mProductsArrayList.get(position);
 
         holder.productIdTv.setText(products.getProductId());
-        holder.productDescriptionTv.setText(products.getProductId());
+        holder.productDescriptionTv.setText(products.getProductDescription());
+        holder.productUPCTv.setText(products.getProductUpc());
+        Glide.with(context).load(products.getImageUri()).into(holder.itemImageView);
 
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
 
@@ -114,13 +118,17 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
         // creating variables for our text views
         private final TextView productIdTv;
         private final TextView productDescriptionTv;
+        private final TextView productUPCTv;
+        private final ImageView itemImageView;
 
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
             // initializing our text views
-            productIdTv = itemView.findViewById(R.id.idTVItemCardProductId);
-            productDescriptionTv = itemView.findViewById(R.id.idTVItemCardProductDescription);
+            productIdTv = itemView.findViewById(R.id.tvItemProductId);
+            productDescriptionTv = itemView.findViewById(R.id.tvItemProductDescription);
+            productUPCTv = itemView.findViewById(R.id.tvItemProductUPC);
+            itemImageView = itemView.findViewById(R.id.imageViewItem);
         }
     }
 
