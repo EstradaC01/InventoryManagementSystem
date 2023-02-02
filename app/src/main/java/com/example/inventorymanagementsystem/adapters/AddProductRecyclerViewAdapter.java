@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,7 @@ public class AddProductRecyclerViewAdapter extends RecyclerView.Adapter<AddProdu
         holder.productId.setText(product.getProductId());
         holder.productDescription.setText(product.getProductDescription());
         holder.productUpc.setText(product.getProductUpc());
+        holder.linearLayout.setVisibility(View.GONE);
 
         Glide.with(mContext).load(product.getImageUri()).into(holder.itemImageView);
 
@@ -73,6 +75,7 @@ public class AddProductRecyclerViewAdapter extends RecyclerView.Adapter<AddProdu
         private final TextView productDescription;
         private final TextView productUpc;
         private final ImageView itemImageView;
+        private final LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +84,7 @@ public class AddProductRecyclerViewAdapter extends RecyclerView.Adapter<AddProdu
             productDescription = itemView.findViewById(R.id.tvItemProductDescription);
             productUpc = itemView.findViewById(R.id.tvItemProductUPC);
             itemImageView = itemView.findViewById(R.id.imageViewItem);
+            linearLayout = itemView.findViewById(R.id.linearLayoutItemTapForDetails);
         }
     }
 
