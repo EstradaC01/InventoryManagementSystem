@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -19,8 +20,17 @@ import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.CustomSpinnerAdapter;
+import com.example.inventorymanagementsystem.models.Location;
+import com.example.inventorymanagementsystem.models.Receiving;
 import com.example.inventorymanagementsystem.models.Users;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 
 public class ReceivingScreen extends AppCompatActivity {
     private static int STATIC_INTEGER_VALUE;
@@ -31,6 +41,7 @@ public class ReceivingScreen extends AppCompatActivity {
     private EditText edtLocation, edtProductId;
     private String mLocation;
     private String mProduct;
+    private int mReceiptId = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +80,7 @@ public class ReceivingScreen extends AppCompatActivity {
 
         // setting default string for spinner
         String defaultTextForSpinner = "Disposition";
-        String[] arrayForSpinner = {"Damaged", "Quarantine", "Other"};
+        String[] arrayForSpinner = {"Good", "Damaged", "Quarantine", "Other"};
 
         spinnerDisposition.setAdapter(new CustomSpinnerAdapter(this, R.layout.spinner_row, arrayForSpinner, defaultTextForSpinner));
 
@@ -88,6 +99,45 @@ public class ReceivingScreen extends AppCompatActivity {
             findProductIntent.putExtra("User", mCurrentUser);
             findProductIntent.putExtra("Warehouse", mWarehouse);
             launchFindProductActivity.launch(findProductIntent);
+        });
+
+        btnSubmit.setOnClickListener(v -> {
+            Receiving receiving = new Receiving();
+
+            receiving.setProductId(edtProductId.getText().toString());
+            receiving.setNumberOfUnits(edtNumberOfUnits.getText().toString());
+            receiving.setPiecesPerBox(edtPiecesPerBox.getText().toString());
+            receiving.setTotalBoxes(edtNumberOfBoxes.getText().toString());
+            receiving.setLoosePieces(edtLoosePieces.getText().toString());
+            receiving.setDisposition(spinnerDisposition.getSelectedItem().toString());
+            receiving.setLocation(edtLocation.getText().toString());
+            receiving.setWeight(edtWeight.getText().toString());
+            receiving.setPO(edtPO.getText().toString());
+            receiving.setShipFrom(edtShipFrom.getText().toString());
+            receiving.setReceiptId(String.valueOf(mReceiptId));
+
+            addDataToFireStore(receiving);
+
+        });
+
+        CollectionReference receiptId = db.collection("Warehouses/"+mWarehouse+"/Receiving");
+
+        receiptId.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(!queryDocumentSnapshots.isEmpty()) {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+
+                    for(DocumentSnapshot d : list) {
+                        mReceiptId++;
+                    }
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ReceivingScreen.this, "Failed to get data", Toast.LENGTH_LONG).show();
+            }
         });
     }
 
@@ -120,4 +170,19 @@ public class ReceivingScreen extends AppCompatActivity {
                     }
                 }
             });
+
+    private void addDataToFireStore(Receiving _receiving) {
+        db.collection("Warehouses/"+mWarehouse+"/Receiving").document(_receiving.getReceiptId()).set(_receiving).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(ReceivingScreen.this, "Receiving confirmed", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ReceivingScreen.this, "Fail to confirm receiving \n" + e, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }

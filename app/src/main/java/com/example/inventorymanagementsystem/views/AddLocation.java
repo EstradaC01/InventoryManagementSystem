@@ -90,6 +90,7 @@ public class AddLocation extends AppCompatActivity {
             && !edtRack.getText().toString().isEmpty()
             && !edtLevel.getText().toString().isEmpty()
             && !spinnerZones.getSelectedItem().toString().equals("Zone")) {
+
                 location.setAisle(edtAisle.getText().toString());
                 location.setRack(edtRack.getText().toString());
                 location.setLevel(edtLevel.getText().toString());
