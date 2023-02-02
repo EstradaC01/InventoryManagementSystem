@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnOrderListActivityAddProduct"
+            android:id="@+id/btnOrderListActivityAddOrder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_orange"

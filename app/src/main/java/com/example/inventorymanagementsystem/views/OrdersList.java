@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -31,6 +32,8 @@ public class OrdersList extends AppCompatActivity {
     private ArrayList<Orders> mOrdersArrayList;
     private OrderRVAdapter mOrderRVAdapter;
     private FirebaseFirestore db;
+    private Button btnAddOrders;
+
     private ProgressBar loadingOrdersPB;
     private static Users currentUser;
     @Override
@@ -42,6 +45,7 @@ public class OrdersList extends AppCompatActivity {
 
         orderRV = findViewById(R.id.idRVOrders);
         loadingOrdersPB = findViewById(R.id.idOrderProgressBar);
+        btnAddOrders = findViewById(R.id.btnOrderListActivityAddOrder);
         db = FirebaseFirestore.getInstance();
         Intent i = getIntent();
 
@@ -74,6 +78,16 @@ public class OrdersList extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(OrdersList.this, "Failed to read data", Toast.LENGTH_LONG);
+            }
+        });
+
+        btnAddOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Creating intent to open add order activity
+                Intent i = new Intent(OrdersList.this, AddOrder.class);
+                i.putExtra("User", currentUser);
+                startActivity(i);
             }
         });
     }
