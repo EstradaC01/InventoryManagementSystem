@@ -13,6 +13,9 @@
         android:theme="@style/Theme.InventoryManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".FindLocationScreen"
+            android:exported="false" />
+        <activity
             android:name=".ReceivingScreen"
             android:exported="false" />
         <activity
