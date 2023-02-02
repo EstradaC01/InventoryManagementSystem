@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -86,7 +87,7 @@ public class AddLocationRecyclerViewAdapter extends RecyclerView.Adapter<AddLoca
         holder.tvLocationName.setText(location.getName());
         holder.tvZone.setText(location.getZone());
         holder.tvStatus.setText(location.getStatus());
-
+        holder.linearLayout.setVisibility(View.GONE);
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -116,12 +117,14 @@ public class AddLocationRecyclerViewAdapter extends RecyclerView.Adapter<AddLoca
         private final TextView tvZone;
         private final TextView tvStatus;
 
+        private final LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvLocationName = itemView.findViewById(R.id.tvLocationName);
             tvZone = itemView.findViewById(R.id.tvLocationZone);
             tvStatus = itemView.findViewById(R.id.tvLocationStatus);
+            linearLayout = itemView.findViewById(R.id.linearLayoutLocationTapForDetails);
         }
     }
 
