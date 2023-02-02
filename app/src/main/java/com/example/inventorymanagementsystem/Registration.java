@@ -24,17 +24,19 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Objects;
+
 public class Registration extends AppCompatActivity {
 
     private FirebaseFirestore db;
 
     private FirebaseAuth mAuth;
 
-    private EditText edtFirstname, edtLastName, edtEmail, edtPassword;
+    private EditText edtFirstname, edtLastName, edtEmail, edtPassword, edtConfirm;
 
     private Button btnRegister;
 
-    private String mFirstName, mLastName, mEmail, mPassword;
+    private String mFirstName, mLastName, mEmail, mPassword, mConfirm;
 
     private static final String TAG = "Registration";
 
@@ -54,6 +56,7 @@ public class Registration extends AppCompatActivity {
         edtLastName = findViewById(R.id.idEdtLastName);
         edtEmail = findViewById(R.id.idEdtEmail);
         edtPassword = findViewById(R.id.idEdtPassword);
+        edtConfirm = findViewById(R.id.idEdtConfirmPassword);
         btnRegister = findViewById(R.id.idBtnRegister);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +67,7 @@ public class Registration extends AppCompatActivity {
                 mLastName = edtLastName.getText().toString();
                 mEmail = edtEmail.getText().toString();
                 mPassword = edtPassword.getText().toString();
+                mConfirm = edtConfirm.getText().toString();
 
                 if(TextUtils.isEmpty(mEmail))
                 {
@@ -77,7 +81,11 @@ public class Registration extends AppCompatActivity {
                 {
                     edtPassword.setError("Please enter a password");
                 }
-                if(!mEmail.isEmpty() && !mPassword.isEmpty())
+                if (!Objects.equals(mPassword, mConfirm))
+                {
+                    edtConfirm.setError("The passwords do not match");
+                }
+                if(!mEmail.isEmpty() && !mPassword.isEmpty() && mPassword.equals(mConfirm))
                 {
                     CreateUser(mEmail, mPassword);
                 }
