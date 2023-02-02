@@ -2,6 +2,7 @@ package com.example.inventorymanagementsystem.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -102,6 +103,32 @@ public class FindLocationScreen extends AppCompatActivity {
             Toast.makeText(FindLocationScreen.this, "Access Denied", Toast.LENGTH_LONG).show();
             finish();
         }
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return false;
+            }
+        });
+    }
+
+    private void searchList(String text) {
+        ArrayList<Location> searchedList = new ArrayList<>();
+        for(Location l : mLocationArrayList) {
+            if(l.getName().toLowerCase().contains(text.toLowerCase())) {
+                searchedList.add(l);
+            } else {
+                mLocationRecyclerViewAdapter.setSearchList(searchedList);
+            }
+        }
+            mLocationRecyclerViewAdapter.setSearchList(searchedList);
+
     }
 
     public void onRestart()

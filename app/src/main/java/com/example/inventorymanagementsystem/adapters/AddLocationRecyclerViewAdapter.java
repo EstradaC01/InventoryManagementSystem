@@ -124,4 +124,9 @@ public class AddLocationRecyclerViewAdapter extends RecyclerView.Adapter<AddLoca
             tvStatus = itemView.findViewById(R.id.tvLocationStatus);
         }
     }
+
+    public void setSearchList(ArrayList<Location> searchList) {
+        mLocationArrayList = searchList;
+        notifyDataSetChanged();
+    }
 }
