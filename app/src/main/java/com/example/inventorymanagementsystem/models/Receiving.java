@@ -1,13 +1,23 @@
 package com.example.inventorymanagementsystem.models;
 
 public class Receiving {
-    String productId, numberOfUnits, piecesPerBox, totalBoxes, loosePieces, disposition, location, weight, PO, shipFrom;
+    String productId, numberOfUnits,
+            piecesPerBox, totalBoxes,
+            loosePieces, disposition,
+            location, weight,
+            PO, shipFrom,
+            receiptId;
+
+    public Receiving() {
+
+    }
 
     public Receiving(String productId, String numberOfUnits,
                      String piecesPerBox, String totalBoxes,
                      String loosePieces, String disposition,
                      String location, String weight,
-                     String PO, String shipFrom) {
+                     String PO, String shipFrom,
+                     String receiptId) {
         this.productId = productId;
         this.numberOfUnits = numberOfUnits;
         this.piecesPerBox = piecesPerBox;
@@ -18,6 +28,7 @@ public class Receiving {
         this.weight = weight;
         this.PO = PO;
         this.shipFrom = shipFrom;
+        this.receiptId = receiptId;
     }
 
     public String getProductId() {
@@ -98,5 +109,13 @@ public class Receiving {
 
     public void setShipFrom(String shipFrom) {
         this.shipFrom = shipFrom;
+    }
+
+    public String getReceiptId() {
+        return receiptId;
+    }
+
+    public void setReceiptId(String receiptId) {
+        this.receiptId = receiptId;
     }
 }
