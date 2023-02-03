@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/blue_android_background"
     android:foregroundTint="@color/black"
+    android:foregroundTintMode="multiply"
     tools:context=".views.OrdersList">
 
 
@@ -19,11 +20,12 @@
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/idSVSearchOrders"
-            android:background="@drawable/rounded_white_background"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_white_background"
             android:gravity="left|center"
             android:queryHint="Search..."
+            app:queryHint="Search..."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/orderListGuidelineMiddleLeft"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,12 +49,12 @@
             android:id="@+id/btnOrderListFilter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="7dp"
             android:background="@color/fui_transparent"
+            android:padding="7dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/orderListGuidelineMiddleLeft"
             app:layout_constraintEnd_toStartOf="@id/orderListGuidelineMiddleRight"
+            app:layout_constraintStart_toEndOf="@id/orderListGuidelineMiddleLeft"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_filter_64px" />
 

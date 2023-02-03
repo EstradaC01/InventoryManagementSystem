@@ -24,6 +24,7 @@
             android:background="@drawable/rounded_white_background"
             android:gravity="left|center"
             android:queryHint="Search..."
+            app:queryHint="Search..."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
