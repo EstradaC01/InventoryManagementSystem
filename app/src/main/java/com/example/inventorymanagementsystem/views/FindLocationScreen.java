@@ -105,6 +105,8 @@ public class FindLocationScreen extends AppCompatActivity {
             finish();
         }
 
+        searchView.setIconified(false);
+        searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

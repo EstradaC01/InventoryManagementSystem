@@ -25,6 +25,8 @@
             android:background="@drawable/rounded_white_background"
             android:gravity="left|center"
             android:queryHint="Search..."
+            android:iconifiedByDefault="false"
+            app:defaultQueryHint="Search..."
             app:queryHint="Search..."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/orderListGuidelineMiddleLeft"

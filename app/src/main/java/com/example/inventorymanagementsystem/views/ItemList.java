@@ -156,6 +156,8 @@ public class ItemList extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        edtSearchItems.setIconified(false);
         edtSearchItems.clearFocus();
         edtSearchItems.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
