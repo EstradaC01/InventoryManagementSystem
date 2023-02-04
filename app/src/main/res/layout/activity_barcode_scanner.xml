@@ -7,7 +7,7 @@
     android:background="@drawable/blue_android_background"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".BarcodeScanner">
+    tools:context=".views.IMSBarcodeScanner">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/idBtnScanCode"

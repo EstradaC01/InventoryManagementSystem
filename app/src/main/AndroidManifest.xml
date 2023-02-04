@@ -18,7 +18,7 @@
         android:theme="@style/Theme.InventoryManagementSystem"
         tools:targetApi="31">
         <activity
-            android:name=".BarcodeScanner"
+            android:name=".views.IMSBarcodeScanner"
             android:exported="false" />
         <activity
             android:name=".views.AddOrder"
@@ -35,6 +35,9 @@
         <activity
             android:name=".views.ReceivingScreen"
             android:exported="false" />
+        <activity
+            android:name=".views.ForgotPassword"
+            android:exported="true" />
         <activity
             android:name=".views.SplashScreen"
             android:exported="true">
@@ -179,9 +182,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name="views..ForgotPassword"
-            android:exported="true"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
