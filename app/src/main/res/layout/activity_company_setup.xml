@@ -7,7 +7,7 @@
     android:background="@drawable/blue_android_background"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".CompanySetup">
+    tools:context=".views.CompanySetup">
 
     <EditText
         android:id="@+id/idEdtCompanyName"

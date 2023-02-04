@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_android_background"
+    android:orientation="vertical"
+    tools:context=".views.AddItem">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/idEdtOrderId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Order Id"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/changeOrderScrollableViewEnd"
+            app:layout_constraintStart_toEndOf="@id/addOrderScrollableViewStart"
+            app:layout_constraintTop_toTopOf="@+id/changeOrderScrollableViewTop" />
+
+        <!--    EditText for Product Description-->
+
+        <EditText
+            android:id="@+id/idEdtOrderDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:gravity="top|start"
+            android:hint="Order Date"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/idEdtOrderId"
+            app:layout_constraintStart_toEndOf="@id/addOrderScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeOrderScrollableViewEnd" />
+
+        <EditText
+            android:id="@+id/idEdtReferenceNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Reference No."
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/idEdtOrderDate"
+            app:layout_constraintStart_toEndOf="@id/addOrderScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeOrderScrollableViewEnd"/>
+
+        <!--    EditText for pieces per box-->
+        <EditText
+            android:id="@+id/idEdtCustomerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Customer Name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/idEdtReferenceNumber"
+            app:layout_constraintStart_toEndOf="@id/addOrderScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeOrderScrollableViewEnd"/>
+        <EditText
+            android:id="@+id/idEdtStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Status"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/idEdtCustomerName"
+            app:layout_constraintStart_toEndOf="@id/addOrderScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/changeOrderScrollableViewEnd"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/idBtnCreateOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_navyblue"
+            android:elevation="15dp"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            android:text="Add Order"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/idEdtStatus"
+            app:layout_constraintEnd_toStartOf="@id/changeOrderScrollableViewEnd"
+            app:layout_constraintStart_toEndOf="@id/addOrderScrollableViewStart"
+            tools:layout_editor_absoluteY="711dp" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/changeOrderScrollableViewTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/changeOrderScrollableViewBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/addOrderScrollableViewStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/changeOrderScrollableViewEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".92" />
+
+        <ProgressBar
+            android:id="@+id/addOrderLayoutPB"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/changeOrderScrollableViewEnd"
+            app:layout_constraintStart_toStartOf="@+id/addOrderScrollableViewStart"
+            app:layout_constraintTop_toTopOf="@+id/changeOrderScrollableViewTop" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/blue_android_background"
+    android:orientation="vertical"
+    tools:context=".views.AddItem">
+
+    <!--    EditText for getting Proudct ID-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnReceivingScreenAddProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_navyblue"
+            android:elevation="15dp"
+            android:padding="12dp"
+            android:text="+"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"
+            app:layout_constraintStart_toEndOf="@id/edtReceivingScreenProductId"
+            app:layout_constraintTop_toTopOf="@id/edtReceivingScreenProductId" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnReceivingScreenAddLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_navyblue"
+            android:elevation="15dp"
+            android:padding="12dp"
+            android:text="+"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/edtReceivingScreenLocation"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"
+            app:layout_constraintStart_toEndOf="@id/edtReceivingScreenLocation"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnReceivingScreenAddPO"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_navyblue"
+            android:elevation="15dp"
+            android:padding="12dp"
+            android:text="+"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/edtReceivingScreenPO"
+            app:layout_constraintEnd_toStartOf="@id/changeItemScrollableViewEnd"
+            app:layout_constraintStart_toEndOf="@id/edtReceivingScreenPO"/>
+
+        <EditText
+            android:id="@+id/edtReceivingScreenProductId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Product Id"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toTopOf="@+id/changeItemScrollableViewTop" />
+
+        <EditText
+            android:id="@+id/edtReceivingScreenNumberOfUnits"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Number of Units"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toBottomOf="@id/edtReceivingScreenProductId" />
+
+        <EditText
+            android:id="@+id/edtReceivingScreenPiecesPerBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Pieces per Box"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toBottomOf="@id/edtReceivingScreenNumberOfUnits" />
+
+        <EditText
+            android:id="@+id/edtReceivingScreenTotalBoxes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Number of Boxes"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toBottomOf="@id/edtReceivingScreenPiecesPerBox" />
+
+        <EditText
+            android:id="@+id/edtReceivingScreenLoosePieces"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Loose Pieces"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toBottomOf="@id/edtReceivingScreenTotalBoxes" />
+
+        <Spinner
+            android:id="@+id/spinnerReceivingScreenDisposition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:contentDescription="Category"
+            android:elevation="15dp"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toBottomOf="@id/edtReceivingScreenLoosePieces" />
+
+        <EditText
+            android:id="@+id/edtReceivingScreenLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Location"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toBottomOf="@id/spinnerReceivingScreenDisposition" />
+
+        <EditText
+            android:id="@+id/edtReceivingScreenWeight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Weight"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toBottomOf="@id/edtReceivingScreenLocation" />
+
+        <EditText
+            android:id="@+id/edtReceivingScreenPO"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="PO#"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toBottomOf="@id/edtReceivingScreenWeight" />
+
+        <EditText
+            android:id="@+id/edtReceivingScreenShipFrom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_white"
+            android:elevation="15dp"
+            android:hint="Ship From"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toBottomOf="@id/edtReceivingScreenPO" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnReceivingScreenSubmit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_navyblue"
+            android:elevation="15dp"
+            android:padding="12dp"
+            android:text="Submit"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintTop_toBottomOf="@id/edtReceivingScreenShipFrom" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" "
+            app:layout_constraintTop_toBottomOf="@id/btnReceivingScreenSubmit"
+            app:layout_constraintStart_toEndOf="@id/addItemScrollableViewStart"
+            app:layout_constraintEnd_toStartOf="@id/receivingScreenGuidelineEnd2"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/changeItemScrollableViewTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/addItemScrollableViewStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/changeItemScrollableViewEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".92" />
+
+        <ProgressBar
+            android:id="@+id/addItemLayoutPB"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/changeItemScrollableViewEnd"
+            app:layout_constraintStart_toStartOf="@+id/addItemScrollableViewStart"
+            app:layout_constraintTop_toTopOf="@+id/changeItemScrollableViewTop" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/receivingScreenGuidelineEnd2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".8" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
