@@ -23,10 +23,10 @@ public class AddLocationRecyclerViewAdapter extends RecyclerView.Adapter<AddLoca
 
     private Activity mActivity;
 
-    public AddLocationRecyclerViewAdapter(ArrayList<Location> locationArrayList, Context context, Activity actvity) {
+    public AddLocationRecyclerViewAdapter(ArrayList<Location> locationArrayList, Context context, Activity activity) {
         mLocationArrayList = locationArrayList;
         mContext = context;
-        mActivity = actvity;
+        mActivity = activity;
     }
 
     /**
