@@ -122,6 +122,7 @@
         </activity>
         <activity
             android:name=".views.ProductDetails"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
