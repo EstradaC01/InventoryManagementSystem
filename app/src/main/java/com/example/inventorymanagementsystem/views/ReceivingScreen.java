@@ -35,7 +35,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ReceivingScreen extends AppCompatActivity {
-    private static int STATIC_INTEGER_VALUE;
     FirebaseFirestore db;
     Users mCurrentUser;
     String mWarehouse;
@@ -109,7 +108,6 @@ public class ReceivingScreen extends AppCompatActivity {
             Receiving receiving = new Receiving();
 
             receiving.setProductId(edtProductId.getText().toString());
-            receiving.setNumberOfUnits(edtNumberOfUnits.getText().toString());
             receiving.setPiecesPerBox(edtPiecesPerBox.getText().toString());
             receiving.setTotalBoxes(edtNumberOfBoxes.getText().toString());
             receiving.setLoosePieces(edtLoosePieces.getText().toString());
@@ -119,6 +117,7 @@ public class ReceivingScreen extends AppCompatActivity {
             receiving.setPO(edtPO.getText().toString());
             receiving.setShipFrom(edtShipFrom.getText().toString());
             receiving.setReceiptId(String.valueOf(mReceiptId));
+            receiving.setTotalPieces(String.valueOf(Integer.parseInt(edtPiecesPerBox.getText().toString()) * Integer.parseInt(edtNumberOfBoxes.getText().toString())));
 
             UnitId mUnit = new UnitId();
             mUnit.setUnitId(String.valueOf(mUnitId));
@@ -129,9 +128,13 @@ public class ReceivingScreen extends AppCompatActivity {
             int totalPieces = Integer.parseInt(mUnit.getPiecesPerBox()) * Integer.parseInt(mUnit.getNumberOfBoxes());
             mUnit.setTotalPieces(String.valueOf(totalPieces));
             mUnit.setReceiptId(receiving.getReceiptId());
+            mUnit.setLocation(edtLocation.getText().toString());
+            mUnit.setDisposition(spinnerDisposition.getSelectedItem().toString());
+            mUnit.setPiecesMarked("0");
+            mUnit.setPiecesAvailable(String.valueOf(totalPieces));
 
             addUnitIdToDatabase(mUnit);
-            updateProductAvailableUnits(receiving.getProductId(), receiving.getNumberOfUnits(), receiving);
+            updateProductAvailableUnits(receiving.getProductId(), receiving.getTotalPieces(), receiving);
 
         });
 
@@ -241,8 +244,8 @@ public class ReceivingScreen extends AppCompatActivity {
                         if(d.getId().equals(_productId)) {
                             Products p = d.toObject(Products.class);
                             productDocument.document(d.getId()).delete();
-                            int availableUnits = Integer.parseInt(p.getAvailableUnits()) * Integer.parseInt(_numberOfUnits);
-                            p.setAvailableUnits(String.valueOf(availableUnits));
+                                int availableUnits = Integer.parseInt(p.getAvailableUnits()) + Integer.parseInt(_numberOfUnits);
+                                p.setAvailableUnits(String.valueOf(availableUnits));
                             addDataToFireStore(p, _receiving);
                         }
                     }
@@ -257,7 +260,10 @@ public class ReceivingScreen extends AppCompatActivity {
     }
 
     private void addUnitIdToDatabase(UnitId _unit) {
-                db.collection("Warehouses/"+mWarehouse+"/UnitId").document(_unit.getUnitId()).set(_unit).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Warehouses/"+mWarehouse+"/UnitId").document(_unit.getUnitId()).set(_unit).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                db.collection("Warehouses/"+mWarehouse+"/Products/"+_unit.getProductId()+"/UnitId").document(_unit.getUnitId()).set(_unit).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(ReceivingScreen.this, "Unit created confirmed", Toast.LENGTH_LONG).show();
@@ -268,6 +274,8 @@ public class ReceivingScreen extends AppCompatActivity {
                         Toast.makeText(ReceivingScreen.this, "Fail to confirm unit \n" + e, Toast.LENGTH_LONG).show();
                     }
                 });
+            }
+        });
     }
 
 

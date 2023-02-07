@@ -1,24 +1,29 @@
 package com.example.inventorymanagementsystem.models;
 
 public class UnitId {
-    private String unitId, productId, productDescription, dateTimeCreated,
-    piecesPerBox, numberOfBoxes, totalPieces, receiptId;
+    private String unitId, productId, dateTimeCreated,
+    piecesPerBox, numberOfBoxes, totalPieces, receiptId, location, disposition,
+    piecesMarked, piecesAvailable;
 
     public UnitId() {
 
     }
-    public UnitId(String unitId, String productId,
-                  String productDescription, String dateTimeCreated,
+    public UnitId(String unitId, String productId, String dateTimeCreated,
                   String piecesPerBox, String numberOfBoxes,
-                  String totalPieces, String receiptId) {
+                  String totalPieces, String receiptId,
+                  String location, String disposition,
+                  String piecesMarked, String piecesAvailable) {
         this.unitId = unitId;
         this.productId = productId;
-        this.productDescription = productDescription;
         this.dateTimeCreated = dateTimeCreated;
         this.piecesPerBox = piecesPerBox;
         this.numberOfBoxes = numberOfBoxes;
         this.totalPieces = totalPieces;
         this.receiptId = receiptId;
+        this.location = location;
+        this.disposition = disposition;
+        this.piecesMarked = piecesMarked;
+        this.piecesAvailable = piecesAvailable;
     }
 
     public String getUnitId() {
@@ -37,13 +42,6 @@ public class UnitId {
         this.productId = productId;
     }
 
-    public String getProductDescription() {
-        return productDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
-    }
 
     public String getDateTimeCreated() {
         return dateTimeCreated;
@@ -83,5 +81,37 @@ public class UnitId {
 
     public void setReceiptId(String receiptId) {
         this.receiptId = receiptId;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getDisposition() {
+        return disposition;
+    }
+
+    public void setDisposition(String disposition) {
+        this.disposition = disposition;
+    }
+
+    public String getPiecesMarked() {
+        return piecesMarked;
+    }
+
+    public void setPiecesMarked(String piecesMarked) {
+        this.piecesMarked = piecesMarked;
+    }
+
+    public String getPiecesAvailable() {
+        return piecesAvailable;
+    }
+
+    public void setPiecesAvailable(String piecesAvailable) {
+        this.piecesAvailable = piecesAvailable;
     }
 }

@@ -1,8 +1,9 @@
 package com.example.inventorymanagementsystem.models;
 
 public class Receiving {
-    String productId, numberOfUnits,
+    String productId,
             piecesPerBox, totalBoxes,
+            totalPieces,
             loosePieces, disposition,
             location, weight,
             PO, shipFrom,
@@ -12,14 +13,14 @@ public class Receiving {
 
     }
 
-    public Receiving(String productId, String numberOfUnits,
+    public Receiving(String productId,
                      String piecesPerBox, String totalBoxes,
                      String loosePieces, String disposition,
                      String location, String weight,
                      String PO, String shipFrom,
-                     String receiptId, String dateTimeCreated) {
+                     String receiptId, String dateTimeCreated,
+                     String totalPieces) {
         this.productId = productId;
-        this.numberOfUnits = numberOfUnits;
         this.piecesPerBox = piecesPerBox;
         this.totalBoxes = totalBoxes;
         this.loosePieces = loosePieces;
@@ -30,6 +31,7 @@ public class Receiving {
         this.shipFrom = shipFrom;
         this.receiptId = receiptId;
         this.dateTimeCreated = dateTimeCreated;
+        this.totalPieces = totalPieces;
     }
 
     public String getProductId() {
@@ -38,14 +40,6 @@ public class Receiving {
 
     public void setProductId(String productId) {
         this.productId = productId;
-    }
-
-    public String getNumberOfUnits() {
-        return numberOfUnits;
-    }
-
-    public void setNumberOfUnits(String numberOfUnits) {
-        this.numberOfUnits = numberOfUnits;
     }
 
     public String getPiecesPerBox() {
@@ -126,5 +120,13 @@ public class Receiving {
 
     public void setDateTimeCreated(String dateTimeCreated) {
         this.dateTimeCreated = dateTimeCreated;
+    }
+
+    public String getTotalPieces() {
+        return totalPieces;
+    }
+
+    public void setTotalPieces(String totalPieces) {
+        this.totalPieces = totalPieces;
     }
 }
