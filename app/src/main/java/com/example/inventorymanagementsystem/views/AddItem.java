@@ -141,6 +141,7 @@ public class AddItem extends AppCompatActivity {
                         mProduct.setUserKey(currentUser.getUserKey());
                         mProduct.setProductOwner(currentUser.getSystemId());
                         mProduct.setProductTimeAdded();
+                        mProduct.setAvailableUnits("0");
 
                         // validating the text fields if empty or not
                         if (TextUtils.isEmpty(mProduct.getProductId())) {
