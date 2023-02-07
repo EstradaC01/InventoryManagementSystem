@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="5dp"
+    android:elevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <!--        Textview for displaying item name-->
+        <TextView
+            android:id="@+id/tvLocationNameTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Location"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineStart2"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLocationName"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="S01-10-A2"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/tvLocationNameTitle"
+            app:layout_constraintStart_toStartOf="@id/tvLocationNameTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationNameTitle" />
+
+        <TextView
+            android:id="@+id/tvLocationZoneTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Zone"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart2"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLocationZone"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="Shelves"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/tvLocationZoneTitle"
+            app:layout_constraintStart_toStartOf="@id/tvLocationZoneTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationZoneTitle" />
+
+        <TextView
+            android:id="@+id/tvLocationPiecesPerBoxTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Pieces per box"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineStart2"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationName" />
+
+        <TextView
+            android:id="@+id/tvLocationPiecesPerBox"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="10"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/tvLocationPiecesPerBoxTitle"
+            app:layout_constraintStart_toStartOf="@id/tvLocationPiecesPerBoxTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationPiecesPerBoxTitle" />
+
+        <TextView
+            android:id="@+id/tvLocationNoBoxesTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="No. of boxes"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart2"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationZone" />
+
+        <TextView
+            android:id="@+id/tvLocationNoBoxes"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="5"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/tvLocationNoBoxesTitle"
+            app:layout_constraintStart_toStartOf="@id/tvLocationNoBoxesTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationNoBoxesTitle" />
+
+
+        <TextView
+            android:id="@+id/tvLocationTotalPiecesTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Total Pieces"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineStart2"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationPiecesPerBox" />
+
+        <TextView
+            android:id="@+id/tvLocationTotalPieces"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="50"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/tvLocationTotalPiecesTitle"
+            app:layout_constraintStart_toStartOf="@id/tvLocationTotalPiecesTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationTotalPiecesTitle" />
+
+        <TextView
+            android:id="@+id/tvLocationAvailableUnitsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Available Units"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart2"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationNoBoxes" />
+
+        <TextView
+            android:id="@+id/tvLocationAvailableUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="10"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/tvLocationAvailableUnitsTitle"
+            app:layout_constraintStart_toStartOf="@id/tvLocationAvailableUnitsTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationAvailableUnitsTitle" />
+
+        <TextView
+            android:id="@+id/tvLocationMarkedUnitsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Marked Units"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineStart2"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationTotalPieces" />
+
+        <TextView
+            android:id="@+id/tvLocationMarkedUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="40"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/tvLocationMarkedUnitsTitle"
+            app:layout_constraintStart_toStartOf="@id/tvLocationMarkedUnitsTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationMarkedUnitsTitle" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".98" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
