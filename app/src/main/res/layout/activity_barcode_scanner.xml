@@ -30,6 +30,20 @@
         app:layout_constraintStart_toEndOf="@id/scanGuidelineStart"
         app:layout_constraintTop_toBottomOf="@id/cameraView" />
 
+    <TextView
+        android:id="@+id/idTVBarcode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/edit_text_border_2"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Barcode"
+        app:layout_constraintEnd_toStartOf="@id/scanGuidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/scanGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/idBtnScanCode"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/scanGuidelineStart"
         android:layout_width="wrap_content"
