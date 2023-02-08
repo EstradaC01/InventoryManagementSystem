@@ -3,7 +3,6 @@ package com.example.inventorymanagementsystem.views;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,9 +19,9 @@ import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.CustomSpinnerAdapter;
-import com.example.inventorymanagementsystem.models.Location;
 import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Receiving;
+import com.example.inventorymanagementsystem.models.UnitId;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,10 +30,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ReceivingScreen extends AppCompatActivity {
-    private static int STATIC_INTEGER_VALUE;
     FirebaseFirestore db;
     Users mCurrentUser;
     String mWarehouse;
@@ -43,6 +43,8 @@ public class ReceivingScreen extends AppCompatActivity {
     private String mLocation;
     private String mProduct;
     private int mReceiptId = 1;
+    private int mUnitId = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +108,6 @@ public class ReceivingScreen extends AppCompatActivity {
             Receiving receiving = new Receiving();
 
             receiving.setProductId(edtProductId.getText().toString());
-            receiving.setNumberOfUnits(edtNumberOfUnits.getText().toString());
             receiving.setPiecesPerBox(edtPiecesPerBox.getText().toString());
             receiving.setTotalBoxes(edtNumberOfBoxes.getText().toString());
             receiving.setLoosePieces(edtLoosePieces.getText().toString());
@@ -116,8 +117,24 @@ public class ReceivingScreen extends AppCompatActivity {
             receiving.setPO(edtPO.getText().toString());
             receiving.setShipFrom(edtShipFrom.getText().toString());
             receiving.setReceiptId(String.valueOf(mReceiptId));
+            receiving.setTotalPieces(String.valueOf(Integer.parseInt(edtPiecesPerBox.getText().toString()) * Integer.parseInt(edtNumberOfBoxes.getText().toString())));
 
-            updateProductAvailableUnits(receiving.getProductId(), receiving.getNumberOfUnits(), receiving);
+            UnitId mUnit = new UnitId();
+            mUnit.setUnitId(String.valueOf(mUnitId));
+            mUnit.setProductId(receiving.getProductId());
+            mUnit.setDateTimeCreated(getCurrentTime());
+            mUnit.setPiecesPerBox(receiving.getPiecesPerBox());
+            mUnit.setNumberOfBoxes(receiving.getTotalBoxes());
+            int totalPieces = Integer.parseInt(mUnit.getPiecesPerBox()) * Integer.parseInt(mUnit.getNumberOfBoxes());
+            mUnit.setTotalPieces(String.valueOf(totalPieces));
+            mUnit.setReceiptId(receiving.getReceiptId());
+            mUnit.setLocation(edtLocation.getText().toString());
+            mUnit.setDisposition(spinnerDisposition.getSelectedItem().toString());
+            mUnit.setPiecesMarked("0");
+            mUnit.setPiecesAvailable(String.valueOf(totalPieces));
+
+            addUnitIdToDatabase(mUnit);
+            updateProductAvailableUnits(receiving.getProductId(), receiving.getTotalPieces(), receiving);
 
         });
 
@@ -139,6 +156,21 @@ public class ReceivingScreen extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(ReceivingScreen.this, "Failed to get data", Toast.LENGTH_LONG).show();
             }
+        });
+
+        CollectionReference nextUnitId = db.collection("Warehouses/"+mWarehouse+"/UnitId");
+
+        nextUnitId.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(!queryDocumentSnapshots.isEmpty()) {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+
+                    for(DocumentSnapshot d : list) {
+                        mUnitId++;
+                    }
+                }
+             }
         });
     }
 
@@ -177,9 +209,11 @@ public class ReceivingScreen extends AppCompatActivity {
         db.collection("Warehouses/"+mWarehouse+"/Products").document(_product.getProductId()).set(_product).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+                _receiving.setDateTimeCreated(getCurrentTime());
                 db.collection("Warehouses/"+mWarehouse+"/Receiving").document(_receiving.getReceiptId()).set(_receiving).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+
                         Toast.makeText(ReceivingScreen.this, "Receiving confirmed", Toast.LENGTH_LONG).show();
                         finish();
                     }
@@ -210,7 +244,8 @@ public class ReceivingScreen extends AppCompatActivity {
                         if(d.getId().equals(_productId)) {
                             Products p = d.toObject(Products.class);
                             productDocument.document(d.getId()).delete();
-                            p.setAvailableUnits(_numberOfUnits);
+                                int availableUnits = Integer.parseInt(p.getAvailableUnits()) + Integer.parseInt(_numberOfUnits);
+                                p.setAvailableUnits(String.valueOf(availableUnits));
                             addDataToFireStore(p, _receiving);
                         }
                     }
@@ -222,6 +257,31 @@ public class ReceivingScreen extends AppCompatActivity {
                 Toast.makeText(ReceivingScreen.this, "Failed to get data", Toast.LENGTH_LONG).show();
             }
         });
+    }
 
+    private void addUnitIdToDatabase(UnitId _unit) {
+        db.collection("Warehouses/"+mWarehouse+"/UnitId").document(_unit.getUnitId()).set(_unit).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                db.collection("Warehouses/"+mWarehouse+"/Products/"+_unit.getProductId()+"/UnitId").document(_unit.getUnitId()).set(_unit).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(ReceivingScreen.this, "Unit created confirmed", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ReceivingScreen.this, "Fail to confirm unit \n" + e, Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+    }
+
+
+    private String getCurrentTime() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(("MM/dd/yyyy HH:mm:ss"));
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
     }
 }

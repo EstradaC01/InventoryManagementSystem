@@ -21,6 +21,9 @@
             android:name=".views.IMSBarcodeScanner"
             android:exported="false" />
         <activity
+            android:name=".views.InventoryList"
+            android:exported="false" />
+        <activity
             android:name=".views.AddOrder"
             android:exported="false" />
         <activity
@@ -133,7 +136,8 @@
         </activity>
         <activity
             android:name=".views.ProductDetails"
-            android:exported="false">
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
