@@ -18,14 +18,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:text="Location"
-            android:textAlignment="center"
+            android:text="Product ID"
             android:textColor="#4A4A4A"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
             app:layout_constraintStart_toEndOf="@id/guidelineStart"
             app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/breakline"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="---------------------------------------------------"
+            android:textColor="#85C1E9"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/tvProductNameLocationCard" />
         <!--        Textview for displaying item name-->
         <TextView
             android:id="@+id/tvLocationNameTitleLocationCard"
@@ -39,7 +50,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/guidelineStart2"
             app:layout_constraintStart_toEndOf="@id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/tvProductNameLocationCard" />
+            app:layout_constraintTop_toBottomOf="@id/breakline" />
 
         <TextView
             android:id="@+id/tvLocationNameLocationCard"
@@ -65,7 +76,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/guidelineStart2"
             app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
-            app:layout_constraintTop_toBottomOf="@id/tvProductNameLocationCard" />
+            app:layout_constraintTop_toBottomOf="@id/breakline" />
 
         <TextView
             android:id="@+id/tvLocationZoneLocationCard"
@@ -214,6 +225,33 @@
             app:layout_constraintEnd_toEndOf="@id/tvLocationMarkedUnitsTitleLocationCard"
             app:layout_constraintStart_toStartOf="@id/tvLocationMarkedUnitsTitleLocationCard"
             app:layout_constraintTop_toBottomOf="@id/tvLocationMarkedUnitsTitleLocationCard" />
+
+        <TextView
+            android:id="@+id/tvLocationUnitIdTitleLocationCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Unit ID"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart2"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationAvailableUnitsLocationCard" />
+
+        <TextView
+            android:id="@+id/tvLocationUnitIdLocationCard"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="4"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/tvLocationUnitIdTitleLocationCard"
+            app:layout_constraintStart_toStartOf="@id/tvLocationUnitIdTitleLocationCard"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationUnitIdTitleLocationCard" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineStart"

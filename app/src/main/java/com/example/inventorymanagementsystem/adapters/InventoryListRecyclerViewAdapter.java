@@ -45,15 +45,16 @@ public class InventoryListRecyclerViewAdapter extends RecyclerView.Adapter<Inven
         UnitId unit = mUnitIdArrayList.get(position);
 
 
-            holder.tvProductId.setText(unit.getProductId());
+            holder.tvProductId.setText("Product ID: " + unit.getProductId());
 
             holder.tvLocationName.setText(unit.getLocation());
-            // zone needs to be implemented
+            holder.tvLocationZone.setText(unit.getZone());
             holder.tvPiecesPerBox.setText(unit.getPiecesPerBox());
             holder.tvNoOfBoxes.setText(unit.getNumberOfBoxes());
             holder.tvTotalPieces.setText(unit.getTotalPieces());
             holder.tvAvailableUnits.setText(unit.getPiecesAvailable());
             holder.tvMarkedUnits.setText(unit.getPiecesMarked());
+            holder.tvUnitId.setText(unit.getUnitId());
 
 
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
@@ -97,6 +98,7 @@ public class InventoryListRecyclerViewAdapter extends RecyclerView.Adapter<Inven
         private final TextView tvAvailableUnits;
         private final TextView tvMarkedUnits;
         private final TextView tvProductId;
+        private final TextView tvUnitId;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -109,6 +111,7 @@ public class InventoryListRecyclerViewAdapter extends RecyclerView.Adapter<Inven
                 tvTotalPieces = itemView.findViewById(R.id.tvLocationTotalPiecesLocationCard);
                 tvAvailableUnits = itemView.findViewById(R.id.tvLocationAvailableUnitsLocationCard);
                 tvMarkedUnits = itemView.findViewById(R.id.tvLocationMarkedUnitsLocationCard);
+                tvUnitId = itemView.findViewById(R.id.tvLocationUnitIdLocationCard);
         }
     }
 

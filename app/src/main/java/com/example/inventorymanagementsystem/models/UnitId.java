@@ -3,7 +3,7 @@ package com.example.inventorymanagementsystem.models;
 public class UnitId {
     private String unitId, productId, dateTimeCreated,
     piecesPerBox, numberOfBoxes, totalPieces, receiptId, location, disposition,
-    piecesMarked, piecesAvailable;
+    piecesMarked, piecesAvailable, zone;
 
     public UnitId() {
 
@@ -12,7 +12,7 @@ public class UnitId {
                   String piecesPerBox, String numberOfBoxes,
                   String totalPieces, String receiptId,
                   String location, String disposition,
-                  String piecesMarked, String piecesAvailable) {
+                  String piecesMarked, String piecesAvailable, String zone) {
         this.unitId = unitId;
         this.productId = productId;
         this.dateTimeCreated = dateTimeCreated;
@@ -113,5 +113,13 @@ public class UnitId {
 
     public void setPiecesAvailable(String piecesAvailable) {
         this.piecesAvailable = piecesAvailable;
+    }
+
+    public String getZone() {
+        return zone;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone;
     }
 }

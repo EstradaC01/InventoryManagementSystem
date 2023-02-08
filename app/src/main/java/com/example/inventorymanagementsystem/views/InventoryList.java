@@ -49,7 +49,7 @@ public class InventoryList extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // change action support bar title and font color
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Product Inquiry</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Inventory</font>"));
 
         mRecyclerView = findViewById(R.id.rvInventoryList);
 

@@ -96,6 +96,7 @@ public class AddLocationRecyclerViewAdapter extends RecyclerView.Adapter<AddLoca
                 // Intent
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("Location", location.getName());
+                resultIntent.putExtra("Zone", location.getZone());
                 mActivity.setResult(Activity.RESULT_OK, resultIntent);
                 mActivity.finish();
             }

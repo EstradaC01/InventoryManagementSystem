@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.CustomSpinnerAdapter;
+import com.example.inventorymanagementsystem.models.Location;
 import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Receiving;
 import com.example.inventorymanagementsystem.models.UnitId;
@@ -41,6 +42,7 @@ public class ReceivingScreen extends AppCompatActivity {
 
     private EditText edtLocation, edtProductId;
     private String mLocation;
+    private String mZone;
     private String mProduct;
     private int mReceiptId = 1;
     private int mUnitId = 1;
@@ -125,13 +127,18 @@ public class ReceivingScreen extends AppCompatActivity {
             mUnit.setDateTimeCreated(getCurrentTime());
             mUnit.setPiecesPerBox(receiving.getPiecesPerBox());
             mUnit.setNumberOfBoxes(receiving.getTotalBoxes());
+
             int totalPieces = Integer.parseInt(mUnit.getPiecesPerBox()) * Integer.parseInt(mUnit.getNumberOfBoxes());
+
             mUnit.setTotalPieces(String.valueOf(totalPieces));
             mUnit.setReceiptId(receiving.getReceiptId());
             mUnit.setLocation(edtLocation.getText().toString());
+            mUnit.setZone(mZone);
             mUnit.setDisposition(spinnerDisposition.getSelectedItem().toString());
             mUnit.setPiecesMarked("0");
             mUnit.setPiecesAvailable(String.valueOf(totalPieces));
+
+
 
             addUnitIdToDatabase(mUnit);
             updateProductAvailableUnits(receiving.getProductId(), receiving.getTotalPieces(), receiving);
@@ -182,6 +189,7 @@ public class ReceivingScreen extends AppCompatActivity {
                     if(result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         mLocation = data.getStringExtra("Location");
+                        mZone = data.getStringExtra("Zone");
                         edtLocation.setText(mLocation);
                     } else {
                         Toast.makeText(ReceivingScreen.this, "Cancelled...", Toast.LENGTH_LONG).show();

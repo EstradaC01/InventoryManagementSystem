@@ -187,24 +187,30 @@ public class AddItem extends AppCompatActivity {
     }
 
     private void saveProduct(Products _product){
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("productImages")
-                .child(uri.getLastPathSegment());
-        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+        if(!(uri == null)) {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("productImages")
+                    .child(uri.getLastPathSegment());
 
-                while(!uriTask.isComplete())pbLoad.setVisibility(View.VISIBLE);
-                Uri urlImage = uriTask.getResult();
-                _product.setImageUri(urlImage.toString());
-                addDataToFireStore(_product);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                addDataToFireStore(_product);
-            }
-        });
+            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+
+                    while(!uriTask.isComplete())pbLoad.setVisibility(View.VISIBLE);
+                    Uri urlImage = uriTask.getResult();
+                    _product.setImageUri(urlImage.toString());
+                    addDataToFireStore(_product);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    addDataToFireStore(_product);
+                }
+            });
+        } else {
+            addDataToFireStore(_product);
+        }
+
     }
 
 }
