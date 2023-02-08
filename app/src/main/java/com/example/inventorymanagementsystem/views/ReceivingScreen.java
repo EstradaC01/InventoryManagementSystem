@@ -139,7 +139,7 @@ public class ReceivingScreen extends AppCompatActivity {
             mUnit.setPiecesAvailable(String.valueOf(totalPieces));
 
 
-
+            updateLocationStatus(mUnit.getLocation());
             addUnitIdToDatabase(mUnit);
             updateProductAvailableUnits(receiving.getProductId(), receiving.getTotalPieces(), receiving);
 
@@ -180,6 +180,8 @@ public class ReceivingScreen extends AppCompatActivity {
              }
         });
     }
+
+
 
     private ActivityResultLauncher<Intent> launchFindLocationActivity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -240,6 +242,15 @@ public class ReceivingScreen extends AppCompatActivity {
         });
     }
 
+    private void addLocationToFirestore(Location _location) {
+        db.collection("Warehouses/"+mWarehouse+"/Locations").document(_location.getName()).set(_location).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+    }
+
     private void updateProductAvailableUnits(String _productId, String _numberOfUnits, Receiving _receiving) {
         CollectionReference productDocument = db.collection("Warehouses/"+mWarehouse+"/Products");
 
@@ -263,6 +274,27 @@ public class ReceivingScreen extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(ReceivingScreen.this, "Failed to get data", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void updateLocationStatus(String _locationName) {
+        CollectionReference location = db.collection("Warehouses/"+mWarehouse+"/Locations");
+
+        location.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(!queryDocumentSnapshots.isEmpty()) {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for(DocumentSnapshot d : list) {
+                        if(d.getId().equals(_locationName)) {
+                            Location l = d.toObject(Location.class);
+                            location.document(d.getId()).delete();
+                            l.setStatus("INUSE");
+                            addLocationToFirestore(l);
+                        }
+                    }
+                }
             }
         });
     }
