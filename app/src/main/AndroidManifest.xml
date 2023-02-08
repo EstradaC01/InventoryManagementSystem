@@ -13,6 +13,9 @@
         android:theme="@style/Theme.InventoryManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".views.InventoryList"
+            android:exported="false" />
+        <activity
             android:name=".views.AddOrder"
             android:exported="false" />
         <activity
@@ -122,8 +125,8 @@
         </activity>
         <activity
             android:name=".views.ProductDetails"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:exported="false">
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
