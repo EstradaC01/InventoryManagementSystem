@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private static Users currentUser;
 
     private static String mWarehouse = "";
+    private Spinner mSpinnerWarehouses;
+    private Button mButtonSubmit;
+    private TextView mTextViewChooseWarehouse;
 
     private FirebaseFirestore db;
 
@@ -51,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
         // prevents users from rotating screen
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        mSpinnerWarehouses = findViewById(R.id.spinnerMainActivity);
+        mButtonSubmit = findViewById(R.id.btnMainActivitySubmit);
+        mTextViewChooseWarehouse = findViewById(R.id.tvMainActivity);
+
+
         // getting intent from Login screen with Users object and companyCode string
         Intent i = getIntent();
         currentUser = (Users) i.getSerializableExtra("User");
@@ -62,8 +70,57 @@ public class MainActivity extends AppCompatActivity {
 
         // Shows dialog box if warehouse is not selected or null
         if (mWarehouse.isEmpty()) {
+            mSpinnerWarehouses.setVisibility(View.GONE);
+            mButtonSubmit.setVisibility(View.GONE);
+            mTextViewChooseWarehouse.setVisibility(View.GONE);
             showCustomDialog();
         }
+
+        String defaultTextForSpinner = "Warehouse";
+
+        List<String> warehouses = new ArrayList<>();
+
+        db.collection("Warehouses").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(!queryDocumentSnapshots.isEmpty())
+                {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for(DocumentSnapshot d : list) {
+                        if(d.getId().contains("Warehouse")){
+                            String warehouse = d.getId();
+                            warehouses.add(warehouse);
+                        }
+                    }
+                    String[] arrayForSpinner = new String[warehouses.size()];
+                    for(int i = 0; i < warehouses.size(); i++) {
+                        arrayForSpinner[i] = warehouses.get(i);
+                    }
+
+                    mSpinnerWarehouses.setAdapter(new CustomSpinnerAdapter(MainActivity.this, R.layout.spinner_row, arrayForSpinner, defaultTextForSpinner));
+                } else {
+                    Toast.makeText(MainActivity.this, "No data found in Database", Toast.LENGTH_LONG).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity.this, "Failed to get data", Toast.LENGTH_LONG).show();
+            }
+        });
+        mButtonSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mWarehouse = mSpinnerWarehouses.getSelectedItem().toString();
+                for(int i = 0; i < warehouses.size(); i++) {
+                    if (mSpinnerWarehouses.getSelectedItem() == warehouses.get(i)) {
+                        break;
+                    }
+                }
+                getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>"+mWarehouse+"</font>"));
+
+            }
+        });
     }
 
     /**
@@ -237,6 +294,9 @@ public class MainActivity extends AppCompatActivity {
                 mWarehouse = spinner.getSelectedItem().toString();
                 for(int i = 0; i < warehouses.size(); i++) {
                     if (spinner.getSelectedItem() == warehouses.get(i)) {
+                        mSpinnerWarehouses.setVisibility(View.VISIBLE);
+                        mButtonSubmit.setVisibility(View.VISIBLE);
+                        mTextViewChooseWarehouse.setVisibility(View.VISIBLE);
                         dialog.dismiss();
                         break;
                     }
