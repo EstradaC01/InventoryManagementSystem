@@ -31,8 +31,9 @@ public class AddMassLocations extends AppCompatActivity {
     private static Users mCurrentUser;
     private String mWarehouse;
     private Spinner spinnerZones;
-    private EditText edtLength, edtLpLimit, edtWeight, edtHeight, edtWidth;
+    private EditText edtLength, edtLpLimit, edtWeight, edtHeight, edtWidth, edtStartingAisle, edtEndingAisle, edtStartingRack, edtEndingRack, edtStartingLevel, edtEndingLevel;
 
+    private boolean locationExists = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +49,14 @@ public class AddMassLocations extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         // Initializing widgets
-        EditText edtStartingAisle = findViewById(R.id.edtAddMassLocationsStartingAisle);
-        EditText edtEndingAisle = findViewById(R.id.edtAddMassLocationsEndingAisle);
+        edtStartingAisle = findViewById(R.id.edtAddMassLocationsStartingAisle);
+        edtEndingAisle = findViewById(R.id.edtAddMassLocationsEndingAisle);
 
-        EditText edtStartingRack = findViewById(R.id.edtAddMassLocationsStartingRack);
-        EditText edtEndingRack = findViewById(R.id.edtAddMassLocationsEndingRack);
+        edtStartingRack = findViewById(R.id.edtAddMassLocationsStartingRack);
+        edtEndingRack = findViewById(R.id.edtAddMassLocationsEndingRack);
 
-        EditText edtStartingLevel = findViewById(R.id.edtAddMassLocationsStartingLevel);
-        EditText edtEndingLevel = findViewById(R.id.edtAddMassLocationsEndingLevel);
+        edtStartingLevel = findViewById(R.id.edtAddMassLocationsStartingLevel);
+        edtEndingLevel = findViewById(R.id.edtAddMassLocationsEndingLevel);
 
         edtLpLimit = findViewById(R.id.edtAddMassLocationsLpLimit);
         edtWeight = findViewById(R.id.edtAddMassLocationsWeight);
@@ -96,34 +97,6 @@ public class AddMassLocations extends AppCompatActivity {
                     && !edtStartingLevel.getText().toString().isEmpty()
                     && !spinnerZones.getSelectedItem().toString().equals("Zone")) {
 
-//                if (!edtStartingAisle.getText().toString().isEmpty()) {
-//
-//                    CollectionReference collectionReference = db.collection("Warehouses/" + mWarehouse + "/Locations");
-//
-//                    collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                            Boolean unitTypeExists = false;
-//                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-//                            for (DocumentSnapshot d : list) {
-//                                if (d.getId().equals(location.getName())) {
-//                                    unitTypeExists = true;
-//                                    Toast.makeText(AddMassLocations.this, "Location already exists", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                            if (!unitTypeExists) {
-//                                addDataToFireStore(edtStartingAisle.getText().toString(), edtEndingAisle.getText().toString(),
-//                                        edtStartingRack.getText().toString(), edtEndingRack.getText().toString(),
-//                                        edtStartingLevel.getText().toString(), edtEndingLevel.getText().toString());
-//                            }
-//                        }
-//                    }).addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Toast.makeText(AddMassLocations.this, "Unable to read data", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
                 addDataToFireStore(edtStartingAisle.getText().toString(), edtEndingAisle.getText().toString(),
                         edtStartingRack.getText().toString(), edtEndingRack.getText().toString(),
                         edtStartingLevel.getText().toString(), edtEndingLevel.getText().toString());
@@ -171,8 +144,6 @@ public class AddMassLocations extends AppCompatActivity {
         boolean zeroPrefixOnAisle = false;
         boolean zeroPrefixOnRack = false;
         boolean zeroPrefixOnLevel = false;
-
-
 
         String startingLetter = "";
         String startingNumber;
@@ -245,6 +216,7 @@ public class AddMassLocations extends AppCompatActivity {
                         location.setHasInventory(false);
                         location.setStatus("OPEN");
                         location.setName(location.getAisle()+"-"+location.getRack()+"-"+location.getLevel());
+
                         addLocationToDatabase(location);
 
                     } else {
@@ -282,6 +254,7 @@ public class AddMassLocations extends AppCompatActivity {
                         location.setName(location.getAisle()+"-"+location.getRack()+"-"+location.getLevel());
 
                         addLocationToDatabase(location);
+
                     }
                     currentLevel++;
                 }
@@ -293,12 +266,30 @@ public class AddMassLocations extends AppCompatActivity {
     }
 
     private void addLocationToDatabase(Location _location) {
-        db.collection("Warehouses/"+mWarehouse+"/Locations").document(_location.getName()).set(_location).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+        CollectionReference collectionReference = db.collection("Warehouses/" + mWarehouse + "/Locations");
+        collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(AddMassLocations.this, "Location added", Toast.LENGTH_SHORT).show();
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                boolean locationExists = false;
+                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot d : list) {
+                    if (d.getId().equals(_location.getName())) {
+                        locationExists = true;
+                        Toast.makeText(AddMassLocations.this, "Location exists", Toast.LENGTH_LONG).show();
+                    }
+                }
+                if(!locationExists) {
+                    db.collection("Warehouses/"+mWarehouse+"/Locations").document(_location.getName()).set(_location).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(AddMassLocations.this, "Location added", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
+
     }
 
 }
