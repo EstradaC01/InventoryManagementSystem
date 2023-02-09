@@ -183,14 +183,14 @@ public class AddMassLocations extends AppCompatActivity {
         char c2 = _endingLevel.charAt(0);
 
         if(c >= 'A' && c <= 'Z') {
-            startingLetter = startingPart[0];
+            startingLetter = startingPart[0].trim();
             startingNumber = startingPart[1];
         } else {
             startingNumber = startingPart[0];
         }
 
         if(c2 >= 'A' && c2 <= 'Z') {
-            endingLetter = endingPart[0];
+            endingLetter = endingPart[0].trim();
             endingNumber = endingPart[1];
         } else {
             endingNumber = endingPart[0];

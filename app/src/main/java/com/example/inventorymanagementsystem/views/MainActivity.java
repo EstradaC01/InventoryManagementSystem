@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(receivingIntent);
                 break;
             case R.id.idMenuInventory:
-                Intent inventoryIntent = new Intent(MainActivity.this, InventoryList.class);
+                Intent inventoryIntent = new Intent(MainActivity.this, InventorySubMenu.class);
                 inventoryIntent.putExtra("User", currentUser);
                 inventoryIntent.putExtra("Warehouse", mWarehouse);
                 startActivity(inventoryIntent);

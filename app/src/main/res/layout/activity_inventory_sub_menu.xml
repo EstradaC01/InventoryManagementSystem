@@ -10,7 +10,7 @@
     <!--    Inventory-->
 
     <ImageButton
-        android:id="@+id/locationsSubMenuCreateLocationsButton"
+        android:id="@+id/inventorySubMenuShowInventory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/statelistdrawable_white"
@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineMiddle"/>
 
     <TextView
-        android:id="@+id/locationsSubMenuCreateLocationsTitle"
+        android:id="@+id/inventorySubMenuShowInventoryTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -31,13 +31,13 @@
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuCreateLocationsButton"
-        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuCreateLocationsButton"
-        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuCreateLocationsButton" />
+        app:layout_constraintEnd_toEndOf="@+id/inventorySubMenuShowInventory"
+        app:layout_constraintStart_toStartOf="@+id/inventorySubMenuShowInventory"
+        app:layout_constraintTop_toBottomOf="@+id/inventorySubMenuShowInventory" />
 
     <!--   Adjustment-->
     <ImageButton
-        android:id="@+id/locationsSubMenuCreateZonesButton"
+        android:id="@+id/inventorySubMenuAdjustment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/statelistdrawable_white"
@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineEnd"/>
 
     <TextView
-        android:id="@+id/locationsSubMenuZoneTitle"
+        android:id="@+id/inventorySubMenuAdjustmentTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -58,13 +58,13 @@
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuCreateZonesButton"
-        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuCreateZonesButton"
-        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuCreateZonesButton" />
+        app:layout_constraintEnd_toEndOf="@+id/inventorySubMenuAdjustment"
+        app:layout_constraintStart_toStartOf="@+id/inventorySubMenuAdjustment"
+        app:layout_constraintTop_toBottomOf="@+id/inventorySubMenuAdjustment" />
 
     <!--    Move Unit-->
     <ImageButton
-        android:id="@+id/locationsSubMenuUnitsOfMeasureButton"
+        android:id="@+id/inventorySubMenuMoveUnit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -72,10 +72,10 @@
         android:elevation="10dp"
         android:padding="30dp"
         android:src="@drawable/ic_move_64px"
-        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuCreateLocationsButton"
+        app:layout_constraintEnd_toEndOf="@+id/inventorySubMenuShowInventory"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuCreateLocationsButton"
-        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuCreateLocationsTitle" />
+        app:layout_constraintStart_toStartOf="@+id/inventorySubMenuShowInventory"
+        app:layout_constraintTop_toBottomOf="@+id/inventorySubMenuShowInventoryTitle" />
 
     <TextView
         android:id="@+id/locationsSubMenuUnitsOfMeasureTitle"
@@ -87,9 +87,9 @@
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuUnitsOfMeasureButton"
-        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuUnitsOfMeasureButton"
-        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuUnitsOfMeasureButton" />
+        app:layout_constraintEnd_toEndOf="@+id/inventorySubMenuMoveUnit"
+        app:layout_constraintStart_toStartOf="@+id/inventorySubMenuMoveUnit"
+        app:layout_constraintTop_toBottomOf="@+id/inventorySubMenuMoveUnit" />
 
 <!--    &lt;!&ndash;    Mass Locations&ndash;&gt;-->
 <!--    <ImageButton-->
