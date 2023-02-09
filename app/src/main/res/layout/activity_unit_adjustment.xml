@@ -80,6 +80,34 @@
                 app:layout_constraintEnd_toEndOf="@id/tvUnitIdTitle"/>
 
             <TextView
+                android:id="@+id/tvUnitAdjustmentProductIdTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Product ID"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/edtUnitAdjustmentUnitId"
+                app:layout_constraintStart_toStartOf="@id/edtUnitAdjustmentUnitId"
+                app:layout_constraintEnd_toEndOf="@id/edtUnitAdjustmentUnitId" />
+            <EditText
+                android:id="@+id/edtUnitAdjustmentProductId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_white"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#423E3E"
+                android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
+                app:layout_constraintTop_toBottomOf="@id/tvUnitAdjustmentProductIdTitle"
+                app:layout_constraintStart_toStartOf="@id/tvUnitAdjustmentProductIdTitle"
+                app:layout_constraintEnd_toEndOf="@id/tvUnitAdjustmentProductIdTitle"/>
+
+            <TextView
                 android:id="@+id/tvUnitAdjustmentLocationNameTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -88,9 +116,9 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/edtUnitAdjustmentUnitId"
-                app:layout_constraintStart_toStartOf="@id/edtUnitAdjustmentUnitId"
-                app:layout_constraintEnd_toEndOf="@id/edtUnitAdjustmentUnitId"/>
+                app:layout_constraintTop_toBottomOf="@id/edtUnitAdjustmentProductId"
+                app:layout_constraintStart_toStartOf="@id/edtUnitAdjustmentProductId"
+                app:layout_constraintEnd_toEndOf="@id/edtUnitAdjustmentProductId"/>
             <EditText
                 android:id="@+id/edtUnitAdjustmentLocationName"
                 android:layout_width="0dp"

@@ -43,5 +43,12 @@ public class InventorySubMenu extends AppCompatActivity {
             startActivity(showInventoryIntent);
         });
 
+        btnAdjustments.setOnClickListener(v -> {
+            Intent adjustmentIntent = new Intent(InventorySubMenu.this, UnitAdjustment.class);
+            adjustmentIntent.putExtra("Warehouse", mWarehouse);
+            adjustmentIntent.putExtra("User", mCurrentUser);
+            startActivity(adjustmentIntent);
+        });
+
     }
 }
