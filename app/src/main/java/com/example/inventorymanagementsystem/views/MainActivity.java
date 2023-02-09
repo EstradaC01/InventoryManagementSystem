@@ -28,6 +28,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.mlkit.vision.barcode.common.Barcode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -234,11 +235,11 @@ public class MainActivity extends AppCompatActivity {
                 locationsIntent.putExtra("Warehouse", mWarehouse);
                 startActivity(locationsIntent);
                 break;
-            case R.id.idMenuQRScanner:
-                Intent QRScanner = new Intent(MainActivity.this, QRScanner.class);
-                QRScanner.putExtra("User", currentUser);
-                QRScanner.putExtra("Warehouse", mWarehouse);
-                startActivity(QRScanner);
+            case R.id.idMenuBarcodeScanner:
+                Intent BarcodeScanner = new Intent(MainActivity.this, IMSBarcodeScanner.class);
+                BarcodeScanner.putExtra("User", currentUser);
+                BarcodeScanner.putExtra("Warehouse", mWarehouse);
+                startActivity(BarcodeScanner);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
