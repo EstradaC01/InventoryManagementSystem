@@ -179,8 +179,8 @@ public class AddMassLocations extends AppCompatActivity {
         String endingLetter = "";
         String endingNumber;
 
-        char c = _startingLevel.charAt(0);
-        char c2 = _endingLevel.charAt(0);
+        char c = _startingLevel.trim().charAt(0);
+        char c2 = _endingLevel.trim().charAt(0);
 
         if(c >= 'A' && c <= 'Z') {
             startingLetter = startingPart[0].trim();
