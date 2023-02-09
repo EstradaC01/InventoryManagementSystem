@@ -36,6 +36,7 @@ public class LocationsSubMenu extends AppCompatActivity {
         ImageButton locationsButton = findViewById(R.id.locationsSubMenuCreateLocationsButton);
         ImageButton zonesButton = findViewById(R.id.locationsSubMenuCreateZonesButton);
         ImageButton unitsOfMeasureButton = findViewById(R.id.locationsSubMenuUnitsOfMeasureButton);
+        ImageButton massLocationsButton = findViewById(R.id.locationsSubMenuMassLocationsButton);
 
         unitsOfMeasureButton.setOnClickListener(v -> {
             Intent unitsOfMeasureIntent = new Intent (LocationsSubMenu.this, UnitsOfMeasure.class);
@@ -57,6 +58,13 @@ public class LocationsSubMenu extends AppCompatActivity {
             locationsIntent.putExtra("User", mCurrentUser);
             locationsIntent.putExtra("Warehouse", mWarehouse);
             startActivity(locationsIntent);
+        });
+
+        massLocationsButton.setOnClickListener( v -> {
+            Intent massLocationsIntent = new Intent(LocationsSubMenu.this, AddMassLocations.class);
+            massLocationsIntent.putExtra("User", mCurrentUser);
+            massLocationsIntent.putExtra("Warehouse", mWarehouse);
+            startActivity(massLocationsIntent);
         });
 
     }

@@ -7,33 +7,7 @@
     android:background="@drawable/blue_android_background"
     tools:context=".views.LocationsSubMenu">
 
-    <ImageButton
-        android:id="@+id/locationsSubMenuUnitsOfMeasureButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/statelistdrawable_white"
-        android:elevation="10dp"
-        android:padding="30dp"
-        android:src="@drawable/ic_product_reports_mainblue_64px"
-        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuCreateLocationsButton"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuCreateLocationsButton"
-        app:layout_constraintTop_toBottomOf="@+id/idTextViewItemSubmenuCreateProductTitle" />
-
-    <TextView
-        android:id="@+id/idTextViewItemSubmenuProductReportsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Units of Measure"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuUnitsOfMeasureButton"
-        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuUnitsOfMeasureButton"
-        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuUnitsOfMeasureButton" />
+<!--    Create Location-->
 
     <ImageButton
         android:id="@+id/locationsSubMenuCreateLocationsButton"
@@ -47,6 +21,21 @@
         app:layout_constraintTop_toTopOf="@id/guidelineTop"
         app:layout_constraintEnd_toStartOf="@id/guidelineMiddle"/>
 
+    <TextView
+        android:id="@+id/locationsSubMenuCreateLocationsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Locations"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuCreateLocationsButton"
+        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuCreateLocationsButton"
+        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuCreateLocationsButton" />
+
+<!--   Create zone-->
     <ImageButton
         android:id="@+id/locationsSubMenuCreateZonesButton"
         android:layout_width="wrap_content"
@@ -60,21 +49,7 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineEnd"/>
 
     <TextView
-        android:id="@+id/idTextViewItemSubmenuCreateProductTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Locations"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuCreateLocationsButton"
-        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuCreateLocationsButton"
-        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuCreateLocationsButton" />
-
-    <TextView
-        android:id="@+id/idTextViewItemSubmenuProductListTitle"
+        android:id="@+id/locationsSubMenuZoneTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -86,6 +61,65 @@
         app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuCreateZonesButton"
         app:layout_constraintStart_toStartOf="@+id/locationsSubMenuCreateZonesButton"
         app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuCreateZonesButton" />
+
+<!--    Unit of measure-->
+    <ImageButton
+        android:id="@+id/locationsSubMenuUnitsOfMeasureButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/statelistdrawable_white"
+        android:elevation="10dp"
+        android:padding="30dp"
+        android:src="@drawable/ic_unitofmeasure_64px"
+        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuCreateLocationsButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuCreateLocationsButton"
+        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuCreateLocationsTitle" />
+
+    <TextView
+        android:id="@+id/locationsSubMenuUnitsOfMeasureTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Units of Measure"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuUnitsOfMeasureButton"
+        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuUnitsOfMeasureButton"
+        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuUnitsOfMeasureButton" />
+
+<!--    Mass Locations-->
+    <ImageButton
+        android:id="@+id/locationsSubMenuMassLocationsButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/statelistdrawable_white"
+        android:elevation="10dp"
+        android:padding="30dp"
+        android:src="@drawable/ic_masslocations_64px"
+        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuCreateZonesButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuCreateZonesButton"
+        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuZoneTitle" />
+
+    <TextView
+        android:id="@+id/locationsSubMassLocationsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Mass Locations"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/locationsSubMenuMassLocationsButton"
+        app:layout_constraintStart_toStartOf="@+id/locationsSubMenuMassLocationsButton"
+        app:layout_constraintTop_toBottomOf="@+id/locationsSubMenuMassLocationsButton" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"

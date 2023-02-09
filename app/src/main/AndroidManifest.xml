@@ -18,6 +18,9 @@
         android:theme="@style/Theme.InventoryManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".views.AddMassLocations"
+            android:exported="false" />
+        <activity
             android:name=".views.IMSBarcodeScanner"
             android:exported="false" />
         <activity
@@ -115,13 +118,6 @@
         </activity>
         <activity
             android:name=".views.ViewCompanyDetails"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".deprecated.ItemsSubMenu"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
