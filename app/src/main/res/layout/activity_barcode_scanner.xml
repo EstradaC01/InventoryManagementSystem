@@ -10,7 +10,7 @@
     tools:context=".views.IMSBarcodeScanner">
     <androidx.camera.view.PreviewView
         android:id="@+id/cameraView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="@id/scanGuidelineStart"
         app:layout_constraintEnd_toStartOf="@id/scanGuidelineEnd"
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".10" />
+        app:layout_constraintGuide_percent="0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/scanGuidelineBottom"

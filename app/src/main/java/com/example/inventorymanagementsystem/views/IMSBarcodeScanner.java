@@ -16,21 +16,18 @@ import androidx.lifecycle.LifecycleOwner;
 
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -106,31 +103,29 @@ public class IMSBarcodeScanner extends AppCompatActivity {
         });
     }
     private void scanBarcodes(InputImage image) {
+        Log.d(TAG, "scanning");
 
         // [START run_detector]
-        Task<List<Barcode>> result = scanner.process(image)
-                .addOnSuccessListener(new OnSuccessListener<List<Barcode>>() {
+        Task<List<Barcode>> result = scanner.process(image).addOnCompleteListener(new OnCompleteListener<List<Barcode>>() {
                     @Override
-                    public void onSuccess(List<Barcode> barcodes) {
-                        // Task completed successfully
-                        // [START_EXCLUDE]
-                        // [START get_barcodes]
-                        for (Barcode barcode: barcodes) {
-                            String rawValue = barcode.getRawValue();
-                            tvBarcode.setText(rawValue);
-                            barcodes.clear();
+                    public void onComplete(@NonNull Task<List<Barcode>> task) {
+                        List<Barcode> barcodes = task.getResult();
+                        if (barcodes.isEmpty()) {
+                            Log.d(TAG, "does not have codes");
+
+                        } else {
+                            for (Barcode barcode: barcodes) {
+                                Log.d(TAG, "has codes");
+
+                                String rawValue = barcode.getRawValue();
+                                Log.d(TAG, "Code: " + rawValue);
+                                tvBarcode.setText(rawValue);
+                            }
                         }
-                        // [END get_barcodes]
-                        // [END_EXCLUDE]
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Task failed with an exception
-                        // ...
+
                     }
                 });
+
         // [END run_detector]
     }
     private void takePhoto() {
@@ -143,9 +138,11 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                 super.onCaptureSuccess(image);
                 Image mediaImage = image.getImage();
                 if (mediaImage != null) {
+                    Log.d(TAG, "executed");
                     InputImage inputImage =
                             InputImage.fromMediaImage(mediaImage, image.getImageInfo().getRotationDegrees());
                     scanBarcodes(inputImage);
+                    image.close();
                 }
             }
             @Override
