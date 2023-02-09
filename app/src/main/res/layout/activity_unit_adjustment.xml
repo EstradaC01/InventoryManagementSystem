@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.ProductDetails"
+    android:background="@drawable/blue_android_background">
+
+    <EditText
+        android:id="@+id/edtUnitAdjustmentUnitIdSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_white"
+        android:hint="Search Unit Id"
+        android:padding="10dp"
+        android:inputType="number"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/productDetailsGuidelineStart"
+        app:layout_constraintBottom_toTopOf="@id/productDetailsGuidelineTop" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUnitAdjustmentSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_orange"
+        android:text="Search"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/edtUnitAdjustmentUnitIdSearch"
+        app:layout_constraintEnd_toEndOf="@id/productDetailsGuidelineEnd"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toEndOf="@id/edtUnitAdjustmentUnitIdSearch"
+        app:layout_constraintTop_toTopOf="@id/edtUnitAdjustmentUnitIdSearch" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_white_background"
+        app:layout_constraintBottom_toTopOf="@+id/productDetailsGuidelineBottom"
+        app:layout_constraintEnd_toStartOf="@+id/productDetailsGuidelineEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/productDetailsGuidelineStart"
+        app:layout_constraintTop_toTopOf="@+id/productDetailsGuidelineTop"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="8dp">
+
+            <TextView
+                android:id="@+id/tvUnitIdTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_margin="10dp"
+                android:text="Unit ID"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/edtUnitAdjustmentUnitId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_white"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#423E3E"
+                android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
+                app:layout_constraintTop_toBottomOf="@id/tvUnitIdTitle"
+                app:layout_constraintStart_toStartOf="@id/tvUnitIdTitle"
+                app:layout_constraintEnd_toEndOf="@id/tvUnitIdTitle"/>
+
+            <TextView
+                android:id="@+id/tvUnitAdjustmentLocationNameTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Location"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/edtUnitAdjustmentUnitId"
+                app:layout_constraintStart_toStartOf="@id/edtUnitAdjustmentUnitId"
+                app:layout_constraintEnd_toEndOf="@id/edtUnitAdjustmentUnitId"/>
+            <EditText
+                android:id="@+id/edtUnitAdjustmentLocationName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_white"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#423E3E"
+                android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
+                app:layout_constraintTop_toBottomOf="@id/tvUnitAdjustmentLocationNameTitle"
+                app:layout_constraintStart_toStartOf="@id/tvUnitAdjustmentLocationNameTitle"
+                app:layout_constraintEnd_toEndOf="@id/tvUnitAdjustmentLocationNameTitle"/>
+
+            <TextView
+                android:id="@+id/tvUnitAdjustmentZoneTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Zone"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/edtUnitAdjustmentLocationName"
+                app:layout_constraintStart_toStartOf="@id/edtUnitAdjustmentLocationName"
+                app:layout_constraintEnd_toEndOf="@id/edtUnitAdjustmentLocationName"/>
+            <EditText
+                android:id="@+id/edtUnitAdjustmentZone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_white"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#423E3E"
+                android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
+                app:layout_constraintTop_toBottomOf="@id/tvUnitAdjustmentZoneTitle"
+                app:layout_constraintStart_toStartOf="@id/tvUnitAdjustmentZoneTitle"
+                app:layout_constraintEnd_toEndOf="@id/tvUnitAdjustmentZoneTitle"/>
+
+            <TextView
+                android:id="@+id/tvUnitAdjustmentNumberOfBoxesTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="No. of Boxes"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/edtUnitAdjustmentZone"
+                app:layout_constraintStart_toStartOf="@id/edtUnitAdjustmentZone"
+                app:layout_constraintEnd_toEndOf="@id/edtUnitAdjustmentZone"/>
+            <EditText
+                android:id="@+id/edtUnitAdjustmentNumberOfBoxes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_white"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#423E3E"
+                android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
+                app:layout_constraintTop_toBottomOf="@id/tvUnitAdjustmentNumberOfBoxesTitle"
+                app:layout_constraintStart_toStartOf="@id/tvUnitAdjustmentNumberOfBoxesTitle"
+                app:layout_constraintEnd_toEndOf="@id/tvUnitAdjustmentNumberOfBoxesTitle"/>
+
+            <TextView
+                android:id="@+id/tvUnitAdjustmentPiecesPerBoxTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Pieces per Box"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/edtUnitAdjustmentNumberOfBoxes"
+                app:layout_constraintStart_toStartOf="@id/edtUnitAdjustmentNumberOfBoxes"
+                app:layout_constraintEnd_toEndOf="@id/edtUnitAdjustmentNumberOfBoxes"/>
+            <EditText
+                android:id="@+id/edtUnitAdjustmentPiecesPerBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_white"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#423E3E"
+                android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
+                app:layout_constraintTop_toBottomOf="@id/tvUnitAdjustmentPiecesPerBoxTitle"
+                app:layout_constraintStart_toStartOf="@id/tvUnitAdjustmentPiecesPerBoxTitle"
+                app:layout_constraintEnd_toEndOf="@id/tvUnitAdjustmentPiecesPerBoxTitle"/>
+
+            <TextView
+                android:id="@+id/tvUnitAdjustmentTotalPiecesTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Total Pieces"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/edtUnitAdjustmentPiecesPerBox"
+                app:layout_constraintStart_toStartOf="@id/edtUnitAdjustmentPiecesPerBox"
+                app:layout_constraintEnd_toEndOf="@id/edtUnitAdjustmentPiecesPerBox"/>
+            <EditText
+                android:id="@+id/edtUnitAdjustmentTotalPieces"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_white"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#423E3E"
+                android:textSize="18sp"
+                android:inputType="none"
+                android:focusedByDefault="false"
+                android:clickable="false"
+                app:layout_constraintTop_toBottomOf="@id/tvUnitAdjustmentTotalPiecesTitle"
+                app:layout_constraintStart_toStartOf="@id/tvUnitAdjustmentTotalPiecesTitle"
+                app:layout_constraintEnd_toEndOf="@id/tvUnitAdjustmentTotalPiecesTitle"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnUnitAdjustmentSubmit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/button_navyblue"
+                android:elevation="15dp"
+                android:padding="12dp"
+                android:text="Submit"
+                android:textAllCaps="true"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/edtUnitAdjustmentTotalPieces"
+                app:layout_constraintEnd_toEndOf="@id/edtUnitAdjustmentTotalPieces"
+                app:layout_constraintStart_toStartOf="@id/edtUnitAdjustmentTotalPieces"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=" "
+                app:layout_constraintTop_toBottomOf="@id/btnUnitAdjustmentSubmit"
+                app:layout_constraintStart_toStartOf="@id/btnUnitAdjustmentSubmit"
+                app:layout_constraintEnd_toEndOf="@id/btnUnitAdjustmentSubmit"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/productDetailsGuidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/productDetailsGuidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/productDetailsGuidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/productDetailsGuidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
