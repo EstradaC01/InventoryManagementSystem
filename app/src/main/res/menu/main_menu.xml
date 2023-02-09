@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -41,6 +42,10 @@
                 android:id="@+id/idMenuLocations"
                 android:title="Locations"
                 android:icon="@drawable/_726131_location_point_icon"/>
+            <item
+                android:id="@+id/idMenuQRScanner"
+                android:title="QR Scanner"
+                android:icon="@drawable/ic_baseline_warehouse_24"/>
         </menu>
     </item>
 

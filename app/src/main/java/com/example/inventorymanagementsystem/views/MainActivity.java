@@ -234,6 +234,12 @@ public class MainActivity extends AppCompatActivity {
                 locationsIntent.putExtra("Warehouse", mWarehouse);
                 startActivity(locationsIntent);
                 break;
+            case R.id.idMenuQRScanner:
+                Intent QRScanner = new Intent(MainActivity.this, QRScanner.class);
+                QRScanner.putExtra("User", currentUser);
+                QRScanner.putExtra("Warehouse", mWarehouse);
+                startActivity(QRScanner);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
