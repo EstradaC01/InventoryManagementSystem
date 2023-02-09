@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.models.UnitId;
@@ -79,6 +80,7 @@ public class UnitAdjustment extends AppCompatActivity {
             unitIdRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    boolean unitIdExists = false;
                     if(!queryDocumentSnapshots.isEmpty()) {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                         for(DocumentSnapshot d : list) {
@@ -93,11 +95,19 @@ public class UnitAdjustment extends AppCompatActivity {
                                 edtNumberOfBoxes.setEnabled(true);
                                 edtPiecesPerBox.setEnabled(true);
                                 btnSubmit.setEnabled(true);
+                                unitIdExists = true;
                             }
+                        }
+                        if(!unitIdExists) {
+                            Toast.makeText(UnitAdjustment.this, "Unit ID Not Found in System", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
             });
+        });
+
+        btnSubmit.setOnClickListener(v ->{
+
         });
     }
 
