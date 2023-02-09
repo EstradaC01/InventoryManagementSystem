@@ -18,6 +18,9 @@
         android:theme="@style/Theme.InventoryManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".views.UnitAdjustment"
+            android:exported="false" />
+        <activity
             android:name=".views.QRScanner"
             android:exported="false" />
         <activity
