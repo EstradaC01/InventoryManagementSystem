@@ -43,7 +43,7 @@ public class AddMassLocations extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // change action support bar title and font color
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Locations</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Inventory</font>"));
 
         //Initializing firebase
         db = FirebaseFirestore.getInstance();
