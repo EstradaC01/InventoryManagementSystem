@@ -27,13 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddMassLocations extends AppCompatActivity {
-
     private FirebaseFirestore db;
     private static Users mCurrentUser;
     private String mWarehouse;
-
     private Spinner spinnerZones;
-
     private EditText edtLength, edtLpLimit, edtWeight, edtHeight, edtWidth;
 
     @Override
@@ -171,6 +168,12 @@ public class AddMassLocations extends AppCompatActivity {
         String[] startingPart = _startingLevel.split("(?<=\\D)(?=\\d)");
         String[] endingPart = _endingLevel.split("(?<=\\D)(?=\\d)");
 
+        boolean zeroPrefixOnAisle = false;
+        boolean zeroPrefixOnRack = false;
+        boolean zeroPrefixOnLevel = false;
+
+
+
         String startingLetter = "";
         String startingNumber;
         String endingLetter = "";
@@ -193,6 +196,16 @@ public class AddMassLocations extends AppCompatActivity {
             endingNumber = endingPart[0];
         }
 
+        if(_startingAisle.startsWith("0")) {
+            zeroPrefixOnAisle = true;
+        }
+        if(_startingRack.startsWith("0")) {
+            zeroPrefixOnRack = true;
+        }
+        if (startingNumber.startsWith("0")) {
+            zeroPrefixOnLevel = true;
+        }
+
         int currentAisle = Integer.parseInt(_startingAisle);
 
         do {
@@ -203,9 +216,24 @@ public class AddMassLocations extends AppCompatActivity {
                     if(!startingLetter.isEmpty()) {
                         Location location = new Location();
 
-                        location.setAisle(String.valueOf(currentAisle));
-                        location.setRack(String.valueOf(currentRack));
-                        location.setLevel((startingLetter+(String.valueOf(currentLevel))));
+                        if(!zeroPrefixOnAisle)
+                        {
+                            location.setAisle(String.valueOf(currentAisle));
+                        } else {
+                            location.setAisle("0"+ currentAisle);
+                        }
+
+                        if(!zeroPrefixOnRack) {
+                            location.setRack(String.valueOf(currentRack));
+                        } else {
+                            location.setRack("0"+currentRack);
+                        }
+
+                        if(!zeroPrefixOnLevel) {
+                            location.setLevel((startingLetter+(currentLevel)));
+                        } else {
+                            location.setLevel(startingLetter+"0"+currentLevel);
+                        }
 
                         location.setZone(spinnerZones.getSelectedItem().toString());
                         location.setLpLimit(edtLpLimit.getText().toString());
@@ -223,9 +251,25 @@ public class AddMassLocations extends AppCompatActivity {
 
                         Location location = new Location();
 
-                        location.setAisle(String.valueOf(currentAisle));
-                        location.setRack(String.valueOf(currentRack));
-                        location.setLevel(String.valueOf(currentLevel));
+                        if(!zeroPrefixOnAisle)
+                        {
+                            location.setAisle(String.valueOf(currentAisle));
+                        } else {
+                            location.setAisle("0"+ currentAisle);
+                        }
+
+                        if(!zeroPrefixOnRack) {
+                            location.setRack(String.valueOf(currentRack));
+                        } else {
+                            location.setRack("0"+currentRack);
+                        }
+
+                        if(!zeroPrefixOnLevel) {
+                            location.setLevel((startingLetter+(currentLevel)));
+                        } else {
+                            location.setLevel(startingLetter+"0"+currentLevel);
+                        }
+
                         location.setZone(spinnerZones.getSelectedItem().toString());
                         location.setLpLimit(edtLpLimit.getText().toString());
                         location.setWeight(edtWeight.getText().toString());
