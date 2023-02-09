@@ -2,13 +2,17 @@ package com.example.inventorymanagementsystem.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.camera.view.PreviewView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -61,8 +65,9 @@ public class IMSBarcodeScanner extends AppCompatActivity {
         }
         REQUIRED_PERMISSIONS = requiredPermissions.toArray(new String[0]);
     }
-    private SurfaceView cameraPreview;
+    private PreviewView cameraPreview;
     private BarcodeScannerOptions barcodeOptions;
+    private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private BarcodeScanner scanner;
     private Button scanBtn;
     private TextView tvBarcode;
@@ -85,24 +90,14 @@ public class IMSBarcodeScanner extends AppCompatActivity {
         scanner = BarcodeScanning.getClient(barcodeOptions);
         scanBtn = findViewById(R.id.idBtnScanCode);
         tvBarcode = findViewById(R.id.idTVBarcode);
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
         cameraExecutor = Executors.newSingleThreadExecutor();
 
         imageCapture = new ImageCapture.Builder().build();
 
         cameraPreview = findViewById(R.id.cameraView);
-        cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                startCamera();
-            }
 
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) { }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) { }
-        });
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,26 +155,29 @@ public class IMSBarcodeScanner extends AppCompatActivity {
         });
     }
     private void startCamera() {
-        ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(() -> {
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-
-                CameraSelector cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA;
-
-                Preview preview = new Preview.Builder().build();
-                preview.setSurfaceProvider((Preview.SurfaceProvider) cameraPreview);
-                try {
-                    cameraProvider.unbindAll();
-                    cameraProvider.bindToLifecycle(IMSBarcodeScanner.this, cameraSelector, preview,imageCapture);
-                } catch (Exception exception) {
-                    Log.e(TAG, "Use case binding failed", exception);
-                }
+                bindPreview(cameraProvider);
             } catch (ExecutionException | InterruptedException e) {
                 Log.e(TAG, "CameraProviderFuture exception", e);
             }
         }, ContextCompat.getMainExecutor(this));
     }
+
+    private void bindPreview(ProcessCameraProvider cameraProvider) {
+        Preview preview = new Preview.Builder()
+                .build();
+
+        CameraSelector cameraSelector = new CameraSelector.Builder()
+                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                .build();
+
+        preview.setSurfaceProvider(cameraPreview.getSurfaceProvider());
+
+        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview, imageCapture);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -193,7 +191,6 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                 startCamera();
             } else {
                 Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
-                finish();
             }
         }
     }
@@ -206,5 +203,15 @@ public class IMSBarcodeScanner extends AppCompatActivity {
             }
         }
         return true;
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (allPermissionsGranted()) {
+            startCamera();
+        } else {
+            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+            finish();
+        }
     }
 }
