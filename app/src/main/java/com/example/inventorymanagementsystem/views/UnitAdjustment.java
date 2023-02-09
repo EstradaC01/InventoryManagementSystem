@@ -1,5 +1,6 @@
 package com.example.inventorymanagementsystem.views;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,8 +12,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
+import com.example.inventorymanagementsystem.models.Products;
+import com.example.inventorymanagementsystem.models.Receiving;
 import com.example.inventorymanagementsystem.models.UnitId;
 import com.example.inventorymanagementsystem.models.Users;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +35,7 @@ public class UnitAdjustment extends AppCompatActivity {
     private Users mCurrentUser;
 
     private UnitId mUnitId;
+    private Products mProduct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +101,24 @@ public class UnitAdjustment extends AppCompatActivity {
                                 edtPiecesPerBox.setEnabled(true);
                                 btnSubmit.setEnabled(true);
                                 unitIdExists = true;
+
+                                CollectionReference productRef = db.collection("Warehouses/"+mWarehouse+"/Products");
+                                productRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        if(!queryDocumentSnapshots.isEmpty()) {
+                                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                            for(DocumentSnapshot d : list) {
+                                                if(d.getId().equals(mUnitId.getProductId())) {
+                                                    mProduct = d.toObject(Products.class);
+                                                    int tempAvailableUnits = Integer.parseInt(mProduct.getAvailableUnits()) - Integer.parseInt(mUnitId.getTotalPieces());
+                                                    mProduct.setAvailableUnits(String.valueOf(tempAvailableUnits));
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+
                             }
                         }
                         if(!unitIdExists) {
@@ -107,7 +130,65 @@ public class UnitAdjustment extends AppCompatActivity {
         });
 
         btnSubmit.setOnClickListener(v ->{
+            mUnitId.setNumberOfBoxes(edtNumberOfBoxes.getText().toString());
+            mUnitId.setPiecesPerBox(edtPiecesPerBox.getText().toString());
+            int numberOfBoxes = Integer.parseInt(mUnitId.getNumberOfBoxes());
+            int piecesPerBox = Integer.parseInt(mUnitId.getPiecesPerBox());
+            mUnitId.setTotalPieces(String.valueOf(numberOfBoxes*piecesPerBox));
+            mProduct.setAvailableUnits(String.valueOf(Integer.parseInt(mProduct.getAvailableUnits()) + Integer.parseInt(mUnitId.getTotalPieces())));
+            updateDatabase();
+        });
+    }
 
+    private void updateDatabase() {
+        CollectionReference productDocument = db.collection("Warehouses/"+mWarehouse+"/Products");
+        CollectionReference unitIdRef = db.collection("Warehouses/"+mWarehouse+"/UnitId");
+        productDocument.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(!queryDocumentSnapshots.isEmpty()) {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for(DocumentSnapshot d : list) {
+                        if(d.getId().equals(mUnitId.getProductId())) {
+                            productDocument.document(d.getId()).delete();
+                            addProductToFirestore();
+                        }
+                    }
+                }
+                unitIdRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if(!queryDocumentSnapshots.isEmpty()){
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for(DocumentSnapshot d : list) {
+                                if(d.getId().equals(mUnitId.getUnitId())) {
+                                    unitIdRef.document(d.getId()).delete();
+                                    addUnitIdToFirestore();
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void addUnitIdToFirestore() {
+        db.collection("Warehouses/"+mWarehouse+"/UnitId").document(mUnitId.getUnitId()).set(mUnitId).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(UnitAdjustment.this, "Unit ID Updated", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+    }
+
+    private void addProductToFirestore() {
+        db.collection("Warehouses/"+mWarehouse+"/Products").document(mProduct.getProductId()).set(mProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
         });
     }
 

@@ -303,17 +303,17 @@ public class ReceivingScreen extends AppCompatActivity {
         db.collection("Warehouses/"+mWarehouse+"/UnitId").document(_unit.getUnitId()).set(_unit).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                db.collection("Warehouses/"+mWarehouse+"/Products/"+_unit.getProductId()+"/UnitId").document(_unit.getUnitId()).set(_unit).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(ReceivingScreen.this, "Unit created confirmed", Toast.LENGTH_LONG).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ReceivingScreen.this, "Fail to confirm unit \n" + e, Toast.LENGTH_LONG).show();
-                    }
-                });
+//                db.collection("Warehouses/"+mWarehouse+"/Products/"+_unit.getProductId()+"/UnitId").document(_unit.getUnitId()).set(_unit).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        Toast.makeText(ReceivingScreen.this, "Unit created confirmed", Toast.LENGTH_LONG).show();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(ReceivingScreen.this, "Fail to confirm unit \n" + e, Toast.LENGTH_LONG).show();
+//                    }
+//                });
             }
         });
     }
