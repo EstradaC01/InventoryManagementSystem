@@ -74,6 +74,7 @@ public class Zones extends AppCompatActivity {
         mZoneRecyclerViewAdapter.setOnItemClickListener(new ZoneRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+
                 if(mZoneArrayList.get(position).getCanBeDeleted() == true)
                 {
                     CollectionReference d = db.collection("Warehouses/" + mWarehouse + "/Zones");

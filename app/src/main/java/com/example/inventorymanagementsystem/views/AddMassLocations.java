@@ -16,6 +16,7 @@ import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.CustomSpinnerAdapter;
 import com.example.inventorymanagementsystem.models.Location;
 import com.example.inventorymanagementsystem.models.Users;
+import com.example.inventorymanagementsystem.models.Zone;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -283,7 +284,28 @@ public class AddMassLocations extends AppCompatActivity {
                     db.collection("Warehouses/"+mWarehouse+"/Locations").document(_location.getName()).set(_location).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(AddMassLocations.this, "Location added", Toast.LENGTH_SHORT).show();
+                            db.collection("Warehouses/"+mWarehouse+"/Zones").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    if(!queryDocumentSnapshots.isEmpty()) {
+                                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                        for(DocumentSnapshot d : list) {
+                                            if(d.getId().equals(_location.getZone())) {
+                                                Zone z = d.toObject(Zone.class);
+                                                if(z.getCanBeDeleted()){
+                                                    z.setCanBeDeleted(false);
+                                                    db.collection("Warehouses/"+mWarehouse+"/Zones").document(z.getZoneId()).set(z).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
                         }
                     });
                 }
