@@ -217,6 +217,12 @@ public class MainActivity extends AppCompatActivity {
                 orders.putExtra("Warehouse", mWarehouse);
                 startActivity(orders);
                 break;
+            case R.id.idMenuPurchaseOrders:
+                Intent purchaseOrderIntent = new Intent(MainActivity.this, AddPurchaseOrder.class);
+                purchaseOrderIntent.putExtra("User", currentUser);
+                purchaseOrderIntent.putExtra("Warehouse", mWarehouse);
+                startActivity(purchaseOrderIntent);
+                break;
             case R.id.idMenuReceiving:
                 Intent receivingIntent = new Intent(MainActivity.this, ReceivingScreen.class);
                 receivingIntent.putExtra("User", currentUser);
