@@ -2,6 +2,7 @@ package com.example.inventorymanagementsystem.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,8 @@ public class LocationList extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ArrayList<Location> mLocationArrayList;
     private LocationRecyclerViewAdapter mLocationRecyclerViewAdapter;
+
+    private androidx.appcompat.widget.SearchView searchView;
     private FirebaseFirestore db;
 
     @Override
@@ -47,6 +50,7 @@ public class LocationList extends AppCompatActivity {
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Locations</font>"));
 
         //initializing widgets
+        searchView = findViewById(R.id.svLocationList);
         Button btnAddLocation = findViewById(R.id.btnLocationListAddLocation);
         mRecyclerView = findViewById(R.id.recyclerViewLocationList);
 
@@ -105,8 +109,35 @@ public class LocationList extends AppCompatActivity {
             addZoneIntent.putExtra("Warehouse", mWarehouse);
             startActivity(addZoneIntent);
         });
+
+        searchView.setIconified(false);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return false;
+            }
+        });
     }
 
+    private void searchList(String text) {
+        ArrayList<Location> searchedList = new ArrayList<>();
+        for(Location l : mLocationArrayList) {
+            if(l.getName().toLowerCase().contains(text.toLowerCase())) {
+                searchedList.add(l);
+            } else {
+                mLocationRecyclerViewAdapter.setSearchList(searchedList);
+            }
+        }
+        mLocationRecyclerViewAdapter.setSearchList(searchedList);
+
+    }
     public void onRestart()
     {
         super.onRestart();

@@ -17,6 +17,18 @@
         app:layout_constraintStart_toEndOf="@id/itemListGuidelineStart"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/svLocationList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_white_background"
+            android:gravity="left|center"
+            android:queryHint="Search..."
+            app:queryHint="Search..."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/itemListGuidelineMiddleLeft"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLocationListAddLocation"
