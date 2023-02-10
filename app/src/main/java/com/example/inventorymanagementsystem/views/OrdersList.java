@@ -30,7 +30,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class OrdersList extends AppCompatActivity {
@@ -184,10 +183,6 @@ public class OrdersList extends AppCompatActivity {
                         filteredList.add(order);
                     }
                     break;
-            }
-
-            if (order.getOrderID().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(order);
             }
         }
         if (filteredList.isEmpty()) {
