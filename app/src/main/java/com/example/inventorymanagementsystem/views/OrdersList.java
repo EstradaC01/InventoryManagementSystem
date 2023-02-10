@@ -47,7 +47,8 @@ public class OrdersList extends AppCompatActivity {
     private enum Sort {
         NAME,
         STATUS,
-        DATE
+        DATE,
+        ORDERID;
     }
     private Sort sorter;
     private static Users currentUser;
@@ -66,7 +67,7 @@ public class OrdersList extends AppCompatActivity {
         edtSearchOrders = findViewById(R.id.idSVSearchOrders);
         db = FirebaseFirestore.getInstance();
         Intent i = getIntent();
-
+        sorter = Sort.ORDERID;
         mOrdersArrayList = new ArrayList<>();
         orderRV.setHasFixedSize(true);
         orderRV.setLayoutManager(new LinearLayoutManager(this));
@@ -186,6 +187,7 @@ public class OrdersList extends AppCompatActivity {
             }
         }
         if (filteredList.isEmpty()) {
+            mOrderRVAdapter.setFilteredList(filteredList);
             Toast.makeText(this, "No items found", Toast.LENGTH_SHORT);
         } else {
             mOrderRVAdapter.setFilteredList(filteredList);
