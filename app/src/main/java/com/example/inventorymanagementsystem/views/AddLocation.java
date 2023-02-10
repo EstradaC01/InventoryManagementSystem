@@ -174,6 +174,7 @@ public class AddLocation extends AppCompatActivity {
                 db.collection("Warehouses/"+mWarehouse+"/Zones").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        // validating zone canBeDeleted value
                         if(!queryDocumentSnapshots.isEmpty()) {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for(DocumentSnapshot d : list) {
