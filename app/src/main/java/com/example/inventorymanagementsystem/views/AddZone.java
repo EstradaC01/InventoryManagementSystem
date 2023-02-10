@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.CustomSpinnerAdapter;
+import com.example.inventorymanagementsystem.models.UnitType;
 import com.example.inventorymanagementsystem.models.Users;
 import com.example.inventorymanagementsystem.models.Zone;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -135,13 +136,31 @@ public class AddZone extends AppCompatActivity {
     }
 
     private void addDataToFireStore(Zone _zone) {
-        //Log.d("FIREBASE-ADD", "Inside");
-        // creating a collection reference
-        // for our Firebase Firestore database
-
         db.collection("Warehouses/"+mWarehouse+"/Zones").document(_zone.getZoneId()).set(_zone).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+                db.collection("Warehouses/"+mWarehouse+"/Units of Measure").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if(!queryDocumentSnapshots.isEmpty()) {
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for(DocumentSnapshot d : list) {
+                                if(d.getId().equals(_zone.getTypeOfUnit())) {
+                                    UnitType u = d.toObject(UnitType.class);
+                                    if(u.getCanBeDeleted()){
+                                        u.setCanBeDeleted(false);
+                                        db.collection("Warehouses/"+mWarehouse+"/Units of Measure").document(u.getUnitType()).set(u).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
                 Toast.makeText(AddZone.this, "Zone Added", Toast.LENGTH_LONG).show();
                 finish();
             }
