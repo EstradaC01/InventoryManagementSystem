@@ -188,7 +188,7 @@ public class OrdersList extends AppCompatActivity {
         }
         if (filteredList.isEmpty()) {
             mOrderRVAdapter.setFilteredList(filteredList);
-            Toast.makeText(this, "No items found", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
         } else {
             mOrderRVAdapter.setFilteredList(filteredList);
         }
