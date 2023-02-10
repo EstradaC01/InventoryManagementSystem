@@ -31,6 +31,11 @@
                 android:title="Orders"
                 android:icon="@drawable/ic_baseline_shopping_cart_24"/>
             <item
+                android:id="@+id/idMenuPurchaseOrders"
+                android:title="Purchase Orders"
+                android:icon="@drawable/ic_money_24"
+                />
+            <item
                 android:id="@+id/idMenuReceiving"
                 android:title="Receiving"
                 android:icon="@drawable/_726506_truck_icon"/>
@@ -45,7 +50,7 @@
             <item
                 android:id="@+id/idMenuBarcodeScanner"
                 android:title="Barcode Scanner"
-                android:icon="@drawable/ic_baseline_warehouse_24"/>
+                android:icon="@drawable/baseline_qr_code_scanner_24"/>
         </menu>
     </item>
 
