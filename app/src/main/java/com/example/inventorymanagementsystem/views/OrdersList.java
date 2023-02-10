@@ -6,12 +6,17 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -25,6 +30,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class OrdersList extends AppCompatActivity {
@@ -34,9 +40,13 @@ public class OrdersList extends AppCompatActivity {
     private OrderRVAdapter mOrderRVAdapter;
     private FirebaseFirestore db;
     private Button btnAddOrders;
+    private ImageButton btnOrderFilter;
+    public PopupMenu DropDownMenu;
+    public Menu menu;
     private androidx.appcompat.widget.SearchView edtSearchOrders;
     private ProgressBar loadingOrdersPB;
     private static Users currentUser;
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +57,7 @@ public class OrdersList extends AppCompatActivity {
         orderRV = findViewById(R.id.idRVOrders);
         loadingOrdersPB = findViewById(R.id.idOrderProgressBar);
         btnAddOrders = findViewById(R.id.btnOrderListActivityAddOrder);
-
+        btnOrderFilter = findViewById(R.id.btnOrderListFilter);
         edtSearchOrders = findViewById(R.id.idSVSearchOrders);
         db = FirebaseFirestore.getInstance();
         Intent i = getIntent();
@@ -59,6 +69,11 @@ public class OrdersList extends AppCompatActivity {
 
         orderRV.setAdapter(mOrderRVAdapter);
 
+        DropDownMenu = new PopupMenu(getApplicationContext(), btnOrderFilter);
+        menu = DropDownMenu.getMenu();
+        menu.add(0,0,0,"Name");
+        menu.add(0,2,0,"Status");
+        menu.add(0,3,0,"Order Date");
 
         currentUser = (Users)i.getSerializableExtra("User");
 
@@ -109,8 +124,54 @@ public class OrdersList extends AppCompatActivity {
                 return false;
             }
         });
+
+        DropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case 0: //Name
+
+                        ArrayList<String> FilterName = new ArrayList();
+                        for (Orders order : mOrdersArrayList){
+                            Object FName = order.getOrderCustomer();
+                            FilterName.add(FName.toString());
+                             Collections.sort(FilterName);
+                        }
+
+                        return true;
+
+                    case 2: //Status
+                        ArrayList<String> FilterStatus = new ArrayList();
+                        for (Orders order : mOrdersArrayList){
+                            Object Status = order.getOrderStatus();
+                            FilterStatus.add(Status.toString());
+                            Collections.sort(FilterStatus);
+                        }
+
+                        return true;
+                    case 3: //Date
+                        ArrayList<String> FilterDate = new ArrayList();
+                        for (Orders order : mOrdersArrayList){
+                            Object Date = order.getOrderDate();
+                            FilterDate.add(Date.toString());
+                            Collections.sort(FilterDate);
+                        }
+
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        btnOrderFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DropDownMenu.show();
+            }
+        });
     }
 
+    //search bar
     private void filterList(String text) {
         ArrayList<Orders> filteredList = new ArrayList<>();
         for (Orders order : mOrdersArrayList) {
