@@ -45,6 +45,12 @@ public class OrdersList extends AppCompatActivity {
     public Menu menu;
     private androidx.appcompat.widget.SearchView edtSearchOrders;
     private ProgressBar loadingOrdersPB;
+    private enum Sort {
+        NAME,
+        STATUS,
+        DATE
+    }
+    private Sort sorter;
     private static Users currentUser;
     @SuppressLint("WrongViewCast")
     @Override
@@ -120,7 +126,7 @@ public class OrdersList extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterList(newText);
+                filterList(newText, sorter);
                 return false;
             }
         });
@@ -130,33 +136,14 @@ public class OrdersList extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case 0: //Name
-
-                        ArrayList<String> FilterName = new ArrayList();
-                        for (Orders order : mOrdersArrayList){
-                            Object FName = order.getOrderCustomer();
-                            FilterName.add(FName.toString());
-                             Collections.sort(FilterName);
-                        }
-
+                        sorter = Sort.NAME;
                         return true;
 
                     case 2: //Status
-                        ArrayList<String> FilterStatus = new ArrayList();
-                        for (Orders order : mOrdersArrayList){
-                            Object Status = order.getOrderStatus();
-                            FilterStatus.add(Status.toString());
-                            Collections.sort(FilterStatus);
-                        }
-
+                        sorter = Sort.STATUS;
                         return true;
                     case 3: //Date
-                        ArrayList<String> FilterDate = new ArrayList();
-                        for (Orders order : mOrdersArrayList){
-                            Object Date = order.getOrderDate();
-                            FilterDate.add(Date.toString());
-                            Collections.sort(FilterDate);
-                        }
-
+                        sorter = Sort.DATE;
                         return true;
                 }
                 return false;
@@ -172,9 +159,33 @@ public class OrdersList extends AppCompatActivity {
     }
 
     //search bar
-    private void filterList(String text) {
+    private void filterList(String text, Sort sorter) {
         ArrayList<Orders> filteredList = new ArrayList<>();
         for (Orders order : mOrdersArrayList) {
+            switch (sorter) {
+                case NAME:
+                    if (order.getOrderCustomer().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(order);
+                    }
+                    break;
+                case STATUS:
+                    if (order.getOrderStatus().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(order);
+                    }
+                    break;
+
+                case DATE:
+                    if (order.getOrderDate().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(order);
+                    }
+                    break;
+                default:
+                    if (order.getOrderID().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(order);
+                    }
+                    break;
+            }
+
             if (order.getOrderID().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(order);
             }
