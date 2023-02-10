@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_android_background"
+    tools:context=".views.AddPurchaseOrder">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addPurchaseOrderRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/guidelineMiddle"
+        app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addPurchaseOrderBtnAddRemoveProducts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button_orange"
+        android:elevation="15dp"
+        android:padding="12dp"
+        android:text="ADD/REMOVE PRODUCT"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/addPurchaseOrderRecyclerView"
+        app:layout_constraintStart_toStartOf="@id/addPurchaseOrderRecyclerView"
+        app:layout_constraintTop_toBottomOf="@id/guidelineMiddle" />
+
+    <EditText
+        android:id="@+id/addPurchaseOrderEdtAnticipatedArrivalDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_corners_white"
+        android:elevation="15dp"
+        android:hint="Anticipated Arrival Date"
+        android:importantForAutofill="no"
+        android:inputType="date"
+        android:minHeight="48dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@id/addPurchaseOrderBtnAddRemoveProducts"
+        app:layout_constraintStart_toStartOf="@id/addPurchaseOrderBtnAddRemoveProducts"
+        app:layout_constraintTop_toBottomOf="@id/addPurchaseOrderBtnAddRemoveProducts" />
+
+    <EditText
+        android:id="@+id/addPurchaseOrderEdtPONumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_corners_white"
+        android:elevation="15dp"
+        android:hint="P.O. Number"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@id/addPurchaseOrderEdtAnticipatedArrivalDate"
+        app:layout_constraintStart_toStartOf="@id/addPurchaseOrderEdtAnticipatedArrivalDate"
+        app:layout_constraintTop_toBottomOf="@id/addPurchaseOrderEdtAnticipatedArrivalDate" />
+
+    <EditText
+        android:id="@+id/addPurchaseOrderEdtShippingFrom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_corners_white"
+        android:elevation="15dp"
+        android:hint="Shipping From"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@id/addPurchaseOrderEdtPONumber"
+        app:layout_constraintStart_toStartOf="@id/addPurchaseOrderEdtPONumber"
+        app:layout_constraintTop_toBottomOf="@id/addPurchaseOrderEdtPONumber" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addPurchaseOrderBtnSubmit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_navyblue"
+        android:elevation="15dp"
+        android:padding="12dp"
+        android:text="SUBMIT"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/addPurchaseOrderEdtShippingFrom"
+        app:layout_constraintStart_toStartOf="@id/addPurchaseOrderEdtShippingFrom"
+        app:layout_constraintTop_toBottomOf="@id/addPurchaseOrderEdtShippingFrom" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+</androidx.constraintlayout.widget.ConstraintLayout>
