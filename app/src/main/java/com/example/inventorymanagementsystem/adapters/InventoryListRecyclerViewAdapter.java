@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventorymanagementsystem.R;
+import com.example.inventorymanagementsystem.models.Orders;
 import com.example.inventorymanagementsystem.models.UnitId;
 
 import java.util.ArrayList;
@@ -115,5 +116,9 @@ public class InventoryListRecyclerViewAdapter extends RecyclerView.Adapter<Inven
         }
     }
 
+    public void setFilteredList(ArrayList<UnitId> filteredList) {
+        mUnitIdArrayList = filteredList;
+        notifyDataSetChanged();
+    }
 
 }

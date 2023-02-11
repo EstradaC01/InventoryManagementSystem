@@ -11,12 +11,18 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.InventoryListRecyclerViewAdapter;
+import com.example.inventorymanagementsystem.models.Orders;
 import com.example.inventorymanagementsystem.models.UnitId;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,10 +42,15 @@ public class InventoryList extends AppCompatActivity {
     private ArrayList<UnitId> mArrayListUnitId;
     private InventoryListRecyclerViewAdapter mRecyclerViewAdapter;
     private FirebaseFirestore db;
-
+    private ImageButton InventoryFilter;
+    public PopupMenu DropDownMenu;
+    public Menu menu;
     private Users mCurrentUser;
     private String mWarehouse;
-
+    private enum Sort {
+    ProductID;
+    }
+    private Sort sorter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +81,13 @@ public class InventoryList extends AppCompatActivity {
 
         CollectionReference unitIdRef = db.collection("Warehouses/"+mWarehouse+"/UnitId");
 
+        InventoryFilter = findViewById(R.id.ibInventoryListFilter);
+        sorter = Sort.ProductID;
+
+        DropDownMenu = new PopupMenu(getApplicationContext(), InventoryFilter);
+        menu = DropDownMenu.getMenu();
+        menu.add(0,0,0,"Product ID");
+
         unitIdRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -86,5 +104,43 @@ public class InventoryList extends AppCompatActivity {
 
             }
         });
+
+        DropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case 0: //Name
+                        sorter = Sort.ProductID;
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        InventoryFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DropDownMenu.show();
+            }
+        });
+    }
+
+    private void filterList(String text, Sort sorter) {
+        ArrayList<UnitId> filteredList = new ArrayList<>();
+        for (UnitId list : mArrayListUnitId) {
+            switch (sorter) {
+                default:
+                    if (list.getProductId().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+            }
+        }
+        if (filteredList.isEmpty()) {
+            mRecyclerViewAdapter.setFilteredList(filteredList);
+            Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
+        } else {
+            mRecyclerViewAdapter.setFilteredList(filteredList);
+        }
     }
 }
