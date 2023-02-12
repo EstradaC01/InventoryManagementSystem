@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.inventorymanagementsystem.R;
+import com.example.inventorymanagementsystem.models.Location;
 import com.example.inventorymanagementsystem.models.Products;
 
 
@@ -90,6 +91,11 @@ public class AddProductRecyclerViewAdapter extends RecyclerView.Adapter<AddProdu
 
     public void setSearchList(ArrayList<Products> searchList) {
         mProductArrayList = searchList;
+        notifyDataSetChanged();
+    }
+
+    public void setFilteredList(ArrayList<Products> filteredList) {
+        mProductArrayList = filteredList;
         notifyDataSetChanged();
     }
 }

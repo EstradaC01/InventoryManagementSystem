@@ -10,6 +10,11 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
@@ -17,6 +22,7 @@ import com.example.inventorymanagementsystem.adapters.AddLocationRecyclerViewAda
 import com.example.inventorymanagementsystem.adapters.AddProductRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.Location;
 import com.example.inventorymanagementsystem.models.Products;
+import com.example.inventorymanagementsystem.models.UnitId;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,7 +42,14 @@ public class FindProductScreen extends AppCompatActivity {
     private androidx.appcompat.widget.SearchView searchView;
     private String mWarehouse;
     private static Users mCurrentUser;
-
+    private ImageButton ProductFilter;
+    public PopupMenu DropDownMenu;
+    public Menu menu;
+    private enum Sort {
+        ProductUPC,
+        ProductID;
+    }
+    private Sort sorter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +82,12 @@ public class FindProductScreen extends AppCompatActivity {
 
         // setting adapter to our recycler view
         mProductsRecyclerView.setAdapter(mProductRecyclerViewAdapter);
+
+        ProductFilter = findViewById(R.id.ibFindProductScreen);
+        sorter = Sort.ProductID;
+        DropDownMenu = new PopupMenu(getApplicationContext(), ProductFilter);
+        menu = DropDownMenu.getMenu();
+        menu.add(0,0,0,"Product ID");
 
         // creating firebasefirestore reference to locations path
         CollectionReference locationsRef = db.collection("Warehouses/"+mWarehouse+"/Products");
@@ -111,6 +130,26 @@ public class FindProductScreen extends AppCompatActivity {
                 return false;
             }
         });
+
+        DropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case 0: //ProductID
+                        sorter = Sort.ProductUPC;
+                        return true;
+
+                }
+                return false;
+            }
+        });
+
+        ProductFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DropDownMenu.show();
+            }
+        });
     }
 
     private void searchList(String text) {
@@ -124,6 +163,31 @@ public class FindProductScreen extends AppCompatActivity {
         }
         mProductRecyclerViewAdapter.setSearchList(searchedList);
 
+    }
+
+    private void filterList(String text, Sort sorter) {
+        ArrayList<Products> filteredList = new ArrayList<>();
+        for (Products list : mProductArrayList) {
+            switch (sorter) {
+                case ProductUPC:
+                    if (list.getProductUpc().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+
+                default:
+                    if (list.getProductId().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+            }
+        }
+        if (filteredList.isEmpty()) {
+            mProductRecyclerViewAdapter.setFilteredList(filteredList);
+            Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
+        } else {
+            mProductRecyclerViewAdapter.setFilteredList(filteredList);
+        }
     }
 
     public void onRestart()

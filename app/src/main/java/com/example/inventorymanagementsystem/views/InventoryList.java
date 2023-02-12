@@ -48,7 +48,14 @@ public class InventoryList extends AppCompatActivity {
     private Users mCurrentUser;
     private String mWarehouse;
     private enum Sort {
-    ProductID;
+        LocationName,
+        LocationZone,
+        NumBox,
+        PiecePerBox,
+        TotalPieces,
+        Availability,
+        PiecesMarked,
+        UnitID;
     }
     private Sort sorter;
     @Override
@@ -82,11 +89,17 @@ public class InventoryList extends AppCompatActivity {
         CollectionReference unitIdRef = db.collection("Warehouses/"+mWarehouse+"/UnitId");
 
         InventoryFilter = findViewById(R.id.ibInventoryListFilter);
-        sorter = Sort.ProductID;
+        sorter = Sort.UnitID;
 
         DropDownMenu = new PopupMenu(getApplicationContext(), InventoryFilter);
         menu = DropDownMenu.getMenu();
-        menu.add(0,0,0,"Product ID");
+        menu.add(0,0,0,"Location Name");
+        menu.add(0,1,0,"Location Zone");
+        menu.add(0,2,0,"Number of Boxes");
+        menu.add(0,3,0,"Pieces Per Box");
+        menu.add(0,4,0,"Total Pieces");
+        menu.add(0,5,0,"Availability");
+        menu.add(0,6,0,"Pieces Marked");
 
         unitIdRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -109,8 +122,26 @@ public class InventoryList extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
-                    case 0: //Name
-                        sorter = Sort.ProductID;
+                    case 0: //ProductID
+                        sorter = Sort.LocationName;
+                        return true;
+                    case 1:
+                        sorter = Sort.LocationZone;
+                        return true;
+                    case 2:
+                        sorter = Sort.PiecePerBox;
+                        return true;
+                    case 3:
+                        sorter = Sort.NumBox;
+                        return true;
+                    case 4:
+                        sorter = Sort.TotalPieces;
+                        return true;
+                    case 5:
+                        sorter = Sort.Availability;
+                        return true;
+                    case 6:
+                        sorter = Sort.PiecesMarked;
                         return true;
                 }
                 return false;
@@ -129,8 +160,43 @@ public class InventoryList extends AppCompatActivity {
         ArrayList<UnitId> filteredList = new ArrayList<>();
         for (UnitId list : mArrayListUnitId) {
             switch (sorter) {
+                case LocationName:
+                    if (list.getLocation().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+                case LocationZone:
+                    if (list.getZone().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+                case PiecePerBox:
+                    if (list.getPiecesPerBox().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+                case NumBox:
+                    if (list.getNumberOfBoxes().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+                case TotalPieces:
+                    if (list.getTotalPieces().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+                case Availability:
+                    if (list.getPiecesAvailable().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+                case PiecesMarked:
+                    if (list.getPiecesMarked().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
                 default:
-                    if (list.getProductId().toLowerCase().contains(text.toLowerCase())) {
+                    if (list.getUnitId().toLowerCase().contains(text.toLowerCase())) {
                         filteredList.add(list);
                     }
                     break;

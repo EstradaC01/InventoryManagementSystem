@@ -88,4 +88,9 @@ public class AddLocationRecyclerViewAdapter extends RecyclerView.Adapter<AddLoca
         mLocationArrayList = searchList;
         notifyDataSetChanged();
     }
+
+    public void setFilteredList(ArrayList<Location> filteredList) {
+        mLocationArrayList = filteredList;
+        notifyDataSetChanged();
+    }
 }

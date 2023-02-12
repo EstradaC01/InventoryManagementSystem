@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.models.Location;
+import com.example.inventorymanagementsystem.models.UnitId;
 
 import java.util.ArrayList;
 
@@ -71,4 +72,10 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
         mLocationArrayList = searchList;
         notifyDataSetChanged();
     }
+
+    public void setFilteredList(ArrayList<Location> filteredList) {
+        mLocationArrayList = filteredList;
+        notifyDataSetChanged();
+    }
+
 }

@@ -10,7 +10,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -18,6 +23,7 @@ import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.AddLocationRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.adapters.LocationRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.Location;
+import com.example.inventorymanagementsystem.models.UnitId;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,7 +47,15 @@ public class FindLocationScreen extends AppCompatActivity {
     private androidx.appcompat.widget.SearchView searchView;
     private String mWarehouse;
     private static Users mCurrentUser;
-
+    private ImageButton LocationFilter;
+    public PopupMenu DropDownMenu;
+    public Menu menu;
+    private enum Sort {
+        LocationName,
+        Zone,
+        Status;
+    }
+    private Sort sorter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +89,14 @@ public class FindLocationScreen extends AppCompatActivity {
 
         // setting adapter to our recycler view
         mLocationsRecyclerView.setAdapter(mLocationRecyclerViewAdapter);
+
+        LocationFilter = findViewById(R.id.ibFindLocationScreen);
+        sorter = Sort.LocationName;
+
+        DropDownMenu = new PopupMenu(getApplicationContext(), LocationFilter);
+        menu = DropDownMenu.getMenu();
+        menu.add(0,0,0,"Location Zone");
+        menu.add(0,1,0,"Location Status");
 
         // creating firebasefirestore reference to locations path
         CollectionReference locationsRef = db.collection("Warehouses/"+mWarehouse+"/Locations");
@@ -119,6 +141,30 @@ public class FindLocationScreen extends AppCompatActivity {
                 return false;
             }
         });
+
+        DropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case 0: //Zone
+                        sorter = Sort.Zone;
+                        return true;
+
+                    case 2: //Status
+                        sorter = Sort.Status;
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        LocationFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DropDownMenu.show();
+            }
+        });
+
     }
 
     private void searchList(String text) {
@@ -132,6 +178,35 @@ public class FindLocationScreen extends AppCompatActivity {
         }
             mLocationRecyclerViewAdapter.setSearchList(searchedList);
 
+    }
+
+    private void filterList(String text, Sort sorter) {
+        ArrayList<Location> filteredList = new ArrayList<>();
+        for (Location list : mLocationArrayList) {
+            switch (sorter) {
+                case Zone:
+                    if (list.getZone().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+                case Status:
+                    if (list.getStatus().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+                default:
+                    if (list.getName().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(list);
+                    }
+                    break;
+            }
+        }
+        if (filteredList.isEmpty()) {
+            mLocationRecyclerViewAdapter.setFilteredList(filteredList);
+            Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
+        } else {
+            mLocationRecyclerViewAdapter.setFilteredList(filteredList);
+        }
     }
 
     public void onRestart()
