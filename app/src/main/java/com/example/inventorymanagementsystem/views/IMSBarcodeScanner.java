@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.ImageProxy;
@@ -21,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.util.Size;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -52,7 +54,8 @@ public class IMSBarcodeScanner extends AppCompatActivity {
     public static final String TAG = "CameraXApp";
     private ExecutorService cameraExecutor;
     private ImageCapture imageCapture = null;
-
+    private ImageAnalysis imageAnalysis = null;
+    private codeAnalyzer codeAnalyzerObject;
     private static final String[] REQUIRED_PERMISSIONS;
 
     static {
@@ -92,9 +95,12 @@ public class IMSBarcodeScanner extends AppCompatActivity {
         cameraExecutor = Executors.newSingleThreadExecutor();
 
         imageCapture = new ImageCapture.Builder().build();
-
+        imageAnalysis = new ImageAnalysis.Builder()
+                .setTargetResolution(new Size(1280,720))
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .build();
         cameraPreview = findViewById(R.id.cameraView);
-
+        codeAnalyzerObject = new codeAnalyzer();
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,27 +108,35 @@ public class IMSBarcodeScanner extends AppCompatActivity {
             }
         });
     }
-    private void scanBarcodes(InputImage image) {
+    @androidx.camera.core.ExperimentalGetImage
+
+    private void scanBarcodes(ImageProxy image) {
         Log.d(TAG, "scanning");
+        Image mediaImage = image.getImage();
+        InputImage inputImage =
+                                InputImage.fromMediaImage(mediaImage, image.getImageInfo().getRotationDegrees());
 
         // [START run_detector]
-        Task<List<Barcode>> result = scanner.process(image).addOnCompleteListener(new OnCompleteListener<List<Barcode>>() {
+        Task<List<Barcode>> result = scanner.process(inputImage).addOnSuccessListener(new OnSuccessListener<List<Barcode>>() {
+            @Override
+            public void onSuccess(List<Barcode> barcodes) {
+                if (barcodes.isEmpty()) {
+                    Log.d(TAG, "does not have codes");
+
+                } else {
+                    for (Barcode barcode: barcodes) {
+                        Log.d(TAG, "has codes");
+
+                        String rawValue = barcode.getRawValue();
+                        Log.d(TAG, "Code: " + rawValue);
+                        tvBarcode.setText(rawValue);
+                    }
+                }
+            }
+        }).addOnCompleteListener(new OnCompleteListener<List<Barcode>>() {
                     @Override
                     public void onComplete(@NonNull Task<List<Barcode>> task) {
-                        List<Barcode> barcodes = task.getResult();
-                        if (barcodes.isEmpty()) {
-                            Log.d(TAG, "does not have codes");
-
-                        } else {
-                            for (Barcode barcode: barcodes) {
-                                Log.d(TAG, "has codes");
-
-                                String rawValue = barcode.getRawValue();
-                                Log.d(TAG, "Code: " + rawValue);
-                                tvBarcode.setText(rawValue);
-                            }
-                        }
-
+                        image.close();
                     }
                 });
 
@@ -136,14 +150,8 @@ public class IMSBarcodeScanner extends AppCompatActivity {
             @androidx.camera.core.ExperimentalGetImage
             public void onCaptureSuccess(@NonNull ImageProxy image) {
                 super.onCaptureSuccess(image);
-                Image mediaImage = image.getImage();
-                if (mediaImage != null) {
-                    Log.d(TAG, "executed");
-                    InputImage inputImage =
-                            InputImage.fromMediaImage(mediaImage, image.getImageInfo().getRotationDegrees());
-                    scanBarcodes(inputImage);
-                    image.close();
-                }
+                scanBarcodes(image);
+
             }
             @Override
             public void onError(@NonNull ImageCaptureException exception) {
@@ -169,17 +177,25 @@ public class IMSBarcodeScanner extends AppCompatActivity {
         CameraSelector cameraSelector = new CameraSelector.Builder()
                 .requireLensFacing(CameraSelector.LENS_FACING_BACK)
                 .build();
-
+        imageAnalysis.setAnalyzer(cameraExecutor, codeAnalyzerObject);
         preview.setSurfaceProvider(cameraPreview.getSurfaceProvider());
 
-        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview, imageCapture);
+        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview, imageCapture, imageAnalysis);
     }
+    public class codeAnalyzer implements ImageAnalysis.Analyzer {
+        @Override
+        @androidx.camera.core.ExperimentalGetImage
+        public void analyze(@NonNull ImageProxy image) {
+                scanBarcodes(image);
+            }
+        }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         cameraExecutor.shutdown();
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
