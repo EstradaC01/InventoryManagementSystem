@@ -18,11 +18,8 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.adapters.AddLocationRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.adapters.AddProductRecyclerViewAdapter;
-import com.example.inventorymanagementsystem.models.Location;
 import com.example.inventorymanagementsystem.models.Products;
-import com.example.inventorymanagementsystem.models.UnitId;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -88,6 +85,7 @@ public class FindProductScreen extends AppCompatActivity {
         DropDownMenu = new PopupMenu(getApplicationContext(), ProductFilter);
         menu = DropDownMenu.getMenu();
         menu.add(0,0,0,"Product ID");
+        menu.add(0,1,0,"Product UPC");
 
         // creating firebasefirestore reference to locations path
         CollectionReference locationsRef = db.collection("Warehouses/"+mWarehouse+"/Products");
@@ -126,7 +124,7 @@ public class FindProductScreen extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchList(newText);
+                filterList(newText);
                 return false;
             }
         });
@@ -136,6 +134,9 @@ public class FindProductScreen extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case 0: //ProductID
+                        sorter = Sort.ProductID;
+                        return true;
+                    case 1: //ProductUPC
                         sorter = Sort.ProductUPC;
                         return true;
 
@@ -152,20 +153,7 @@ public class FindProductScreen extends AppCompatActivity {
         });
     }
 
-    private void searchList(String text) {
-        ArrayList<Products> searchedList = new ArrayList<>();
-        for(Products p : mProductArrayList) {
-            if(p.getProductId().toLowerCase().contains(text.toLowerCase())) {
-                searchedList.add(p);
-            } else {
-                mProductRecyclerViewAdapter.setSearchList(searchedList);
-            }
-        }
-        mProductRecyclerViewAdapter.setSearchList(searchedList);
-
-    }
-
-    private void filterList(String text, Sort sorter) {
+    private void filterList(String text) {
         ArrayList<Products> filteredList = new ArrayList<>();
         for (Products list : mProductArrayList) {
             switch (sorter) {
@@ -174,7 +162,6 @@ public class FindProductScreen extends AppCompatActivity {
                         filteredList.add(list);
                     }
                     break;
-
                 default:
                     if (list.getProductId().toLowerCase().contains(text.toLowerCase())) {
                         filteredList.add(list);
