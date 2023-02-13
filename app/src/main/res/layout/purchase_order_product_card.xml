@@ -16,7 +16,7 @@
 
         <!--        Textview for displaying item name-->
         <ImageView
-            android:id="@+id/imageViewItem"
+            android:id="@+id/purchaseOrderProductCardImage"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/rounded_corners_white"
@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvItemProductId"
+            android:id="@+id/purchaseOrderProductCardTvProductId"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:padding="2dp"
@@ -63,10 +63,10 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/guideline5"
-            app:layout_constraintTop_toBottomOf="@id/tvItemProductId" />
+            app:layout_constraintTop_toBottomOf="@id/purchaseOrderProductCardTvProductId" />
 
         <TextView
-            android:id="@+id/tvItemProductDescription"
+            android:id="@+id/purchaseOrderProductCardTvProductDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="2dp"
@@ -90,10 +90,10 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/guideline5"
-            app:layout_constraintTop_toBottomOf="@id/tvItemProductDescription" />
+            app:layout_constraintTop_toBottomOf="@id/purchaseOrderProductCardTvProductDescription" />
 
         <TextView
-            android:id="@+id/tvItemProductUPC"
+            android:id="@+id/purchaseOrderProductCardTvUPC"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:padding="2dp"
@@ -109,7 +109,7 @@
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
             android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/tvItemProductUPC">
+            app:layout_constraintTop_toBottomOf="@id/purchaseOrderProductCardTvUPC">
 
             <EditText
                 android:id="@+id/purchaseOrderProductCardUnits"

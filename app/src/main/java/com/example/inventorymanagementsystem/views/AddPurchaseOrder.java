@@ -1,8 +1,14 @@
 package com.example.inventorymanagementsystem.views;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,10 +18,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.inventorymanagementsystem.R;
+import com.example.inventorymanagementsystem.adapters.PurchaseOrderRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class AddPurchaseOrder extends AppCompatActivity {
@@ -26,9 +34,10 @@ public class AddPurchaseOrder extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private EditText edtAnticipatedArrivalDate, edtPoNumber, edtShippingFrom;
 
-    String mAnticipatedArrivalDate, mPoNumber, mShippingFrom;
+    private String mAnticipatedArrivalDate, mPoNumber, mShippingFrom;
 
-    ArrayList<Products> mProductsArrayList;
+    private ArrayList<Products> mProductsArrayList;
+    private PurchaseOrderRecyclerViewAdapter mRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +60,19 @@ public class AddPurchaseOrder extends AppCompatActivity {
         edtShippingFrom = findViewById(R.id.addPurchaseOrderEdtShippingFrom);
         mRecyclerView = findViewById(R.id.addPurchaseOrderRecyclerView);
 
+        // creating our new array list
+
+        mProductsArrayList = new ArrayList<>();
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Intent i = getIntent();
         mCurrentUser = (Users)i.getSerializableExtra("User");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
+
+        mRecyclerViewAdapter = new PurchaseOrderRecyclerViewAdapter(mProductsArrayList, this);
+
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
 
         btnSubmit.setOnClickListener(v -> {
 
@@ -70,7 +88,35 @@ public class AddPurchaseOrder extends AppCompatActivity {
         });
 
         btnAddRemoveProduct.setOnClickListener(v -> {
+            Intent addProductIntent = new Intent(AddPurchaseOrder.this, PurchaseOrderProductList.class);
+            addProductIntent.putExtra("User", mCurrentUser);
+            addProductIntent.putExtra("Warehouse", mWarehouse);
+            if(mProductsArrayList != null) {
+                addProductIntent.putExtra("ProductList", (Serializable) mProductsArrayList);
 
+            }
+            launchAddProductsActivity.launch(addProductIntent);
         });
     }
+
+    private ActivityResultLauncher<Intent> launchAddProductsActivity = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        ArrayList<Products> tempProduct = (ArrayList<Products>) data.getSerializableExtra("ProductList");
+                        mProductsArrayList.clear();
+                        mRecyclerViewAdapter.notifyDataSetChanged();
+                        for(Products p : tempProduct) {
+                            mProductsArrayList.add(p);
+                            mRecyclerViewAdapter.notifyDataSetChanged();
+                        }
+
+                    }
+
+                }
+            });
+
 }
