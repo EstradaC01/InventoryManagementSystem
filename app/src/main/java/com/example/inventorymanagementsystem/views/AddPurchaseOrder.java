@@ -16,14 +16,19 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.PurchaseOrderRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.Products;
+import com.example.inventorymanagementsystem.models.PurchaseOrder;
 import com.example.inventorymanagementsystem.models.Users;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class AddPurchaseOrder extends AppCompatActivity {
@@ -76,6 +81,10 @@ public class AddPurchaseOrder extends AppCompatActivity {
 
         btnSubmit.setOnClickListener(v -> {
 
+            mAnticipatedArrivalDate = edtAnticipatedArrivalDate.getText().toString();
+            mPoNumber = edtPoNumber.getText().toString();
+            mShippingFrom = edtShippingFrom.getText().toString();
+
             if(TextUtils.isEmpty(mAnticipatedArrivalDate)) {
                 edtAnticipatedArrivalDate.setError("Enter Anticipated Arrival Date");
             }
@@ -84,6 +93,19 @@ public class AddPurchaseOrder extends AppCompatActivity {
             }
             if(TextUtils.isEmpty(mShippingFrom)) {
                 edtShippingFrom.setError("Enter Shipping From");
+            }
+            if(!mAnticipatedArrivalDate.isEmpty() && !mPoNumber.isEmpty() &&
+                !mShippingFrom.isEmpty() && !mProductsArrayList.isEmpty()) {
+
+                PurchaseOrder purchaseOrder = new PurchaseOrder();
+
+                purchaseOrder.setDateCreated(getCurrentTime());
+                purchaseOrder.setPoNumber(mPoNumber);
+                purchaseOrder.setAnticipatedArrivalDate(mAnticipatedArrivalDate);
+                purchaseOrder.setStatus("OPEN");
+                purchaseOrder.setShippingFrom(mShippingFrom);
+                purchaseOrder.setProducts(mProductsArrayList);
+                addPurchaseOrderToDatabase(purchaseOrder);
             }
         });
 
@@ -119,4 +141,19 @@ public class AddPurchaseOrder extends AppCompatActivity {
                 }
             });
 
+    private void addPurchaseOrderToDatabase(PurchaseOrder _purchaseOrder) {
+        db.collection("Warehouses/"+mWarehouse+"/PurchaseOrders").document(_purchaseOrder.getPoNumber()).set(_purchaseOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(AddPurchaseOrder.this, "Purchase Order Added To System", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+    }
+
+    private String getCurrentTime() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(("MM/dd/yyyy HH:mm:ss"));
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
 }
