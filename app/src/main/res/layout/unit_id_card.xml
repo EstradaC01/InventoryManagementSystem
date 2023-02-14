@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="5dp"
+    android:elevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/tvProductNameLocationCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Product ID"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/breakline"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="---------------------------------------------------"
+            android:textColor="#85C1E9"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/tvProductNameLocationCard" />
+        <!--        Textview for displaying item name-->
+        <TextView
+            android:id="@+id/unitIdCardUnitIdTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Unit ID"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineStart2"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/breakline" />
+
+        <TextView
+            android:id="@+id/unitIdCardUnitId"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="4849"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/unitIdCardUnitIdTitle"
+            app:layout_constraintStart_toStartOf="@id/unitIdCardUnitIdTitle"
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardUnitIdTitle" />
+
+        <TextView
+            android:id="@+id/unitIdCardPiecesPerBoxTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Pieces per Box"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart2"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintTop_toBottomOf="@id/breakline" />
+
+        <TextView
+            android:id="@+id/tvLocationZoneLocationCard"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="10"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/unitIdCardPiecesPerBoxTitle"
+            app:layout_constraintStart_toStartOf="@id/unitIdCardPiecesPerBoxTitle"
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardPiecesPerBoxTitle" />
+
+        <TextView
+            android:id="@+id/unitIdCardNumberOfBoxesTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="No. Boxes"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineStart2"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardUnitId" />
+
+        <TextView
+            android:id="@+id/unitIdCardNumberOfBoxes"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="10"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/unitIdCardNumberOfBoxesTitle"
+            app:layout_constraintStart_toStartOf="@id/unitIdCardNumberOfBoxesTitle"
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardNumberOfBoxesTitle" />
+
+        <TextView
+            android:id="@+id/unitIdCardTotalPiecesTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Total Pieces"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart2"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationZoneLocationCard" />
+
+        <TextView
+            android:id="@+id/unitIdCardTotalPieces"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="100"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/unitIdCardTotalPiecesTitle"
+            app:layout_constraintStart_toStartOf="@id/unitIdCardTotalPiecesTitle"
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardTotalPiecesTitle" />
+
+
+        <TextView
+            android:id="@+id/unitIdCardAvailableUnitsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Available Units"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineStart2"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardNumberOfBoxes" />
+
+        <TextView
+            android:id="@+id/unitIdCardAvailableUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="80"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/unitIdCardAvailableUnitsTitle"
+            app:layout_constraintStart_toStartOf="@id/unitIdCardAvailableUnitsTitle"
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardAvailableUnitsTitle" />
+
+        <TextView
+            android:id="@+id/unitIdCardMarkedUnitsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Marked Units"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart2"
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardTotalPieces" />
+
+        <TextView
+            android:id="@+id/unitIdCardMarkedUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="20"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/unitIdCardMarkedUnitsTitle"
+            app:layout_constraintStart_toStartOf="@id/unitIdCardMarkedUnitsTitle"
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardMarkedUnitsTitle" />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".98" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
