@@ -20,7 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.adapters.PurchaseOrderRecyclerViewAdapter;
+import com.example.inventorymanagementsystem.views.adapters.PurchaseOrderRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.PurchaseOrder;
 import com.example.inventorymanagementsystem.models.Users;

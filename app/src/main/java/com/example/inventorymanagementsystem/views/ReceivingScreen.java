@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.adapters.CustomSpinnerAdapter;
+import com.example.inventorymanagementsystem.views.adapters.CustomSpinnerAdapter;
 import com.example.inventorymanagementsystem.models.Location;
 import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Receiving;
@@ -40,10 +40,11 @@ public class ReceivingScreen extends AppCompatActivity {
     Users mCurrentUser;
     String mWarehouse;
 
-    private EditText edtLocation, edtProductId;
+    private EditText edtLocation, edtProductId, edtPo;
     private String mLocation;
     private String mZone;
     private String mProduct;
+    private String mPo;
     private int mReceiptId = 1;
     private int mUnitId = 1;
 
@@ -60,14 +61,17 @@ public class ReceivingScreen extends AppCompatActivity {
 
         // Initialize widgets
         edtProductId = findViewById(R.id.edtReceivingScreenProductId);
+        edtProductId.setEnabled(false);
         EditText edtNumberOfUnits = findViewById(R.id.edtReceivingScreenNumberOfUnits);
         EditText edtPiecesPerBox = findViewById(R.id.edtReceivingScreenPiecesPerBox);
         EditText edtNumberOfBoxes = findViewById(R.id.edtReceivingScreenTotalBoxes);
         EditText edtLoosePieces = findViewById(R.id.edtReceivingScreenLoosePieces);
         Spinner spinnerDisposition = findViewById(R.id.spinnerReceivingScreenDisposition);
         edtLocation = findViewById(R.id.edtReceivingScreenLocation);
+        edtLocation.setEnabled(false);
         EditText edtWeight = findViewById(R.id.edtReceivingScreenWeight);
-        EditText edtPO = findViewById(R.id.edtReceivingScreenPO);
+        edtPo = findViewById(R.id.edtReceivingScreenPO);
+        edtPo.setEnabled(false);
         EditText edtShipFrom = findViewById(R.id.edtReceivingScreenShipFrom);
 
         Button btnSubmit = findViewById(R.id.btnReceivingScreenSubmit);
@@ -106,6 +110,13 @@ public class ReceivingScreen extends AppCompatActivity {
             launchFindProductActivity.launch(findProductIntent);
         });
 
+        btnAddPO.setOnClickListener(v -> {
+            Intent findPoIntent = new Intent(ReceivingScreen.this, FindPurchaseOrderScreen.class);
+            findPoIntent.putExtra("User", mCurrentUser);
+            findPoIntent.putExtra("Warehouse", mWarehouse);
+            launchFindPoActivity.launch(findPoIntent);
+        });
+
         btnSubmit.setOnClickListener(v -> {
             Receiving receiving = new Receiving();
 
@@ -116,7 +127,7 @@ public class ReceivingScreen extends AppCompatActivity {
             receiving.setDisposition(spinnerDisposition.getSelectedItem().toString());
             receiving.setLocation(edtLocation.getText().toString());
             receiving.setWeight(edtWeight.getText().toString());
-            receiving.setPO(edtPO.getText().toString());
+            receiving.setPO(edtPo.getText().toString());
             receiving.setShipFrom(edtShipFrom.getText().toString());
             receiving.setReceiptId(String.valueOf(mReceiptId));
             receiving.setTotalPieces(String.valueOf(Integer.parseInt(edtPiecesPerBox.getText().toString()) * Integer.parseInt(edtNumberOfBoxes.getText().toString())));
@@ -208,6 +219,21 @@ public class ReceivingScreen extends AppCompatActivity {
                         Intent data = result.getData();
                         mProduct = data.getStringExtra("Product");
                         edtProductId.setText(mProduct);
+                    } else {
+                        Toast.makeText(ReceivingScreen.this, "Cancelled", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
+    private ActivityResultLauncher<Intent> launchFindPoActivity = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        mPo = data.getStringExtra("PoNumber");
+                        edtPo.setText(mPo);
                     } else {
                         Toast.makeText(ReceivingScreen.this, "Cancelled", Toast.LENGTH_LONG).show();
                     }

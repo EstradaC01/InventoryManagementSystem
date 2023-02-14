@@ -21,7 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.adapters.OrderRVAdapter;
+import com.example.inventorymanagementsystem.views.adapters.OrderRVAdapter;
 import com.example.inventorymanagementsystem.models.Orders;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnFailureListener;

@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.adapters.UnitTypeRecyclerViewAdapter;
+import com.example.inventorymanagementsystem.views.adapters.UnitTypeRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.UnitType;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnFailureListener;

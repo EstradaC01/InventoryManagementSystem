@@ -1,4 +1,4 @@
-package com.example.inventorymanagementsystem.adapters;
+package com.example.inventorymanagementsystem.views.adapters;
 
 import android.content.Context;
 import android.content.Intent;

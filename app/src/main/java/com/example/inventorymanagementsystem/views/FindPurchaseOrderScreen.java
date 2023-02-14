@@ -10,13 +10,15 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.views.adapters.LocationRecyclerViewAdapter;
-import com.example.inventorymanagementsystem.models.Location;
+import com.example.inventorymanagementsystem.models.Products;
+import com.example.inventorymanagementsystem.models.PurchaseOrder;
 import com.example.inventorymanagementsystem.models.Users;
+import com.example.inventorymanagementsystem.views.adapters.AddProductRecyclerViewAdapter;
+import com.example.inventorymanagementsystem.views.adapters.FindPurchaseOrderRecyclerViewAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -27,91 +29,81 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationList extends AppCompatActivity {
+public class FindPurchaseOrderScreen extends AppCompatActivity {
 
-    private Users mCurrentUser;
-    private String mWarehouse;
+    private ArrayList<PurchaseOrder> mArrayPurchaseOrder;
     private RecyclerView mRecyclerView;
-    private ArrayList<Location> mLocationArrayList;
-    private LocationRecyclerViewAdapter mLocationRecyclerViewAdapter;
+    private FindPurchaseOrderRecyclerViewAdapter mAdapter;
+    private FirebaseFirestore db;
+    private String mWarehouse;
+    private Users mCurrentUser;
 
     private androidx.appcompat.widget.SearchView searchView;
-    private FirebaseFirestore db;
+    private ImageButton ProductFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_list);
+        setContentView(R.layout.activity_find_purchase_order_screen);
 
         // prevents users from rotating screen
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // change action support bar title and font color
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Locations</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Find PO</font>"));
 
-        //initializing widgets
-        searchView = findViewById(R.id.svLocationList);
-        Button btnAddLocation = findViewById(R.id.btnLocationListAddLocation);
-        mRecyclerView = findViewById(R.id.recyclerViewLocationList);
+        // initializing widgets
+        searchView = findViewById(R.id.findPurchaseOrderSearchView);
+        mRecyclerView = findViewById(R.id.findPurchaseOrderRecyclerView);
 
         // creating our new array list
-        mLocationArrayList = new ArrayList<>();
+        mArrayPurchaseOrder = new ArrayList<>();
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // initialize firebase
         db = FirebaseFirestore.getInstance();
 
+        // getting intent from previous class
         Intent i = getIntent();
-        mCurrentUser = (Users)i.getSerializableExtra("User");
+        mCurrentUser = (Users) i.getSerializableExtra("User");
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         // adding our array list to our recycler view adapter class
-        mLocationRecyclerViewAdapter = new LocationRecyclerViewAdapter(mLocationArrayList, this);
+        mAdapter = new FindPurchaseOrderRecyclerViewAdapter(mArrayPurchaseOrder, this, FindPurchaseOrderScreen.this);
 
         // setting adapter to our recycler view
-        mRecyclerView.setAdapter(mLocationRecyclerViewAdapter);
+        mRecyclerView.setAdapter(mAdapter);
 
-        CollectionReference itemsRef = db.collection("Warehouses/"+mWarehouse+"/Locations");
+        // creating firebasefirestore reference to locations path
+        CollectionReference locationsRef = db.collection("Warehouses/"+mWarehouse+"/PurchaseOrders");
 
-        if(mCurrentUser.getIsAdmin())
-        {
-            itemsRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        if(mCurrentUser.getIsAdmin()) {
+            locationsRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    if(!queryDocumentSnapshots.isEmpty())
-                    {
+                    if(!queryDocumentSnapshots.isEmpty()) {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                         for(DocumentSnapshot d : list) {
-                            Location l = d.toObject(Location.class);
-                            mLocationArrayList.add(l);
+                            PurchaseOrder p = d.toObject(PurchaseOrder.class);
+                            mArrayPurchaseOrder.add(p);
                         }
-                        mLocationRecyclerViewAdapter.notifyDataSetChanged();
+                        mAdapter.notifyDataSetChanged();
                     } else {
-                        Toast.makeText(LocationList.this, "No data found in Database", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FindPurchaseOrderScreen.this, "No data found in Database", Toast.LENGTH_LONG).show();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(LocationList.this, "Failed to get data", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FindPurchaseOrderScreen.this, "Failed to get data", Toast.LENGTH_LONG).show();
                 }
             });
         } else {
-            Toast.makeText(LocationList.this, "Access Denied", Toast.LENGTH_LONG).show();
+            Toast.makeText(FindPurchaseOrderScreen.this, "Access Denied", Toast.LENGTH_LONG).show();
             finish();
         }
 
-        btnAddLocation.setOnClickListener(v -> {
-            // Intent
-            Intent addZoneIntent = new Intent(LocationList.this, AddLocation.class);
-            addZoneIntent.putExtra("User", mCurrentUser);
-            addZoneIntent.putExtra("Warehouse", mWarehouse);
-            startActivity(addZoneIntent);
-        });
-
-        searchView.setIconified(false);
-        searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -120,24 +112,31 @@ public class LocationList extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchList(newText);
+                filterList(newText);
                 return false;
             }
         });
+
+
     }
 
-    private void searchList(String text) {
-        ArrayList<Location> searchedList = new ArrayList<>();
-        for(Location l : mLocationArrayList) {
-            if(l.getName().toLowerCase().contains(text.toLowerCase())) {
-                searchedList.add(l);
-            } else {
-                mLocationRecyclerViewAdapter.setSearchList(searchedList);
+    private void filterList(String text) {
+        ArrayList<PurchaseOrder> filteredList = new ArrayList<>();
+
+        for(PurchaseOrder p : mArrayPurchaseOrder) {
+            if(p.getPoNumber().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(p);
             }
         }
-        mLocationRecyclerViewAdapter.setSearchList(searchedList);
 
+        if (filteredList.isEmpty()) {
+            mAdapter.setFilteredList(filteredList);
+            Toast.makeText(this, "No items found", Toast.LENGTH_SHORT).show();
+        } else {
+            mAdapter.setFilteredList(filteredList);
+        }
     }
+
     public void onRestart()
     {
         super.onRestart();

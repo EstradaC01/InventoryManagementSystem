@@ -1,4 +1,4 @@
-package com.example.inventorymanagementsystem.adapters;
+package com.example.inventorymanagementsystem.views.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.models.Orders;
 import com.example.inventorymanagementsystem.models.UnitId;
 
 import java.util.ArrayList;

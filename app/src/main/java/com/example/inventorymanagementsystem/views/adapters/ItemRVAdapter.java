@@ -1,4 +1,4 @@
-package com.example.inventorymanagementsystem.adapters;
+package com.example.inventorymanagementsystem.views.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;

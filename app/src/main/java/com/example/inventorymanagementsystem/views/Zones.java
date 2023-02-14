@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.adapters.ZoneRecyclerViewAdapter;
+import com.example.inventorymanagementsystem.views.adapters.ZoneRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.Users;
 import com.example.inventorymanagementsystem.models.Zone;
 import com.google.android.gms.tasks.OnFailureListener;
