@@ -39,7 +39,7 @@ public class PurchaseOrderRecyclerViewAdapter extends RecyclerView.Adapter<Purch
     public void onBindViewHolder(@NonNull PurchaseOrderRecyclerViewAdapter.ViewHolder holder, int position) {
         Products product = mProductArrayList.get(position);
         holder.productId.setText(product.getProductId());
-        holder.totalUnits.setText(product.getAvailableUnits()+" units");
+        holder.totalUnits.setText(product.getExpectedUnits()+" units");
 
     }
 
