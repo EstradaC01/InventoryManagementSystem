@@ -121,6 +121,7 @@ public class PurchaseOrderProductList extends AppCompatActivity {
                         if(d.getId().equals(_productId)) {
                             Products p = new Products();
                             p = d.toObject(Products.class);
+                            p.setExpectedUnits("0");
                             mArrayListProducts.add(p);
                             mAdapter.notifyDataSetChanged();
                         }

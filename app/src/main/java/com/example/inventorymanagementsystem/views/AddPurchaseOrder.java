@@ -14,6 +14,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,12 +25,16 @@ import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.PurchaseOrder;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddPurchaseOrder extends AppCompatActivity {
 
@@ -43,6 +48,7 @@ public class AddPurchaseOrder extends AppCompatActivity {
 
     private ArrayList<Products> mProductsArrayList;
     private PurchaseOrderRecyclerViewAdapter mRecyclerViewAdapter;
+    private static final String TAG = "AddPurchaseOrder";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +112,7 @@ public class AddPurchaseOrder extends AppCompatActivity {
                 purchaseOrder.setShippingFrom(mShippingFrom);
                 purchaseOrder.setProducts(mProductsArrayList);
                 addPurchaseOrderToDatabase(purchaseOrder);
+                updateProductExpectedQuantity(mProductsArrayList);
             }
         });
 
@@ -146,9 +153,34 @@ public class AddPurchaseOrder extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(AddPurchaseOrder.this, "Purchase Order Added To System", Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
+    }
+
+    private void updateProductExpectedQuantity(List<Products> _products) {
+        for(Products p : _products) {
+            db.collection("Warehouses/"+mWarehouse+"/Products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    if(!queryDocumentSnapshots.isEmpty()) {
+                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                        for(DocumentSnapshot d : list) {
+                            if(d.getId().equals(p.getProductId())) {
+                                Products tempProduct = d.toObject(Products.class);
+                                DocumentReference productReference = db.collection("Warehouses/"+mWarehouse+"/Products").document(d.getId());
+                                
+                                productReference.update("expectedUnits", String.valueOf(Integer.parseInt(p.getExpectedUnits()) + Integer.parseInt(tempProduct.getExpectedUnits()))).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d(TAG, "DocumentSnapshot successfuly updated!");
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+        }
     }
 
     private String getCurrentTime() {
