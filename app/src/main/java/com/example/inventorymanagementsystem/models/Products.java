@@ -13,7 +13,7 @@ public class Products implements Serializable {
             productUpc, productPcsPerBox, productTimeAdded,
             userKey,  uniqueIdentifier,
             imageUri, productOwner,
-            availableUnits;
+            availableUnits, expectedUnits;
 
     public Products()
     {
@@ -25,7 +25,7 @@ public class Products implements Serializable {
     public Products(String _productId, String _productDescription,
                     String _productUpc, String _productPcsPerBox,
                     String _productTimeAdded, String _userKey, String _productOwner,
-                    String _imageUri, String _availableUnits)
+                    String _imageUri, String _availableUnits, String _expectedUnits)
     {
         productId = _productId;
         productDescription = _productDescription;
@@ -36,6 +36,7 @@ public class Products implements Serializable {
         productOwner = _productOwner;
         imageUri = _imageUri;
         availableUnits = _availableUnits;
+        expectedUnits = _expectedUnits;
     }
 
     // getter methods for all variables
@@ -112,5 +113,13 @@ public class Products implements Serializable {
 
     public void setAvailableUnits(String availableUnits) {
         this.availableUnits = availableUnits;
+    }
+
+    public String getExpectedUnits() {
+        return expectedUnits;
+    }
+
+    public void setExpectedUnits(String expectedUnits) {
+        this.expectedUnits = expectedUnits;
     }
 }

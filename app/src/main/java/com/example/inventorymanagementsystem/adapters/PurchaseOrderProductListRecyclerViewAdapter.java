@@ -26,6 +26,7 @@ public class PurchaseOrderProductListRecyclerViewAdapter extends RecyclerView.Ad
     private Context mContext;
     private Activity mActivity;
 
+
     public PurchaseOrderProductListRecyclerViewAdapter(ArrayList<Products> mProductArrayList, Context mContext, Activity mActivity) {
         this.mProductArrayList = mProductArrayList;
         this.mContext = mContext;
@@ -50,11 +51,23 @@ public class PurchaseOrderProductListRecyclerViewAdapter extends RecyclerView.Ad
         holder.productId.setText(product.getProductId());
         holder.productDescription.setText(product.getProductId());
         holder.productUpc.setText(product.getProductUpc());
+        holder.totalUnits.setText(product.getExpectedUnits());
 
         Glide.with(mContext).load(product.getImageUri()).into(holder.productImage);
 
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
 
+        holder.btnUpdate.setOnClickListener(v -> {
+            if(!holder.totalUnits.getText().toString().isEmpty()) {
+                product.setExpectedUnits(holder.totalUnits.getText().toString());
+                notifyDataSetChanged();
+            }
+        });
+
+        holder.btnRemove.setOnClickListener(v -> {
+            mProductArrayList.remove(product);
+            notifyDataSetChanged();
+        });
     }
 
     @Override
@@ -68,6 +81,7 @@ public class PurchaseOrderProductListRecyclerViewAdapter extends RecyclerView.Ad
         private final TextView productUpc;
         private final ImageView productImage;
         private final Button btnRemove;
+        private final Button btnUpdate;
         private final EditText totalUnits;
 
         public ViewHolder(@NonNull View itemView) {
@@ -78,7 +92,9 @@ public class PurchaseOrderProductListRecyclerViewAdapter extends RecyclerView.Ad
             productUpc = itemView.findViewById(R.id.purchaseOrderProductCardTvUPC);
             productImage = itemView.findViewById(R.id.purchaseOrderProductCardImage);
             btnRemove = itemView.findViewById(R.id.purchaseOrderProductCardBtnRemove);
+            btnUpdate = itemView.findViewById(R.id.purchaseOrderProductCardBtnUpdate);
             totalUnits = itemView.findViewById(R.id.purchaseOrderProductCardUnits);
+
         }
     }
 }

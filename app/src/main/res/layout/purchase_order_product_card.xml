@@ -123,6 +123,15 @@
                 android:padding="15dp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/purchaseOrderProductCardBtnUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_navyblue"
+                android:text="UPDATE"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="right"
+                android:textColor="@color/white" />
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/purchaseOrderProductCardBtnRemove"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
