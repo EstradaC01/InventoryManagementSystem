@@ -1,6 +1,7 @@
 package com.example.inventorymanagementsystem.views;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
@@ -15,6 +16,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.media.Image;
@@ -24,16 +27,27 @@ import android.text.Html;
 import android.util.Log;
 import android.util.Size;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
+import com.example.inventorymanagementsystem.adapters.CustomSpinnerAdapter;
+import com.example.inventorymanagementsystem.models.Products;
+import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
 import com.google.mlkit.vision.barcode.BarcodeScanning;
@@ -70,7 +84,11 @@ public class IMSBarcodeScanner extends AppCompatActivity {
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private BarcodeScanner scanner;
     private Button scanBtn;
+    private String rawValue = "";
+    private String mWarehouse = "";
     private TextView tvBarcode;
+    private FirebaseFirestore db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +106,7 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                         .build();
 
         scanner = BarcodeScanning.getClient(barcodeOptions);
-        scanBtn = findViewById(R.id.idBtnScanCode);
+        scanBtn = findViewById(R.id.idBtnFindProduct);
         tvBarcode = findViewById(R.id.idTVBarcode);
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
@@ -101,10 +119,35 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                 .build();
         cameraPreview = findViewById(R.id.cameraView);
         codeAnalyzerObject = new codeAnalyzer();
+        db = FirebaseFirestore.getInstance();
+        Intent i = getIntent();
+        mWarehouse = (String) i.getSerializableExtra("Warehouse");
+
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePhoto();
+                if (rawValue.isEmpty()) {
+                    Toast.makeText(getBaseContext(), "Code is empty.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                CollectionReference itemsRef = db.collection("Warehouses/"+mWarehouse+"/Products");
+                itemsRef.whereEqualTo("productUpc", rawValue).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (!value.isEmpty()) {
+                            Products p = null;
+                            List<DocumentSnapshot> list = value.getDocuments();
+                            for (DocumentSnapshot d : list) {
+                                p = d.toObject(Products.class);
+                            }
+                            Intent j = new Intent(IMSBarcodeScanner.this, ProductDetails.class);
+                            j.putExtra("Object", p);
+                            startActivity(j);
+                        } else {
+                            Toast.makeText(IMSBarcodeScanner.this, "UPC code not found.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }
@@ -115,7 +158,6 @@ public class IMSBarcodeScanner extends AppCompatActivity {
         Image mediaImage = image.getImage();
         InputImage inputImage =
                                 InputImage.fromMediaImage(mediaImage, image.getImageInfo().getRotationDegrees());
-
         // [START run_detector]
         Task<List<Barcode>> result = scanner.process(inputImage).addOnSuccessListener(new OnSuccessListener<List<Barcode>>() {
             @Override
@@ -127,7 +169,7 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                     for (Barcode barcode: barcodes) {
                         Log.d(TAG, "has codes");
 
-                        String rawValue = barcode.getRawValue();
+                        rawValue = barcode.getRawValue();
                         Log.d(TAG, "Code: " + rawValue);
                         tvBarcode.setText(rawValue);
                     }

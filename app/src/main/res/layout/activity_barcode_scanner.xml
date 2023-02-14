@@ -17,23 +17,12 @@
         app:layout_constraintTop_toTopOf="@id/scanGuidelineTop"
         app:layout_constraintBottom_toTopOf="@id/scanGuidelineBottom"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/idBtnScanCode"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_navyblue"
-        android:text="Scan"
-        android:textAllCaps="true"
-        android:textColor="#ffffff"
-        app:layout_constraintEnd_toStartOf="@id/scanGuidelineEnd"
-        app:layout_constraintStart_toEndOf="@id/scanGuidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/cameraView" />
 
     <TextView
         android:id="@+id/idTVBarcode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         android:background="@drawable/edit_text_border_2"
         android:textColor="@color/black"
@@ -42,7 +31,20 @@
         android:text="Barcode"
         app:layout_constraintEnd_toStartOf="@id/scanGuidelineEnd"
         app:layout_constraintStart_toEndOf="@id/scanGuidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/idBtnScanCode"/>
+        app:layout_constraintTop_toBottomOf="@id/cameraView"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/idBtnFindProduct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_navyblue"
+        android:text="Find Product"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toStartOf="@id/scanGuidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/scanGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/idTVBarcode" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/scanGuidelineStart"
