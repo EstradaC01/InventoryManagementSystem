@@ -83,7 +83,6 @@ public class IMSBarcodeScanner extends AppCompatActivity {
     private BarcodeScannerOptions barcodeOptions;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private BarcodeScanner scanner;
-    private Button scanBtn;
     private String rawValue = "";
     private String mWarehouse = "";
     private TextView tvBarcode;
@@ -106,7 +105,6 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                         .build();
 
         scanner = BarcodeScanning.getClient(barcodeOptions);
-        scanBtn = findViewById(R.id.idBtnFindProduct);
         tvBarcode = findViewById(R.id.idTVBarcode);
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
@@ -123,34 +121,6 @@ public class IMSBarcodeScanner extends AppCompatActivity {
         Intent i = getIntent();
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
-        scanBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (rawValue.isEmpty()) {
-                    Toast.makeText(getBaseContext(), "Code is empty.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                CollectionReference itemsRef = db.collection("Warehouses/"+mWarehouse+"/Products");
-                itemsRef.whereEqualTo("productUpc", rawValue).addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (!value.isEmpty()) {
-                            Products p = null;
-                            List<DocumentSnapshot> list = value.getDocuments();
-                            for (DocumentSnapshot d : list) {
-                                p = d.toObject(Products.class);
-                            }
-                            Intent j = new Intent(IMSBarcodeScanner.this, ProductDetails.class);
-                            j.putExtra("Object", p);
-                            j.putExtra("Warehouse", mWarehouse);
-                            startActivity(j);
-                        } else {
-                            Toast.makeText(IMSBarcodeScanner.this, "UPC code not found.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });
     }
     @androidx.camera.core.ExperimentalGetImage
 
@@ -180,6 +150,29 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<List<Barcode>> task) {
                         image.close();
+                        if (rawValue.isEmpty()) {
+                            Toast.makeText(getBaseContext(), "Code is empty.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        CollectionReference itemsRef = db.collection("Warehouses/"+mWarehouse+"/Products");
+                        itemsRef.whereEqualTo("productUpc", rawValue).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if (!value.isEmpty()) {
+                                    Products p = null;
+                                    List<DocumentSnapshot> list = value.getDocuments();
+                                    for (DocumentSnapshot d : list) {
+                                        p = d.toObject(Products.class);
+                                    }
+                                    Intent j = new Intent(IMSBarcodeScanner.this, ProductDetails.class);
+                                    j.putExtra("Object", p);
+                                    j.putExtra("Warehouse", mWarehouse);
+                                    startActivity(j);
+                                } else {
+                                    Toast.makeText(IMSBarcodeScanner.this, "UPC code not found.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
                 });
 

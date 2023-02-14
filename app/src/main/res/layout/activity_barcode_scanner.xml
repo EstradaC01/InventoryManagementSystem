@@ -33,19 +33,6 @@
         app:layout_constraintStart_toEndOf="@id/scanGuidelineStart"
         app:layout_constraintTop_toBottomOf="@id/cameraView"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/idBtnFindProduct"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_navyblue"
-        android:text="Find Product"
-        android:textAllCaps="true"
-        android:textColor="#ffffff"
-        app:layout_constraintEnd_toStartOf="@id/scanGuidelineEnd"
-        app:layout_constraintStart_toEndOf="@id/scanGuidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/idTVBarcode" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/scanGuidelineStart"
         android:layout_width="wrap_content"
@@ -72,6 +59,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".8" />
+        app:layout_constraintGuide_percent=".9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
