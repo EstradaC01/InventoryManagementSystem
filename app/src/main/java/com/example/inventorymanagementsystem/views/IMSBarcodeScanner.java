@@ -142,6 +142,7 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                             }
                             Intent j = new Intent(IMSBarcodeScanner.this, ProductDetails.class);
                             j.putExtra("Object", p);
+                            j.putExtra("Warehouse", mWarehouse);
                             startActivity(j);
                         } else {
                             Toast.makeText(IMSBarcodeScanner.this, "UPC code not found.", Toast.LENGTH_SHORT).show();
