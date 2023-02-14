@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +41,9 @@ public class LocationDetails extends AppCompatActivity {
     private UnitIdRecyclerViewAdapter mAdapter;
     private Location mLocation;
     private FirebaseFirestore db;
+    private Button deleteButton;
 
+    private static final String TAG = "LocationDetails";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +63,8 @@ public class LocationDetails extends AppCompatActivity {
         TextView tvHeight = findViewById(R.id.locationDetailsHeight);
         TextView tvWidth = findViewById(R.id.locationDetailsWidth);
         TextView tvLength = findViewById(R.id.locationDetailsLength);
-        mRecyclerView = findViewById(R.id.locaationDetailsRecyclerView);
+        mRecyclerView = findViewById(R.id.locationDetailsRecyclerView);
+        deleteButton = findViewById(R.id.locationDetailsDeleteButton);
 
         // creating array list
         mUnitIdArrayList = new ArrayList<>();
@@ -87,6 +93,10 @@ public class LocationDetails extends AppCompatActivity {
 
         mRecyclerView.setAdapter(mAdapter);
 
+        if(mLocation.getStatus().equals("INUSE")) {
+            deleteButton.setVisibility(View.GONE);
+        }
+
         CollectionReference unitIdRef = db.collection("Warehouses/" + mWarehouse + "/UnitId");
 
         unitIdRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -111,6 +121,16 @@ public class LocationDetails extends AppCompatActivity {
                 Toast.makeText(LocationDetails.this, "Failed to get data", Toast.LENGTH_LONG).show();
             }
         });
-    }
 
+        deleteButton.setOnClickListener(v -> {
+            db.collection("Warehouses/"+mWarehouse+"/Locations").document(mLocation.getName()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    Toast.makeText(LocationDetails.this, "Location Deleted", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }).addOnFailureListener(e-> Log.w(TAG, "Error deleting document",e ));
+        });
+    }
 }

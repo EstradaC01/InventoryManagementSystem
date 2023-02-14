@@ -248,14 +248,40 @@
             app:layout_constraintGuide_percent="0.45" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/locaationDetailsRecyclerView"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/locationDetailsDeleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="DELETE"
+        android:textColor="@color/white"
+        android:background="@drawable/statelistdrawable_red"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTop2"
+        app:layout_constraintStart_toEndOf="@id/guidelineStart"
+        app:layout_constraintEnd_toStartOf="@id/guidelineEnd" />
+
+    <TextView
+        android:id="@+id/inventoryListTv"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:text="Inventory List"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@id/guidelineStart"
         app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
-        app:layout_constraintTop_toBottomOf="@id/guidelineTop2"
+        app:layout_constraintTop_toBottomOf="@id/locationDetailsDeleteButton"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/locationDetailsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/guidelineStart"
+        app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+        app:layout_constraintTop_toBottomOf="@id/inventoryListTv"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
