@@ -14,7 +14,7 @@
         android:padding="4dp">
 
         <TextView
-            android:id="@+id/tvProductNameLocationCard"
+            android:id="@+id/unitIdCardProductId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="2dp"
@@ -36,7 +36,7 @@
             android:textAlignment="center"
             app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
             app:layout_constraintStart_toEndOf="@id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/tvProductNameLocationCard" />
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardProductId" />
         <!--        Textview for displaying item name-->
         <TextView
             android:id="@+id/unitIdCardUnitIdTitle"
@@ -79,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@id/breakline" />
 
         <TextView
-            android:id="@+id/tvLocationZoneLocationCard"
+            android:id="@+id/unitIdCardPiecesPerBox"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:padding="2dp"
@@ -130,7 +130,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
             app:layout_constraintStart_toEndOf="@id/guidelineStart2"
-            app:layout_constraintTop_toBottomOf="@id/tvLocationZoneLocationCard" />
+            app:layout_constraintTop_toBottomOf="@id/unitIdCardPiecesPerBox" />
 
         <TextView
             android:id="@+id/unitIdCardTotalPieces"

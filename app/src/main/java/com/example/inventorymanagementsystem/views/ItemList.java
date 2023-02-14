@@ -187,27 +187,7 @@ public class ItemList extends AppCompatActivity {
         }
     }
 
-    /**
-     * This method is called after {@link #onStart} when the activity is
-     * being re-initialized from a previously saved state, given here in
-     * <var>savedInstanceState</var>.  Most implementations will simply use {@link #onCreate}
-     * to restore their state, but it is sometimes convenient to do it here
-     * after all of the initialization has been done or to allow subclasses to
-     * decide whether to use your default implementation.  The default
-     * implementation of this method performs a restore of any view state that
-     * had previously been frozen by {@link #onSaveInstanceState}.
-     *
-     * <p>This method is called between {@link #onStart} and
-     * {@link #onPostCreate}. This method is called only when recreating
-     * an activity; the method isn't invoked if {@link #onStart} is called for
-     * any other reason.</p>
-     *
-     * @param savedInstanceState the data most recently supplied in {@link #onSaveInstanceState}.
-     * @see #onCreate
-     * @see #onPostCreate
-     * @see #onResume
-     * @see #onSaveInstanceState
-     */
+
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);

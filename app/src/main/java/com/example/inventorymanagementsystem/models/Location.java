@@ -1,6 +1,8 @@
 package com.example.inventorymanagementsystem.models;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
     private String aisle, rack, level, zone, lpLimit, weight, height, width, length, status, name;
     private Boolean canBeDeleted, hasInventory;
 

@@ -1,6 +1,7 @@
 package com.example.inventorymanagementsystem.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.models.Location;
+import com.example.inventorymanagementsystem.views.LocationDetails;
 
 import java.util.ArrayList;
 
@@ -19,10 +21,17 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
 
     private ArrayList<Location> mLocationArrayList;
     private Context mContext;
+    private Intent mIntent;
 
     public LocationRecyclerViewAdapter(ArrayList<Location> locationArrayList, Context context) {
         mLocationArrayList = locationArrayList;
         mContext = context;
+    }
+
+    public LocationRecyclerViewAdapter(ArrayList<Location> mLocationArrayList, Context mContext, Intent mIntent) {
+        this.mLocationArrayList = mLocationArrayList;
+        this.mContext = mContext;
+        this.mIntent = mIntent;
     }
 
     @NonNull
@@ -39,12 +48,21 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
 
     @Override
     public void onBindViewHolder(@NonNull LocationRecyclerViewAdapter.ViewHolder holder, int position) {
+        String mWarehouse = (String) mIntent.getSerializableExtra("Warehouse");
+
         Location location = mLocationArrayList.get(position);
         holder.tvLocationName.setText(location.getName());
         holder.tvZone.setText(location.getZone());
         holder.tvStatus.setText(location.getStatus());
 
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent i = new Intent(v.getContext(), LocationDetails.class);
+            i.putExtra("Object", location);
+            i.putExtra("Warehouse", mWarehouse);
+            v.getContext().startActivity(i);
+        });
     }
 
     @Override

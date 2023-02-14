@@ -67,7 +67,7 @@ public class LocationList extends AppCompatActivity {
         mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         // adding our array list to our recycler view adapter class
-        mLocationRecyclerViewAdapter = new LocationRecyclerViewAdapter(mLocationArrayList, this);
+        mLocationRecyclerViewAdapter = new LocationRecyclerViewAdapter(mLocationArrayList, this, i);
 
         // setting adapter to our recycler view
         mRecyclerView.setAdapter(mLocationRecyclerViewAdapter);
