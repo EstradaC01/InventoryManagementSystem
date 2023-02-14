@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_android_background"
+    tools:context=".views.LocationDetails">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#FFC107"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTop2"
+        app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTop"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/locationDetailsAisleTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Aisle"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/locationDetailsAisle"
+            app:layout_constraintEnd_toStartOf="@+id/locationDetailsRackTitle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/locationDetailsRackTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Rack"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/locationDetailsAisleTitle"
+            app:layout_constraintEnd_toStartOf="@+id/locationDetailsLevelTitle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/locationDetailsAisleTitle"
+            app:layout_constraintTop_toTopOf="@id/locationDetailsAisleTitle" />
+
+        <TextView
+            android:id="@+id/locationDetailsLevelTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Level"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/locationDetailsRackTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/locationDetailsRackTitle"
+            app:layout_constraintTop_toTopOf="@id/locationDetailsRackTitle" />
+
+        <TextView
+            android:id="@+id/locationDetailsAisle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="001"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guidelineTop3"
+            app:layout_constraintEnd_toEndOf="@id/locationDetailsAisleTitle"
+            app:layout_constraintStart_toStartOf="@id/locationDetailsAisleTitle"
+            app:layout_constraintTop_toBottomOf="@id/locationDetailsAisleTitle" />
+
+        <TextView
+            android:id="@+id/locationDetailsRack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="001"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guidelineTop3"
+            app:layout_constraintEnd_toEndOf="@id/locationDetailsRackTitle"
+            app:layout_constraintStart_toStartOf="@id/locationDetailsRackTitle"
+            app:layout_constraintTop_toBottomOf="@id/locationDetailsRackTitle" />
+
+        <TextView
+            android:id="@+id/locationDetailsLevel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="A1"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guidelineTop3"
+            app:layout_constraintEnd_toEndOf="@id/locationDetailsLevelTitle"
+            app:layout_constraintStart_toStartOf="@id/locationDetailsLevelTitle"
+            app:layout_constraintTop_toBottomOf="@id/locationDetailsLevelTitle" />
+
+
+        <TextView
+            android:id="@+id/locationDetailsZoneTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Zone"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/locationDetailsZone"
+            app:layout_constraintEnd_toStartOf="@+id/locationDetailsUnitTypeTitle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineTop3" />
+
+        <TextView
+            android:id="@+id/locationDetailsUnitTypeTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Unit Type"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/locationDetailsZoneTitle"
+            app:layout_constraintEnd_toStartOf="@+id/locationDetailsHeightTitle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/locationDetailsZoneTitle"
+            app:layout_constraintTop_toTopOf="@id/locationDetailsZoneTitle" />
+
+        <TextView
+            android:id="@+id/locationDetailsHeightTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Height"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/locationDetailsUnitTypeTitle"
+            app:layout_constraintEnd_toStartOf="@+id/locationDetailsWidthTitle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/locationDetailsUnitTypeTitle"
+            app:layout_constraintTop_toTopOf="@id/locationDetailsUnitTypeTitle" />
+
+        <TextView
+            android:id="@+id/locationDetailsWidthTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Width"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/locationDetailsHeightTitle"
+            app:layout_constraintEnd_toStartOf="@+id/locationDetailsLengthTitle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/locationDetailsHeightTitle"
+            app:layout_constraintTop_toTopOf="@id/locationDetailsHeightTitle" />
+
+        <TextView
+            android:id="@+id/locationDetailsLengthTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Length"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/locationDetailsWidthTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/locationDetailsWidthTitle"
+            app:layout_constraintTop_toTopOf="@id/locationDetailsWidthTitle" />
+
+        <TextView
+            android:id="@+id/locationDetailsZone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Bin Area"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/locationDetailsZoneTitle"
+            app:layout_constraintEnd_toEndOf="@id/locationDetailsZoneTitle"
+            app:layout_constraintTop_toBottomOf="@id/locationDetailsZoneTitle"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/locationDetailsUnitType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Inner Carton"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/locationDetailsUnitTypeTitle"
+            app:layout_constraintEnd_toEndOf="@id/locationDetailsUnitTypeTitle"
+            app:layout_constraintTop_toBottomOf="@id/locationDetailsUnitTypeTitle"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/locationDetailsHeight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="68"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/locationDetailsHeightTitle"
+            app:layout_constraintEnd_toEndOf="@id/locationDetailsHeightTitle"
+            app:layout_constraintTop_toBottomOf="@id/locationDetailsHeightTitle"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/locationDetailsWidth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="48"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/locationDetailsWidthTitle"
+            app:layout_constraintEnd_toEndOf="@id/locationDetailsWidthTitle"
+            app:layout_constraintTop_toBottomOf="@id/locationDetailsWidthTitle"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/locationDetailsLength"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="48"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/locationDetailsLengthTitle"
+            app:layout_constraintEnd_toEndOf="@id/locationDetailsLengthTitle"
+            app:layout_constraintTop_toBottomOf="@id/locationDetailsLengthTitle"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineTop3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/locaationDetailsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@id/guidelineStart"
+        app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTop2"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".02" />
+</androidx.constraintlayout.widget.ConstraintLayout>
