@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.views.adapters.CustomSpinnerAdapter;
+import com.example.inventorymanagementsystem.adapters.CustomSpinnerAdapter;
 import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnFailureListener;

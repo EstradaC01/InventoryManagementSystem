@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.views.adapters.CustomSpinnerAdapter;
+import com.example.inventorymanagementsystem.adapters.CustomSpinnerAdapter;
 import com.example.inventorymanagementsystem.models.Location;
 import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Receiving;

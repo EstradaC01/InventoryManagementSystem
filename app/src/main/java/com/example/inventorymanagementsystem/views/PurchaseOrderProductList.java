@@ -16,7 +16,7 @@ import android.text.Html;
 import android.widget.Button;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.views.adapters.PurchaseOrderProductListRecyclerViewAdapter;
+import com.example.inventorymanagementsystem.adapters.PurchaseOrderProductListRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnSuccessListener;

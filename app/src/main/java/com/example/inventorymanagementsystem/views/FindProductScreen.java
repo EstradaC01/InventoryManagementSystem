@@ -18,7 +18,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.views.adapters.AddProductRecyclerViewAdapter;
+import com.example.inventorymanagementsystem.adapters.AddProductRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnFailureListener;

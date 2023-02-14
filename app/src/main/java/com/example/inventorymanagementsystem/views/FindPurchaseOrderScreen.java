@@ -14,11 +14,9 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.PurchaseOrder;
 import com.example.inventorymanagementsystem.models.Users;
-import com.example.inventorymanagementsystem.views.adapters.AddProductRecyclerViewAdapter;
-import com.example.inventorymanagementsystem.views.adapters.FindPurchaseOrderRecyclerViewAdapter;
+import com.example.inventorymanagementsystem.adapters.FindPurchaseOrderRecyclerViewAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;

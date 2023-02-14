@@ -18,7 +18,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
-import com.example.inventorymanagementsystem.views.adapters.AddLocationRecyclerViewAdapter;
+import com.example.inventorymanagementsystem.adapters.AddLocationRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.Location;
 import com.example.inventorymanagementsystem.models.Users;
 import com.google.android.gms.tasks.OnFailureListener;
