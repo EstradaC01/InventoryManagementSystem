@@ -39,6 +39,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hbb20.CountryCodePicker;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -64,6 +65,8 @@ public class AddOrder extends AppCompatActivity {
             orderEmailAddressEdt, orderShippingMethodEdt;
     private Button submitOrderBtn;
     private Button addRemoveOrderBtn;
+    private CountryCodePicker ccp;
+
     private int count = 0;
 
     @Override
@@ -78,6 +81,7 @@ public class AddOrder extends AppCompatActivity {
         // change action support bar title and font color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Create Order</font>"));
 
+        ccp = (CountryCodePicker) findViewById(R.id.ccp);
 
         orderReferenceEdt = findViewById(R.id.addOrderEdtReferenceNumber);
         orderCustomerNameEdt = findViewById(R.id.addOrderEdtCustomerName);
@@ -87,13 +91,15 @@ public class AddOrder extends AppCompatActivity {
         orderStateEdt = findViewById(R.id.addOrderEdtState);
         orderCityEdt = findViewById(R.id.addOrderEdtCity);
         orderZipcodeEdt = findViewById(R.id.addOrderEdtZipcode);
-        orderCountryEdt = findViewById(R.id.addOrderEdtCountry);
         orderEmailAddressEdt = findViewById(R.id.addOrderEmailAddress);
         orderPhoneNumberEdt = findViewById(R.id.addOrderEdtPhoneNumber);
         orderShippingMethodEdt = findViewById(R.id.addOrderShippingMethod);
         submitOrderBtn = findViewById(R.id.addOrderBtnSubmit);
         addRemoveOrderBtn = findViewById(R.id.addOrderBtnAddRemoveProducts);
         mRecyclerView = findViewById(R.id.addOrderRecyclerView);
+
+        ccp.registerCarrierNumberEditText(orderPhoneNumberEdt);
+
         // initializng variable firebase
         // firestore and getting its instance
         db = FirebaseFirestore.getInstance();
@@ -125,7 +131,7 @@ public class AddOrder extends AppCompatActivity {
             mState = orderStateEdt.getText().toString();
             mCity = orderCityEdt.getText().toString();
             mZipcode = orderZipcodeEdt.getText().toString();
-            mCountry = orderCountryEdt.getText().toString();
+            mCountry = ccp.getSelectedCountryName();
             mPhoneNumber = orderPhoneNumberEdt.getText().toString();
             mEmailAddress = orderEmailAddressEdt.getText().toString();
             mShippingMethod = orderShippingMethodEdt.getText().toString();
@@ -162,7 +168,7 @@ public class AddOrder extends AppCompatActivity {
                 orderCountryEdt.setError("Enter Country");
                 hasErrors = true;
             }
-            if(TextUtils.isEmpty(mPhoneNumber)) {
+            if(TextUtils.isEmpty(mPhoneNumber) || !ccp.isValidFullNumber()) {
                 orderPhoneNumberEdt.setError("Enter Phone Number");
                 hasErrors = true;
             }

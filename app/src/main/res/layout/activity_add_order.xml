@@ -39,7 +39,6 @@
             app:layout_constraintEnd_toEndOf="@id/addOrderRecyclerView"
             app:layout_constraintStart_toStartOf="@id/addOrderRecyclerView"
             app:layout_constraintTop_toBottomOf="@id/guidelineMiddle" />
-
         <EditText
             android:id="@+id/addOrderEdtReferenceNumber"
             android:layout_width="0dp"
@@ -162,21 +161,21 @@
             app:layout_constraintEnd_toEndOf="@id/addOrderEdtCity"
             app:layout_constraintStart_toStartOf="@id/addOrderEdtCity"
             app:layout_constraintTop_toBottomOf="@id/addOrderEdtCity" />
-        <EditText
-            android:id="@+id/addOrderEdtCountry"
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corners_white"
+            android:layout_marginTop="10dp"
             android:elevation="15dp"
-            android:hint="Country"
-            android:importantForAutofill="no"
-            android:inputType="text"
             android:minHeight="48dp"
             android:padding="10dp"
+            app:ccp_showFullName="true"
+            app:ccp_countryPreference="us"
+            app:ccp_defaultPhoneCode="1"
             app:layout_constraintEnd_toEndOf="@id/addOrderEdtZipcode"
             app:layout_constraintStart_toStartOf="@id/addOrderEdtZipcode"
-            app:layout_constraintTop_toBottomOf="@id/addOrderEdtZipcode" />
+            app:layout_constraintTop_toBottomOf="@id/addOrderEdtZipcode"/>
         <EditText
             android:id="@+id/addOrderEdtPhoneNumber"
             android:layout_width="0dp"
@@ -186,12 +185,13 @@
             android:elevation="15dp"
             android:hint="Phone Number"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:inputType="phone"
+            android:singleLine="true"
             android:minHeight="48dp"
             android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="@id/addOrderEdtCountry"
-            app:layout_constraintStart_toStartOf="@id/addOrderEdtCountry"
-            app:layout_constraintTop_toBottomOf="@id/addOrderEdtCountry" />
+            app:layout_constraintEnd_toEndOf="@id/ccp"
+            app:layout_constraintStart_toStartOf="@id/ccp"
+            app:layout_constraintTop_toBottomOf="@id/ccp" />
         <EditText
             android:id="@+id/addOrderEmailAddress"
             android:layout_width="0dp"
