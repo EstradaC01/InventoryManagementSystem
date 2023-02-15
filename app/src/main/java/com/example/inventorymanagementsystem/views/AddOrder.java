@@ -64,6 +64,7 @@ public class AddOrder extends AppCompatActivity {
             orderEmailAddressEdt, orderShippingMethodEdt;
     private Button submitOrderBtn;
     private Button addRemoveOrderBtn;
+    private int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,6 +189,7 @@ public class AddOrder extends AppCompatActivity {
                         for (DocumentSnapshot d : docs) {
                             Object id = d.get("count");
                             mOrderId = id.toString();
+                            count = Integer.parseInt(mOrderId);
                         }
                     }
                 }).addOnCompleteListener(task -> {
@@ -276,7 +278,8 @@ public class AddOrder extends AppCompatActivity {
         //Log.d("FIREBASE-ADD", "Inside");
         // creating a collection reference
         // for our Firebase Firestore database
-
+        ++count;
+        db.collection("OrderCount/Counter").document().update("count", count);
         db.collection("Orders").document(orders.getOrderID()).set(orders).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
