@@ -6,9 +6,11 @@
 
     <TextView
         android:id="@+id/productLineProductTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Joseph Joestar Gun"
+        android:maxLines="1"
+        android:maxLength="30"
         android:textSize="16sp"
         android:textColor="#FF9800"
         android:textStyle="bold" />
