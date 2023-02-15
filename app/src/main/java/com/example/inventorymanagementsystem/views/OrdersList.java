@@ -52,6 +52,7 @@ public class OrdersList extends AppCompatActivity {
     }
     private Sort sorter;
     private static Users currentUser;
+    private String mWarehouse;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,7 @@ public class OrdersList extends AppCompatActivity {
         menu.add(0,3,0,"Order Date");
 
         currentUser = (Users)i.getSerializableExtra("User");
+        mWarehouse = (String) i.getSerializableExtra("Warehouse");
 
         CollectionReference ordersRef = db.collection("Orders");
 
@@ -111,6 +113,7 @@ public class OrdersList extends AppCompatActivity {
                 // Creating intent to open add order activity
                 Intent i = new Intent(OrdersList.this, AddOrder.class);
                 i.putExtra("User", currentUser);
+                i.putExtra("Warehouse", mWarehouse);
                 startActivity(i);
             }
         });
