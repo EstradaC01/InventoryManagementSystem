@@ -279,7 +279,7 @@ public class AddOrder extends AppCompatActivity {
         // creating a collection reference
         // for our Firebase Firestore database
         ++count;
-        db.collection("OrderCount/Counter").document().update("count", count);
+        db.collection("OrderCount").document("counter").update("count", count);
         db.collection("Orders").document(orders.getOrderID()).set(orders).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
