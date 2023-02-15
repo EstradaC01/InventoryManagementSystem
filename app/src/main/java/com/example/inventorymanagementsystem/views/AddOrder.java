@@ -46,12 +46,12 @@ public class AddOrder extends AppCompatActivity {
         // change action support bar title and font color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Create Order</font>"));
 
-        orderIDEdt = findViewById(R.id.idEdtOrderId);
-        orderDateEdt = findViewById(R.id.idEdtOrderDate);
-        orderReferenceEdt = findViewById(R.id.idEdtReferenceNumber);
-        orderCustomerEdt = findViewById(R.id.idEdtCustomerName);
-        orderStatusEdt = findViewById(R.id.idEdtStatus);
-        addOrderBtn = findViewById(R.id.idBtnCreateOrder);
+        //orderIDEdt = findViewById(R.id.idEdtOrderId);
+        //orderDateEdt = findViewById(R.id.idEdtOrderDate);
+        //orderReferenceEdt = findViewById(R.id.idEdtReferenceNumber);
+        //orderCustomerEdt = findViewById(R.id.idEdtCustomerName);
+        //orderStatusEdt = findViewById(R.id.idEdtStatus);
+        //addOrderBtn = findViewById(R.id.idBtnCreateOrder);
 
         // initializng variable firebase
         // firestore and getting its instance
@@ -62,42 +62,42 @@ public class AddOrder extends AppCompatActivity {
         Intent i = getIntent();
         currentUser = (Users)i.getSerializableExtra("User");
 
-        addOrderBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mOrder = new Orders();
-
-                mOrder.setOrderID(orderIDEdt.getText().toString());
-                mOrder.setOrderDate(orderDateEdt.getText().toString());
-                mOrder.setOrderReference(orderReferenceEdt.getText().toString());
-                mOrder.setOrderCustomer(orderCustomerEdt.getText().toString());
-                mOrder.setOrderStatus(orderStatusEdt.getText().toString());
-
-                // validating the text fields if empty or not
-                if (TextUtils.isEmpty(mOrder.getOrderID())) {
-                    orderIDEdt.setError("Please enter order id");
-                    return;
-                }
-                if (TextUtils.isEmpty(mOrder.getOrderDate())) {
-                    orderDateEdt.setError("Please enter order date");
-                    return;
-                }
-                if (TextUtils.isEmpty(mOrder.getOrderReference())) {
-                    orderReferenceEdt.setError("Please enter order reference");
-                    return;
-                }
-                if (TextUtils.isEmpty(mOrder.getOrderCustomer())) {
-                    orderCustomerEdt.setError("Please enter order customer name");
-                    return;
-                }
-                if (TextUtils.isEmpty(mOrder.getOrderStatus())) {
-                    orderStatusEdt.setError("Please enter order customer name");
-                    return;
-                }
-                // calling method to add data to Firebase Firestore
-                addDataToFireStore(mOrder);
-            }
-        });
+//        addOrderBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mOrder = new Orders();
+//
+//                mOrder.setOrderID(orderIDEdt.getText().toString());
+//                mOrder.setOrderDate(orderDateEdt.getText().toString());
+//                mOrder.setOrderReference(orderReferenceEdt.getText().toString());
+//                mOrder.setOrderCustomer(orderCustomerEdt.getText().toString());
+//                mOrder.setOrderStatus(orderStatusEdt.getText().toString());
+//
+//                // validating the text fields if empty or not
+//                if (TextUtils.isEmpty(mOrder.getOrderID())) {
+//                    orderIDEdt.setError("Please enter order id");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(mOrder.getOrderDate())) {
+//                    orderDateEdt.setError("Please enter order date");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(mOrder.getOrderReference())) {
+//                    orderReferenceEdt.setError("Please enter order reference");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(mOrder.getOrderCustomer())) {
+//                    orderCustomerEdt.setError("Please enter order customer name");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(mOrder.getOrderStatus())) {
+//                    orderStatusEdt.setError("Please enter order customer name");
+//                    return;
+//                }
+//                // calling method to add data to Firebase Firestore
+//                addDataToFireStore(mOrder);
+//            }
+//        });
     }
     private void addDataToFireStore(Orders orders) {
         //Log.d("FIREBASE-ADD", "Inside");
