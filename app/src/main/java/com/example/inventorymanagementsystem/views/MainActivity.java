@@ -246,6 +246,11 @@ public class MainActivity extends AppCompatActivity {
                 BarcodeScanner.putExtra("Warehouse", mWarehouse);
                 startActivity(BarcodeScanner);
                 break;
+            case R.id.idMenuUtilities:
+                Intent utilitiesIntent = new Intent(MainActivity.this, UtilitiesSubMenu.class);
+                utilitiesIntent.putExtra("User", currentUser);
+                utilitiesIntent.putExtra("Warehouse", mWarehouse);
+                startActivity(utilitiesIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }
