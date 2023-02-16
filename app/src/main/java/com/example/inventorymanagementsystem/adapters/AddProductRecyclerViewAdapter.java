@@ -50,6 +50,7 @@ public class AddProductRecyclerViewAdapter extends RecyclerView.Adapter<AddProdu
         holder.productId.setText(product.getProductId());
         holder.productDescription.setText(product.getProductDescription());
         holder.productUpc.setText(product.getProductUpc());
+        holder.productAvailableUnits.setText(product.getAvailableUnits());
         holder.linearLayout.setVisibility(View.GONE);
 
         Glide.with(mContext).load(product.getImageUri()).into(holder.itemImageView);
@@ -73,6 +74,7 @@ public class AddProductRecyclerViewAdapter extends RecyclerView.Adapter<AddProdu
         private final TextView productId;
         private final TextView productDescription;
         private final TextView productUpc;
+        private final TextView productAvailableUnits;
         private final ImageView itemImageView;
         private final LinearLayout linearLayout;
 
@@ -82,6 +84,7 @@ public class AddProductRecyclerViewAdapter extends RecyclerView.Adapter<AddProdu
             productId = itemView.findViewById(R.id.tvItemProductId);
             productDescription = itemView.findViewById(R.id.tvItemProductDescription);
             productUpc = itemView.findViewById(R.id.tvItemProductUPC);
+            productAvailableUnits = itemView.findViewById(R.id.tvItemProductAvailableUnits);
             itemImageView = itemView.findViewById(R.id.imageViewItem);
             linearLayout = itemView.findViewById(R.id.linearLayoutItemTapForDetails);
         }

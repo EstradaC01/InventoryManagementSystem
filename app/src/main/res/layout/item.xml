@@ -102,6 +102,30 @@
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@id/tvItemProductUPCTitle" />
+        <TextView
+            android:id="@+id/tvItemProductAvailableUnitsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:text="Available Units"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@id/tvItemProductUPC" />
+
+        <TextView
+            android:id="@+id/tvItemProductAvailableUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="2dp"
+            android:text="100"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@id/tvItemProductAvailableUnitsTitle" />
         <LinearLayout
             android:id="@+id/linearLayoutItemTapForDetails"
             android:layout_width="match_parent"
@@ -109,7 +133,7 @@
             android:layout_marginTop="10dp"
             android:gravity="end"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/tvItemProductUPC">
+            app:layout_constraintTop_toBottomOf="@id/tvItemProductAvailableUnits">
 
             <TextView
                 android:layout_width="wrap_content"

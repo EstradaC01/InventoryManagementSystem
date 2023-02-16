@@ -49,6 +49,7 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
         holder.productIdTv.setText(products.getProductId());
         holder.productDescriptionTv.setText(products.getProductDescription());
         holder.productUPCTv.setText(products.getProductUpc());
+        holder.productAvailableUnitsTv.setText(products.getAvailableUnits());
         Glide.with(context).load(products.getImageUri()).into(holder.itemImageView);
 
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_one));
@@ -76,6 +77,7 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
         private final TextView productIdTv;
         private final TextView productDescriptionTv;
         private final TextView productUPCTv;
+        private final TextView productAvailableUnitsTv;
         private final ImageView itemImageView;
 
         public ViewHolder(@NonNull View itemView)
@@ -85,6 +87,7 @@ public class ItemRVAdapter extends RecyclerView.Adapter<ItemRVAdapter.ViewHolder
             productIdTv = itemView.findViewById(R.id.tvItemProductId);
             productDescriptionTv = itemView.findViewById(R.id.tvItemProductDescription);
             productUPCTv = itemView.findViewById(R.id.tvItemProductUPC);
+            productAvailableUnitsTv = itemView.findViewById(R.id.tvItemProductAvailableUnits);
             itemImageView = itemView.findViewById(R.id.imageViewItem);
         }
     }
