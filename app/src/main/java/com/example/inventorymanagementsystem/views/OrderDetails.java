@@ -8,17 +8,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.PurchaseOrderRecyclerViewAdapter;
 import com.example.inventorymanagementsystem.models.Orders;
 import com.example.inventorymanagementsystem.models.Products;
-import com.example.inventorymanagementsystem.models.Users;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -49,7 +44,7 @@ public class OrderDetails extends AppCompatActivity {
 
         // change action support bar title and font color
         if(getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Product Details</font>"));
+            getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Order Details</font>"));
         }
 
 
