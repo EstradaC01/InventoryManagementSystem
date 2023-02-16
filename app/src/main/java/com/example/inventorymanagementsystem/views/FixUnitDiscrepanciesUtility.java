@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.models.Products;
@@ -88,6 +89,7 @@ public class FixUnitDiscrepanciesUtility extends AppCompatActivity {
                         });
                     }
                 }
+                Toast.makeText(FixUnitDiscrepanciesUtility.this, "Units Discrepancies Fixed", Toast.LENGTH_LONG).show();
             }
         });
     }
