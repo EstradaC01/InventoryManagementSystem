@@ -101,7 +101,7 @@ public class AddOrder extends AppCompatActivity {
         orderCityEdt = findViewById(R.id.addOrderEdtCity);
         orderZipcodeEdt = findViewById(R.id.addOrderEdtZipcode);
         orderEmailAddressEdt = findViewById(R.id.addOrderEmailAddress);
-        orderPhoneNumberEdt = findViewById(R.id.addOrderEdtPhoneNumber);
+        orderPhoneNumberEdt = (EditText)findViewById(R.id.addOrderEdtPhoneNumber);
         orderShippingMethodEdt = findViewById(R.id.addOrderShippingMethod);
         submitOrderBtn = findViewById(R.id.addOrderBtnSubmit);
         addRemoveOrderBtn = findViewById(R.id.addOrderBtnAddRemoveProducts);
@@ -176,7 +176,7 @@ public class AddOrder extends AppCompatActivity {
                 orderCountryEdt.setError("Enter Country");
                 hasErrors = true;
             }
-            if(TextUtils.isEmpty(mPhoneNumber) || !ccp.isValidFullNumber()) {
+            if(TextUtils.isEmpty(mPhoneNumber)) {
                 orderPhoneNumberEdt.setError("Enter Phone Number");
                 hasErrors = true;
             }
