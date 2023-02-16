@@ -40,6 +40,9 @@
             android:name=".views.AddPurchaseOrder"
             android:exported="false" />
         <activity
+        android:name=".views.OrderDetails"
+        android:exported="false" />
+        <activity
             android:name=".views.UnitAdjustment"
             android:exported="false" />
         <activity

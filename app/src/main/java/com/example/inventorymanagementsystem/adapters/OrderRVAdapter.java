@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.models.Orders;
+import com.example.inventorymanagementsystem.views.OrderDetails;
+import com.example.inventorymanagementsystem.views.ProductDetails;
 
 import java.util.ArrayList;
 
@@ -40,6 +42,16 @@ public class OrderRVAdapter extends RecyclerView.Adapter<OrderRVAdapter.ViewHold
         holder.referenceTV.setText(order.getOrderReference());
         holder.customerNameTV.setText(order.getOrderCustomer());
         holder.statusTV.setText(order.getOrderStatus());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), OrderDetails.class);
+                i.putExtra("Order object", order);
+                i.putExtra("Warehouse", mWarehouse);
+                v.getContext().startActivity(i);
+            }
+        });
 
     }
 
