@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,17 +36,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.model.Document;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.protobuf.Internal;
 import com.hbb20.CountryCodePicker;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AddOrder extends AppCompatActivity {
@@ -69,6 +75,7 @@ public class AddOrder extends AppCompatActivity {
     private CountryCodePicker ccp, ccpPhoneCode;
 
     private int count = 0;
+    private HashMap<String, String> productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +207,7 @@ public class AddOrder extends AppCompatActivity {
                         }
                     }
                 }).addOnCompleteListener(task -> {
+
                     mOrder = new Orders();
 
                     mOrder.setOrderID(mOrderId);
@@ -217,6 +225,8 @@ public class AddOrder extends AppCompatActivity {
                     mOrder.setOrderEmailAddress(mEmailAddress);
                     mOrder.setOrderShippingMethod(mShippingMethod);
                     mOrder.setOrderStatus("Pending");
+
+                    mOrder.setProductList(productList);
                     addDataToFireStore(mOrder);
                 });
             }
@@ -230,6 +240,7 @@ public class AddOrder extends AppCompatActivity {
 
             }
             launchAddProductsActivity.launch(addProductIntent);
+
         });
     }
     private ActivityResultLauncher<Intent> launchAddProductsActivity = registerForActivityResult(
@@ -240,10 +251,47 @@ public class AddOrder extends AppCompatActivity {
                     if(result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         ArrayList<Products> tempProduct = (ArrayList<Products>) data.getSerializableExtra("ProductList");
+
                         mProductsArrayList.clear();
                         mRecyclerViewAdapter.notifyDataSetChanged();
                         for(Products p : tempProduct) {
                             mProductsArrayList.add(p);
+                            if(mProductsArrayList != null) {
+                                Log.d("PRODUCTS ", "Not null");
+                                productList = new HashMap<String, String>(mProductsArrayList.size());
+                                for (int x = 0; x < mProductsArrayList.size(); ++x) {
+                                    String id = mProductsArrayList.get(x).getProductId();
+                                    String units = mProductsArrayList.get(x).getExpectedUnits();
+                                    productList.put(id, units);
+                                    db.collection("Warehouses/"+mWarehouse+"/UnitId")
+                                            .whereEqualTo("productId", id)
+                                            .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                                    if (!value.isEmpty()) {
+                                                        Log.d("PRODUCTS ", "found");
+
+                                                        List<DocumentSnapshot> docs = value.getDocuments();
+                                                        for (DocumentSnapshot d : docs) {
+                                                            String available = d.get("totalPieces").toString();
+
+                                                            if (Integer.parseInt(units) > Integer.parseInt(available)) {
+                                                                Toast.makeText(getBaseContext(),
+                                                                        "Product " + id + " doesn't have that many units",
+                                                                        Toast.LENGTH_LONG).show();
+                                                                mProductsArrayList.clear();
+                                                                return;
+                                                            }
+                                                        }
+                                                    } else {
+                                                        Toast.makeText(getBaseContext(),
+                                                                "Product " + id + " doesn't exist",
+                                                                Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            });
+                                }
+                            }
                             mRecyclerViewAdapter.notifyDataSetChanged();
                         }
 

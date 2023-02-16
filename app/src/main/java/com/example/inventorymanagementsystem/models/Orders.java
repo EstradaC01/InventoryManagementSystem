@@ -2,6 +2,7 @@ package com.example.inventorymanagementsystem.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Orders implements Serializable {
 
@@ -20,7 +21,7 @@ public class Orders implements Serializable {
     private String orderPhoneNumber;
     private String orderEmailAddress;
     private String orderShippingMethod;
-    private String[] orderProductList;
+    HashMap<String, String> productList;
 
 
     public Orders() {
@@ -154,11 +155,11 @@ public class Orders implements Serializable {
         this.orderStatus = orderStatus;
     }
 
-    public String[] getOrderProductList() {
-        return orderProductList;
+    public HashMap<String, String> getProductList() {
+        return productList;
     }
 
-    public void setOrderProductList(String[] orderProductList) {
-        this.orderProductList = orderProductList;
+    public void setProductList(HashMap<String, String> productList) {
+        this.productList = productList;
     }
 }
