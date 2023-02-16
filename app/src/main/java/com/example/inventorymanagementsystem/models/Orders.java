@@ -1,6 +1,7 @@
 package com.example.inventorymanagementsystem.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Orders implements Serializable {
 
@@ -19,6 +20,7 @@ public class Orders implements Serializable {
     private String orderPhoneNumber;
     private String orderEmailAddress;
     private String orderShippingMethod;
+    private String[] orderProductList;
 
 
     public Orders() {
@@ -150,5 +152,13 @@ public class Orders implements Serializable {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String[] getOrderProductList() {
+        return orderProductList;
+    }
+
+    public void setOrderProductList(String[] orderProductList) {
+        this.orderProductList = orderProductList;
     }
 }

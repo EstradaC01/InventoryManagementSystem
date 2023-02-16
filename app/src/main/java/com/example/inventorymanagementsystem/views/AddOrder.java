@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.inventorymanagementsystem.R;
 import com.example.inventorymanagementsystem.adapters.PurchaseOrderRecyclerViewAdapter;
+import com.example.inventorymanagementsystem.models.Helper;
 import com.example.inventorymanagementsystem.models.Orders;
 import com.example.inventorymanagementsystem.models.Products;
 import com.example.inventorymanagementsystem.models.Users;
@@ -65,7 +66,7 @@ public class AddOrder extends AppCompatActivity {
             orderEmailAddressEdt, orderShippingMethodEdt;
     private Button submitOrderBtn;
     private Button addRemoveOrderBtn;
-    private CountryCodePicker ccp;
+    private CountryCodePicker ccp, ccpPhoneCode;
 
     private int count = 0;
 
@@ -81,7 +82,8 @@ public class AddOrder extends AppCompatActivity {
         // change action support bar title and font color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Create Order</font>"));
 
-        ccp = (CountryCodePicker) findViewById(R.id.ccp);
+        ccp = (CountryCodePicker) findViewById(R.id.addOrderCcp);
+        ccpPhoneCode = (CountryCodePicker) findViewById(R.id.addOrderCcpPhoneCode);
 
         orderReferenceEdt = findViewById(R.id.addOrderEdtReferenceNumber);
         orderCustomerNameEdt = findViewById(R.id.addOrderEdtCustomerName);
@@ -98,8 +100,7 @@ public class AddOrder extends AppCompatActivity {
         addRemoveOrderBtn = findViewById(R.id.addOrderBtnAddRemoveProducts);
         mRecyclerView = findViewById(R.id.addOrderRecyclerView);
 
-        ccp.registerCarrierNumberEditText(orderPhoneNumberEdt);
-
+        ccpPhoneCode.registerCarrierNumberEditText(orderPhoneNumberEdt);
         // initializng variable firebase
         // firestore and getting its instance
         db = FirebaseFirestore.getInstance();
@@ -172,7 +173,7 @@ public class AddOrder extends AppCompatActivity {
                 orderPhoneNumberEdt.setError("Enter Phone Number");
                 hasErrors = true;
             }
-            if(TextUtils.isEmpty(mEmailAddress)) {
+            if(TextUtils.isEmpty(mEmailAddress) || !Helper.isValidEmail(mEmailAddress)) {
                 orderEmailAddressEdt.setError("Enter an Email Address");
                 hasErrors = true;
             }
