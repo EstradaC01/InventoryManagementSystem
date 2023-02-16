@@ -51,6 +51,7 @@
                 android:id="@+id/idMenuBarcodeScanner"
                 android:title="Barcode Scanner"
                 android:icon="@drawable/baseline_qr_code_scanner_24"/>
+            // utilities object
             <item
                 android:id="@+id/idMenuUtilities"
                 android:title="Utilities"
