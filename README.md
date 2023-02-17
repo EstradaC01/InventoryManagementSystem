@@ -52,10 +52,10 @@ The Powerful Bears project
 <img src="https://user-images.githubusercontent.com/95639661/219810126-373ef7be-b88e-4961-97e0-cfca065b22f5.png" width=270 height=480>
 </p>
 
-### Inventory Screen
+### Inventory and Inventory adjustments Screen
 <p align="center">
 <img align="left" src="https://user-images.githubusercontent.com/95639661/219810985-098472b2-6fe5-44e8-9ebc-432b45c27796.png" width=270 height=480>
-<img src="" width=270 height=480>
+<img src="https://user-images.githubusercontent.com/95639661/219813817-4528aec7-8334-4b2d-ab70-217b41c0c961.png" width=270 height=480>
 </p>
 
 ### Create Order Screen
@@ -64,16 +64,17 @@ The Powerful Bears project
 <img src="https://user-images.githubusercontent.com/95639661/219811414-d69c057a-da44-4720-b2f6-d7d1c5992f33.png" width=270 height=480>
 </p>
 
-### Barcode Scanner Screen
+### Barcode Scanner Screen and Order Inquiry Screen
 <p align="center">
 <img align="left" src="https://user-images.githubusercontent.com/95639661/219811830-64a54338-8a28-48f1-b6b4-0e6588a29228.png" width=270 height=480>
-<img src="" width=270 height=480>
+<img src="https://user-images.githubusercontent.com/95639661/219814054-32a12e66-89ff-4cdb-a679-5cd7af9a1f34.png" width=270 height=480>
 </p>
 
-### Figma design
+
+### Figma design and Purchase Order Screen
 <p align="center">
 <img align="left" src="https://user-images.githubusercontent.com/95639661/219812009-92d1b33b-5b2d-407d-b3d9-753b3c2593d3.png" width=270 height=480>
-<img src="" width=270 height=480>
+<img src="https://user-images.githubusercontent.com/95639661/219814097-323ad764-7618-41df-bffc-1c3222ded5f9.png" width=270 height=480>
 
 </p>
 
