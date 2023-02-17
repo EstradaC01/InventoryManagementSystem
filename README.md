@@ -55,6 +55,7 @@ The Powerful Bears project
 ### Inventory Screen
 <p align="center">
 <img align="left" src="https://user-images.githubusercontent.com/95639661/219810985-098472b2-6fe5-44e8-9ebc-432b45c27796.png" width=270 height=480>
+<img src="" width=270 height=480>
 </p>
 
 ### Create Order Screen
@@ -66,10 +67,13 @@ The Powerful Bears project
 ### Barcode Scanner Screen
 <p align="center">
 <img align="left" src="https://user-images.githubusercontent.com/95639661/219811830-64a54338-8a28-48f1-b6b4-0e6588a29228.png" width=270 height=480>
+<img src="" width=270 height=480>
 </p>
 
 ### Figma design
 <p align="center">
 <img align="left" src="https://user-images.githubusercontent.com/95639661/219812009-92d1b33b-5b2d-407d-b3d9-753b3c2593d3.png" width=270 height=480>
+<img src="" width=270 height=480>
+
 </p>
 
