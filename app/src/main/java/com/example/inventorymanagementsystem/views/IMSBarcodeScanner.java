@@ -79,7 +79,8 @@ public class IMSBarcodeScanner extends AppCompatActivity {
     private String mWarehouse = "";
     private TextView tvBarcode;
     private FirebaseFirestore db;
-
+    private Products p = null;
+    private Boolean foundCode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,28 +144,26 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                     public void onComplete(@NonNull Task<List<Barcode>> task) {
                         image.close();
                         if (rawValue.isEmpty()) {
-                            Toast.makeText(getBaseContext(), "Code is empty.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        CollectionReference itemsRef = db.collection("Warehouses/"+mWarehouse+"/Products");
-                        itemsRef.whereEqualTo("productUpc", rawValue).addSnapshotListener(new EventListener<QuerySnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                if (!value.isEmpty()) {
-                                    Products p = null;
-                                    List<DocumentSnapshot> list = value.getDocuments();
-                                    for (DocumentSnapshot d : list) {
-                                        p = d.toObject(Products.class);
+                            //Toast.makeText(getBaseContext(), "Code is empty.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            CollectionReference itemsRef = db.collection("Warehouses/"+mWarehouse+"/Products");
+                            itemsRef.whereEqualTo("productUpc", rawValue).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                @Override
+                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                    if (!value.isEmpty()) {
+                                        Log.d(TAG, "has upc: " + rawValue);
+                                        List<DocumentSnapshot> list = value.getDocuments();
+                                        for (DocumentSnapshot d : list) {
+                                            p = d.toObject(Products.class);
+                                            Log.d(TAG, "has product: " + p.getProductId());
+                                            foundCode = true;
+                                        }
+                                    } else {
+                                        Toast.makeText(IMSBarcodeScanner.this, "UPC code not found.", Toast.LENGTH_SHORT).show();
                                     }
-                                    Intent j = new Intent(IMSBarcodeScanner.this, ProductDetails.class);
-                                    j.putExtra("Object", p);
-                                    j.putExtra("Warehouse", mWarehouse);
-                                    startActivity(j);
-                                } else {
-                                    Toast.makeText(IMSBarcodeScanner.this, "UPC code not found.", Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 });
 
@@ -214,7 +213,17 @@ public class IMSBarcodeScanner extends AppCompatActivity {
         @Override
         @androidx.camera.core.ExperimentalGetImage
         public void analyze(@NonNull ImageProxy image) {
-                scanBarcodes(image);
+                if (foundCode) {
+                    Log.d(TAG, "has found code in db: " + foundCode);
+                    Intent j = new Intent(IMSBarcodeScanner.this, ProductDetails.class);
+                    j.putExtra("Object", p);
+                    j.putExtra("Warehouse", mWarehouse);
+                    finish();
+                    startActivity(j);
+                }
+                else {
+                    scanBarcodes(image);
+                }
             }
         }
 
