@@ -159,7 +159,7 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                                             foundCode = true;
                                         }
                                     } else {
-                                        Toast.makeText(IMSBarcodeScanner.this, "UPC code not found.", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(IMSBarcodeScanner.this, "UPC code not found.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
