@@ -40,6 +40,7 @@ public class LoginTest {
 
     @Test
     public void loginTest() {
+
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.idEdtLoginEmail),
                         childAtPosition(
