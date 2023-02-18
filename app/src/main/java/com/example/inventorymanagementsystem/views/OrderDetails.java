@@ -57,7 +57,7 @@ public class OrderDetails extends AppCompatActivity {
         for(Map.Entry<String, String> e: productList.entrySet()) {
             Products product = new Products();
             product.setProductId(e.getKey());
-            product.setAvailableUnits(e.getValue());
+            product.setExpectedUnits(e.getValue());
             mProductsArrayList.add(product);
         }
 
