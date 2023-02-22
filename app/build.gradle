@@ -52,6 +52,8 @@ dependencies {
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
 
     implementation 'com.google.mlkit:barcode-scanning:17.0.3'
+    androidTestImplementation ('androidx.test.espresso:espresso-contrib:3.4.0'){
+            exclude module: "protobuf-lite"}
 
     def camerax_version = "1.2.1"
     implementation "androidx.camera:camera-core:${camerax_version}"
