@@ -194,13 +194,78 @@ public class LoginAndOpenMenuTest {
                         isDisplayed()));
         actionMenuItemView.perform(click());
 
+        ViewInteraction textView = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Company Details"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView.check(matches(withText("Company Details")));
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Users"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView2.check(matches(withText("Users")));
+
+        ViewInteraction textView3 = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Systems"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView3.check(matches(withText("Systems")));
+
+        ViewInteraction textView4 = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Products"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView4.check(matches(withText("Products")));
+
+        ViewInteraction textView5 = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Shipping Orders"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView5.check(matches(withText("Shipping Orders")));
+
+        ViewInteraction textView6 = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Purchase Orders"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView6.check(matches(withText("Purchase Orders")));
+
+        ViewInteraction textView7 = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Receiving"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView7.check(matches(withText("Receiving")));
+
+        ViewInteraction textView8 = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Inventory"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView8.check(matches(withText("Inventory")));
+
+        ViewInteraction textView9 = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Locations"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView9.check(matches(withText("Locations")));
+
+        ViewInteraction textView10 = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Barcode Scanner"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView10.check(matches(withText("Barcode Scanner")));
+
+        ViewInteraction textView11 = onView(
+                allOf(withId(androidx.preference.R.id.title), withText("Utilities"),
+                        withParent(withParent(withId(androidx.preference.R.id.content))),
+                        isDisplayed()));
+        textView11.check(matches(withText("Utilities")));
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         mActivityScenarioRule.getScenario().close();
-        
+
 
     }
 
