@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -202,8 +203,6 @@ public class MainActivity extends AppCompatActivity {
                 u.putExtra("User", currentUser);
                 startActivity(u);
                 break;
-            case R.id.idMenuSystems:
-                break;
             case R.id.idMenuProducts:
                 Intent i = new Intent(MainActivity.this, ItemList.class);
                 i.putExtra("User", currentUser);
@@ -251,6 +250,12 @@ public class MainActivity extends AppCompatActivity {
                 utilitiesIntent.putExtra("User", currentUser);
                 utilitiesIntent.putExtra("Warehouse", mWarehouse);
                 startActivity(utilitiesIntent);
+                break;
+            case R.id.idMenuLogout:
+                db.terminate();
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
