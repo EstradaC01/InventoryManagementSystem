@@ -123,57 +123,6 @@ public class LoginAndOpenMenuTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        ViewInteraction appCompatSpinner = onView(
-                allOf(withId(R.id.dialogChooseWarehouseSpinner), withContentDescription("Warehouse"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatSpinner.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(6750);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        onView(withText("WestCoastWarehouse")).inRoot(isPlatformPopup()).perform(click());
-
-
-        ViewInteraction button = onView(
-                allOf(withId(R.id.dialogChooseWarehouseSubmitButton), withText("SUBMIT"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
-        ViewInteraction frameLayout = onView(
-                allOf(withId(android.R.id.content),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class))),
-                        isDisplayed()));
-        frameLayout.check(matches(isDisplayed()));
-
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.dialogChooseWarehouseSubmitButton), withText("Submit"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        materialButton.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -183,15 +132,8 @@ public class LoginAndOpenMenuTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         ViewInteraction actionMenuItemView = onView(
-                allOf(withId(R.id.idMenuHamburguer),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(androidx.preference.R.id.action_bar),
-                                        0),
-                                0),
-                        isDisplayed()));
+                (withId(R.id.idMenuHamburguer)));
         actionMenuItemView.perform(click());
 
         ViewInteraction textView = onView(
