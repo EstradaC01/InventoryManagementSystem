@@ -7,12 +7,14 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
@@ -33,6 +35,7 @@ import com.example.inventorymanagementsystem.R;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -164,13 +167,85 @@ public class ProductDetailsTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        ViewInteraction button = onView(
+                allOf(withId(R.id.btnItemListActivityAddProduct), withText("ADD PRODUCT"),
+                        withParent(withParent(withId(R.id.constraintLayout))),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
 
+        ViewInteraction linearLayout3 = onView(
+                allOf(withId(androidx.preference.R.id.search_plate),
+                        withParent(allOf(withId(androidx.preference.R.id.search_edit_frame),
+                                withParent(withId(androidx.preference.R.id.search_bar)))),
+                        isDisplayed()));
+        linearLayout3.check(matches(isDisplayed()));
+
+        onView(
+                allOf(withId(androidx.preference.R.id.search_src_text),
+                        withParent(allOf(withId(androidx.preference.R.id.search_plate),
+                                withParent(withId(androidx.preference.R.id.search_edit_frame)))),
+                        isDisplayed()));
+
+        ViewInteraction textView = onView(
+                allOf(withText("Product Inquiry"),
+                        withParent(allOf(withId(androidx.preference.R.id.action_bar),
+                                withParent(withId(androidx.preference.R.id.action_bar_container)))),
+                        isDisplayed()));
+        textView.check(matches(withText("Product Inquiry")));
+
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.idRVItems),
                         childAtPosition(
                                 withId(R.id.constraintLayout),
                                 1)));
         recyclerView.perform(actionOnItemAtPosition(0, click()));
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ViewInteraction textView2 = onView(
+                allOf(withText("Product Details"),
+                        withParent(allOf(withId(androidx.preference.R.id.action_bar),
+                                withParent(withId(androidx.preference.R.id.action_bar_container)))),
+                        isDisplayed()));
+        textView2.check(matches(withText("Product Details")));
+
+        ViewInteraction imageButton = onView(
+                allOf(withId(R.id.productDetailsEditButton), withContentDescription("editbutton"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        imageButton.check(matches(isDisplayed()));
+
+        ViewInteraction imageButton2 = onView(
+                allOf(withId(R.id.productDetailsDeleteButton), withContentDescription("deletebutton"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        imageButton2.check(matches(isDisplayed()));
+
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.idTvProductIdTitle), withText("Product ID"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        textView3.check(matches(withText("Product ID")));
+
+        ViewInteraction textView4 = onView(
+                allOf(withId(R.id.idTvproductDescriptionTitle), withText("Product Description"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        textView4.check(matches(withText("Product Description")));
+
+        ViewInteraction textView5 = onView(
+                allOf(withId(R.id.idTVCardItemAvailableUnitsTitle), withText("Available Units"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        textView5.check(matches(withText("Available Units")));
+
         mActivityScenarioRule.getScenario().close();
 
     }
