@@ -1,7 +1,6 @@
 package com.example.inventorymanagementsystem.views;
 
 
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -9,9 +8,8 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
@@ -24,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -42,14 +39,14 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LocationTest {
+public class InventoryTest {
 
     @Rule
     public ActivityScenarioRule<SplashScreen> mActivityScenarioRule =
             new ActivityScenarioRule<>(SplashScreen.class);
 
     @Test
-    public void locationTest() {
+    public void inventoryTest() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -118,6 +115,57 @@ public class LocationTest {
                                 5),
                         isDisplayed()));
         appCompatButton.perform(click());
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatSpinner = onView(
+                allOf(withId(R.id.dialogChooseWarehouseSpinner), withContentDescription("Warehouse"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatSpinner.perform(click());
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(6750);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withText("WestCoastWarehouse")).inRoot(isPlatformPopup()).perform(click());
+
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.dialogChooseWarehouseSubmitButton), withText("SUBMIT"),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
+
+        ViewInteraction frameLayout = onView(
+                allOf(withId(android.R.id.content),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class))),
+                        isDisplayed()));
+        frameLayout.check(matches(isDisplayed()));
+
+        ViewInteraction materialButton = onView(
+                allOf(withId(R.id.dialogChooseWarehouseSubmitButton), withText("Submit"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        materialButton.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -129,7 +177,13 @@ public class LocationTest {
         }
 
         ViewInteraction actionMenuItemView = onView(
-                (withId(R.id.idMenuHamburguer)));
+                allOf(withId(R.id.idMenuHamburguer),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(androidx.preference.R.id.action_bar),
+                                        0),
+                                0),
+                        isDisplayed()));
         actionMenuItemView.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
@@ -142,7 +196,7 @@ public class LocationTest {
         }
 
         ViewInteraction materialTextView = onView(
-                allOf(withId(androidx.preference.R.id.title), withText("Locations"),
+                allOf(withId(androidx.preference.R.id.title), withText("Inventory"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(androidx.preference.R.id.content),
@@ -160,8 +214,51 @@ public class LocationTest {
             e.printStackTrace();
         }
 
+        ViewInteraction imageButton = onView(
+                allOf(withId(R.id.inventorySubMenuShowInventory),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        imageButton.check(matches(isDisplayed()));
+
+        ViewInteraction imageButton2 = onView(
+                allOf(withId(R.id.inventorySubMenuAdjustment),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        imageButton2.check(matches(isDisplayed()));
+
+        ViewInteraction imageButton3 = onView(
+                allOf(withId(R.id.inventorySubMenuMoveUnit),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        imageButton3.check(matches(isDisplayed()));
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.inventorySubMenuShowInventoryTitle), withText("INVENTORY"),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        textView.check(matches(withText("INVENTORY")));
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.inventorySubMenuAdjustmentTitle), withText("ADJUSTMENT"),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        textView2.check(matches(withText("ADJUSTMENT")));
+
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.locationsSubMenuUnitsOfMeasureTitle), withText("MOVE UNIT"),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        textView3.check(matches(withText("MOVE UNIT")));
+
+        ViewInteraction textView4 = onView(
+                allOf(withText("Locations"),
+                        withParent(allOf(withId(androidx.preference.R.id.action_bar),
+                                withParent(withId(androidx.preference.R.id.action_bar_container)))),
+                        isDisplayed()));
+        textView4.check(matches(withText("Locations")));
+
         ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.locationsSubMenuCreateLocationsButton),
+                allOf(withId(R.id.inventorySubMenuShowInventory),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -179,138 +276,32 @@ public class LocationTest {
             e.printStackTrace();
         }
 
-        ViewInteraction button = onView(
-                allOf(withId(R.id.btnLocationListAddLocation), withText("ADD LOCATION"),
-                        withParent(withParent(withId(R.id.constraintLayout))),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
-        ViewInteraction linearLayout2 = onView(
-                allOf(withId(androidx.preference.R.id.search_plate),
-                        withParent(allOf(withId(androidx.preference.R.id.search_edit_frame),
-                                withParent(withId(androidx.preference.R.id.search_bar)))),
-                        isDisplayed()));
-        linearLayout2.check(matches(isDisplayed()));
-
-        ViewInteraction textView = onView(
-                allOf(withText("Locations"),
-                        withParent(allOf(withId(androidx.preference.R.id.action_bar),
-                                withParent(withId(androidx.preference.R.id.action_bar_container)))),
-                        isDisplayed()));
-        textView.check(matches(withText("Locations")));
-
-        ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.recyclerViewLocationList),
-                        childAtPosition(
-                                withId(R.id.constraintLayout),
-                                1)));
-        recyclerView.perform(actionOnItemAtPosition(0, click()));
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.locationDetailsAisleTitle), withText("Aisle"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        textView2.check(matches(withText("Aisle")));
-
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.locationDetailsRackTitle), withText("Rack"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        textView3.check(matches(withText("Rack")));
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.locationDetailsLevelTitle), withText("Level"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        textView4.check(matches(withText("Level")));
-
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.locationDetailsZoneTitle), withText("Zone"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        textView5.check(matches(withText("Zone")));
-
-        ViewInteraction textView6 = onView(
-                allOf(withId(R.id.locationDetailsUnitTypeTitle), withText("Unit Type"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        textView6.check(matches(withText("Unit Type")));
-
-        ViewInteraction textView7 = onView(
-                allOf(withId(R.id.locationDetailsHeightTitle), withText("Height"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        textView7.check(matches(withText("Height")));
-
-        ViewInteraction textView8 = onView(
-                allOf(withId(R.id.locationDetailsWidthTitle), withText("Width"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        textView8.check(matches(withText("Width")));
-
-        ViewInteraction textView9 = onView(
-                allOf(withId(R.id.locationDetailsLengthTitle), withText("Length"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        textView9.check(matches(withText("Length")));
-
-        pressBack();
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        pressBack();
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        ViewInteraction imageButton = onView(
-                allOf(withId(R.id.locationsSubMenuCreateLocationsButton),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        imageButton.check(matches(isDisplayed()));
-
-        ViewInteraction imageButton2 = onView(
-                allOf(withId(R.id.locationsSubMenuCreateZonesButton),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        imageButton2.check(matches(isDisplayed()));
-
-        ViewInteraction imageButton3 = onView(
-                allOf(withId(R.id.locationsSubMenuUnitsOfMeasureButton),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        imageButton3.check(matches(isDisplayed()));
-
         ViewInteraction imageButton4 = onView(
-                allOf(withId(R.id.locationsSubMenuMassLocationsButton),
-                        withParent(withParent(withId(android.R.id.content))),
+                allOf(withId(R.id.ibInventoryListFilter), withContentDescription("filter"),
+                        withParent(withParent(withId(R.id.constraintLayout))),
                         isDisplayed()));
         imageButton4.check(matches(isDisplayed()));
 
+        ViewInteraction linearLayout2 = onView(
+                allOf(withId(androidx.preference.R.id.search_bar),
+                        withParent(allOf(withId(R.id.svInventoryList),
+                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+                        isDisplayed()));
+        linearLayout2.check(matches(isDisplayed()));
+
+        pressBack();
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ViewInteraction appCompatImageButton2 = onView(
-                allOf(withId(R.id.locationsSubMenuCreateZonesButton),
+                allOf(withId(R.id.inventorySubMenuAdjustment),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -328,18 +319,44 @@ public class LocationTest {
             e.printStackTrace();
         }
 
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.btnZonesAddZone), withText("ADD ZONE"),
-                        withParent(withParent(withId(R.id.constraintLayout))),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
-
-        ViewInteraction textView10 = onView(
-                allOf(withText("Zones"),
+        ViewInteraction textView5 = onView(
+                allOf(withText("Adjustment"),
                         withParent(allOf(withId(androidx.preference.R.id.action_bar),
                                 withParent(withId(androidx.preference.R.id.action_bar_container)))),
                         isDisplayed()));
-        textView10.check(matches(withText("Zones")));
+        textView5.check(matches(withText("Adjustment")));
+
+        ViewInteraction button2 = onView(
+                allOf(withId(R.id.btnUnitAdjustmentSearch), withText("SEARCH"),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        button2.check(matches(isDisplayed()));
+
+        ViewInteraction textView6 = onView(
+                allOf(withId(R.id.tvUnitIdTitle), withText("Unit ID"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        textView6.check(matches(withText("Unit ID")));
+
+        ViewInteraction textView7 = onView(
+                allOf(withId(R.id.tvUnitAdjustmentProductIdTitle), withText("Product ID"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        textView7.check(matches(withText("Product ID")));
+
+        ViewInteraction textView8 = onView(
+                allOf(withId(R.id.tvUnitAdjustmentLocationNameTitle), withText("Location"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        textView8.check(matches(withText("Location")));
+
+        ViewInteraction textView9 = onView(
+                allOf(withId(R.id.tvUnitAdjustmentZoneTitle), withText("Zone"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        textView9.check(matches(withText("Zone")));
+
+        pressBack();
 
         pressBack();
 
@@ -353,7 +370,7 @@ public class LocationTest {
         }
 
         ViewInteraction appCompatImageButton3 = onView(
-                allOf(withId(R.id.locationsSubMenuUnitsOfMeasureButton),
+                allOf(withId(R.id.inventorySubMenuMoveUnit),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -361,77 +378,6 @@ public class LocationTest {
                                 4),
                         isDisplayed()));
         appCompatImageButton3.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        ViewInteraction textView11 = onView(
-                allOf(withId(R.id.unitOfMeasureDescriptionTitle), withText("Description: "),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        textView11.check(matches(withText("Description: ")));
-
-        ViewInteraction textView12 = onView(
-                allOf(withText("Units of Measure"),
-                        withParent(allOf(withId(androidx.preference.R.id.action_bar),
-                                withParent(withId(androidx.preference.R.id.action_bar_container)))),
-                        isDisplayed()));
-        textView12.check(matches(withText("Units of Measure")));
-
-        ViewInteraction imageButton5 = onView(
-                allOf(withId(R.id.unitsOfMeasureAddButton), withContentDescription("editbutton"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        imageButton5.check(matches(isDisplayed()));
-
-        ViewInteraction appCompatImageButton4 = onView(
-                allOf(withId(R.id.unitsOfMeasureAddButton), withContentDescription("editbutton"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatImageButton4.perform(click());
-
-        pressBack();
-
-        ViewInteraction appCompatImageButton5 = onView(
-                allOf(withId(R.id.unitsOfMeasureAddButton), withContentDescription("editbutton"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatImageButton5.perform(click());
-
-        pressBack();
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        ViewInteraction appCompatImageButton6 = onView(
-                allOf(withId(R.id.locationsSubMenuMassLocationsButton),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                6),
-                        isDisplayed()));
-        appCompatImageButton6.perform(click());
     }
 
     private static Matcher<View> childAtPosition(
