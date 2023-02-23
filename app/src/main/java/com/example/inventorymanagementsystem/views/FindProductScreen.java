@@ -124,7 +124,7 @@ public class FindProductScreen extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterList(newText);
+                filterList(newText, sorter);
                 return false;
             }
         });
@@ -153,7 +153,7 @@ public class FindProductScreen extends AppCompatActivity {
         });
     }
 
-    private void filterList(String text) {
+    private void filterList(String text, Sort sorter) {
         ArrayList<Products> filteredList = new ArrayList<>();
         for (Products list : mProductArrayList) {
             switch (sorter) {

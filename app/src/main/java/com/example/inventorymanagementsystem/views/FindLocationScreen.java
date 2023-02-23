@@ -131,8 +131,10 @@ public class FindLocationScreen extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 searchList(newText);
+                filterList(newText, sorter);
                 return false;
             }
+
         });
 
         DropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

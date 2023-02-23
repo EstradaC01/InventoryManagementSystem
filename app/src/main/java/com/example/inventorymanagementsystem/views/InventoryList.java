@@ -1,6 +1,7 @@
 package com.example.inventorymanagementsystem.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +35,7 @@ public class InventoryList extends AppCompatActivity {
     private ArrayList<UnitId> mArrayListUnitId;
     private InventoryListRecyclerViewAdapter mRecyclerViewAdapter;
     private FirebaseFirestore db;
+    private androidx.appcompat.widget.SearchView searchView;
     private ImageButton InventoryFilter;
     public PopupMenu DropDownMenu;
     public Menu menu;
@@ -60,7 +62,7 @@ public class InventoryList extends AppCompatActivity {
 
         // change action support bar title and font color
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Inventory</font>"));
-
+        searchView = findViewById(R.id.svInventoryList);
         mRecyclerView = findViewById(R.id.rvInventoryList);
 
         db=FirebaseFirestore.getInstance();
@@ -108,6 +110,22 @@ public class InventoryList extends AppCompatActivity {
                 }
 
             }
+        });
+
+        searchView.setIconified(false);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText, sorter);
+                return false;
+            }
+
         });
 
         DropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
