@@ -207,10 +207,10 @@ public class LoginAndOpenMenuTest {
         textView2.check(matches(withText("Users")));
 
         ViewInteraction textView3 = onView(
-                allOf(withId(androidx.preference.R.id.title), withText("Systems"),
+                allOf(withId(androidx.preference.R.id.title), withText("Log out"),
                         withParent(withParent(withId(androidx.preference.R.id.content))),
                         isDisplayed()));
-        textView3.check(matches(withText("Systems")));
+        textView3.check(matches(withText("Log out")));
 
         ViewInteraction textView4 = onView(
                 allOf(withId(androidx.preference.R.id.title), withText("Products"),
