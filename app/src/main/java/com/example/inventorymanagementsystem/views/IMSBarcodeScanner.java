@@ -7,7 +7,6 @@ import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
-import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
@@ -54,8 +53,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class IMSBarcodeScanner extends AppCompatActivity {
-
-    private static final String FILENAME_FORMAT = "dd-M-yyyy hh:mm:ss";
     public static final int REQUEST_CODE_PERMISSIONS = 10;
     public static final String TAG = "CameraXApp";
     private ExecutorService cameraExecutor;
@@ -168,23 +165,6 @@ public class IMSBarcodeScanner extends AppCompatActivity {
                 });
 
         // [END run_detector]
-    }
-    private void takePhoto() {
-        ImageCapture imageCapture = this.imageCapture;
-        if (imageCapture == null) return;
-        imageCapture.takePicture(Executors.newSingleThreadExecutor(), new ImageCapture.OnImageCapturedCallback() {
-            @Override
-            @androidx.camera.core.ExperimentalGetImage
-            public void onCaptureSuccess(@NonNull ImageProxy image) {
-                super.onCaptureSuccess(image);
-                scanBarcodes(image);
-
-            }
-            @Override
-            public void onError(@NonNull ImageCaptureException exception) {
-                super.onError(exception);
-            }
-        });
     }
     private void startCamera() {
         cameraProviderFuture.addListener(() -> {

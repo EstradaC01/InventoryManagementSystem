@@ -46,9 +46,6 @@
             android:name=".views.UnitAdjustment"
             android:exported="false" />
         <activity
-            android:name=".views.QRScanner"
-            android:exported="false" />
-        <activity
             android:name=".views.InventorySubMenu"
             android:exported="false" />
         <activity
