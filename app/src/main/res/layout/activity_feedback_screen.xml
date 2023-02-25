@@ -9,11 +9,11 @@
     android:background="@drawable/blue_android_background">
 
     <EditText
-        android:id="@+id/idEdtEmail"
+        android:id="@+id/idEdtFeedbackEmail"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
-        android:text="Email"
+        android:hint="Your email..."
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="20dp"
@@ -26,13 +26,13 @@
 
 
     <EditText
-        android:id="@+id/text"
+        android:id="@+id/idEdtFeedbackMessage"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginTop="128dp"
         android:background="@drawable/rounded_corners_white"
         android:gravity="center"
-        android:text="Enter Message"
+        android:hint="Message..."
         android:textColor="@color/black"
         android:textSize="24dp"
         app:layout_constraintHorizontal_bias="0.496"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnMainActivitySubmit"
+        android:id="@+id/btnFeedbackSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send Feedback"
