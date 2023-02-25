@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
@@ -252,10 +253,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(utilitiesIntent);
                 break;
             case R.id.idMenuFeedback:
-                Intent MenuFeedback = new Intent(MainActivity.this, FeedbackScreen.class);
-                MenuFeedback.putExtra("User", currentUser);
-                MenuFeedback.putExtra("Warehouse", mWarehouse);
-                startActivity(MenuFeedback);
+                Intent MenuFeedback = new Intent(Intent.ACTION_SENDTO, Uri.parse(
+                        "mailto:TylerJenningsW@gmail.com"));
+                startActivity(Intent.createChooser(MenuFeedback, "Send Email"));
                 break;
             case R.id.idMenuLogout:
                 Intent Logout = new Intent(MainActivity.this, Login.class);
