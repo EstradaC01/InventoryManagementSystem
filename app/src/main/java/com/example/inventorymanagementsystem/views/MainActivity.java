@@ -251,6 +251,12 @@ public class MainActivity extends AppCompatActivity {
                 utilitiesIntent.putExtra("Warehouse", mWarehouse);
                 startActivity(utilitiesIntent);
                 break;
+            case R.id.idMenuFeedback:
+                Intent MenuFeedback = new Intent(MainActivity.this, FeedbackScreen.class);
+                MenuFeedback.putExtra("User", currentUser);
+                MenuFeedback.putExtra("Warehouse", mWarehouse);
+                startActivity(MenuFeedback);
+                break;
             case R.id.idMenuLogout:
                 db.terminate();
                 FirebaseAuth.getInstance().signOut();
