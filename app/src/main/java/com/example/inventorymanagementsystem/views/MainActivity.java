@@ -258,8 +258,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(MenuFeedback);
                 break;
             case R.id.idMenuLogout:
-                db.terminate();
-                FirebaseAuth.getInstance().signOut();
+                Intent Logout = new Intent(MainActivity.this, Login.class);
+                Logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(Logout);
                 finish();
                 break;
             default:
