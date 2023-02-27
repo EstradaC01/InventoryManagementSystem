@@ -30,6 +30,7 @@ The Powerful Bears project
 
 - Press clone
 
+- Create a Firebase firestore and add it to the project using Firebase assisttant
 ## Screenshots/Examples 📷
 
 #### Login and Register Screen
