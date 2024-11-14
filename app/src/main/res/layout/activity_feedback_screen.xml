@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.FeedbackScreen"
-    android:background="@drawable/blue_android_background">
+    android:background="@drawable/bg">
 
     <EditText
         android:id="@+id/idEdtFeedbackEmail"

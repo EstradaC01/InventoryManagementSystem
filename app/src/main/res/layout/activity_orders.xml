@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue_android_background"
+    android:background="@color/white"
     android:foregroundTint="@color/black"
     android:foregroundTintMode="multiply"
     tools:context=".views.OrdersList">
@@ -24,20 +24,20 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_white_background"
             android:gravity="left|center"
-            android:queryHint="Search..."
             android:iconifiedByDefault="false"
+            android:queryHint="Search..."
             app:defaultQueryHint="Search..."
-            app:queryHint="Search..."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/orderListGuidelineMiddleLeft"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryHint="Search..." />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnOrderListActivityAddOrder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_orange"
+            android:background="@color/purple_200"
             android:padding="5dp"
             android:text="+"
             android:textColor="#ffffff"

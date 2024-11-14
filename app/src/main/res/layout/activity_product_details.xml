@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.ProductDetails"
-    android:background="@drawable/blue_android_background">
+    android:background="@drawable/bg">
 
     <ScrollView
         android:layout_width="0dp"

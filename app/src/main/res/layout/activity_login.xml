@@ -4,45 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue_android_background">
-
-    <ImageView
-        android:id="@+id/idImageLogo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/logoGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/logoGuidelineStart"
-        app:layout_constraintTop_toTopOf="@id/logoGuidelineTopVertical"
-        app:srcCompat="@drawable/ic_shieldlogo_512px" />
-
-    <TextView
-        android:id="@+id/idTvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="Aegis"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/logoGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/logoGuidelineStart"
-        app:layout_constraintTop_toBottomOf="@+id/idImageLogo" />
-
-    <TextView
-        android:id="@+id/idTvSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="Inventory Management System"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idTvTitle" />
+    android:background="@drawable/log">
 
     <EditText
 
@@ -77,7 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/button_navyblue"
+        android:background="@color/purple_200"
         android:padding="10dp"
         android:text="Login"
         android:textAllCaps="true"
@@ -91,7 +53,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:background="@drawable/button_navyblue"
+        android:background="@color/purple_200"
         android:padding="10dp"
         android:text="Register"
         android:textAllCaps="true"
@@ -159,6 +121,30 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".4" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/idforgotpasswordbtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="LOGIN"
+        android:textColor="#020101"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/idforgotpasswordbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.302" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
