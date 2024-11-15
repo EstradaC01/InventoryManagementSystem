@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_alt">#E2DFDF</color>
+    <color name="royal"> #67379B</color>
+
 </resources>

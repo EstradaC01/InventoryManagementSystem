@@ -73,7 +73,7 @@
             android:id="@+id/btnAddZonesCreateZone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_navyblue"
+            android:background="@color/royal"
             android:elevation="15dp"
             android:padding="12dp"
             android:text="Create Zone"

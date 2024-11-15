@@ -8,11 +8,11 @@
         android:id="@+id/productLineProductTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Joseph Joestar Gun"
+        android:text="Balloon"
         android:maxLines="1"
         android:maxLength="30"
         android:textSize="16sp"
-        android:textColor="#FF9800"
+        android:textColor="#A186BE"
         android:textStyle="bold" />
 
     <TextView

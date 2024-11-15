@@ -18,6 +18,6 @@
         android:textAllCaps="true"
         android:textSize="18sp"
         android:textColor="@color/white"
-        android:background="@drawable/button_navyblue" />
+        android:background="@color/royal" />
 
 </LinearLayout>

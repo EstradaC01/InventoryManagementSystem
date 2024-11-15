@@ -110,7 +110,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@color/purple_200"
+        android:background="@color/royal"
         android:padding="10dp"
         android:text="Register"
         android:textAllCaps="true"
